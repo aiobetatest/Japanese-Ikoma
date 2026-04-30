@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Japanese Practice — Dai Ka</title>
 
-<!-- Mobile / install-to-home-screen -->
 <meta name="theme-color" content="#0f172a">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,12 +13,10 @@
 <meta name="application-name" content="Japanese Practice">
 <meta name="format-detection" content="telephone=no">
 
-<!-- Inline app icon (SVG, used as favicon + iOS touch icon) -->
 <link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="%230f172a"/><text x="50" y="68" font-size="60" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" fill="%2338bdf8" font-weight="700">日</text></svg>'>
-<link rel="apple-touch-icon" href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAQAAAAjY2NeAAABTUlEQVR42u3aMQrCQBRF0V9YLOgi7HUBLsSdiTtwAVZuwM5SsLAwhTaCMIYwGZL5J9c5VYqXNAk/IQAAAAAAAAAAAAAAACDdK6+zGc3WlwzN6vZw9p5b/uhe1QhwBgAjhwAjBwAjB4AjBwAjBwAjBwAjBwAjBwAjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AAAA8AfPdKQEAAAAAAAAAAAAAAACAuQ+DPj1xN9TOjAAAAABJRU5ErkJggg=='>
-
-<!-- Inline web manifest (so file stays single-file). -->
+<link rel="apple-touch-icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="%230f172a"/><text x="50" y="68" font-size="60" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" fill="%2338bdf8" font-weight="700">日</text></svg>'>
 <link rel="manifest" href='data:application/manifest+json;utf8,{"name":"Japanese Practice","short_name":"日本語","start_url":".","display":"standalone","background_color":"%230f172a","theme_color":"%230f172a","icons":[{"src":"data:image/svg+xml;utf8,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 100 100%22%3E%3Crect width%3D%22100%22 height%3D%22100%22 rx%3D%2222%22 fill%3D%22%230f172a%22/%3E%3Ctext x%3D%2250%22 y%3D%2268%22 font-size%3D%2260%22 text-anchor%3D%22middle%22 font-family%3D%22sans-serif%22 fill%3D%22%2338bdf8%22 font-weight%3D%22700%22%3E%E6%97%A5%3C/text%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml"}]}'>
+
 <style>
   :root {
     --bg: #0f172a;
@@ -31,15 +28,17 @@
     --accent-2: #f472b6;
     --good: #22c55e;
     --bad: #ef4444;
+    --warn: #f59e0b;
     --border: #334155;
   }
-  * { box-sizing: border-box; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
+    -webkit-text-size-adjust: 100%;
   }
   header {
     padding: 16px 24px;
@@ -54,12 +53,19 @@
   h1 .ja { color: var(--accent); margin-right: 8px; }
   .stats { font-size: 13px; color: var(--muted); }
   .stats span { color: var(--text); font-weight: 600; }
-
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 24px;
+  .streak-pill {
+    background: var(--panel-2);
+    color: var(--warn);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
   }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 24px; }
 
   .controls {
     background: var(--panel);
@@ -68,13 +74,7 @@
     padding: 16px;
     margin-bottom: 20px;
   }
-  .controls-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 12px;
-  }
+  .controls-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
   .controls-row:last-child { margin-bottom: 0; }
   .controls label {
     font-size: 12px;
@@ -94,6 +94,7 @@
     font-size: 14px;
     cursor: pointer;
     transition: all 0.15s;
+    font-family: inherit;
   }
   .mode-tabs button:hover { border-color: var(--accent); }
   .mode-tabs button.active {
@@ -114,6 +115,7 @@
     cursor: pointer;
     user-select: none;
     transition: all 0.1s;
+    position: relative;
   }
   .lesson-pill:hover { border-color: var(--accent); }
   .lesson-pill.active {
@@ -122,8 +124,13 @@
     border-color: var(--accent);
     font-weight: 600;
   }
+  .lesson-pill .pct {
+    font-size: 10px;
+    opacity: 0.8;
+    margin-left: 4px;
+  }
 
-  select, input[type="text"] {
+  select, input[type="text"], input[type="search"] {
     background: var(--panel-2);
     color: var(--text);
     border: 1px solid var(--border);
@@ -132,6 +139,7 @@
     font-size: 14px;
     font-family: inherit;
   }
+  input[type="search"] { -webkit-appearance: none; appearance: none; }
 
   .toggle {
     display: inline-flex;
@@ -143,6 +151,73 @@
     color: var(--muted);
   }
   .toggle input { accent-color: var(--accent); }
+
+  .seg {
+    display: inline-flex;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2px;
+    gap: 0;
+  }
+  .seg button {
+    background: transparent;
+    color: var(--muted);
+    border: 0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .seg button.active {
+    background: var(--accent);
+    color: #0f172a;
+    font-weight: 600;
+  }
+
+  .search-box {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+  }
+  .search-box input {
+    width: 100%;
+    padding-left: 32px;
+  }
+  .search-box::before {
+    content: "🔍";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    opacity: 0.6;
+  }
+  .search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-top: 4px;
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+  .search-result {
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .search-result:last-child { border-bottom: 0; }
+  .search-result:hover { background: var(--panel-2); }
+  .search-result .jp { color: var(--accent); font-weight: 600; margin-right: 8px; }
+  .search-result .meta { font-size: 11px; color: var(--muted); }
 
   /* Card area */
   .card {
@@ -158,17 +233,15 @@
     align-items: center;
     gap: 16px;
   }
-  .prompt-label {
-    font-size: 12px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .prompt-en {
-    font-size: 32px;
+  .prompt-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .prompt-en { font-size: 32px; font-weight: 600; line-height: 1.3; max-width: 600px; }
+  .prompt-jp {
+    font-size: 48px;
     font-weight: 600;
-    line-height: 1.3;
-    max-width: 600px;
+    color: var(--accent);
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    line-height: 1.2;
+    max-width: 720px;
   }
   .answer-jp {
     font-size: 56px;
@@ -179,9 +252,10 @@
   }
   .answer-jp.sentence { font-size: 32px; line-height: 1.5; max-width: 720px; }
   .prompt-en.sentence { font-size: 22px; max-width: 700px; line-height: 1.4; }
+  .prompt-jp.sentence { font-size: 28px; line-height: 1.5; }
   .answer-romaji { font-size: 18px; color: var(--muted); font-style: italic; }
   .answer-romaji.sentence { font-size: 16px; }
-  .answer-en { font-size: 20px; color: var(--text); }
+  .answer-en { font-size: 22px; }
   .lesson-tag {
     font-size: 11px;
     color: var(--muted);
@@ -189,6 +263,17 @@
     padding: 3px 8px;
     border-radius: 999px;
   }
+  .box-tag {
+    font-size: 10px;
+    color: var(--muted);
+    background: var(--panel-2);
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 6px;
+  }
+  .box-tag.b1, .box-tag.b2 { color: var(--bad); }
+  .box-tag.b3 { color: var(--warn); }
+  .box-tag.b4, .box-tag.b5 { color: var(--good); }
 
   /* Buttons */
   .btn-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
@@ -212,7 +297,7 @@
   }
   button.btn.primary:hover { background: #0ea5e9; }
   button.btn.good { background: var(--good); border-color: var(--good); color: white; }
-  button.btn.bad { background: var(--bad); border-color: var(--bad); color: white; }
+  button.btn.bad  { background: var(--bad);  border-color: var(--bad);  color: white; }
   button.btn.icon { padding: 10px 14px; }
 
   /* MCQ */
@@ -233,7 +318,7 @@
   .choice.wrong { background: var(--bad); border-color: var(--bad); color: white; }
   .choice.disabled { pointer-events: none; opacity: 0.6; }
 
-  /* Dictation input */
+  /* Dictation input + canvas */
   .dictation-input {
     width: 100%;
     max-width: 420px;
@@ -244,6 +329,50 @@
   .dictation-feedback { margin-top: 12px; font-size: 14px; min-height: 20px; }
   .feedback-correct { color: var(--good); }
   .feedback-wrong { color: var(--bad); }
+
+  .canvas-wrap {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    margin-top: 12px;
+    position: relative;
+    aspect-ratio: 2 / 1;
+    touch-action: none;
+  }
+  .canvas-wrap canvas { width: 100%; height: 100%; display: block; border-radius: 8px; }
+  .canvas-tools {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Quiz summary */
+  .summary {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 16px;
+    text-align: left;
+  }
+  .summary h3 { margin: 0 0 8px 0; font-size: 16px; }
+  .summary .miss-list {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .summary .miss-item {
+    background: var(--panel-2);
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .summary .miss-item .jp { color: var(--accent); font-weight: 600; margin-right: 8px; }
 
   .empty {
     text-align: center;
@@ -268,15 +397,12 @@
   }
 
   @media (max-width: 700px) {
-    /* Respect notch + home indicator */
     body {
       padding-top: env(safe-area-inset-top);
       padding-bottom: env(safe-area-inset-bottom);
       padding-left: env(safe-area-inset-left);
       padding-right: env(safe-area-inset-right);
     }
-
-    /* Header stacks: title row, stats below */
     header {
       padding: 10px 14px;
       flex-direction: column;
@@ -286,24 +412,15 @@
     h1 { font-size: 17px; }
     h1 .ja { margin-right: 6px; }
     .stats { font-size: 11px; line-height: 1.4; }
-
     .container { padding: 12px; }
     .controls { padding: 12px; border-radius: 10px; margin-bottom: 14px; }
-
-    /* Each control row stacks its label above its content */
     .controls-row {
       flex-direction: column;
       align-items: stretch;
       gap: 8px;
       margin-bottom: 10px;
     }
-    .controls label {
-      margin-right: 0;
-      margin-bottom: 2px;
-      font-size: 11px;
-    }
-
-    /* Mode tabs: 2x2 grid so 4 tabs always fit cleanly */
+    .controls label { margin-right: 0; margin-bottom: 2px; font-size: 11px; }
     .mode-tabs {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -315,12 +432,7 @@
       font-size: 14px;
       min-height: 40px;
     }
-
-    /* Lesson pills wrap, with All/None inline at the end */
-    .lesson-pills {
-      width: 100%;
-      gap: 6px;
-    }
+    .lesson-pills { width: 100%; gap: 6px; }
     .lesson-pill {
       padding: 6px 12px;
       font-size: 14px;
@@ -332,12 +444,9 @@
       flex: 1;
       max-width: 80px;
     }
-
-    /* Voice select + toggle — full width */
     select { width: 100%; min-height: 40px; padding: 8px 10px; }
     .toggle { font-size: 13px; }
-
-    /* Card */
+    .seg button { padding: 8px 14px; font-size: 14px; min-height: 36px; }
     .card {
       padding: 24px 14px;
       min-height: 260px;
@@ -347,29 +456,23 @@
     .prompt-label { font-size: 11px; }
     .prompt-en { font-size: 22px; line-height: 1.3; }
     .prompt-en.sentence { font-size: 18px; line-height: 1.45; }
+    .prompt-jp { font-size: 36px; }
+    .prompt-jp.sentence { font-size: 22px; line-height: 1.45; }
     .answer-jp { font-size: 38px; }
     .answer-jp.sentence { font-size: 22px; line-height: 1.45; }
     .answer-romaji { font-size: 15px; }
     .answer-romaji.sentence { font-size: 14px; }
-
-    /* MCQ — single column for thumb-friendly tapping */
+    .answer-en { font-size: 18px; }
     .choices { grid-template-columns: 1fr; gap: 10px; max-width: 100%; }
     .choice { padding: 16px 14px; font-size: 22px; min-height: 56px; }
-
-    /* Buttons — Apple's 44px minimum tap target */
     .btn-row { gap: 8px; margin-top: 16px; }
     button.btn { padding: 12px 16px; font-size: 15px; min-height: 44px; }
     button.btn.icon { padding: 12px 14px; }
-
-    /* Dictation */
-    /* Prevent iOS zoom on input focus — 16px+ font on inputs */
-    input[type="text"], select { font-size: 16px; }
+    input[type="text"], input[type="search"], select { font-size: 16px; }
     .dictation-input { font-size: 17px; padding: 14px; min-height: 50px; }
-
-    /* Hide the keyboard-shortcut tip on mobile (no keyboard) */
     .help-text { display: none; }
-
     footer { font-size: 11px; padding: 18px 14px; }
+    .canvas-wrap { aspect-ratio: 1.6 / 1; }
   }
 </style>
 </head>
@@ -378,7 +481,8 @@
 <header>
   <h1><span class="ja">日本語</span>Practice — Dai Ka</h1>
   <div class="stats">
-    Session: <span id="stat-seen">0</span> seen · <span id="stat-correct">0</span> correct · <span id="stat-streak">0</span> streak
+    <span id="stat-seen">0</span> seen · <span id="stat-correct">0</span> correct · streak
+    <span class="streak-pill">🔥 <span id="stat-streak-day">0</span>d</span>
   </div>
 </header>
 
@@ -394,19 +498,38 @@
         <button data-mode="dictation">Dictation</button>
       </div>
     </div>
+
     <div class="controls-row">
       <label>Lessons</label>
       <div class="lesson-pills" id="lesson-pills"></div>
       <button class="btn icon" id="lessons-all" style="padding: 4px 10px; font-size: 12px;">All</button>
       <button class="btn icon" id="lessons-none" style="padding: 4px 10px; font-size: 12px;">None</button>
     </div>
+
+    <div class="controls-row">
+      <label>Direction</label>
+      <div class="seg" id="dir-seg">
+        <button data-dir="en2jp" class="active">EN → JP</button>
+        <button data-dir="jp2en">JP → EN</button>
+      </div>
+      <button class="btn primary" id="quiz-btn">🎯 Quiz of the day (10)</button>
+    </div>
+
     <div class="controls-row">
       <label>Voice</label>
       <select id="voice-select"><option>Loading voices…</option></select>
       <label class="toggle">
         <input type="checkbox" id="auto-speak" checked>
-        Auto-speak Japanese on reveal
+        Auto-speak
       </label>
+    </div>
+
+    <div class="controls-row">
+      <label>Search</label>
+      <div class="search-box">
+        <input type="search" id="search-input" placeholder="Search vocab or sentences…">
+        <div class="search-results" id="search-results" hidden></div>
+      </div>
     </div>
   </div>
 
@@ -415,20 +538,15 @@
   </div>
 
   <div class="help-text">
-    Tip: press <strong>Space</strong> to flip / continue, <strong>1–4</strong> to pick a choice, <strong>S</strong> to hear the word again.
+    Tip: <strong>Space</strong> flips / continues, <strong>1–4</strong> picks a choice, <strong>S</strong> hears the word again.
   </div>
 </div>
 
 <footer>
-  Vocab covers Lessons 1–10 (Dai_Ka.pdf). To add a new lesson: open this file in a text editor, scroll to the <code>VOCAB</code> array, and add entries with the same shape. Saved progress lives in your browser.
+  Vocab + sentences cover Lessons 1–10 (Dai_Ka.pdf). To add a new lesson, open this file in a text editor, find the <code>VOCAB</code> or <code>SENTENCES</code> array, and append entries with the same shape. Progress saved in your browser.
 </footer>
 
 <script>
-/* ============================================================
-   VOCAB DATA — Lessons 1–10 from Dai_Ka.pdf
-   To add a new lesson, append entries with the same shape.
-   { lesson: number, jp: 'kana/kanji', romaji: 'romaji', en: 'meaning' }
-   ============================================================ */
 const VOCAB = [
   // ---------- Lesson 1 ----------
   { lesson: 1, jp: "わたし", romaji: "watashi", en: "I" },
@@ -922,12 +1040,6 @@ const VOCAB = [
   { lesson: 10, jp: "いちばん した", romaji: "ichiban shita", en: "the bottom" },
 ];
 
-/* ============================================================
-   SENTENCES — high-yield example sentences per lesson
-   Sourced from Minna no Nihongo Lessons 1–10 patterns and the
-   Exercise & Supplements drills. To add: append entries with
-   the same shape. { lesson, jp, romaji, en }
-   ============================================================ */
 const SENTENCES = [
   // Lesson 1 — AはBです / occupation / nationality / introductions
   { lesson: 1, jp: "わたしは アファクです。", romaji: "Watashi wa Afaqu desu.", en: "I am Afaq." },
@@ -1049,57 +1161,139 @@ const SENTENCES = [
   { lesson: 10, jp: "ポストは ビルの となりに あります。", romaji: "Posuto wa biru no tonari ni arimasu.", en: "The mailbox is next to the building." },
   { lesson: 10, jp: "なかに なにが ありますか。", romaji: "Naka ni nani ga arimasu ka.", en: "What is inside?" },
 ];
-
 /* ============================================================
-   STATE
+   STATE + PERSISTENCE
    ============================================================ */
-const STORE_KEY = 'jp_practice_state_v1';
+const STORE_KEY = 'jp_practice_state_v2';
+const todayStr = () => new Date().toISOString().slice(0,10);
 
 const state = {
-  mode: 'flash',           // 'flash' | 'mcq' | 'sentences' | 'dictation'
+  mode: 'flash',
+  direction: 'en2jp',         // 'en2jp' | 'jp2en'
+  dictMode: 'romaji',         // 'romaji' | 'kana' | 'draw'
   lessons: new Set(),
   current: null,
   revealed: false,
   seen: 0,
   correct: 0,
-  streak: 0,
   voice: null,
   autoSpeak: true,
+  // Quiz
+  quiz: null,                 // { items: [...], idx, correct, misses: [] }
+  // Persisted
+  progress: {},               // key -> { seen, correct, wrong, box, lastSeen }
+  streak: 0,
+  lastDay: null,
+  totalSeen: 0,
 };
 
-try {
-  const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
-  if (saved && Array.isArray(saved.lessons)) saved.lessons.forEach(n => state.lessons.add(n));
-  if (saved && typeof saved.autoSpeak === 'boolean') state.autoSpeak = saved.autoSpeak;
-} catch (e) {}
-if (state.lessons.size === 0) {
-  [...new Set(VOCAB.map(v => v.lesson))].forEach(n => state.lessons.add(n));
+function cardKey(item, kind) {
+  return `${kind}:${item.lesson}:${item.jp}`;
 }
-function persist() {
+
+function loadStore() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if (!s) return;
+    if (Array.isArray(s.lessons)) s.lessons.forEach(n => state.lessons.add(n));
+    if (typeof s.autoSpeak === 'boolean') state.autoSpeak = s.autoSpeak;
+    if (s.direction) state.direction = s.direction;
+    if (s.dictMode) state.dictMode = s.dictMode;
+    if (s.progress) state.progress = s.progress;
+    if (typeof s.streak === 'number') state.streak = s.streak;
+    if (s.lastDay) state.lastDay = s.lastDay;
+    if (typeof s.totalSeen === 'number') state.totalSeen = s.totalSeen;
+  } catch (e) {}
+}
+function saveStore() {
   try {
     localStorage.setItem(STORE_KEY, JSON.stringify({
       lessons: [...state.lessons],
       autoSpeak: state.autoSpeak,
+      direction: state.direction,
+      dictMode: state.dictMode,
+      progress: state.progress,
+      streak: state.streak,
+      lastDay: state.lastDay,
+      totalSeen: state.totalSeen,
     }));
   } catch (e) {}
 }
+loadStore();
+if (state.lessons.size === 0) {
+  [...new Set(VOCAB.map(v => v.lesson))].forEach(n => state.lessons.add(n));
+}
+
+function bumpStreak() {
+  const t = todayStr();
+  if (state.lastDay === t) return;
+  if (state.lastDay) {
+    const yest = new Date(Date.now() - 86400000).toISOString().slice(0,10);
+    state.streak = (state.lastDay === yest) ? state.streak + 1 : 1;
+  } else {
+    state.streak = 1;
+  }
+  state.lastDay = t;
+}
 
 /* ============================================================
-   UTIL
+   SMART PICKER (Leitner boxes 1..5)
+   - Wrong / didn't know -> box 1
+   - Got it -> box+1 (cap 5)
+   - New cards default box 2
+   - Pick weighted toward low boxes
    ============================================================ */
-function getPool() {
-  const src = (state.mode === 'sentences') ? SENTENCES : VOCAB;
-  return src.filter(v => state.lessons.has(v.lesson));
+function getBox(item, kind) {
+  const k = cardKey(item, kind);
+  return (state.progress[k] && state.progress[k].box) || 2;
 }
-function pickRandom(pool, exclude) {
+function recordResult(item, kind, correct) {
+  const k = cardKey(item, kind);
+  const p = state.progress[k] || { seen: 0, correct: 0, wrong: 0, box: 2, lastSeen: 0 };
+  p.seen++;
+  p.lastSeen = Date.now();
+  if (correct) {
+    p.correct++;
+    p.box = Math.min(5, (p.box || 2) + 1);
+  } else {
+    p.wrong++;
+    p.box = 1;
+  }
+  state.progress[k] = p;
+  state.seen++;
+  state.totalSeen++;
+  if (correct) state.correct++;
+  bumpStreak();
+  saveStore();
+}
+
+const BOX_WEIGHTS = { 1: 8, 2: 5, 3: 3, 4: 2, 5: 1 };
+
+function pickSmart(pool, kind, exclude) {
   if (!pool.length) return null;
-  let pick, tries = 0;
-  do {
-    pick = pool[Math.floor(Math.random() * pool.length)];
-    tries++;
-  } while (exclude && pool.length > 1 && pick === exclude && tries < 8);
-  return pick;
+  // Weight each card by box (lower box = more weight) + LRU bias
+  const now = Date.now();
+  const weighted = pool.map(item => {
+    const k = cardKey(item, kind);
+    const p = state.progress[k];
+    const box = (p && p.box) || 2;
+    const w = BOX_WEIGHTS[box] || 5;
+    // Bias: not-seen-recently gets a small bonus; just-seen gets a penalty
+    const since = p ? (now - (p.lastSeen || 0)) / 60000 : 999; // minutes
+    const lruBoost = since < 1 ? 0.2 : (since > 30 ? 1.3 : 1);
+    return { item, weight: w * lruBoost };
+  });
+  // Avoid showing the same card twice in a row
+  const filtered = exclude ? weighted.filter(x => x.item !== exclude) : weighted;
+  const final = filtered.length ? filtered : weighted;
+  const total = final.reduce((s, x) => s + x.weight, 0);
+  let r = Math.random() * total;
+  for (const x of final) {
+    if ((r -= x.weight) <= 0) return x.item;
+  }
+  return final[final.length - 1].item;
 }
+
 function shuffle(arr) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
@@ -1108,6 +1302,23 @@ function shuffle(arr) {
   }
   return a;
 }
+
+/* ============================================================
+   POOL (vocab vs sentences) + filtering
+   ============================================================ */
+function currentKind() {
+  return (state.mode === 'sentences') ? 'sent' : 'vocab';
+}
+function currentSource() {
+  return (state.mode === 'sentences') ? SENTENCES : VOCAB;
+}
+function getPool() {
+  return currentSource().filter(v => state.lessons.has(v.lesson));
+}
+
+/* ============================================================
+   NORMALISATION + TTS
+   ============================================================ */
 function normalize(s) {
   return (s || '').toLowerCase().trim()
     .replace(/[、。.,!?！？\s\-]/g, '')
@@ -1125,6 +1336,17 @@ function speak(text) {
     window.speechSynthesis.speak(u);
   } catch (e) {}
 }
+function speakSlow(text) {
+  if (!('speechSynthesis' in window)) return;
+  try {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ja-JP';
+    if (state.voice) u.voice = state.voice;
+    u.rate = 0.55;
+    window.speechSynthesis.speak(u);
+  } catch (e) {}
+}
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
@@ -1135,15 +1357,32 @@ function escapeHtml(s) {
 const cardEl = document.getElementById('card');
 const statSeen = document.getElementById('stat-seen');
 const statCorrect = document.getElementById('stat-correct');
-const statStreak = document.getElementById('stat-streak');
+const statStreakDay = document.getElementById('stat-streak-day');
 
 function updateStats() {
-  statSeen.textContent = state.seen;
+  statSeen.textContent = state.totalSeen;
   statCorrect.textContent = state.correct;
-  statStreak.textContent = state.streak;
+  statStreakDay.textContent = state.streak;
+}
+function refreshLessonPills() {
+  document.querySelectorAll('.lesson-pill').forEach(pill => {
+    const n = +pill.dataset.lesson;
+    const kind = currentKind();
+    const items = currentSource().filter(v => v.lesson === n);
+    const mastered = items.filter(v => getBox(v, kind) >= 4).length;
+    const pct = items.length ? Math.round(100 * mastered / items.length) : 0;
+    let pctEl = pill.querySelector('.pct');
+    if (!pctEl) {
+      pctEl = document.createElement('span');
+      pctEl.className = 'pct';
+      pill.appendChild(pctEl);
+    }
+    pctEl.textContent = `${pct}%`;
+  });
 }
 
 function render() {
+  if (state.quiz) { renderQuiz(); return; }
   const pool = getPool();
   if (!pool.length) {
     cardEl.innerHTML = '<div class="empty">Select at least one lesson to start.</div>';
@@ -1153,80 +1392,101 @@ function render() {
   else if (state.mode === 'mcq') renderMCQ(pool);
   else if (state.mode === 'sentences') renderSentences(pool);
   else if (state.mode === 'dictation') renderDictation(pool);
+  refreshLessonPills();
 }
 
+/* ---- Flashcards ---- */
 function renderFlash(pool) {
-  if (!state.current) { state.current = pickRandom(pool); state.revealed = false; }
-  const v = state.current;
-  if (!state.revealed) {
-    cardEl.innerHTML = `
-      <span class="lesson-tag">Lesson ${v.lesson}</span>
-      <div class="prompt-label">Translate to Japanese</div>
-      <div class="prompt-en">${escapeHtml(v.en)}</div>
-      <div class="btn-row"><button class="btn primary" id="reveal">Show answer (Space)</button></div>`;
-    document.getElementById('reveal').onclick = () => { state.revealed = true; render(); if (state.autoSpeak) speak(state.current.jp); };
-  } else {
-    cardEl.innerHTML = `
-      <span class="lesson-tag">Lesson ${v.lesson}</span>
-      <div class="prompt-label">${escapeHtml(v.en)}</div>
-      <div class="answer-jp">${escapeHtml(v.jp)}</div>
-      <div class="answer-romaji">${escapeHtml(v.romaji)}</div>
-      <div class="btn-row">
-        <button class="btn icon" id="speak" title="Hear it (S)">🔊 Hear</button>
-        <button class="btn bad" id="miss">Didn't know</button>
-        <button class="btn good" id="hit">Got it!</button>
-      </div>`;
-    document.getElementById('speak').onclick = () => speak(v.jp);
-    document.getElementById('hit').onclick = () => grade(true);
-    document.getElementById('miss').onclick = () => grade(false);
+  if (!state.current) {
+    state.current = pickSmart(pool, 'vocab');
+    state.revealed = false;
   }
+  flashLike(pool, state.current, 'vocab', false);
 }
-
 function renderSentences(pool) {
-  if (!state.current) { state.current = pickRandom(pool); state.revealed = false; }
-  const v = state.current;
+  if (!state.current) {
+    state.current = pickSmart(pool, 'sent');
+    state.revealed = false;
+  }
+  flashLike(pool, state.current, 'sent', true);
+}
+function flashLike(pool, v, kind, isSentence) {
+  const box = getBox(v, kind);
+  const boxClass = `b${box}`;
+  const dirEN = state.direction === 'en2jp';
   if (!state.revealed) {
-    cardEl.innerHTML = `
-      <span class="lesson-tag">Lesson ${v.lesson}</span>
-      <div class="prompt-label">Translate to Japanese</div>
-      <div class="prompt-en sentence">${escapeHtml(v.en)}</div>
-      <div class="btn-row"><button class="btn primary" id="reveal">Show answer (Space)</button></div>`;
-    document.getElementById('reveal').onclick = () => { state.revealed = true; render(); if (state.autoSpeak) speak(state.current.jp); };
+    if (dirEN) {
+      cardEl.innerHTML = `
+        <div>
+          <span class="lesson-tag">Lesson ${v.lesson}</span>
+          <span class="box-tag ${boxClass}">box ${box}</span>
+        </div>
+        <div class="prompt-label">Translate to Japanese</div>
+        <div class="prompt-en${isSentence ? ' sentence' : ''}">${escapeHtml(v.en)}</div>
+        <div class="btn-row"><button class="btn primary" id="reveal">Show answer (Space)</button></div>`;
+    } else {
+      cardEl.innerHTML = `
+        <div>
+          <span class="lesson-tag">Lesson ${v.lesson}</span>
+          <span class="box-tag ${boxClass}">box ${box}</span>
+        </div>
+        <div class="prompt-label">What does this mean?</div>
+        <div class="prompt-jp${isSentence ? ' sentence' : ''}">${escapeHtml(v.jp)}</div>
+        <div class="btn-row">
+          <button class="btn icon" id="speak-prompt" title="Hear it (S)">🔊 Hear</button>
+          <button class="btn primary" id="reveal">Show answer (Space)</button>
+        </div>`;
+      const sp = document.getElementById('speak-prompt');
+      if (sp) sp.onclick = () => speak(v.jp);
+    }
+    document.getElementById('reveal').onclick = () => {
+      state.revealed = true;
+      render();
+      if (state.autoSpeak) speak(v.jp);
+    };
   } else {
     cardEl.innerHTML = `
-      <span class="lesson-tag">Lesson ${v.lesson}</span>
-      <div class="prompt-label">${escapeHtml(v.en)}</div>
-      <div class="answer-jp sentence">${escapeHtml(v.jp)}</div>
-      <div class="answer-romaji sentence">${escapeHtml(v.romaji)}</div>
+      <div>
+        <span class="lesson-tag">Lesson ${v.lesson}</span>
+        <span class="box-tag ${boxClass}">box ${box}</span>
+      </div>
+      <div class="answer-jp${isSentence ? ' sentence' : ''}">${escapeHtml(v.jp)}</div>
+      <div class="answer-romaji${isSentence ? ' sentence' : ''}">${escapeHtml(v.romaji)}</div>
+      <div class="answer-en">${escapeHtml(v.en)}</div>
       <div class="btn-row">
-        <button class="btn icon" id="speak" title="Hear it (S)">🔊 Hear</button>
+        <button class="btn icon" id="speak-ans" title="Hear it (S)">🔊 Hear</button>
         <button class="btn bad" id="miss">Didn't know</button>
         <button class="btn good" id="hit">Got it!</button>
       </div>`;
-    document.getElementById('speak').onclick = () => speak(v.jp);
-    document.getElementById('hit').onclick = () => grade(true);
-    document.getElementById('miss').onclick = () => grade(false);
+    document.getElementById('speak-ans').onclick = () => speak(v.jp);
+    document.getElementById('hit').onclick = () => grade(true, kind);
+    document.getElementById('miss').onclick = () => grade(false, kind);
   }
 }
 
-function grade(correct) {
-  state.seen++;
-  if (correct) { state.correct++; state.streak++; } else { state.streak = 0; }
+function grade(correct, kind) {
+  const v = state.current;
+  recordResult(v, kind, correct);
   updateStats();
-  state.current = pickRandom(getPool(), state.current);
+  state.current = pickSmart(getPool(), kind, v);
   state.revealed = false;
   render();
 }
 
+/* ---- Multiple choice ---- */
 function renderMCQ(pool) {
   if (!state.current) {
-    state.current = pickRandom(pool);
+    state.current = pickSmart(pool, 'vocab');
     state.choices = buildChoices(pool, state.current);
     state.answered = false;
   }
   const v = state.current;
+  const box = getBox(v, 'vocab');
   cardEl.innerHTML = `
-    <span class="lesson-tag">Lesson ${v.lesson}</span>
+    <div>
+      <span class="lesson-tag">Lesson ${v.lesson}</span>
+      <span class="box-tag b${box}">box ${box}</span>
+    </div>
     <div class="prompt-label">Pick the Japanese for</div>
     <div class="prompt-en">${escapeHtml(v.en)}</div>
     <div class="choices" id="choices"></div>
@@ -1249,67 +1509,128 @@ function buildChoices(pool, correct) {
 function answerMCQ(picked, el) {
   if (state.answered) return;
   state.answered = true;
-  state.seen++;
-  const isCorrect = picked.jp === state.current.jp;
-  if (isCorrect) { state.correct++; state.streak++; el.classList.add('correct'); }
-  else { state.streak = 0; el.classList.add('wrong'); }
+  const v = state.current;
+  const ok = picked.jp === v.jp;
+  recordResult(v, 'vocab', ok);
+  if (ok) el.classList.add('correct');
+  else el.classList.add('wrong');
   document.querySelectorAll('.choice').forEach(c => {
     c.classList.add('disabled');
-    if (c.textContent.includes(state.current.jp)) c.classList.add('correct');
+    if (c.textContent.includes(v.jp)) c.classList.add('correct');
   });
-  if (state.autoSpeak) speak(state.current.jp);
+  if (state.autoSpeak) speak(v.jp);
   updateStats();
   document.getElementById('next-row').style.display = 'flex';
   document.getElementById('next').onclick = nextMCQ;
 }
 function nextMCQ() {
-  state.current = pickRandom(getPool(), state.current);
+  state.current = pickSmart(getPool(), 'vocab', state.current);
   state.choices = buildChoices(getPool(), state.current);
   state.answered = false;
   render();
 }
 
+/* ---- Dictation: Romaji / Kana / Draw ---- */
 function renderDictation(pool) {
-  if (!state.current) { state.current = pickRandom(pool); state.dictAttempted = false; }
+  if (!state.current) {
+    state.current = pickSmart(pool, 'vocab');
+    state.dictAttempted = false;
+  }
   const v = state.current;
+  const box = getBox(v, 'vocab');
+
+  const segHTML = `
+    <div class="seg" id="dict-seg" style="margin-top:6px;">
+      <button data-dm="romaji" class="${state.dictMode==='romaji'?'active':''}">Type Romaji</button>
+      <button data-dm="kana"   class="${state.dictMode==='kana'?'active':''}">Type Kana</button>
+      <button data-dm="draw"   class="${state.dictMode==='draw'?'active':''}">Draw</button>
+    </div>`;
+
+  let bodyHTML = '';
+  if (state.dictMode === 'draw') {
+    bodyHTML = `
+      <div class="canvas-wrap"><canvas id="draw-canvas"></canvas></div>
+      <div class="canvas-tools">
+        <button class="btn" id="canvas-clear">Clear</button>
+        <button class="btn" id="canvas-undo">Undo</button>
+        <button class="btn" id="dict-show">Show answer</button>
+      </div>`;
+  } else {
+    const ph = state.dictMode === 'kana' ? 'Type the kana (use Japanese keyboard)…' : 'Type English meaning or romaji…';
+    const acap = state.dictMode === 'kana' ? 'on' : 'off';
+    bodyHTML = `
+      <input class="dictation-input" id="dict-input" placeholder="${ph}" autocomplete="off" autocapitalize="${acap}" autocorrect="off" />`;
+  }
+
   cardEl.innerHTML = `
-    <span class="lesson-tag">Lesson ${v.lesson}</span>
-    <div class="prompt-label">Listen and type the meaning (or romaji)</div>
+    <div>
+      <span class="lesson-tag">Lesson ${v.lesson}</span>
+      <span class="box-tag b${box}">box ${box}</span>
+    </div>
+    <div class="prompt-label">Listen and answer</div>
     <div class="btn-row">
       <button class="btn primary" id="play">🔊 Play audio</button>
       <button class="btn" id="play-slow">🐢 Slow</button>
     </div>
-    <input class="dictation-input" id="dict-input" placeholder="Type English meaning or romaji…" autocomplete="off" autocapitalize="off" autocorrect="off" />
+    ${segHTML}
+    ${bodyHTML}
     <div class="dictation-feedback" id="dict-feedback"></div>
     <div class="btn-row">
-      <button class="btn" id="dict-show">Show answer</button>
-      <button class="btn primary" id="dict-check">Check</button>
-      <button class="btn" id="dict-next">Skip / Next →</button>
+      ${state.dictMode === 'draw'
+        ? `<button class="btn bad" id="draw-miss">Try again</button>
+           <button class="btn good" id="draw-hit">Got it</button>
+           <button class="btn" id="dict-next">Skip / Next →</button>`
+        : `<button class="btn" id="dict-show">Show answer</button>
+           <button class="btn primary" id="dict-check">Check</button>
+           <button class="btn" id="dict-next">Skip / Next →</button>`}
     </div>`;
-  const input = document.getElementById('dict-input');
-  setTimeout(() => input.focus(), 50);
+
+  document.querySelectorAll('#dict-seg button').forEach(b => {
+    b.onclick = () => {
+      state.dictMode = b.dataset.dm;
+      saveStore();
+      state.dictAttempted = false;
+      render();
+    };
+  });
   document.getElementById('play').onclick = () => speak(v.jp);
-  document.getElementById('play-slow').onclick = () => {
-    if (!('speechSynthesis' in window)) return;
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(v.jp);
-    u.lang = 'ja-JP';
-    if (state.voice) u.voice = state.voice;
-    u.rate = 0.55;
-    window.speechSynthesis.speak(u);
-  };
-  document.getElementById('dict-check').onclick = checkDictation;
-  document.getElementById('dict-show').onclick = () => {
-    document.getElementById('dict-feedback').innerHTML =
-      `<span>Answer: <strong>${escapeHtml(v.jp)}</strong> · ${escapeHtml(v.romaji)} · ${escapeHtml(v.en)}</span>`;
-  };
+  document.getElementById('play-slow').onclick = () => speakSlow(v.jp);
   document.getElementById('dict-next').onclick = () => {
-    state.current = pickRandom(getPool(), state.current);
+    state.current = pickSmart(getPool(), 'vocab', state.current);
     state.dictAttempted = false;
     render();
   };
-  input.onkeydown = (e) => { if (e.key === 'Enter') checkDictation(); };
-  /* iOS: no auto-play; user taps Play */
+
+  if (state.dictMode === 'draw') {
+    setupCanvas();
+    document.getElementById('canvas-clear').onclick = canvasClear;
+    document.getElementById('canvas-undo').onclick = canvasUndo;
+    document.getElementById('dict-show').onclick = () => {
+      document.getElementById('dict-feedback').innerHTML =
+        `<span>Answer: <strong>${escapeHtml(v.jp)}</strong> · ${escapeHtml(v.romaji)} · ${escapeHtml(v.en)}</span>`;
+    };
+    document.getElementById('draw-hit').onclick = () => {
+      if (!state.dictAttempted) { recordResult(v, 'vocab', true); state.dictAttempted = true; updateStats(); }
+      state.current = pickSmart(getPool(), 'vocab', v);
+      state.dictAttempted = false;
+      render();
+    };
+    document.getElementById('draw-miss').onclick = () => {
+      if (!state.dictAttempted) { recordResult(v, 'vocab', false); state.dictAttempted = true; updateStats(); }
+      document.getElementById('dict-feedback').innerHTML =
+        `<span class="feedback-wrong">Answer: <strong>${escapeHtml(v.jp)}</strong> · ${escapeHtml(v.romaji)} · ${escapeHtml(v.en)}</span>`;
+    };
+  } else {
+    const input = document.getElementById('dict-input');
+    setTimeout(() => input.focus(), 50);
+    document.getElementById('dict-check').onclick = checkDictation;
+    document.getElementById('dict-show').onclick = () => {
+      if (!state.dictAttempted) { recordResult(v, 'vocab', false); state.dictAttempted = true; updateStats(); }
+      document.getElementById('dict-feedback').innerHTML =
+        `<span>Answer: <strong>${escapeHtml(v.jp)}</strong> · ${escapeHtml(v.romaji)} · ${escapeHtml(v.en)}</span>`;
+    };
+    input.onkeydown = (e) => { if (e.key === 'Enter') checkDictation(); };
+  }
 }
 function checkDictation() {
   const v = state.current;
@@ -1320,30 +1641,300 @@ function checkDictation() {
   const okEn = normalize(v.en).split(/[,/;]|\bor\b/).some(part => part && (guess === normalize(part) || (normalize(part).includes(guess) && guess.length >= 3)));
   const okRomaji = normalize(v.romaji) === guess;
   const okJp = v.jp.replace(/\s/g,'') === input.value.trim().replace(/\s/g,'');
-  const correct = okEn || okRomaji || okJp;
+  const correct = (state.dictMode === 'kana') ? okJp : (okEn || okRomaji || okJp);
   if (!state.dictAttempted) {
-    state.seen++;
+    recordResult(v, 'vocab', correct);
     state.dictAttempted = true;
-    if (correct) { state.correct++; state.streak++; } else { state.streak = 0; }
     updateStats();
   }
   if (correct) {
     fb.innerHTML = `<span class="feedback-correct">✓ Correct! <strong>${escapeHtml(v.jp)}</strong> · ${escapeHtml(v.romaji)} · ${escapeHtml(v.en)}</span>`;
     setTimeout(() => {
-      state.current = pickRandom(getPool(), state.current);
+      state.current = pickSmart(getPool(), 'vocab', v);
       state.dictAttempted = false;
       render();
-    }, 1200);
+    }, 1100);
   } else {
     fb.innerHTML = `<span class="feedback-wrong">✗ Try again — or click Show answer.</span>`;
   }
 }
 
 /* ============================================================
+   DRAWING CANVAS
+   ============================================================ */
+let canvasCtx = null;
+let canvasStrokes = [];
+let canvasCurrent = null;
+let canvasDrawing = false;
+
+function setupCanvas() {
+  const wrap = document.querySelector('.canvas-wrap');
+  const canvas = document.getElementById('draw-canvas');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = wrap.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  canvasCtx = canvas.getContext('2d');
+  canvasCtx.scale(dpr, dpr);
+  canvasCtx.lineWidth = 6;
+  canvasCtx.lineCap = 'round';
+  canvasCtx.lineJoin = 'round';
+  canvasCtx.strokeStyle = '#0f172a';
+  canvasStrokes = [];
+  canvasCurrent = null;
+  redrawCanvas();
+
+  const start = (e) => {
+    e.preventDefault();
+    canvasDrawing = true;
+    canvasCurrent = [getPos(canvas, e)];
+  };
+  const move = (e) => {
+    if (!canvasDrawing) return;
+    e.preventDefault();
+    canvasCurrent.push(getPos(canvas, e));
+    redrawCanvas();
+  };
+  const end = (e) => {
+    if (!canvasDrawing) return;
+    e && e.preventDefault();
+    canvasDrawing = false;
+    if (canvasCurrent && canvasCurrent.length > 1) canvasStrokes.push(canvasCurrent);
+    canvasCurrent = null;
+    redrawCanvas();
+  };
+
+  canvas.addEventListener('touchstart', start, { passive: false });
+  canvas.addEventListener('touchmove', move, { passive: false });
+  canvas.addEventListener('touchend', end);
+  canvas.addEventListener('mousedown', start);
+  canvas.addEventListener('mousemove', move);
+  canvas.addEventListener('mouseup', end);
+  canvas.addEventListener('mouseleave', end);
+}
+function getPos(canvas, e) {
+  const rect = canvas.getBoundingClientRect();
+  const t = e.touches ? e.touches[0] : e;
+  return { x: t.clientX - rect.left, y: t.clientY - rect.top };
+}
+function redrawCanvas() {
+  if (!canvasCtx) return;
+  const c = document.getElementById('draw-canvas');
+  const dpr = window.devicePixelRatio || 1;
+  canvasCtx.clearRect(0, 0, c.width / dpr, c.height / dpr);
+  for (const stroke of canvasStrokes) drawStroke(stroke);
+  if (canvasCurrent) drawStroke(canvasCurrent);
+}
+function drawStroke(s) {
+  if (s.length < 2) return;
+  canvasCtx.beginPath();
+  canvasCtx.moveTo(s[0].x, s[0].y);
+  for (let i = 1; i < s.length; i++) canvasCtx.lineTo(s[i].x, s[i].y);
+  canvasCtx.stroke();
+}
+function canvasClear() { canvasStrokes = []; canvasCurrent = null; redrawCanvas(); }
+function canvasUndo() { canvasStrokes.pop(); redrawCanvas(); }
+
+/* ============================================================
+   QUIZ OF THE DAY (10 mixed cards)
+   ============================================================ */
+function startQuiz() {
+  const vocabPool = VOCAB.filter(v => state.lessons.has(v.lesson));
+  const sentPool = SENTENCES.filter(v => state.lessons.has(v.lesson));
+  if (!vocabPool.length) { alert('Pick at least one lesson first.'); return; }
+  // Bias toward struggling cards
+  const items = [];
+  for (let i = 0; i < 10; i++) {
+    const useSent = (i % 4 === 3) && sentPool.length;
+    const pool = useSent ? sentPool : vocabPool;
+    const kind = useSent ? 'sent' : 'vocab';
+    const item = pickSmart(pool, kind);
+    const subModes = useSent ? ['sentence'] : ['flash','mcq','dictation'];
+    const sub = subModes[Math.floor(Math.random() * subModes.length)];
+    items.push({ item, kind, sub });
+  }
+  state.quiz = { items, idx: 0, correct: 0, misses: [] };
+  render();
+}
+function endQuiz() {
+  const q = state.quiz;
+  state.quiz = null;
+  const missHTML = q.misses.length
+    ? `<div class="miss-list">${q.misses.map(m => `
+        <div class="miss-item"><span class="jp">${escapeHtml(m.item.jp)}</span> ${escapeHtml(m.item.romaji)} — ${escapeHtml(m.item.en)}</div>
+       `).join('')}</div>`
+    : '<div style="color:var(--good); margin-top:8px;">Perfect — no misses.</div>';
+  cardEl.innerHTML = `
+    <div class="summary">
+      <h3>Quiz complete: ${q.correct} / 10 correct</h3>
+      <div style="color:var(--muted); font-size:13px;">Streak: 🔥 ${state.streak} day${state.streak===1?'':'s'}</div>
+      ${q.misses.length ? '<div style="margin-top:14px; font-weight:600;">Cards to review:</div>' : ''}
+      ${missHTML}
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="quiz-restart">Start another</button>
+      <button class="btn primary" id="quiz-back">Back to practice</button>
+    </div>`;
+  document.getElementById('quiz-restart').onclick = startQuiz;
+  document.getElementById('quiz-back').onclick = () => { state.current = null; render(); };
+  refreshLessonPills();
+}
+function renderQuiz() {
+  const q = state.quiz;
+  if (q.idx >= q.items.length) { endQuiz(); return; }
+  const cur = q.items[q.idx];
+  const v = cur.item;
+  const progressLine = `<div class="prompt-label">Quiz ${q.idx + 1} / 10 — ${cur.sub.toUpperCase()}</div>`;
+
+  if (cur.sub === 'flash' || cur.sub === 'sentence') {
+    cardEl.innerHTML = `
+      ${progressLine}
+      <span class="lesson-tag">Lesson ${v.lesson}</span>
+      <div class="prompt-en${cur.sub==='sentence'?' sentence':''}">${escapeHtml(v.en)}</div>
+      <div class="btn-row"><button class="btn primary" id="reveal">Show answer</button></div>`;
+    document.getElementById('reveal').onclick = () => {
+      cardEl.innerHTML = `
+        ${progressLine}
+        <span class="lesson-tag">Lesson ${v.lesson}</span>
+        <div class="prompt-label">${escapeHtml(v.en)}</div>
+        <div class="answer-jp${cur.sub==='sentence'?' sentence':''}">${escapeHtml(v.jp)}</div>
+        <div class="answer-romaji${cur.sub==='sentence'?' sentence':''}">${escapeHtml(v.romaji)}</div>
+        <div class="btn-row">
+          <button class="btn icon" id="qspeak">🔊</button>
+          <button class="btn bad"  id="qmiss">Didn't know</button>
+          <button class="btn good" id="qhit">Got it</button>
+        </div>`;
+      document.getElementById('qspeak').onclick = () => speak(v.jp);
+      document.getElementById('qhit').onclick = () => quizGrade(true, cur);
+      document.getElementById('qmiss').onclick = () => quizGrade(false, cur);
+      if (state.autoSpeak) speak(v.jp);
+    };
+  } else if (cur.sub === 'mcq') {
+    const pool = currentSource().filter(x => state.lessons.has(x.lesson));
+    const choices = buildChoices(pool, v);
+    cardEl.innerHTML = `
+      ${progressLine}
+      <span class="lesson-tag">Lesson ${v.lesson}</span>
+      <div class="prompt-en">${escapeHtml(v.en)}</div>
+      <div class="choices" id="qchoices"></div>`;
+    const cEl = document.getElementById('qchoices');
+    choices.forEach(c => {
+      const div = document.createElement('div');
+      div.className = 'choice';
+      div.textContent = c.jp;
+      div.onclick = () => {
+        if (div.classList.contains('disabled')) return;
+        const ok = c.jp === v.jp;
+        if (ok) div.classList.add('correct'); else div.classList.add('wrong');
+        document.querySelectorAll('#qchoices .choice').forEach(x => {
+          x.classList.add('disabled');
+          if (x.textContent === v.jp) x.classList.add('correct');
+        });
+        if (state.autoSpeak) speak(v.jp);
+        setTimeout(() => quizGrade(ok, cur), 900);
+      };
+      cEl.appendChild(div);
+    });
+  } else if (cur.sub === 'dictation') {
+    cardEl.innerHTML = `
+      ${progressLine}
+      <span class="lesson-tag">Lesson ${v.lesson}</span>
+      <div class="prompt-label">Listen and type the meaning (or romaji)</div>
+      <div class="btn-row">
+        <button class="btn primary" id="qplay">🔊 Play</button>
+        <button class="btn" id="qslow">🐢 Slow</button>
+      </div>
+      <input class="dictation-input" id="qdict" placeholder="Type meaning / romaji" autocomplete="off" autocapitalize="off" autocorrect="off" />
+      <div class="dictation-feedback" id="qfb"></div>
+      <div class="btn-row">
+        <button class="btn" id="qshow">Show answer</button>
+        <button class="btn primary" id="qcheck">Check</button>
+      </div>`;
+    document.getElementById('qplay').onclick = () => speak(v.jp);
+    document.getElementById('qslow').onclick = () => speakSlow(v.jp);
+    const inp = document.getElementById('qdict');
+    setTimeout(() => inp.focus(), 50);
+    const checkQ = () => {
+      const guess = normalize(inp.value);
+      if (!guess) return;
+      const okEn = normalize(v.en).split(/[,/;]|\bor\b/).some(p => p && (guess === normalize(p) || (normalize(p).includes(guess) && guess.length >= 3)));
+      const okR = normalize(v.romaji) === guess;
+      const ok = okEn || okR;
+      document.getElementById('qfb').innerHTML = ok
+        ? `<span class="feedback-correct">✓ ${escapeHtml(v.jp)} — ${escapeHtml(v.en)}</span>`
+        : `<span class="feedback-wrong">✗ Answer: ${escapeHtml(v.jp)} — ${escapeHtml(v.romaji)} — ${escapeHtml(v.en)}</span>`;
+      setTimeout(() => quizGrade(ok, cur), ok ? 900 : 2000);
+    };
+    document.getElementById('qcheck').onclick = checkQ;
+    document.getElementById('qshow').onclick = () => quizGrade(false, cur);
+    inp.onkeydown = (e) => { if (e.key === 'Enter') checkQ(); };
+  }
+}
+function quizGrade(ok, cur) {
+  recordResult(cur.item, cur.kind, ok);
+  if (ok) state.quiz.correct++;
+  else state.quiz.misses.push({ item: cur.item });
+  state.quiz.idx++;
+  updateStats();
+  render();
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+function runSearch(q) {
+  q = q.trim().toLowerCase();
+  if (!q) { searchResults.hidden = true; searchResults.innerHTML = ''; return; }
+  const all = [...VOCAB.map(v => ({...v, _src: 'vocab'})), ...SENTENCES.map(v => ({...v, _src: 'sent'}))];
+  const matches = all.filter(v =>
+    v.jp.toLowerCase().includes(q) ||
+    v.romaji.toLowerCase().includes(q) ||
+    v.en.toLowerCase().includes(q)
+  ).slice(0, 30);
+  if (!matches.length) {
+    searchResults.innerHTML = '<div class="search-result" style="color:var(--muted);">No match.</div>';
+  } else {
+    searchResults.innerHTML = matches.map(m => `
+      <div class="search-result" data-src="${m._src}" data-jp="${escapeHtml(m.jp)}">
+        <span class="jp">${escapeHtml(m.jp)}</span>
+        <span>${escapeHtml(m.romaji)} — ${escapeHtml(m.en)}</span>
+        <div class="meta">L${m.lesson} · ${m._src === 'sent' ? 'sentence' : 'vocab'}</div>
+      </div>`).join('');
+    searchResults.querySelectorAll('.search-result').forEach((el, i) => {
+      el.onclick = () => {
+        const m = matches[i];
+        // Switch mode + lesson, set as current
+        state.lessons.add(m.lesson);
+        document.querySelectorAll('.lesson-pill').forEach(p => {
+          if (+p.dataset.lesson === m.lesson) p.classList.add('active');
+        });
+        state.mode = (m._src === 'sent') ? 'sentences' : 'flash';
+        document.querySelectorAll('.mode-tabs button').forEach(b => b.classList.toggle('active', b.dataset.mode === state.mode));
+        state.current = m;
+        state.revealed = false;
+        searchInput.value = '';
+        searchResults.hidden = true;
+        saveStore();
+        render();
+      };
+    });
+  }
+  searchResults.hidden = false;
+}
+searchInput.addEventListener('input', e => runSearch(e.target.value));
+searchInput.addEventListener('focus', e => { if (e.target.value) runSearch(e.target.value); });
+document.addEventListener('click', e => {
+  if (!e.target.closest('.search-box')) searchResults.hidden = true;
+});
+
+/* ============================================================
    CONTROLS
    ============================================================ */
 document.querySelectorAll('.mode-tabs button').forEach(b => {
   b.onclick = () => {
+    if (state.quiz) state.quiz = null;
     document.querySelectorAll('.mode-tabs button').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
     state.mode = b.dataset.mode;
@@ -1352,17 +1943,35 @@ document.querySelectorAll('.mode-tabs button').forEach(b => {
   };
 });
 
+document.querySelectorAll('#dir-seg button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('#dir-seg button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.direction = b.dataset.dir;
+    saveStore();
+    state.revealed = false;
+    render();
+  };
+});
+// Set initial direction button
+document.querySelectorAll('#dir-seg button').forEach(b => {
+  b.classList.toggle('active', b.dataset.dir === state.direction);
+});
+
+document.getElementById('quiz-btn').onclick = startQuiz;
+
 const lessonPillsEl = document.getElementById('lesson-pills');
 const allLessons = [...new Set([...VOCAB, ...SENTENCES].map(v => v.lesson))].sort((a,b)=>a-b);
 allLessons.forEach(n => {
   const pill = document.createElement('div');
   pill.className = 'lesson-pill' + (state.lessons.has(n) ? ' active' : '');
-  pill.textContent = `L${n}`;
+  pill.dataset.lesson = n;
+  pill.innerHTML = `L${n} <span class="pct">0%</span>`;
   pill.onclick = () => {
     if (state.lessons.has(n)) state.lessons.delete(n); else state.lessons.add(n);
     pill.classList.toggle('active');
     state.current = null;
-    persist();
+    saveStore();
     render();
   };
   lessonPillsEl.appendChild(pill);
@@ -1371,19 +1980,19 @@ document.getElementById('lessons-all').onclick = () => {
   allLessons.forEach(n => state.lessons.add(n));
   document.querySelectorAll('.lesson-pill').forEach(p => p.classList.add('active'));
   state.current = null;
-  persist();
+  saveStore();
   render();
 };
 document.getElementById('lessons-none').onclick = () => {
   state.lessons.clear();
   document.querySelectorAll('.lesson-pill').forEach(p => p.classList.remove('active'));
   state.current = null;
-  persist();
+  saveStore();
   render();
 };
 
 document.getElementById('auto-speak').checked = state.autoSpeak;
-document.getElementById('auto-speak').onchange = (e) => { state.autoSpeak = e.target.checked; persist(); };
+document.getElementById('auto-speak').onchange = (e) => { state.autoSpeak = e.target.checked; saveStore(); };
 
 const voiceSelect = document.getElementById('voice-select');
 function loadVoices() {
@@ -1409,12 +2018,12 @@ loadVoices();
 if ('speechSynthesis' in window) window.speechSynthesis.onvoiceschanged = loadVoices;
 
 document.addEventListener('keydown', (e) => {
-  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) return;
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) return;
   if (e.code === 'Space') {
     e.preventDefault();
     if (state.mode === 'flash' || state.mode === 'sentences') {
-      if (!state.revealed) { state.revealed = true; render(); if (state.autoSpeak) speak(state.current.jp); }
-      else { grade(true); }
+      if (!state.revealed) { state.revealed = true; render(); if (state.autoSpeak && state.current) speak(state.current.jp); }
+      else { grade(true, currentKind()); }
     } else if (state.mode === 'mcq' && state.answered) {
       nextMCQ();
     }
@@ -1427,8 +2036,10 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// Init
 updateStats();
 render();
+
 </script>
 </body>
 </html>
