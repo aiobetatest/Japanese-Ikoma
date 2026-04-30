@@ -84,7 +84,7 @@
     margin-right: 8px;
   }
 
-  .mode-tabs { display: flex; gap: 6px; }
+  .mode-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
   .mode-tabs button {
     background: var(--panel-2);
     color: var(--text);
@@ -176,77 +176,41 @@
     font-weight: 600;
   }
 
-  .search-box {
-    position: relative;
-    flex: 1;
-    min-width: 200px;
-  }
-  .search-box input {
-    width: 100%;
-    padding-left: 32px;
-  }
+  .search-box { position: relative; flex: 1; min-width: 200px; }
+  .search-box input { width: 100%; padding-left: 32px; }
   .search-box::before {
     content: "🔍";
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 13px;
-    opacity: 0.6;
+    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    font-size: 13px; opacity: 0.6;
   }
   .search-results {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    margin-top: 4px;
-    max-height: 280px;
-    overflow-y: auto;
-    z-index: 10;
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 8px; margin-top: 4px;
+    max-height: 280px; overflow-y: auto; z-index: 10;
     box-shadow: 0 10px 30px rgba(0,0,0,0.4);
   }
-  .search-result {
-    padding: 10px 14px;
-    cursor: pointer;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-  }
+  .search-result { padding: 10px 14px; cursor: pointer; border-bottom: 1px solid var(--border); font-size: 14px; }
   .search-result:last-child { border-bottom: 0; }
   .search-result:hover { background: var(--panel-2); }
   .search-result .jp { color: var(--accent); font-weight: 600; margin-right: 8px; }
   .search-result .meta { font-size: 11px; color: var(--muted); }
 
-  /* Card area */
   .card {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 48px 32px;
-    text-align: center;
-    min-height: 360px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 16px; padding: 48px 32px; text-align: center;
+    min-height: 360px; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; gap: 16px;
   }
   .prompt-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
   .prompt-en { font-size: 32px; font-weight: 600; line-height: 1.3; max-width: 600px; }
   .prompt-jp {
-    font-size: 48px;
-    font-weight: 600;
-    color: var(--accent);
+    font-size: 48px; font-weight: 600; color: var(--accent);
     font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
-    line-height: 1.2;
-    max-width: 720px;
+    line-height: 1.2; max-width: 720px;
   }
   .answer-jp {
-    font-size: 56px;
-    font-weight: 600;
-    color: var(--accent);
+    font-size: 56px; font-weight: 600; color: var(--accent);
     font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
     line-height: 1.2;
   }
@@ -256,60 +220,29 @@
   .answer-romaji { font-size: 18px; color: var(--muted); font-style: italic; }
   .answer-romaji.sentence { font-size: 16px; }
   .answer-en { font-size: 22px; }
-  .lesson-tag {
-    font-size: 11px;
-    color: var(--muted);
-    background: var(--panel-2);
-    padding: 3px 8px;
-    border-radius: 999px;
-  }
-  .box-tag {
-    font-size: 10px;
-    color: var(--muted);
-    background: var(--panel-2);
-    padding: 2px 8px;
-    border-radius: 999px;
-    margin-left: 6px;
-  }
+  .lesson-tag { font-size: 11px; color: var(--muted); background: var(--panel-2); padding: 3px 8px; border-radius: 999px; }
+  .box-tag { font-size: 10px; color: var(--muted); background: var(--panel-2); padding: 2px 8px; border-radius: 999px; margin-left: 6px; }
   .box-tag.b1, .box-tag.b2 { color: var(--bad); }
   .box-tag.b3 { color: var(--warn); }
   .box-tag.b4, .box-tag.b5 { color: var(--good); }
 
-  /* Buttons */
   .btn-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
   button.btn {
-    background: var(--panel-2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.15s;
-    font-family: inherit;
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    padding: 10px 18px; border-radius: 8px; font-size: 15px; cursor: pointer;
+    transition: all 0.15s; font-family: inherit;
   }
   button.btn:hover { border-color: var(--accent); }
-  button.btn.primary {
-    background: var(--accent);
-    color: #0f172a;
-    border-color: var(--accent);
-    font-weight: 600;
-  }
+  button.btn.primary { background: var(--accent); color: #0f172a; border-color: var(--accent); font-weight: 600; }
   button.btn.primary:hover { background: #0ea5e9; }
   button.btn.good { background: var(--good); border-color: var(--good); color: white; }
   button.btn.bad  { background: var(--bad);  border-color: var(--bad);  color: white; }
   button.btn.icon { padding: 10px 14px; }
 
-  /* MCQ */
   .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 520px; margin-top: 20px; }
   .choice {
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 18px 14px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 24px;
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 14px; cursor: pointer; text-align: center; font-size: 24px;
     font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
     transition: all 0.15s;
   }
@@ -318,83 +251,31 @@
   .choice.wrong { background: var(--bad); border-color: var(--bad); color: white; }
   .choice.disabled { pointer-events: none; opacity: 0.6; }
 
-  /* Dictation input + canvas */
-  .dictation-input {
-    width: 100%;
-    max-width: 420px;
-    padding: 14px 16px;
-    font-size: 18px;
-    margin-top: 16px;
-  }
+  .dictation-input { width: 100%; max-width: 420px; padding: 14px 16px; font-size: 18px; margin-top: 16px; }
   .dictation-feedback { margin-top: 12px; font-size: 14px; min-height: 20px; }
   .feedback-correct { color: var(--good); }
   .feedback-wrong { color: var(--bad); }
 
   .canvas-wrap {
-    width: 100%;
-    max-width: 420px;
-    background: white;
-    border-radius: 10px;
-    border: 2px solid var(--border);
-    margin-top: 12px;
-    position: relative;
-    aspect-ratio: 2 / 1;
-    touch-action: none;
+    width: 100%; max-width: 420px; background: white;
+    border-radius: 10px; border: 2px solid var(--border);
+    margin-top: 12px; position: relative; aspect-ratio: 2 / 1; touch-action: none;
   }
   .canvas-wrap canvas { width: 100%; height: 100%; display: block; border-radius: 8px; }
-  .canvas-tools {
-    display: flex;
-    gap: 8px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+  .canvas-tools { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
 
-  /* Quiz summary */
   .summary {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 16px;
-    text-align: left;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; margin-top: 16px; text-align: left;
   }
   .summary h3 { margin: 0 0 8px 0; font-size: 16px; }
-  .summary .miss-list {
-    margin-top: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .summary .miss-item {
-    background: var(--panel-2);
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-size: 14px;
-  }
+  .summary .miss-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .summary .miss-item { background: var(--panel-2); padding: 10px 12px; border-radius: 8px; font-size: 14px; }
   .summary .miss-item .jp { color: var(--accent); font-weight: 600; margin-right: 8px; }
 
-  .empty {
-    text-align: center;
-    color: var(--muted);
-    padding: 40px 20px;
-  }
-
-  footer {
-    text-align: center;
-    color: var(--muted);
-    font-size: 12px;
-    padding: 24px;
-    border-top: 1px solid var(--border);
-    margin-top: 40px;
-  }
-
-  .help-text {
-    font-size: 13px;
-    color: var(--muted);
-    text-align: center;
-    margin-top: 8px;
-  }
+  .empty { text-align: center; color: var(--muted); padding: 40px 20px; }
+  footer { text-align: center; color: var(--muted); font-size: 12px; padding: 24px; border-top: 1px solid var(--border); margin-top: 40px; }
+  .help-text { font-size: 13px; color: var(--muted); text-align: center; margin-top: 8px; }
 
   @media (max-width: 700px) {
     body {
@@ -403,56 +284,23 @@
       padding-left: env(safe-area-inset-left);
       padding-right: env(safe-area-inset-right);
     }
-    header {
-      padding: 10px 14px;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-    }
+    header { padding: 10px 14px; flex-direction: column; align-items: flex-start; gap: 4px; }
     h1 { font-size: 17px; }
     h1 .ja { margin-right: 6px; }
     .stats { font-size: 11px; line-height: 1.4; }
     .container { padding: 12px; }
     .controls { padding: 12px; border-radius: 10px; margin-bottom: 14px; }
-    .controls-row {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
+    .controls-row { flex-direction: column; align-items: stretch; gap: 8px; margin-bottom: 10px; }
     .controls label { margin-right: 0; margin-bottom: 2px; font-size: 11px; }
-    .mode-tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-      width: 100%;
-    }
-    .mode-tabs button {
-      padding: 10px 8px;
-      font-size: 14px;
-      min-height: 40px;
-    }
+    .mode-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: 100%; }
+    .mode-tabs button { padding: 10px 8px; font-size: 14px; min-height: 40px; }
     .lesson-pills { width: 100%; gap: 6px; }
-    .lesson-pill {
-      padding: 6px 12px;
-      font-size: 14px;
-      min-height: 32px;
-      display: inline-flex;
-      align-items: center;
-    }
-    #lessons-all, #lessons-none {
-      flex: 1;
-      max-width: 80px;
-    }
+    .lesson-pill { padding: 6px 12px; font-size: 14px; min-height: 32px; display: inline-flex; align-items: center; }
+    #lessons-all, #lessons-none { flex: 1; max-width: 80px; }
     select { width: 100%; min-height: 40px; padding: 8px 10px; }
     .toggle { font-size: 13px; }
     .seg button { padding: 8px 14px; font-size: 14px; min-height: 36px; }
-    .card {
-      padding: 24px 14px;
-      min-height: 260px;
-      border-radius: 12px;
-      gap: 14px;
-    }
+    .card { padding: 24px 14px; min-height: 260px; border-radius: 12px; gap: 14px; }
     .prompt-label { font-size: 11px; }
     .prompt-en { font-size: 22px; line-height: 1.3; }
     .prompt-en.sentence { font-size: 18px; line-height: 1.45; }
@@ -496,14 +344,24 @@
         <button data-mode="mcq">Multiple Choice</button>
         <button data-mode="sentences">Sentences</button>
         <button data-mode="dictation">Dictation</button>
+        <button data-mode="hira">Hiragana</button>
+        <button data-mode="kata">Katakana</button>
       </div>
     </div>
 
-    <div class="controls-row">
+    <div class="controls-row" id="lessons-row">
       <label>Lessons</label>
       <div class="lesson-pills" id="lesson-pills"></div>
       <button class="btn icon" id="lessons-all" style="padding: 4px 10px; font-size: 12px;">All</button>
       <button class="btn icon" id="lessons-none" style="padding: 4px 10px; font-size: 12px;">None</button>
+    </div>
+
+    <div class="controls-row" id="kana-row" style="display:none;">
+      <label>Set</label>
+      <div class="seg" id="kana-set">
+        <button data-set="basic" class="active">Basic 46</button>
+        <button data-set="all">+ Dakuten / Handakuten</button>
+      </div>
     </div>
 
     <div class="controls-row">
@@ -543,7 +401,7 @@
 </div>
 
 <footer>
-  Vocab + sentences cover Lessons 1–10 (Dai_Ka.pdf). To add a new lesson, open this file in a text editor, find the <code>VOCAB</code> or <code>SENTENCES</code> array, and append entries with the same shape. Progress saved in your browser.
+  Vocab + sentences cover Lessons 1–10 (Dai_Ka.pdf). Hiragana + Katakana writing modes use the standard 46-char chart, with optional dakuten/handakuten. Progress saved in your browser.
 </footer>
 
 <script>
@@ -1161,6 +1019,53 @@ const SENTENCES = [
   { lesson: 10, jp: "ポストは ビルの となりに あります。", romaji: "Posuto wa biru no tonari ni arimasu.", en: "The mailbox is next to the building." },
   { lesson: 10, jp: "なかに なにが ありますか。", romaji: "Naka ni nani ga arimasu ka.", en: "What is inside?" },
 ];
+
+/* ============================================================
+   KANA CHARTS
+   ============================================================ */
+const HIRAGANA_BASIC = [
+  {romaji:'a',kana:'あ'},{romaji:'i',kana:'い'},{romaji:'u',kana:'う'},{romaji:'e',kana:'え'},{romaji:'o',kana:'お'},
+  {romaji:'ka',kana:'か'},{romaji:'ki',kana:'き'},{romaji:'ku',kana:'く'},{romaji:'ke',kana:'け'},{romaji:'ko',kana:'こ'},
+  {romaji:'sa',kana:'さ'},{romaji:'shi',kana:'し'},{romaji:'su',kana:'す'},{romaji:'se',kana:'せ'},{romaji:'so',kana:'そ'},
+  {romaji:'ta',kana:'た'},{romaji:'chi',kana:'ち'},{romaji:'tsu',kana:'つ'},{romaji:'te',kana:'て'},{romaji:'to',kana:'と'},
+  {romaji:'na',kana:'な'},{romaji:'ni',kana:'に'},{romaji:'nu',kana:'ぬ'},{romaji:'ne',kana:'ね'},{romaji:'no',kana:'の'},
+  {romaji:'ha',kana:'は'},{romaji:'hi',kana:'ひ'},{romaji:'fu',kana:'ふ'},{romaji:'he',kana:'へ'},{romaji:'ho',kana:'ほ'},
+  {romaji:'ma',kana:'ま'},{romaji:'mi',kana:'み'},{romaji:'mu',kana:'む'},{romaji:'me',kana:'め'},{romaji:'mo',kana:'も'},
+  {romaji:'ya',kana:'や'},{romaji:'yu',kana:'ゆ'},{romaji:'yo',kana:'よ'},
+  {romaji:'ra',kana:'ら'},{romaji:'ri',kana:'り'},{romaji:'ru',kana:'る'},{romaji:'re',kana:'れ'},{romaji:'ro',kana:'ろ'},
+  {romaji:'wa',kana:'わ'},{romaji:'wo',kana:'を'},{romaji:'n',kana:'ん'},
+];
+const HIRAGANA_DAKUTEN = [
+  {romaji:'ga',kana:'が'},{romaji:'gi',kana:'ぎ'},{romaji:'gu',kana:'ぐ'},{romaji:'ge',kana:'げ'},{romaji:'go',kana:'ご'},
+  {romaji:'za',kana:'ざ'},{romaji:'ji',kana:'じ'},{romaji:'zu',kana:'ず'},{romaji:'ze',kana:'ぜ'},{romaji:'zo',kana:'ぞ'},
+  {romaji:'da',kana:'だ'},{romaji:'di',kana:'ぢ'},{romaji:'du',kana:'づ'},{romaji:'de',kana:'で'},{romaji:'do',kana:'ど'},
+  {romaji:'ba',kana:'ば'},{romaji:'bi',kana:'び'},{romaji:'bu',kana:'ぶ'},{romaji:'be',kana:'べ'},{romaji:'bo',kana:'ぼ'},
+  {romaji:'pa',kana:'ぱ'},{romaji:'pi',kana:'ぴ'},{romaji:'pu',kana:'ぷ'},{romaji:'pe',kana:'ぺ'},{romaji:'po',kana:'ぽ'},
+];
+const KATAKANA_BASIC = [
+  {romaji:'a',kana:'ア'},{romaji:'i',kana:'イ'},{romaji:'u',kana:'ウ'},{romaji:'e',kana:'エ'},{romaji:'o',kana:'オ'},
+  {romaji:'ka',kana:'カ'},{romaji:'ki',kana:'キ'},{romaji:'ku',kana:'ク'},{romaji:'ke',kana:'ケ'},{romaji:'ko',kana:'コ'},
+  {romaji:'sa',kana:'サ'},{romaji:'shi',kana:'シ'},{romaji:'su',kana:'ス'},{romaji:'se',kana:'セ'},{romaji:'so',kana:'ソ'},
+  {romaji:'ta',kana:'タ'},{romaji:'chi',kana:'チ'},{romaji:'tsu',kana:'ツ'},{romaji:'te',kana:'テ'},{romaji:'to',kana:'ト'},
+  {romaji:'na',kana:'ナ'},{romaji:'ni',kana:'ニ'},{romaji:'nu',kana:'ヌ'},{romaji:'ne',kana:'ネ'},{romaji:'no',kana:'ノ'},
+  {romaji:'ha',kana:'ハ'},{romaji:'hi',kana:'ヒ'},{romaji:'fu',kana:'フ'},{romaji:'he',kana:'ヘ'},{romaji:'ho',kana:'ホ'},
+  {romaji:'ma',kana:'マ'},{romaji:'mi',kana:'ミ'},{romaji:'mu',kana:'ム'},{romaji:'me',kana:'メ'},{romaji:'mo',kana:'モ'},
+  {romaji:'ya',kana:'ヤ'},{romaji:'yu',kana:'ユ'},{romaji:'yo',kana:'ヨ'},
+  {romaji:'ra',kana:'ラ'},{romaji:'ri',kana:'リ'},{romaji:'ru',kana:'ル'},{romaji:'re',kana:'レ'},{romaji:'ro',kana:'ロ'},
+  {romaji:'wa',kana:'ワ'},{romaji:'wo',kana:'ヲ'},{romaji:'n',kana:'ン'},
+];
+const KATAKANA_DAKUTEN = [
+  {romaji:'ga',kana:'ガ'},{romaji:'gi',kana:'ギ'},{romaji:'gu',kana:'グ'},{romaji:'ge',kana:'ゲ'},{romaji:'go',kana:'ゴ'},
+  {romaji:'za',kana:'ザ'},{romaji:'ji',kana:'ジ'},{romaji:'zu',kana:'ズ'},{romaji:'ze',kana:'ゼ'},{romaji:'zo',kana:'ゾ'},
+  {romaji:'da',kana:'ダ'},{romaji:'di',kana:'ヂ'},{romaji:'du',kana:'ヅ'},{romaji:'de',kana:'デ'},{romaji:'do',kana:'ド'},
+  {romaji:'ba',kana:'バ'},{romaji:'bi',kana:'ビ'},{romaji:'bu',kana:'ブ'},{romaji:'be',kana:'ベ'},{romaji:'bo',kana:'ボ'},
+  {romaji:'pa',kana:'パ'},{romaji:'pi',kana:'ピ'},{romaji:'pu',kana:'プ'},{romaji:'pe',kana:'ペ'},{romaji:'po',kana:'ポ'},
+];
+HIRAGANA_BASIC.forEach(o => o.script = 'hiragana');
+HIRAGANA_DAKUTEN.forEach(o => o.script = 'hiragana');
+KATAKANA_BASIC.forEach(o => o.script = 'katakana');
+KATAKANA_DAKUTEN.forEach(o => o.script = 'katakana');
+
 /* ============================================================
    STATE + PERSISTENCE
    ============================================================ */
@@ -1169,8 +1074,9 @@ const todayStr = () => new Date().toISOString().slice(0,10);
 
 const state = {
   mode: 'flash',
-  direction: 'en2jp',         // 'en2jp' | 'jp2en'
-  dictMode: 'romaji',         // 'romaji' | 'kana' | 'draw'
+  direction: 'en2jp',
+  dictMode: 'romaji',
+  kanaSet: 'basic',
   lessons: new Set(),
   current: null,
   revealed: false,
@@ -1178,10 +1084,9 @@ const state = {
   correct: 0,
   voice: null,
   autoSpeak: true,
-  // Quiz
-  quiz: null,                 // { items: [...], idx, correct, misses: [] }
-  // Persisted
-  progress: {},               // key -> { seen, correct, wrong, box, lastSeen }
+  quiz: null,
+  progress: {},
+  kanaProgress: {},
   streak: 0,
   lastDay: null,
   totalSeen: 0,
@@ -1199,7 +1104,9 @@ function loadStore() {
     if (typeof s.autoSpeak === 'boolean') state.autoSpeak = s.autoSpeak;
     if (s.direction) state.direction = s.direction;
     if (s.dictMode) state.dictMode = s.dictMode;
+    if (s.kanaSet) state.kanaSet = s.kanaSet;
     if (s.progress) state.progress = s.progress;
+    if (s.kanaProgress) state.kanaProgress = s.kanaProgress;
     if (typeof s.streak === 'number') state.streak = s.streak;
     if (s.lastDay) state.lastDay = s.lastDay;
     if (typeof s.totalSeen === 'number') state.totalSeen = s.totalSeen;
@@ -1212,7 +1119,9 @@ function saveStore() {
       autoSpeak: state.autoSpeak,
       direction: state.direction,
       dictMode: state.dictMode,
+      kanaSet: state.kanaSet,
       progress: state.progress,
+      kanaProgress: state.kanaProgress,
       streak: state.streak,
       lastDay: state.lastDay,
       totalSeen: state.totalSeen,
@@ -1237,12 +1146,10 @@ function bumpStreak() {
 }
 
 /* ============================================================
-   SMART PICKER (Leitner boxes 1..5)
-   - Wrong / didn't know -> box 1
-   - Got it -> box+1 (cap 5)
-   - New cards default box 2
-   - Pick weighted toward low boxes
+   SMART PICKER (Leitner)
    ============================================================ */
+const BOX_WEIGHTS = { 1: 8, 2: 5, 3: 3, 4: 2, 5: 1 };
+
 function getBox(item, kind) {
   const k = cardKey(item, kind);
   return (state.progress[k] && state.progress[k].box) || 2;
@@ -1252,13 +1159,8 @@ function recordResult(item, kind, correct) {
   const p = state.progress[k] || { seen: 0, correct: 0, wrong: 0, box: 2, lastSeen: 0 };
   p.seen++;
   p.lastSeen = Date.now();
-  if (correct) {
-    p.correct++;
-    p.box = Math.min(5, (p.box || 2) + 1);
-  } else {
-    p.wrong++;
-    p.box = 1;
-  }
+  if (correct) { p.correct++; p.box = Math.min(5, (p.box || 2) + 1); }
+  else { p.wrong++; p.box = 1; }
   state.progress[k] = p;
   state.seen++;
   state.totalSeen++;
@@ -1266,34 +1168,25 @@ function recordResult(item, kind, correct) {
   bumpStreak();
   saveStore();
 }
-
-const BOX_WEIGHTS = { 1: 8, 2: 5, 3: 3, 4: 2, 5: 1 };
-
 function pickSmart(pool, kind, exclude) {
   if (!pool.length) return null;
-  // Weight each card by box (lower box = more weight) + LRU bias
   const now = Date.now();
   const weighted = pool.map(item => {
     const k = cardKey(item, kind);
     const p = state.progress[k];
     const box = (p && p.box) || 2;
     const w = BOX_WEIGHTS[box] || 5;
-    // Bias: not-seen-recently gets a small bonus; just-seen gets a penalty
-    const since = p ? (now - (p.lastSeen || 0)) / 60000 : 999; // minutes
-    const lruBoost = since < 1 ? 0.2 : (since > 30 ? 1.3 : 1);
-    return { item, weight: w * lruBoost };
+    const since = p ? (now - (p.lastSeen || 0)) / 60000 : 999;
+    const lru = since < 1 ? 0.2 : (since > 30 ? 1.3 : 1);
+    return { item, weight: w * lru };
   });
-  // Avoid showing the same card twice in a row
   const filtered = exclude ? weighted.filter(x => x.item !== exclude) : weighted;
   const final = filtered.length ? filtered : weighted;
   const total = final.reduce((s, x) => s + x.weight, 0);
   let r = Math.random() * total;
-  for (const x of final) {
-    if ((r -= x.weight) <= 0) return x.item;
-  }
+  for (const x of final) if ((r -= x.weight) <= 0) return x.item;
   return final[final.length - 1].item;
 }
-
 function shuffle(arr) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
@@ -1302,23 +1195,11 @@ function shuffle(arr) {
   }
   return a;
 }
+function currentKind() { return (state.mode === 'sentences') ? 'sent' : 'vocab'; }
+function currentSource() { return (state.mode === 'sentences') ? SENTENCES : VOCAB; }
+function getPool() { return currentSource().filter(v => state.lessons.has(v.lesson)); }
+function isKanaMode() { return state.mode === 'hira' || state.mode === 'kata'; }
 
-/* ============================================================
-   POOL (vocab vs sentences) + filtering
-   ============================================================ */
-function currentKind() {
-  return (state.mode === 'sentences') ? 'sent' : 'vocab';
-}
-function currentSource() {
-  return (state.mode === 'sentences') ? SENTENCES : VOCAB;
-}
-function getPool() {
-  return currentSource().filter(v => state.lessons.has(v.lesson));
-}
-
-/* ============================================================
-   NORMALISATION + TTS
-   ============================================================ */
 function normalize(s) {
   return (s || '').toLowerCase().trim()
     .replace(/[、。.,!?！？\s\-]/g, '')
@@ -1352,7 +1233,7 @@ function escapeHtml(s) {
 }
 
 /* ============================================================
-   RENDER
+   RENDER (vocab/sentences/MCQ)
    ============================================================ */
 const cardEl = document.getElementById('card');
 const statSeen = document.getElementById('stat-seen');
@@ -1372,17 +1253,23 @@ function refreshLessonPills() {
     const mastered = items.filter(v => getBox(v, kind) >= 4).length;
     const pct = items.length ? Math.round(100 * mastered / items.length) : 0;
     let pctEl = pill.querySelector('.pct');
-    if (!pctEl) {
-      pctEl = document.createElement('span');
-      pctEl.className = 'pct';
-      pill.appendChild(pctEl);
-    }
+    if (!pctEl) { pctEl = document.createElement('span'); pctEl.className = 'pct'; pill.appendChild(pctEl); }
     pctEl.textContent = `${pct}%`;
   });
 }
 
 function render() {
   if (state.quiz) { renderQuiz(); return; }
+  const lessonsRow = document.getElementById('lessons-row');
+  const kanaRow = document.getElementById('kana-row');
+  if (isKanaMode()) {
+    lessonsRow.style.display = 'none';
+    kanaRow.style.display = 'flex';
+  } else {
+    lessonsRow.style.display = 'flex';
+    kanaRow.style.display = 'none';
+  }
+  if (isKanaMode()) { renderKana(); return; }
   const pool = getPool();
   if (!pool.length) {
     cardEl.innerHTML = '<div class="empty">Select at least one lesson to start.</div>';
@@ -1395,31 +1282,23 @@ function render() {
   refreshLessonPills();
 }
 
-/* ---- Flashcards ---- */
 function renderFlash(pool) {
-  if (!state.current) {
-    state.current = pickSmart(pool, 'vocab');
-    state.revealed = false;
-  }
+  if (!state.current) { state.current = pickSmart(pool, 'vocab'); state.revealed = false; }
   flashLike(pool, state.current, 'vocab', false);
 }
 function renderSentences(pool) {
-  if (!state.current) {
-    state.current = pickSmart(pool, 'sent');
-    state.revealed = false;
-  }
+  if (!state.current) { state.current = pickSmart(pool, 'sent'); state.revealed = false; }
   flashLike(pool, state.current, 'sent', true);
 }
 function flashLike(pool, v, kind, isSentence) {
   const box = getBox(v, kind);
-  const boxClass = `b${box}`;
   const dirEN = state.direction === 'en2jp';
   if (!state.revealed) {
     if (dirEN) {
       cardEl.innerHTML = `
         <div>
           <span class="lesson-tag">Lesson ${v.lesson}</span>
-          <span class="box-tag ${boxClass}">box ${box}</span>
+          <span class="box-tag b${box}">box ${box}</span>
         </div>
         <div class="prompt-label">Translate to Japanese</div>
         <div class="prompt-en${isSentence ? ' sentence' : ''}">${escapeHtml(v.en)}</div>
@@ -1428,7 +1307,7 @@ function flashLike(pool, v, kind, isSentence) {
       cardEl.innerHTML = `
         <div>
           <span class="lesson-tag">Lesson ${v.lesson}</span>
-          <span class="box-tag ${boxClass}">box ${box}</span>
+          <span class="box-tag b${box}">box ${box}</span>
         </div>
         <div class="prompt-label">What does this mean?</div>
         <div class="prompt-jp${isSentence ? ' sentence' : ''}">${escapeHtml(v.jp)}</div>
@@ -1440,15 +1319,14 @@ function flashLike(pool, v, kind, isSentence) {
       if (sp) sp.onclick = () => speak(v.jp);
     }
     document.getElementById('reveal').onclick = () => {
-      state.revealed = true;
-      render();
+      state.revealed = true; render();
       if (state.autoSpeak) speak(v.jp);
     };
   } else {
     cardEl.innerHTML = `
       <div>
         <span class="lesson-tag">Lesson ${v.lesson}</span>
-        <span class="box-tag ${boxClass}">box ${box}</span>
+        <span class="box-tag b${box}">box ${box}</span>
       </div>
       <div class="answer-jp${isSentence ? ' sentence' : ''}">${escapeHtml(v.jp)}</div>
       <div class="answer-romaji${isSentence ? ' sentence' : ''}">${escapeHtml(v.romaji)}</div>
@@ -1463,7 +1341,6 @@ function flashLike(pool, v, kind, isSentence) {
     document.getElementById('miss').onclick = () => grade(false, kind);
   }
 }
-
 function grade(correct, kind) {
   const v = state.current;
   recordResult(v, kind, correct);
@@ -1473,7 +1350,6 @@ function grade(correct, kind) {
   render();
 }
 
-/* ---- Multiple choice ---- */
 function renderMCQ(pool) {
   if (!state.current) {
     state.current = pickSmart(pool, 'vocab');
@@ -1512,8 +1388,7 @@ function answerMCQ(picked, el) {
   const v = state.current;
   const ok = picked.jp === v.jp;
   recordResult(v, 'vocab', ok);
-  if (ok) el.classList.add('correct');
-  else el.classList.add('wrong');
+  if (ok) el.classList.add('correct'); else el.classList.add('wrong');
   document.querySelectorAll('.choice').forEach(c => {
     c.classList.add('disabled');
     if (c.textContent.includes(v.jp)) c.classList.add('correct');
@@ -1530,12 +1405,11 @@ function nextMCQ() {
   render();
 }
 
-/* ---- Dictation: Romaji / Kana / Draw ---- */
+/* ============================================================
+   DICTATION
+   ============================================================ */
 function renderDictation(pool) {
-  if (!state.current) {
-    state.current = pickSmart(pool, 'vocab');
-    state.dictAttempted = false;
-  }
+  if (!state.current) { state.current = pickSmart(pool, 'vocab'); state.dictAttempted = false; }
   const v = state.current;
   const box = getBox(v, 'vocab');
 
@@ -1638,7 +1512,7 @@ function checkDictation() {
   const fb = document.getElementById('dict-feedback');
   if (!input.value.trim()) return;
   const guess = normalize(input.value);
-  const okEn = normalize(v.en).split(/[,/;]|\bor\b/).some(part => part && (guess === normalize(part) || (normalize(part).includes(guess) && guess.length >= 3)));
+  const okEn = normalize(v.en).split(/[,/;]|\bor\b/).some(p => p && (guess === normalize(p) || (normalize(p).includes(guess) && guess.length >= 3)));
   const okRomaji = normalize(v.romaji) === guess;
   const okJp = v.jp.replace(/\s/g,'') === input.value.trim().replace(/\s/g,'');
   const correct = (state.dictMode === 'kana') ? okJp : (okEn || okRomaji || okJp);
@@ -1660,7 +1534,7 @@ function checkDictation() {
 }
 
 /* ============================================================
-   DRAWING CANVAS
+   DRAWING CANVAS (shared by Dictation Draw + Hiragana + Katakana)
    ============================================================ */
 let canvasCtx = null;
 let canvasStrokes = [];
@@ -1736,13 +1610,124 @@ function canvasClear() { canvasStrokes = []; canvasCurrent = null; redrawCanvas(
 function canvasUndo() { canvasStrokes.pop(); redrawCanvas(); }
 
 /* ============================================================
-   QUIZ OF THE DAY (10 mixed cards)
+   KANA WRITING (Hiragana + Katakana modes)
+   ============================================================ */
+function getKanaPool() {
+  const out = [];
+  if (state.mode === 'hira') {
+    out.push(...HIRAGANA_BASIC);
+    if (state.kanaSet === 'all') out.push(...HIRAGANA_DAKUTEN);
+  } else if (state.mode === 'kata') {
+    out.push(...KATAKANA_BASIC);
+    if (state.kanaSet === 'all') out.push(...KATAKANA_DAKUTEN);
+  }
+  return out;
+}
+function kanaKey(item) { return `${item.script}:${item.kana}`; }
+function getKanaBox(item) {
+  const p = state.kanaProgress[kanaKey(item)];
+  return (p && p.box) || 2;
+}
+function recordKanaResult(item, ok) {
+  const k = kanaKey(item);
+  const p = state.kanaProgress[k] || { seen: 0, correct: 0, wrong: 0, box: 2, lastSeen: 0 };
+  p.seen++;
+  p.lastSeen = Date.now();
+  if (ok) { p.correct++; p.box = Math.min(5, p.box + 1); }
+  else    { p.wrong++; p.box = 1; }
+  state.kanaProgress[k] = p;
+  state.seen++;
+  state.totalSeen++;
+  if (ok) state.correct++;
+  bumpStreak();
+  saveStore();
+}
+function pickSmartKana(pool, exclude) {
+  if (!pool.length) return null;
+  const now = Date.now();
+  const weighted = pool.map(item => {
+    const p = state.kanaProgress[kanaKey(item)];
+    const box = (p && p.box) || 2;
+    const w = BOX_WEIGHTS[box] || 5;
+    const since = p ? (now - (p.lastSeen || 0)) / 60000 : 999;
+    const lru = since < 1 ? 0.2 : (since > 30 ? 1.3 : 1);
+    return { item, weight: w * lru };
+  });
+  const filtered = exclude ? weighted.filter(x => x.item !== exclude) : weighted;
+  const final = filtered.length ? filtered : weighted;
+  const total = final.reduce((s, x) => s + x.weight, 0);
+  let r = Math.random() * total;
+  for (const x of final) if ((r -= x.weight) <= 0) return x.item;
+  return final[final.length - 1].item;
+}
+function renderKana() {
+  const pool = getKanaPool();
+  if (!pool.length) {
+    cardEl.innerHTML = '<div class="empty">Pick a script.</div>';
+    return;
+  }
+  if (!state.current) {
+    state.current = pickSmartKana(pool);
+    state.revealed = false;
+  }
+  const v = state.current;
+  const box = getKanaBox(v);
+  const scriptLabel = v.script === 'hiragana' ? 'Hiragana' : 'Katakana';
+
+  if (!state.revealed) {
+    cardEl.innerHTML = `
+      <div>
+        <span class="lesson-tag">${scriptLabel}</span>
+        <span class="box-tag b${box}">box ${box}</span>
+      </div>
+      <div class="prompt-label">Write the kana for</div>
+      <div class="prompt-en" style="font-size:48px; font-style:italic; color:var(--accent-2);">${escapeHtml(v.romaji)}</div>
+      <div class="canvas-wrap"><canvas id="draw-canvas"></canvas></div>
+      <div class="canvas-tools">
+        <button class="btn" id="canvas-clear">Clear</button>
+        <button class="btn" id="canvas-undo">Undo</button>
+        <button class="btn primary" id="kana-reveal">Show answer</button>
+      </div>`;
+    setupCanvas();
+    document.getElementById('canvas-clear').onclick = canvasClear;
+    document.getElementById('canvas-undo').onclick = canvasUndo;
+    document.getElementById('kana-reveal').onclick = () => { state.revealed = true; render(); };
+  } else {
+    cardEl.innerHTML = `
+      <div>
+        <span class="lesson-tag">${scriptLabel}</span>
+        <span class="box-tag b${box}">box ${box}</span>
+      </div>
+      <div class="prompt-label">${escapeHtml(v.romaji)}</div>
+      <div class="answer-jp" style="font-size:96px;">${escapeHtml(v.kana)}</div>
+      <div class="btn-row">
+        <button class="btn bad" id="kmiss">Try again</button>
+        <button class="btn good" id="khit">Got it!</button>
+      </div>`;
+    document.getElementById('khit').onclick = () => {
+      recordKanaResult(v, true);
+      updateStats();
+      state.current = pickSmartKana(getKanaPool(), v);
+      state.revealed = false;
+      render();
+    };
+    document.getElementById('kmiss').onclick = () => {
+      recordKanaResult(v, false);
+      updateStats();
+      state.current = pickSmartKana(getKanaPool(), v);
+      state.revealed = false;
+      render();
+    };
+  }
+}
+
+/* ============================================================
+   QUIZ OF THE DAY
    ============================================================ */
 function startQuiz() {
   const vocabPool = VOCAB.filter(v => state.lessons.has(v.lesson));
   const sentPool = SENTENCES.filter(v => state.lessons.has(v.lesson));
   if (!vocabPool.length) { alert('Pick at least one lesson first.'); return; }
-  // Bias toward struggling cards
   const items = [];
   for (let i = 0; i < 10; i++) {
     const useSent = (i % 4 === 3) && sentPool.length;
@@ -1831,7 +1816,7 @@ function renderQuiz() {
           if (x.textContent === v.jp) x.classList.add('correct');
         });
         if (state.autoSpeak) speak(v.jp);
-        setTimeout(() => quizGrade(ok, cur), 900);
+        showQuizNext(ok, cur, v);
       };
       cEl.appendChild(div);
     });
@@ -1860,13 +1845,14 @@ function renderQuiz() {
       const okEn = normalize(v.en).split(/[,/;]|\bor\b/).some(p => p && (guess === normalize(p) || (normalize(p).includes(guess) && guess.length >= 3)));
       const okR = normalize(v.romaji) === guess;
       const ok = okEn || okR;
-      document.getElementById('qfb').innerHTML = ok
-        ? `<span class="feedback-correct">✓ ${escapeHtml(v.jp)} — ${escapeHtml(v.en)}</span>`
-        : `<span class="feedback-wrong">✗ Answer: ${escapeHtml(v.jp)} — ${escapeHtml(v.romaji)} — ${escapeHtml(v.en)}</span>`;
-      setTimeout(() => quizGrade(ok, cur), ok ? 900 : 2000);
+      if (state.autoSpeak) speak(v.jp);
+      showQuizNext(ok, cur, v);
     };
     document.getElementById('qcheck').onclick = checkQ;
-    document.getElementById('qshow').onclick = () => quizGrade(false, cur);
+    document.getElementById('qshow').onclick = () => {
+      if (state.autoSpeak) speak(v.jp);
+      showQuizNext(false, cur, v);
+    };
     inp.onkeydown = (e) => { if (e.key === 'Enter') checkQ(); };
   }
 }
@@ -1877,6 +1863,26 @@ function quizGrade(ok, cur) {
   state.quiz.idx++;
   updateStats();
   render();
+}
+function showQuizNext(ok, cur, v) {
+  // Show full answer + an explicit Next button so the user controls pace.
+  const lessonTag = `<span class="lesson-tag">Lesson ${v.lesson}</span>`;
+  const banner = ok
+    ? `<div class="feedback-correct" style="font-size:18px; font-weight:600;">✓ Correct</div>`
+    : `<div class="feedback-wrong" style="font-size:18px; font-weight:600;">✗ Not quite</div>`;
+  cardEl.innerHTML = `
+    <div class="prompt-label">Quiz ${state.quiz.idx + 1} / 10</div>
+    ${lessonTag}
+    ${banner}
+    <div class="answer-jp" style="${cur.sub==='sentence' ? 'font-size:32px;' : ''}">${escapeHtml(v.jp)}</div>
+    <div class="answer-romaji">${escapeHtml(v.romaji)}</div>
+    <div class="answer-en">${escapeHtml(v.en)}</div>
+    <div class="btn-row">
+      <button class="btn icon" id="qspeak2">🔊 Hear</button>
+      <button class="btn primary" id="qnext">Next →</button>
+    </div>`;
+  document.getElementById('qspeak2').onclick = () => speak(v.jp);
+  document.getElementById('qnext').onclick = () => quizGrade(ok, cur);
 }
 
 /* ============================================================
@@ -1905,7 +1911,6 @@ function runSearch(q) {
     searchResults.querySelectorAll('.search-result').forEach((el, i) => {
       el.onclick = () => {
         const m = matches[i];
-        // Switch mode + lesson, set as current
         state.lessons.add(m.lesson);
         document.querySelectorAll('.lesson-pill').forEach(p => {
           if (+p.dataset.lesson === m.lesson) p.classList.add('active');
@@ -1944,6 +1949,7 @@ document.querySelectorAll('.mode-tabs button').forEach(b => {
 });
 
 document.querySelectorAll('#dir-seg button').forEach(b => {
+  b.classList.toggle('active', b.dataset.dir === state.direction);
   b.onclick = () => {
     document.querySelectorAll('#dir-seg button').forEach(x => x.classList.remove('active'));
     b.classList.add('active');
@@ -1953,9 +1959,17 @@ document.querySelectorAll('#dir-seg button').forEach(b => {
     render();
   };
 });
-// Set initial direction button
-document.querySelectorAll('#dir-seg button').forEach(b => {
-  b.classList.toggle('active', b.dataset.dir === state.direction);
+
+document.querySelectorAll('#kana-set button').forEach(b => {
+  b.classList.toggle('active', b.dataset.set === state.kanaSet);
+  b.onclick = () => {
+    document.querySelectorAll('#kana-set button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.kanaSet = b.dataset.set;
+    state.current = null;
+    saveStore();
+    render();
+  };
 });
 
 document.getElementById('quiz-btn').onclick = startQuiz;
@@ -2039,7 +2053,6 @@ document.addEventListener('keydown', (e) => {
 // Init
 updateStats();
 render();
-
 </script>
 </body>
 </html>
