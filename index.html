@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Japanese Practice — Dai Ka</title>
+
+<!-- Mobile / install-to-home-screen -->
+<meta name="theme-color" content="#0f172a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="日本語">
+<meta name="application-name" content="Japanese Practice">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Inline app icon (SVG, used as favicon + iOS touch icon) -->
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="%230f172a"/><text x="50" y="68" font-size="60" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" fill="%2338bdf8" font-weight="700">日</text></svg>'>
+<link rel="apple-touch-icon" href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAQAAAAjY2NeAAABTUlEQVR42u3aMQrCQBRF0V9YLOgi7HUBLsSdiTtwAVZuwM5SsLAwhTaCMIYwGZL5J9c5VYqXNAk/IQAAAAAAAAAAAAAAACDdK6+zGc3WlwzN6vZw9p5b/uhe1QhwBgAjhwAjBwAjB4AjBwAjBwAjBwAjBwAjBwAjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AjB4AAAA8AfPdKQEAAAAAAAAAAAAAAACAuQ+DPj1xN9TOjAAAAABJRU5ErkJggg=='>
+
+<!-- Inline web manifest (so file stays single-file). -->
+<link rel="manifest" href='data:application/manifest+json;utf8,{"name":"Japanese Practice","short_name":"日本語","start_url":".","display":"standalone","background_color":"%230f172a","theme_color":"%230f172a","icons":[{"src":"data:image/svg+xml;utf8,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 100 100%22%3E%3Crect width%3D%22100%22 height%3D%22100%22 rx%3D%2222%22 fill%3D%22%230f172a%22/%3E%3Ctext x%3D%2250%22 y%3D%2268%22 font-size%3D%2260%22 text-anchor%3D%22middle%22 font-family%3D%22sans-serif%22 fill%3D%22%2338bdf8%22 font-weight%3D%22700%22%3E%E6%97%A5%3C/text%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml"}]}'>
+<style>
+  :root {
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --panel-2: #334155;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-2: #f472b6;
+    --good: #22c55e;
+    --bad: #ef4444;
+    --border: #334155;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  h1 { margin: 0; font-size: 20px; font-weight: 600; }
+  h1 .ja { color: var(--accent); margin-right: 8px; }
+  .stats { font-size: 13px; color: var(--muted); }
+  .stats span { color: var(--text); font-weight: 600; }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  .controls {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .controls-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .controls-row:last-child { margin-bottom: 0; }
+  .controls label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 8px;
+  }
+
+  .mode-tabs { display: flex; gap: 6px; }
+  .mode-tabs button {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .mode-tabs button:hover { border-color: var(--accent); }
+  .mode-tabs button.active {
+    background: var(--accent);
+    color: #0f172a;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+
+  .lesson-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .lesson-pill {
+    background: var(--panel-2);
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.1s;
+  }
+  .lesson-pill:hover { border-color: var(--accent); }
+  .lesson-pill.active {
+    background: var(--accent);
+    color: #0f172a;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+
+  select, input[type="text"] {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+
+  .toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .toggle input { accent-color: var(--accent); }
+
+  /* Card area */
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 32px;
+    text-align: center;
+    min-height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+  .prompt-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .prompt-en {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.3;
+    max-width: 600px;
+  }
+  .answer-jp {
+    font-size: 56px;
+    font-weight: 600;
+    color: var(--accent);
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    line-height: 1.2;
+  }
+  .answer-jp.sentence { font-size: 32px; line-height: 1.5; max-width: 720px; }
+  .prompt-en.sentence { font-size: 22px; max-width: 700px; line-height: 1.4; }
+  .answer-romaji { font-size: 18px; color: var(--muted); font-style: italic; }
+  .answer-romaji.sentence { font-size: 16px; }
+  .answer-en { font-size: 20px; color: var(--text); }
+  .lesson-tag {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--panel-2);
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+
+  /* Buttons */
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+  button.btn {
+    background: var(--panel-2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  button.btn:hover { border-color: var(--accent); }
+  button.btn.primary {
+    background: var(--accent);
+    color: #0f172a;
+    border-color: var(--accent);
+    font-weight: 600;
+  }
+  button.btn.primary:hover { background: #0ea5e9; }
+  button.btn.good { background: var(--good); border-color: var(--good); color: white; }
+  button.btn.bad { background: var(--bad); border-color: var(--bad); color: white; }
+  button.btn.icon { padding: 10px 14px; }
+
+  /* MCQ */
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 520px; margin-top: 20px; }
+  .choice {
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 14px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 24px;
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    transition: all 0.15s;
+  }
+  .choice:hover { border-color: var(--accent); }
+  .choice.correct { background: var(--good); border-color: var(--good); color: white; }
+  .choice.wrong { background: var(--bad); border-color: var(--bad); color: white; }
+  .choice.disabled { pointer-events: none; opacity: 0.6; }
+
+  /* Dictation input */
+  .dictation-input {
+    width: 100%;
+    max-width: 420px;
+    padding: 14px 16px;
+    font-size: 18px;
+    margin-top: 16px;
+  }
+  .dictation-feedback { margin-top: 12px; font-size: 14px; min-height: 20px; }
+  .feedback-correct { color: var(--good); }
+  .feedback-wrong { color: var(--bad); }
+
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 20px;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+  }
+
+  .help-text {
+    font-size: 13px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 600px) {
+    body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+    header { padding: 12px 16px; }
+    h1 { font-size: 18px; }
+    .stats { font-size: 12px; }
+    .container { padding: 14px; }
+    .controls { padding: 12px; }
+    .controls-row { gap: 8px; }
+    .prompt-en { font-size: 24px; }
+    .prompt-en.sentence { font-size: 18px; }
+    .answer-jp { font-size: 40px; }
+    .answer-jp.sentence { font-size: 22px; }
+    .choices { grid-template-columns: 1fr; }
+    .card { padding: 28px 14px; min-height: 280px; }
+    .choice { padding: 16px 12px; font-size: 22px; }
+    button.btn { padding: 12px 16px; font-size: 16px; }
+    .lesson-pill { padding: 6px 12px; font-size: 14px; }
+    /* Prevent iOS zoom on input focus by ensuring 16px min */
+    input[type="text"], select { font-size: 16px; }
+    .dictation-input { font-size: 17px; padding: 14px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1><span class="ja">日本語</span>Practice — Dai Ka</h1>
+  <div class="stats">
+    Session: <span id="stat-seen">0</span> seen · <span id="stat-correct">0</span> correct · <span id="stat-streak">0</span> streak
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="controls">
+    <div class="controls-row">
+      <label>Mode</label>
+      <div class="mode-tabs">
+        <button data-mode="flash" class="active">Flashcards</button>
+        <button data-mode="mcq">Multiple Choice</button>
+        <button data-mode="sentences">Sentences</button>
+        <button data-mode="dictation">Dictation</button>
+      </div>
+    </div>
+    <div class="controls-row">
+      <label>Lessons</label>
+      <div class="lesson-pills" id="lesson-pills"></div>
+      <button class="btn icon" id="lessons-all" style="padding: 4px 10px; font-size: 12px;">All</button>
+      <button class="btn icon" id="lessons-none" style="padding: 4px 10px; font-size: 12px;">None</button>
+    </div>
+    <div class="controls-row">
+      <label>Voice</label>
+      <select id="voice-select"><option>Loading voices…</option></select>
+      <label class="toggle">
+        <input type="checkbox" id="auto-speak" checked>
+        Auto-speak Japanese on reveal
+      </label>
+    </div>
+  </div>
+
+  <div class="card" id="card">
+    <div class="empty">Select at least one lesson to start.</div>
+  </div>
+
+  <div class="help-text">
+    Tip: press <strong>Space</strong> to flip / continue, <strong>1–4</strong> to pick a choice, <strong>S</strong> to hear the word again.
+  </div>
+</div>
+
+<footer>
+  Vocab covers Lessons 1–10 (Dai_Ka.pdf). To add a new lesson: open this file in a text editor, scroll to the <code>VOCAB</code> array, and add entries with the same shape. Saved progress lives in your browser.
+</footer>
+
+<script>
+/* ============================================================
+   VOCAB DATA — Lessons 1–10 from Dai_Ka.pdf
+   To add a new lesson, append entries with the same shape.
+   { lesson: number, jp: 'kana/kanji', romaji: 'romaji', en: 'meaning' }
+   ============================================================ */
+const VOCAB = [
+  // ---------- Lesson 1 ----------
+  { lesson: 1, jp: "わたし", romaji: "watashi", en: "I" },
+  { lesson: 1, jp: "あなた", romaji: "anata", en: "you" },
+  { lesson: 1, jp: "あのひと", romaji: "ano hito", en: "that person, he/she" },
+  { lesson: 1, jp: "あのかた", romaji: "ano kata", en: "that person (polite)" },
+  { lesson: 1, jp: "さん", romaji: "san", en: "Mr./Ms. (suffix)" },
+  { lesson: 1, jp: "ちゃん", romaji: "chan", en: "suffix added to a child's name" },
+  { lesson: 1, jp: "じん", romaji: "jin", en: "suffix meaning a national of (e.g. America-jin)" },
+  { lesson: 1, jp: "せんせい", romaji: "sensei", en: "teacher, instructor" },
+  { lesson: 1, jp: "きょうし", romaji: "kyōshi", en: "teacher, instructor" },
+  { lesson: 1, jp: "がくせい", romaji: "gakusei", en: "student" },
+  { lesson: 1, jp: "かいしゃいん", romaji: "kaishain", en: "company employee" },
+  { lesson: 1, jp: "しゃいん", romaji: "shain", en: "employee of company" },
+  { lesson: 1, jp: "ぎんこういん", romaji: "ginkōin", en: "bank employee" },
+  { lesson: 1, jp: "いしゃ", romaji: "isha", en: "medical doctor" },
+  { lesson: 1, jp: "けんきゅうしゃ", romaji: "kenkyūsha", en: "researcher, scholar" },
+  { lesson: 1, jp: "だいがく", romaji: "daigaku", en: "university" },
+  { lesson: 1, jp: "びょういん", romaji: "byōin", en: "hospital" },
+  { lesson: 1, jp: "だれ", romaji: "dare", en: "who" },
+  { lesson: 1, jp: "どなた", romaji: "donata", en: "who (polite)" },
+  { lesson: 1, jp: "さい", romaji: "sai", en: "years old" },
+  { lesson: 1, jp: "なんさい", romaji: "nansai", en: "how old" },
+  { lesson: 1, jp: "おいくつ", romaji: "oikutsu", en: "how old (polite)" },
+  { lesson: 1, jp: "はい", romaji: "hai", en: "yes" },
+  { lesson: 1, jp: "いいえ", romaji: "iie", en: "no" },
+  { lesson: 1, jp: "はじめまして", romaji: "hajimemashite", en: "How do you do" },
+  { lesson: 1, jp: "から きました", romaji: "kara kimashita", en: "I came from" },
+  { lesson: 1, jp: "どうぞ よろしく", romaji: "dōzo yoroshiku", en: "pleased to meet you" },
+  { lesson: 1, jp: "しつれいですが", romaji: "shitsurei desu ga", en: "excuse me but…" },
+  { lesson: 1, jp: "おなまえは？", romaji: "o-namae wa?", en: "May I have your name?" },
+  { lesson: 1, jp: "こちらはさんです", romaji: "kochira wa san desu", en: "This is Mr./Ms." },
+  { lesson: 1, jp: "アメリカ", romaji: "Amerika", en: "America" },
+  { lesson: 1, jp: "イギリス", romaji: "Igirisu", en: "U.K." },
+  { lesson: 1, jp: "インド", romaji: "Indo", en: "India" },
+  { lesson: 1, jp: "インドネシア", romaji: "Indoneshia", en: "Indonesia" },
+  { lesson: 1, jp: "かんこく", romaji: "Kankoku", en: "Korea" },
+  { lesson: 1, jp: "タイ", romaji: "Tai", en: "Thailand" },
+  { lesson: 1, jp: "ちゅうごく", romaji: "Chūgoku", en: "China" },
+  { lesson: 1, jp: "ドイツ", romaji: "Doitsu", en: "Germany" },
+  { lesson: 1, jp: "にほん", romaji: "Nihon", en: "Japan" },
+  { lesson: 1, jp: "ブラジル", romaji: "Burajiru", en: "Brazil" },
+
+  // ---------- Lesson 2 ----------
+  { lesson: 2, jp: "これ", romaji: "kore", en: "this (thing here)" },
+  { lesson: 2, jp: "それ", romaji: "sore", en: "that (thing near you)" },
+  { lesson: 2, jp: "あれ", romaji: "are", en: "that (thing over there)" },
+  { lesson: 2, jp: "この", romaji: "kono", en: "this" },
+  { lesson: 2, jp: "その", romaji: "sono", en: "that near you" },
+  { lesson: 2, jp: "あの", romaji: "ano", en: "that over there" },
+  { lesson: 2, jp: "ほん", romaji: "hon", en: "book" },
+  { lesson: 2, jp: "じしょ", romaji: "jisho", en: "dictionary" },
+  { lesson: 2, jp: "ざっし", romaji: "zasshi", en: "magazine" },
+  { lesson: 2, jp: "しんぶん", romaji: "shinbun", en: "newspaper" },
+  { lesson: 2, jp: "ノート", romaji: "nōto", en: "notebook" },
+  { lesson: 2, jp: "てちょう", romaji: "techō", en: "pocket notebook" },
+  { lesson: 2, jp: "めいし", romaji: "meishi", en: "business card" },
+  { lesson: 2, jp: "カード", romaji: "kādo", en: "card" },
+  { lesson: 2, jp: "えんぴつ", romaji: "enpitsu", en: "pencil" },
+  { lesson: 2, jp: "ボールペン", romaji: "bōrupen", en: "ballpoint pen" },
+  { lesson: 2, jp: "シャープペンシル", romaji: "shāpu penshiru", en: "mechanical / propelling pencil" },
+  { lesson: 2, jp: "かぎ", romaji: "kagi", en: "key" },
+  { lesson: 2, jp: "とけい", romaji: "tokei", en: "watch, clock" },
+  { lesson: 2, jp: "かさ", romaji: "kasa", en: "umbrella" },
+  { lesson: 2, jp: "かばん", romaji: "kaban", en: "bag, briefcase" },
+  { lesson: 2, jp: "シーディー", romaji: "shīdī", en: "CD" },
+  { lesson: 2, jp: "テレビ", romaji: "terebi", en: "television" },
+  { lesson: 2, jp: "ラジオ", romaji: "rajio", en: "radio" },
+  { lesson: 2, jp: "カメラ", romaji: "kamera", en: "camera" },
+  { lesson: 2, jp: "コンピューター", romaji: "konpyūtā", en: "computer" },
+  { lesson: 2, jp: "くるま", romaji: "kuruma", en: "automobile, car" },
+  { lesson: 2, jp: "つくえ", romaji: "tsukue", en: "desk" },
+  { lesson: 2, jp: "いす", romaji: "isu", en: "chair" },
+  { lesson: 2, jp: "チョコレート", romaji: "chokorēto", en: "chocolate" },
+  { lesson: 2, jp: "コーヒー", romaji: "kōhī", en: "coffee" },
+  { lesson: 2, jp: "おみやげ", romaji: "o-miyage", en: "souvenir, present" },
+  { lesson: 2, jp: "えいご", romaji: "eigo", en: "English language" },
+  { lesson: 2, jp: "にほんご", romaji: "nihongo", en: "Japanese language" },
+  { lesson: 2, jp: "ご", romaji: "go", en: "language" },
+  { lesson: 2, jp: "なん", romaji: "nan", en: "what" },
+  { lesson: 2, jp: "そう", romaji: "sō", en: "so" },
+  { lesson: 2, jp: "そうです", romaji: "sō desu", en: "That's right" },
+  { lesson: 2, jp: "ちがいます", romaji: "chigaimasu", en: "No, it isn't" },
+
+  // ---------- Lesson 3 ----------
+  { lesson: 3, jp: "ここ", romaji: "koko", en: "here, this place" },
+  { lesson: 3, jp: "そこ", romaji: "soko", en: "there, that place near you" },
+  { lesson: 3, jp: "あそこ", romaji: "asoko", en: "that place over there" },
+  { lesson: 3, jp: "どこ", romaji: "doko", en: "where" },
+  { lesson: 3, jp: "こちら", romaji: "kochira", en: "this way / this place (polite)" },
+  { lesson: 3, jp: "そちら", romaji: "sochira", en: "that way / that place near you (polite)" },
+  { lesson: 3, jp: "あちら", romaji: "achira", en: "that way over there (polite)" },
+  { lesson: 3, jp: "どちら", romaji: "dochira", en: "which way (polite for どこ)" },
+  { lesson: 3, jp: "きょうしつ", romaji: "kyōshitsu", en: "classroom" },
+  { lesson: 3, jp: "しょくどう", romaji: "shokudō", en: "dining hall, canteen" },
+  { lesson: 3, jp: "じむしょ", romaji: "jimusho", en: "office" },
+  { lesson: 3, jp: "かいぎしつ", romaji: "kaigishitsu", en: "conference / meeting room" },
+  { lesson: 3, jp: "うけつけ", romaji: "uketsuke", en: "reception desk" },
+  { lesson: 3, jp: "ロビー", romaji: "robī", en: "lobby" },
+  { lesson: 3, jp: "へや", romaji: "heya", en: "room" },
+  { lesson: 3, jp: "トイレ", romaji: "toire", en: "toilet" },
+  { lesson: 3, jp: "おてあらい", romaji: "o-tearai", en: "toilet (polite)" },
+  { lesson: 3, jp: "かいだん", romaji: "kaidan", en: "staircase" },
+  { lesson: 3, jp: "エレベーター", romaji: "erebētā", en: "lift, elevator" },
+  { lesson: 3, jp: "エスカレーター", romaji: "esukarētā", en: "escalator" },
+  { lesson: 3, jp: "じどうはんばいき", romaji: "jidō hanbaiki", en: "vending machine" },
+  { lesson: 3, jp: "でんわ", romaji: "denwa", en: "telephone, phone call" },
+  { lesson: 3, jp: "おくに", romaji: "o-kuni", en: "country" },
+  { lesson: 3, jp: "かいしゃ", romaji: "kaisha", en: "company" },
+  { lesson: 3, jp: "うち", romaji: "uchi", en: "house, home" },
+  { lesson: 3, jp: "くつ", romaji: "kutsu", en: "shoes" },
+  { lesson: 3, jp: "ネクタイ", romaji: "nekutai", en: "tie, necktie" },
+  { lesson: 3, jp: "ワイン", romaji: "wain", en: "wine" },
+  { lesson: 3, jp: "うりば", romaji: "uriba", en: "department, counter (in dept store)" },
+  { lesson: 3, jp: "ちか", romaji: "chika", en: "basement" },
+  { lesson: 3, jp: "かい", romaji: "kai", en: "floor" },
+  { lesson: 3, jp: "なんがい", romaji: "nangai", en: "what floor" },
+  { lesson: 3, jp: "えん", romaji: "en", en: "yen" },
+  { lesson: 3, jp: "いくら", romaji: "ikura", en: "how much" },
+  { lesson: 3, jp: "ひゃく", romaji: "hyaku", en: "hundred" },
+  { lesson: 3, jp: "せん", romaji: "sen", en: "thousand" },
+  { lesson: 3, jp: "まん", romaji: "man", en: "ten thousand" },
+  { lesson: 3, jp: "いらっしゃいませ", romaji: "irasshaimase", en: "Welcome (in a shop)" },
+  { lesson: 3, jp: "みせて ください", romaji: "misete kudasai", en: "Please show me" },
+  { lesson: 3, jp: "じゃあ", romaji: "jā", en: "well, then" },
+  { lesson: 3, jp: "を ください", romaji: "o kudasai", en: "Give me please" },
+  { lesson: 3, jp: "イタリア", romaji: "Itaria", en: "Italy" },
+  { lesson: 3, jp: "スイス", romaji: "Suisu", en: "Switzerland" },
+  { lesson: 3, jp: "フランス", romaji: "Furansu", en: "France" },
+  { lesson: 3, jp: "ジャカルタ", romaji: "Jakaruta", en: "Jakarta" },
+  { lesson: 3, jp: "バンコク", romaji: "Bankoku", en: "Bangkok" },
+  { lesson: 3, jp: "ベルリン", romaji: "Berurin", en: "Berlin" },
+
+  // ---------- Lesson 4 ----------
+  { lesson: 4, jp: "おきます", romaji: "okimasu", en: "get up, wake up" },
+  { lesson: 4, jp: "ねます", romaji: "nemasu", en: "sleep, go to bed" },
+  { lesson: 4, jp: "はたらきます", romaji: "hatarakimasu", en: "work" },
+  { lesson: 4, jp: "やすみます", romaji: "yasumimasu", en: "take a rest, take a holiday" },
+  { lesson: 4, jp: "べんきょうします", romaji: "benkyō shimasu", en: "study" },
+  { lesson: 4, jp: "おわります", romaji: "owarimasu", en: "finish" },
+  { lesson: 4, jp: "デパート", romaji: "depāto", en: "department store" },
+  { lesson: 4, jp: "ぎんこう", romaji: "ginkō", en: "bank" },
+  { lesson: 4, jp: "ゆうびんきょく", romaji: "yūbinkyoku", en: "post office" },
+  { lesson: 4, jp: "としょかん", romaji: "toshokan", en: "library" },
+  { lesson: 4, jp: "びじゅつかん", romaji: "bijutsukan", en: "art museum, gallery" },
+  { lesson: 4, jp: "いま", romaji: "ima", en: "now" },
+  { lesson: 4, jp: "じ", romaji: "ji", en: "o'clock" },
+  { lesson: 4, jp: "ふん／ぷん", romaji: "fun / pun", en: "minute" },
+  { lesson: 4, jp: "はん", romaji: "han", en: "half (thirty)" },
+  { lesson: 4, jp: "なんじ", romaji: "nanji", en: "what time" },
+  { lesson: 4, jp: "なんぷん", romaji: "nanpun", en: "what minute" },
+  { lesson: 4, jp: "ごぜん", romaji: "gozen", en: "a.m., morning" },
+  { lesson: 4, jp: "ごご", romaji: "gogo", en: "p.m., afternoon" },
+  { lesson: 4, jp: "あさ", romaji: "asa", en: "morning" },
+  { lesson: 4, jp: "ひる", romaji: "hiru", en: "daytime, noon" },
+  { lesson: 4, jp: "ばん", romaji: "ban", en: "night, evening" },
+  { lesson: 4, jp: "よる", romaji: "yoru", en: "night" },
+  { lesson: 4, jp: "おととい", romaji: "ototoi", en: "day before yesterday" },
+  { lesson: 4, jp: "きのう", romaji: "kinō", en: "yesterday" },
+  { lesson: 4, jp: "きょう", romaji: "kyō", en: "today" },
+  { lesson: 4, jp: "あした", romaji: "ashita", en: "tomorrow" },
+  { lesson: 4, jp: "あさって", romaji: "asatte", en: "day after tomorrow" },
+  { lesson: 4, jp: "けさ", romaji: "kesa", en: "this morning" },
+  { lesson: 4, jp: "こんばん", romaji: "konban", en: "this evening, tonight" },
+  { lesson: 4, jp: "やすみ", romaji: "yasumi", en: "holiday, day off" },
+  { lesson: 4, jp: "ひるやすみ", romaji: "hiruyasumi", en: "lunch break" },
+  { lesson: 4, jp: "しけん", romaji: "shiken", en: "examination, test" },
+  { lesson: 4, jp: "かいぎ", romaji: "kaigi", en: "meeting, conference" },
+  { lesson: 4, jp: "えいが", romaji: "eiga", en: "film, movie" },
+  { lesson: 4, jp: "まいあさ", romaji: "maiasa", en: "every morning" },
+  { lesson: 4, jp: "まいばん", romaji: "maiban", en: "every night" },
+  { lesson: 4, jp: "まいにち", romaji: "mainichi", en: "every day" },
+  { lesson: 4, jp: "げつようび", romaji: "getsuyōbi", en: "Monday" },
+  { lesson: 4, jp: "かようび", romaji: "kayōbi", en: "Tuesday" },
+  { lesson: 4, jp: "すいようび", romaji: "suiyōbi", en: "Wednesday" },
+  { lesson: 4, jp: "もくようび", romaji: "mokuyōbi", en: "Thursday" },
+  { lesson: 4, jp: "きんようび", romaji: "kinyōbi", en: "Friday" },
+  { lesson: 4, jp: "どようび", romaji: "doyōbi", en: "Saturday" },
+  { lesson: 4, jp: "にちようび", romaji: "nichiyōbi", en: "Sunday" },
+  { lesson: 4, jp: "なんようび", romaji: "nanyōbi", en: "what day of the week" },
+  { lesson: 4, jp: "から", romaji: "kara", en: "from" },
+  { lesson: 4, jp: "まで", romaji: "made", en: "up to / until" },
+  { lesson: 4, jp: "と", romaji: "to", en: "and" },
+  { lesson: 4, jp: "ばんごう", romaji: "bangō", en: "number" },
+  { lesson: 4, jp: "なんばん", romaji: "nanban", en: "what number" },
+  { lesson: 4, jp: "ニューヨーク", romaji: "Nyū Yōku", en: "New York" },
+  { lesson: 4, jp: "ペキン", romaji: "Pekin", en: "Beijing" },
+  { lesson: 4, jp: "ロサンゼルス", romaji: "Rosanzerusu", en: "Los Angeles" },
+  { lesson: 4, jp: "ロンドン", romaji: "Rondon", en: "London" },
+
+  // ---------- Lesson 5 ----------
+  { lesson: 5, jp: "いきます", romaji: "ikimasu", en: "go" },
+  { lesson: 5, jp: "きます", romaji: "kimasu", en: "come" },
+  { lesson: 5, jp: "かえります", romaji: "kaerimasu", en: "go home, return" },
+  { lesson: 5, jp: "がっこう", romaji: "gakkō", en: "school" },
+  { lesson: 5, jp: "スーパー", romaji: "sūpā", en: "supermarket" },
+  { lesson: 5, jp: "えき", romaji: "eki", en: "station" },
+  { lesson: 5, jp: "ひこうき", romaji: "hikōki", en: "airplane" },
+  { lesson: 5, jp: "ふね", romaji: "fune", en: "ship" },
+  { lesson: 5, jp: "でんしゃ", romaji: "densha", en: "electric train" },
+  { lesson: 5, jp: "ちかてつ", romaji: "chikatetsu", en: "underground, subway" },
+  { lesson: 5, jp: "しんかんせん", romaji: "shinkansen", en: "the Shinkansen, bullet train" },
+  { lesson: 5, jp: "バス", romaji: "basu", en: "bus" },
+  { lesson: 5, jp: "タクシー", romaji: "takushī", en: "taxi" },
+  { lesson: 5, jp: "じてんしゃ", romaji: "jitensha", en: "bicycle" },
+  { lesson: 5, jp: "あるいて", romaji: "aruite", en: "on foot" },
+  { lesson: 5, jp: "ひと", romaji: "hito", en: "person, people" },
+  { lesson: 5, jp: "ともだち", romaji: "tomodachi", en: "friend" },
+  { lesson: 5, jp: "かれ", romaji: "kare", en: "he, boyfriend" },
+  { lesson: 5, jp: "かのじょ", romaji: "kanojo", en: "she, girlfriend" },
+  { lesson: 5, jp: "かぞく", romaji: "kazoku", en: "family" },
+  { lesson: 5, jp: "ひとりで", romaji: "hitori de", en: "alone, by oneself" },
+  { lesson: 5, jp: "せんしゅう", romaji: "senshū", en: "last week" },
+  { lesson: 5, jp: "こんしゅう", romaji: "konshū", en: "this week" },
+  { lesson: 5, jp: "らいしゅう", romaji: "raishū", en: "next week" },
+  { lesson: 5, jp: "せんげつ", romaji: "sengetsu", en: "last month" },
+  { lesson: 5, jp: "こんげつ", romaji: "kongetsu", en: "this month" },
+  { lesson: 5, jp: "らいげつ", romaji: "raigetsu", en: "next month" },
+  { lesson: 5, jp: "きょねん", romaji: "kyonen", en: "last year" },
+  { lesson: 5, jp: "ことし", romaji: "kotoshi", en: "this year" },
+  { lesson: 5, jp: "らいねん", romaji: "rainen", en: "next year" },
+  { lesson: 5, jp: "がつ", romaji: "gatsu", en: "month (of year)" },
+  { lesson: 5, jp: "なんがつ", romaji: "nangatsu", en: "what month" },
+  { lesson: 5, jp: "ついたち", romaji: "tsuitachi", en: "1st of month" },
+  { lesson: 5, jp: "ふつか", romaji: "futsuka", en: "2nd, two days" },
+  { lesson: 5, jp: "みっか", romaji: "mikka", en: "3rd, three days" },
+  { lesson: 5, jp: "よっか", romaji: "yokka", en: "4th, four days" },
+  { lesson: 5, jp: "いつか", romaji: "itsuka", en: "5th, five days" },
+  { lesson: 5, jp: "むいか", romaji: "muika", en: "6th, six days" },
+  { lesson: 5, jp: "なのか", romaji: "nanoka", en: "7th, seven days" },
+  { lesson: 5, jp: "ようか", romaji: "yōka", en: "8th, eight days" },
+  { lesson: 5, jp: "ここのか", romaji: "kokonoka", en: "9th, nine days" },
+  { lesson: 5, jp: "とおか", romaji: "tōka", en: "10th, ten days" },
+  { lesson: 5, jp: "じゅうよっか", romaji: "jūyokka", en: "14th, fourteen days" },
+  { lesson: 5, jp: "はつか", romaji: "hatsuka", en: "20th, twenty days" },
+  { lesson: 5, jp: "にじゅうよっか", romaji: "nijūyokka", en: "24th, twenty-four days" },
+  { lesson: 5, jp: "にち", romaji: "nichi", en: "day of month" },
+  { lesson: 5, jp: "なんにち", romaji: "nannichi", en: "what day of month" },
+  { lesson: 5, jp: "いつ", romaji: "itsu", en: "when" },
+  { lesson: 5, jp: "たんじょうび", romaji: "tanjōbi", en: "birthday" },
+  { lesson: 5, jp: "ありがとう ございました", romaji: "arigatō gozaimashita", en: "Thank you very much" },
+  { lesson: 5, jp: "どう いたしまして", romaji: "dō itashimashite", en: "You're welcome" },
+  { lesson: 5, jp: "いっぱい", romaji: "ippai", en: "filled, full" },
+  { lesson: 5, jp: "つぎの", romaji: "tsugi no", en: "next" },
+  { lesson: 5, jp: "ふつう", romaji: "futsū", en: "local train" },
+  { lesson: 5, jp: "きゅうこう", romaji: "kyūkō", en: "rapid train" },
+  { lesson: 5, jp: "とっきゅう", romaji: "tokkyū", en: "express train" },
+
+  // ---------- Lesson 6 ----------
+  { lesson: 6, jp: "たべます", romaji: "tabemasu", en: "eat" },
+  { lesson: 6, jp: "のみます", romaji: "nomimasu", en: "drink" },
+  { lesson: 6, jp: "すいます", romaji: "suimasu", en: "smoke (cigarettes)" },
+  { lesson: 6, jp: "みます", romaji: "mimasu", en: "see, look, watch" },
+  { lesson: 6, jp: "ききます", romaji: "kikimasu", en: "hear, listen" },
+  { lesson: 6, jp: "よみます", romaji: "yomimasu", en: "read" },
+  { lesson: 6, jp: "かきます", romaji: "kakimasu", en: "write, draw, paint" },
+  { lesson: 6, jp: "かいます", romaji: "kaimasu", en: "buy" },
+  { lesson: 6, jp: "とります", romaji: "torimasu", en: "take (a photograph)" },
+  { lesson: 6, jp: "します", romaji: "shimasu", en: "do" },
+  { lesson: 6, jp: "あいます", romaji: "aimasu", en: "meet (a friend)" },
+  { lesson: 6, jp: "ごはん", romaji: "gohan", en: "meal, cooked rice" },
+  { lesson: 6, jp: "あさごはん", romaji: "asa-gohan", en: "breakfast" },
+  { lesson: 6, jp: "ひるごはん", romaji: "hiru-gohan", en: "lunch" },
+  { lesson: 6, jp: "ばんごはん", romaji: "ban-gohan", en: "supper, dinner" },
+  { lesson: 6, jp: "パン", romaji: "pan", en: "bread" },
+  { lesson: 6, jp: "たまご", romaji: "tamago", en: "egg" },
+  { lesson: 6, jp: "にく", romaji: "niku", en: "meat" },
+  { lesson: 6, jp: "さかな", romaji: "sakana", en: "fish" },
+  { lesson: 6, jp: "やさい", romaji: "yasai", en: "vegetable" },
+  { lesson: 6, jp: "くだもの", romaji: "kudamono", en: "fruit" },
+  { lesson: 6, jp: "みず", romaji: "mizu", en: "water" },
+  { lesson: 6, jp: "おちゃ", romaji: "o-cha", en: "tea (green)" },
+  { lesson: 6, jp: "こうちゃ", romaji: "kōcha", en: "black tea" },
+  { lesson: 6, jp: "ぎゅうにゅう", romaji: "gyūnyū", en: "milk" },
+  { lesson: 6, jp: "ミルク", romaji: "miruku", en: "milk" },
+  { lesson: 6, jp: "ジュース", romaji: "jūsu", en: "juice" },
+  { lesson: 6, jp: "ビール", romaji: "bīru", en: "beer" },
+  { lesson: 6, jp: "おさけ", romaji: "o-sake", en: "alcohol, sake" },
+  { lesson: 6, jp: "たばこ", romaji: "tabako", en: "cigarette" },
+  { lesson: 6, jp: "てがみ", romaji: "tegami", en: "letter" },
+  { lesson: 6, jp: "レポート", romaji: "repōto", en: "report" },
+  { lesson: 6, jp: "しゃしん", romaji: "shashin", en: "photograph" },
+  { lesson: 6, jp: "ビデオ", romaji: "bideo", en: "video tape" },
+  { lesson: 6, jp: "みせ", romaji: "mise", en: "shop, store" },
+  { lesson: 6, jp: "にわ", romaji: "niwa", en: "garden" },
+  { lesson: 6, jp: "しゅくだい", romaji: "shukudai", en: "homework" },
+  { lesson: 6, jp: "テニス", romaji: "tenisu", en: "tennis" },
+  { lesson: 6, jp: "サッカー", romaji: "sakkā", en: "soccer" },
+  { lesson: 6, jp: "おはなみ", romaji: "o-hanami", en: "cherry-blossom viewing" },
+  { lesson: 6, jp: "なに", romaji: "nani", en: "what" },
+  { lesson: 6, jp: "いっしょに", romaji: "issho ni", en: "together" },
+  { lesson: 6, jp: "ちょっと", romaji: "chotto", en: "a little, a little while" },
+  { lesson: 6, jp: "いつも", romaji: "itsumo", en: "always" },
+  { lesson: 6, jp: "ときどき", romaji: "tokidoki", en: "sometimes" },
+  { lesson: 6, jp: "それから", romaji: "sorekara", en: "after that, then" },
+  { lesson: 6, jp: "ええ", romaji: "ē", en: "yes" },
+  { lesson: 6, jp: "いいですね", romaji: "ii desu ne", en: "That's good / sounds good" },
+  { lesson: 6, jp: "わかりました", romaji: "wakarimashita", en: "I see, understood" },
+
+  // ---------- Lesson 7 ----------
+  { lesson: 7, jp: "きります", romaji: "kirimasu", en: "cut, slice" },
+  { lesson: 7, jp: "おくります", romaji: "okurimasu", en: "send" },
+  { lesson: 7, jp: "あげます", romaji: "agemasu", en: "give" },
+  { lesson: 7, jp: "もらいます", romaji: "moraimasu", en: "receive" },
+  { lesson: 7, jp: "かします", romaji: "kashimasu", en: "lend" },
+  { lesson: 7, jp: "かります", romaji: "karimasu", en: "borrow" },
+  { lesson: 7, jp: "おしえます", romaji: "oshiemasu", en: "teach" },
+  { lesson: 7, jp: "ならいます", romaji: "naraimasu", en: "learn" },
+  { lesson: 7, jp: "かけます (でんわを)", romaji: "kakemasu (denwa o)", en: "make a phone call" },
+  { lesson: 7, jp: "て", romaji: "te", en: "hand, arm" },
+  { lesson: 7, jp: "はし", romaji: "hashi", en: "chopsticks" },
+  { lesson: 7, jp: "スプーン", romaji: "supūn", en: "spoon" },
+  { lesson: 7, jp: "ナイフ", romaji: "naifu", en: "knife" },
+  { lesson: 7, jp: "フォーク", romaji: "fōku", en: "fork" },
+  { lesson: 7, jp: "はさみ", romaji: "hasami", en: "scissors" },
+  { lesson: 7, jp: "パソコン", romaji: "pasokon", en: "personal computer" },
+  { lesson: 7, jp: "ケータイ", romaji: "kētai", en: "mobile phone, cell phone" },
+  { lesson: 7, jp: "メール", romaji: "mēru", en: "e-mail" },
+  { lesson: 7, jp: "ねんがじょう", romaji: "nengajō", en: "New Year's greeting card" },
+  { lesson: 7, jp: "パンチ", romaji: "panchi", en: "punch (hole punch)" },
+  { lesson: 7, jp: "ホッチキス", romaji: "hocchikisu", en: "stapler" },
+  { lesson: 7, jp: "セロテープ", romaji: "serotēpu", en: "Sellotape, Scotch tape" },
+  { lesson: 7, jp: "けしゴム", romaji: "keshigomu", en: "rubber, eraser" },
+  { lesson: 7, jp: "かみ", romaji: "kami", en: "paper" },
+  { lesson: 7, jp: "はな", romaji: "hana", en: "flower, blossom" },
+  { lesson: 7, jp: "シャツ", romaji: "shatsu", en: "shirt" },
+  { lesson: 7, jp: "プレゼント", romaji: "purezento", en: "present, gift" },
+  { lesson: 7, jp: "にもつ", romaji: "nimotsu", en: "luggage, baggage, parcel" },
+  { lesson: 7, jp: "おかね", romaji: "o-kane", en: "money" },
+  { lesson: 7, jp: "きっぷ", romaji: "kippu", en: "ticket" },
+  { lesson: 7, jp: "クリスマス", romaji: "kurisumasu", en: "Christmas" },
+  { lesson: 7, jp: "ちち", romaji: "chichi", en: "my father" },
+  { lesson: 7, jp: "はは", romaji: "haha", en: "my mother" },
+  { lesson: 7, jp: "おとうさん", romaji: "otōsan", en: "someone else's father" },
+  { lesson: 7, jp: "おかあさん", romaji: "okāsan", en: "someone else's mother" },
+  { lesson: 7, jp: "もう", romaji: "mō", en: "already" },
+  { lesson: 7, jp: "まだ", romaji: "mada", en: "not yet" },
+  { lesson: 7, jp: "これから", romaji: "kore kara", en: "from now on, soon" },
+  { lesson: 7, jp: "いらっしゃい", romaji: "irasshai", en: "welcome (to a guest)" },
+  { lesson: 7, jp: "しつれいします", romaji: "shitsurei shimasu", en: "excuse me / I'll be going" },
+  { lesson: 7, jp: "いただきます", romaji: "itadakimasu", en: "thanks (before a meal)" },
+  { lesson: 7, jp: "ごちそうさまでした", romaji: "gochisōsama deshita", en: "thanks for the meal" },
+  { lesson: 7, jp: "すてきですね", romaji: "suteki desu ne", en: "what a nice" },
+  { lesson: 7, jp: "スペイン", romaji: "Supein", en: "Spain" },
+
+  // ---------- Lesson 8 ----------
+  { lesson: 8, jp: "ハンサム[な]", romaji: "hansamu", en: "handsome" },
+  { lesson: 8, jp: "きれい[な]", romaji: "kirei", en: "beautiful, clean" },
+  { lesson: 8, jp: "しずか[な]", romaji: "shizuka", en: "quiet" },
+  { lesson: 8, jp: "にぎやか[な]", romaji: "nigiyaka", en: "lively" },
+  { lesson: 8, jp: "ゆうめい[な]", romaji: "yūmei", en: "famous" },
+  { lesson: 8, jp: "しんせつ[な]", romaji: "shinsetsu", en: "kind, considerate" },
+  { lesson: 8, jp: "げんき[な]", romaji: "genki", en: "healthy, energetic" },
+  { lesson: 8, jp: "ひま[な]", romaji: "hima", en: "free time" },
+  { lesson: 8, jp: "べんり[な]", romaji: "benri", en: "convenient" },
+  { lesson: 8, jp: "すてき[な]", romaji: "suteki", en: "fine, nice, wonderful" },
+  { lesson: 8, jp: "おおきい", romaji: "ōkii", en: "big, large" },
+  { lesson: 8, jp: "ちいさい", romaji: "chiisai", en: "small, little" },
+  { lesson: 8, jp: "あたらしい", romaji: "atarashii", en: "new, fresh" },
+  { lesson: 8, jp: "ふるい", romaji: "furui", en: "old (of things, not age)" },
+  { lesson: 8, jp: "いい", romaji: "ii", en: "good" },
+  { lesson: 8, jp: "わるい", romaji: "warui", en: "bad" },
+  { lesson: 8, jp: "あつい", romaji: "atsui", en: "hot" },
+  { lesson: 8, jp: "さむい", romaji: "samui", en: "cold (temperature)" },
+  { lesson: 8, jp: "つめたい", romaji: "tsumetai", en: "cold (to touch)" },
+  { lesson: 8, jp: "むずかしい", romaji: "muzukashii", en: "difficult" },
+  { lesson: 8, jp: "やさしい", romaji: "yasashii", en: "easy / kind" },
+  { lesson: 8, jp: "たかい", romaji: "takai", en: "expensive, tall, high" },
+  { lesson: 8, jp: "やすい", romaji: "yasui", en: "inexpensive, cheap" },
+  { lesson: 8, jp: "ひくい", romaji: "hikui", en: "low" },
+  { lesson: 8, jp: "おもしろい", romaji: "omoshiroi", en: "interesting" },
+  { lesson: 8, jp: "おいしい", romaji: "oishii", en: "delicious, tasty" },
+  { lesson: 8, jp: "いそがしい", romaji: "isogashii", en: "busy" },
+  { lesson: 8, jp: "たのしい", romaji: "tanoshii", en: "enjoyable" },
+  { lesson: 8, jp: "しろい", romaji: "shiroi", en: "white" },
+  { lesson: 8, jp: "くろい", romaji: "kuroi", en: "black" },
+  { lesson: 8, jp: "あかい", romaji: "akai", en: "red" },
+  { lesson: 8, jp: "あおい", romaji: "aoi", en: "blue" },
+  { lesson: 8, jp: "さくら", romaji: "sakura", en: "cherry (blossom)" },
+  { lesson: 8, jp: "やま", romaji: "yama", en: "mountain" },
+  { lesson: 8, jp: "まち", romaji: "machi", en: "town, city" },
+  { lesson: 8, jp: "たべもの", romaji: "tabemono", en: "food" },
+  { lesson: 8, jp: "ところ", romaji: "tokoro", en: "place, location" },
+  { lesson: 8, jp: "りょう", romaji: "ryō", en: "dormitory" },
+  { lesson: 8, jp: "レストラン", romaji: "resutoran", en: "restaurant" },
+  { lesson: 8, jp: "せいかつ", romaji: "seikatsu", en: "life" },
+  { lesson: 8, jp: "おしごと", romaji: "o-shigoto", en: "work, business" },
+  { lesson: 8, jp: "どう", romaji: "dō", en: "how, what" },
+  { lesson: 8, jp: "どんな", romaji: "donna", en: "what kind of" },
+  { lesson: 8, jp: "どれ", romaji: "dore", en: "which" },
+  { lesson: 8, jp: "とても", romaji: "totemo", en: "very" },
+  { lesson: 8, jp: "あまり", romaji: "amari", en: "not so much (with neg.)" },
+  { lesson: 8, jp: "そして", romaji: "soshite", en: "and (joining sentences)" },
+  { lesson: 8, jp: "が、", romaji: "ga", en: "but" },
+  { lesson: 8, jp: "ふじさん", romaji: "Fuji-san", en: "Mt. Fuji" },
+
+  // ---------- Lesson 9 ----------
+  { lesson: 9, jp: "わかります", romaji: "wakarimasu", en: "understand" },
+  { lesson: 9, jp: "あります", romaji: "arimasu", en: "have" },
+  { lesson: 9, jp: "すき[な]", romaji: "suki", en: "like" },
+  { lesson: 9, jp: "きらい[な]", romaji: "kirai", en: "dislike" },
+  { lesson: 9, jp: "じょうず[な]", romaji: "jōzu", en: "good at, skilful" },
+  { lesson: 9, jp: "へた[な]", romaji: "heta", en: "poor at, unskilful" },
+  { lesson: 9, jp: "のみもの", romaji: "nomimono", en: "drinks" },
+  { lesson: 9, jp: "りょうり", romaji: "ryōri", en: "dish (cooked food), cuisine" },
+  { lesson: 9, jp: "スポーツ", romaji: "supōtsu", en: "sport" },
+  { lesson: 9, jp: "やきゅう", romaji: "yakyū", en: "baseball" },
+  { lesson: 9, jp: "ダンス", romaji: "dansu", en: "dance" },
+  { lesson: 9, jp: "りょこう", romaji: "ryokō", en: "travel, trip" },
+  { lesson: 9, jp: "おんがく", romaji: "ongaku", en: "music" },
+  { lesson: 9, jp: "うた", romaji: "uta", en: "song" },
+  { lesson: 9, jp: "クラシック", romaji: "kurashikku", en: "classical music" },
+  { lesson: 9, jp: "ジャズ", romaji: "jazu", en: "jazz" },
+  { lesson: 9, jp: "コンサート", romaji: "konsāto", en: "concert" },
+  { lesson: 9, jp: "カラオケ", romaji: "karaoke", en: "karaoke" },
+  { lesson: 9, jp: "かぶき", romaji: "kabuki", en: "kabuki (traditional drama)" },
+  { lesson: 9, jp: "え", romaji: "e", en: "picture, drawing" },
+  { lesson: 9, jp: "じ", romaji: "ji", en: "letter, character" },
+  { lesson: 9, jp: "かんじ", romaji: "kanji", en: "Chinese character (kanji)" },
+  { lesson: 9, jp: "ひらがな", romaji: "hiragana", en: "hiragana script" },
+  { lesson: 9, jp: "かたかな", romaji: "katakana", en: "katakana script" },
+  { lesson: 9, jp: "ローマじ", romaji: "rōmaji", en: "Roman alphabet, romaji" },
+  { lesson: 9, jp: "こまかい おかね", romaji: "komakai o-kane", en: "small change" },
+  { lesson: 9, jp: "チケット", romaji: "chiketto", en: "ticket" },
+  { lesson: 9, jp: "じかん", romaji: "jikan", en: "time" },
+  { lesson: 9, jp: "ようじ", romaji: "yōji", en: "something to do, errand" },
+  { lesson: 9, jp: "やくそく", romaji: "yakusoku", en: "appointment, promise" },
+  { lesson: 9, jp: "アルバイト", romaji: "arubaito", en: "side job, part-time work" },
+  { lesson: 9, jp: "ごしゅじん", romaji: "go-shujin", en: "(someone else's) husband" },
+  { lesson: 9, jp: "しゅじん", romaji: "shujin", en: "my husband" },
+  { lesson: 9, jp: "おくさん", romaji: "okusan", en: "(someone else's) wife" },
+  { lesson: 9, jp: "つま", romaji: "tsuma", en: "my wife" },
+  { lesson: 9, jp: "かない", romaji: "kanai", en: "my wife" },
+  { lesson: 9, jp: "こども", romaji: "kodomo", en: "child" },
+  { lesson: 9, jp: "だいたい", romaji: "daitai", en: "mostly, roughly" },
+  { lesson: 9, jp: "たくさん", romaji: "takusan", en: "many, much" },
+  { lesson: 9, jp: "すこし", romaji: "sukoshi", en: "a little, a few" },
+  { lesson: 9, jp: "ぜんぜん", romaji: "zenzen", en: "not at all (with neg.)" },
+  { lesson: 9, jp: "はやく", romaji: "hayaku", en: "early, quickly, fast" },
+  { lesson: 9, jp: "から", romaji: "kara", en: "because, since" },
+  { lesson: 9, jp: "どうして", romaji: "dōshite", en: "why" },
+  { lesson: 9, jp: "ざんねんですね", romaji: "zannen desu ne", en: "I'm sorry, that's a pity" },
+  { lesson: 9, jp: "だめですか", romaji: "dame desu ka", en: "is it not possible?" },
+
+  // ---------- Lesson 10 ----------
+  { lesson: 10, jp: "あります", romaji: "arimasu", en: "exist, be (inanimate)" },
+  { lesson: 10, jp: "います", romaji: "imasu", en: "exist (animate, person/animal)" },
+  { lesson: 10, jp: "いろいろ[な]", romaji: "iroiro", en: "various, variety of" },
+  { lesson: 10, jp: "おとこのひと", romaji: "otoko no hito", en: "man" },
+  { lesson: 10, jp: "おんなのひと", romaji: "onna no hito", en: "woman" },
+  { lesson: 10, jp: "おとこのこ", romaji: "otoko no ko", en: "boy" },
+  { lesson: 10, jp: "おんなのこ", romaji: "onna no ko", en: "girl" },
+  { lesson: 10, jp: "いぬ", romaji: "inu", en: "dog" },
+  { lesson: 10, jp: "ねこ", romaji: "neko", en: "cat" },
+  { lesson: 10, jp: "パンダ", romaji: "panda", en: "panda" },
+  { lesson: 10, jp: "ぞう", romaji: "zō", en: "elephant" },
+  { lesson: 10, jp: "き", romaji: "ki", en: "tree, wood" },
+  { lesson: 10, jp: "もの", romaji: "mono", en: "thing" },
+  { lesson: 10, jp: "でんち", romaji: "denchi", en: "battery" },
+  { lesson: 10, jp: "はこ", romaji: "hako", en: "box" },
+  { lesson: 10, jp: "スイッチ", romaji: "suicchi", en: "switch" },
+  { lesson: 10, jp: "れいぞうこ", romaji: "reizōko", en: "refrigerator" },
+  { lesson: 10, jp: "テーブル", romaji: "tēburu", en: "table" },
+  { lesson: 10, jp: "ベッド", romaji: "beddo", en: "bed" },
+  { lesson: 10, jp: "たな", romaji: "tana", en: "shelf" },
+  { lesson: 10, jp: "ドア", romaji: "doa", en: "door" },
+  { lesson: 10, jp: "まど", romaji: "mado", en: "window" },
+  { lesson: 10, jp: "ポスト", romaji: "posuto", en: "postbox, mailbox" },
+  { lesson: 10, jp: "ビル", romaji: "biru", en: "building" },
+  { lesson: 10, jp: "エーティーエム", romaji: "ētīemu", en: "ATM, cash machine" },
+  { lesson: 10, jp: "コンビニ", romaji: "konbini", en: "convenience store" },
+  { lesson: 10, jp: "こうえん", romaji: "kōen", en: "park" },
+  { lesson: 10, jp: "きっさてん", romaji: "kissaten", en: "coffee shop" },
+  { lesson: 10, jp: "のりば", romaji: "noriba", en: "place to catch taxi/bus, stand" },
+  { lesson: 10, jp: "けん", romaji: "ken", en: "prefecture" },
+  { lesson: 10, jp: "うえ", romaji: "ue", en: "on, above, over" },
+  { lesson: 10, jp: "した", romaji: "shita", en: "under, below, beneath" },
+  { lesson: 10, jp: "まえ", romaji: "mae", en: "front, before" },
+  { lesson: 10, jp: "うしろ", romaji: "ushiro", en: "back, behind" },
+  { lesson: 10, jp: "みぎ", romaji: "migi", en: "right (side)" },
+  { lesson: 10, jp: "ひだり", romaji: "hidari", en: "left (side)" },
+  { lesson: 10, jp: "なか", romaji: "naka", en: "in, inside" },
+  { lesson: 10, jp: "そと", romaji: "soto", en: "outside" },
+  { lesson: 10, jp: "となり", romaji: "tonari", en: "next to, next door" },
+  { lesson: 10, jp: "ちかく", romaji: "chikaku", en: "near, vicinity" },
+  { lesson: 10, jp: "あいだ", romaji: "aida", en: "between, among" },
+  { lesson: 10, jp: "やなど", romaji: "ya nado", en: "and and so on" },
+  { lesson: 10, jp: "どうも すみません", romaji: "dōmo sumimasen", en: "Thank you / I'm sorry" },
+  { lesson: 10, jp: "ナンプラー", romaji: "nanpurā", en: "fish sauce (nam pla)" },
+  { lesson: 10, jp: "コーナー", romaji: "kōnā", en: "corner, section" },
+  { lesson: 10, jp: "いちばん した", romaji: "ichiban shita", en: "the bottom" },
+];
+
+/* ============================================================
+   SENTENCES — high-yield example sentences per lesson
+   Sourced from Minna no Nihongo Lessons 1–10 patterns and the
+   Exercise & Supplements drills. To add: append entries with
+   the same shape. { lesson, jp, romaji, en }
+   ============================================================ */
+const SENTENCES = [
+  // Lesson 1 — AはBです / occupation / nationality / introductions
+  { lesson: 1, jp: "わたしは アファクです。", romaji: "Watashi wa Afaqu desu.", en: "I am Afaq." },
+  { lesson: 1, jp: "アファクさんは ぎんこういんです。", romaji: "Afaqu-san wa ginkōin desu.", en: "Mr. Afaq is a bank employee." },
+  { lesson: 1, jp: "わたしは パキスタンじんです。", romaji: "Watashi wa Pakisutan-jin desu.", en: "I am Pakistani." },
+  { lesson: 1, jp: "あのひとは だれですか。", romaji: "Ano hito wa dare desu ka.", en: "Who is that person?" },
+  { lesson: 1, jp: "たなかさんは せんせいですか。", romaji: "Tanaka-san wa sensei desu ka.", en: "Is Mr. Tanaka a teacher?" },
+  { lesson: 1, jp: "いいえ、せんせいじゃ ありません。", romaji: "Iie, sensei ja arimasen.", en: "No, he is not a teacher." },
+  { lesson: 1, jp: "はじめまして。どうぞ よろしく。", romaji: "Hajimemashite. Dōzo yoroshiku.", en: "How do you do. Pleased to meet you." },
+  { lesson: 1, jp: "こちらは スズキさんです。", romaji: "Kochira wa Suzuki-san desu.", en: "This is Mr. Suzuki." },
+  { lesson: 1, jp: "わたしは アメリカから きました。", romaji: "Watashi wa Amerika kara kimashita.", en: "I came from America." },
+  { lesson: 1, jp: "しつれいですが、おなまえは？", romaji: "Shitsurei desu ga, o-namae wa?", en: "Excuse me, may I have your name?" },
+
+  // Lesson 2 — kore/sore/are + ～の～
+  { lesson: 2, jp: "これは ほんです。", romaji: "Kore wa hon desu.", en: "This is a book." },
+  { lesson: 2, jp: "それは じしょですか。", romaji: "Sore wa jisho desu ka.", en: "Is that a dictionary?" },
+  { lesson: 2, jp: "あれは なんですか。", romaji: "Are wa nan desu ka.", en: "What is that over there?" },
+  { lesson: 2, jp: "これは わたしの かさです。", romaji: "Kore wa watashi no kasa desu.", en: "This is my umbrella." },
+  { lesson: 2, jp: "このほんは わたしのです。", romaji: "Kono hon wa watashi no desu.", en: "This book is mine." },
+  { lesson: 2, jp: "それは にほんごの ほんです。", romaji: "Sore wa nihongo no hon desu.", en: "That is a Japanese-language book." },
+  { lesson: 2, jp: "あの かばんは だれのですか。", romaji: "Ano kaban wa dare no desu ka.", en: "Whose bag is that?" },
+  { lesson: 2, jp: "これは チョコレートです。どうぞ。", romaji: "Kore wa chokorēto desu. Dōzo.", en: "This is chocolate. Please (have some)." },
+  { lesson: 2, jp: "これは えいごで なんですか。", romaji: "Kore wa eigo de nan desu ka.", en: "What is this in English?" },
+  { lesson: 2, jp: "ちがいます。それは ボールペンじゃ ありません。", romaji: "Chigaimasu. Sore wa bōrupen ja arimasen.", en: "No. That isn't a ballpoint pen." },
+
+  // Lesson 3 — koko/soko/asoko + price + floor
+  { lesson: 3, jp: "ここは きょうしつです。", romaji: "Koko wa kyōshitsu desu.", en: "Here is a classroom." },
+  { lesson: 3, jp: "トイレは あそこです。", romaji: "Toire wa asoko desu.", en: "The toilet is over there." },
+  { lesson: 3, jp: "でんわは どこですか。", romaji: "Denwa wa doko desu ka.", en: "Where is the telephone?" },
+  { lesson: 3, jp: "おくには どちらですか。", romaji: "O-kuni wa dochira desu ka.", en: "Where are you from? (polite)" },
+  { lesson: 3, jp: "これは いくらですか。", romaji: "Kore wa ikura desu ka.", en: "How much is this?" },
+  { lesson: 3, jp: "このほんは せんえんです。", romaji: "Kono hon wa sen-en desu.", en: "This book is 1,000 yen." },
+  { lesson: 3, jp: "ネクタイうりばは なんがいですか。", romaji: "Nekutai uriba wa nan-gai desu ka.", en: "What floor is the necktie counter on?" },
+  { lesson: 3, jp: "すみません、これを みせて ください。", romaji: "Sumimasen, kore o misete kudasai.", en: "Excuse me, please show me this." },
+  { lesson: 3, jp: "じゃあ、これを ください。", romaji: "Jā, kore o kudasai.", en: "Then, please give me this." },
+  { lesson: 3, jp: "うけつけは いっかいです。", romaji: "Uketsuke wa ikkai desu.", en: "Reception is on the 1st floor." },
+
+  // Lesson 4 — time / daily routines / from–to
+  { lesson: 4, jp: "いま なんじですか。", romaji: "Ima nanji desu ka.", en: "What time is it now?" },
+  { lesson: 4, jp: "いま くじはんです。", romaji: "Ima kuji-han desu.", en: "It's 9:30 now." },
+  { lesson: 4, jp: "わたしは まいあさ ろくじに おきます。", romaji: "Watashi wa maiasa rokuji ni okimasu.", en: "I get up at 6:00 every morning." },
+  { lesson: 4, jp: "ぎんこうは くじから さんじまでです。", romaji: "Ginkō wa kuji kara sanji made desu.", en: "The bank is open from 9 to 3." },
+  { lesson: 4, jp: "きょうは げつようびです。", romaji: "Kyō wa getsuyōbi desu.", en: "Today is Monday." },
+  { lesson: 4, jp: "やすみは どようびと にちようびです。", romaji: "Yasumi wa doyōbi to nichiyōbi desu.", en: "The holidays are Saturday and Sunday." },
+  { lesson: 4, jp: "きのう ろくじまで はたらきました。", romaji: "Kinō rokuji made hatarakimashita.", en: "I worked until six yesterday." },
+  { lesson: 4, jp: "あした べんきょうしません。", romaji: "Ashita benkyō shimasen.", en: "I won't study tomorrow." },
+  { lesson: 4, jp: "しけんは なんじから なんじまでですか。", romaji: "Shiken wa nanji kara nanji made desu ka.", en: "From what time to what time is the exam?" },
+  { lesson: 4, jp: "ひるやすみは じゅうにじから いちじまでです。", romaji: "Hiruyasumi wa jūniji kara ichiji made desu.", en: "Lunch break is from 12 to 1." },
+
+  // Lesson 5 — ikimasu / kimasu / kaerimasu + de + e + to
+  { lesson: 5, jp: "わたしは とうきょうへ いきます。", romaji: "Watashi wa Tōkyō e ikimasu.", en: "I am going to Tokyo." },
+  { lesson: 5, jp: "あした がっこうへ いきます。", romaji: "Ashita gakkō e ikimasu.", en: "I'll go to school tomorrow." },
+  { lesson: 5, jp: "でんしゃで がっこうへ いきます。", romaji: "Densha de gakkō e ikimasu.", en: "I go to school by train." },
+  { lesson: 5, jp: "ともだちと きょうとへ いきます。", romaji: "Tomodachi to Kyōto e ikimasu.", en: "I'm going to Kyoto with a friend." },
+  { lesson: 5, jp: "ひとりで うちへ かえります。", romaji: "Hitori de uchi e kaerimasu.", en: "I'm going home alone." },
+  { lesson: 5, jp: "らいしゅう にほんへ きます。", romaji: "Raishū Nihon e kimasu.", en: "I'm coming to Japan next week." },
+  { lesson: 5, jp: "たんじょうびは なんがつ なんにちですか。", romaji: "Tanjōbi wa nangatsu nannichi desu ka.", en: "What month and day is your birthday?" },
+  { lesson: 5, jp: "わたしの たんじょうびは くがつ ついたちです。", romaji: "Watashi no tanjōbi wa kugatsu tsuitachi desu.", en: "My birthday is September 1st." },
+  { lesson: 5, jp: "きのう どこへも いきませんでした。", romaji: "Kinō doko e mo ikimasen deshita.", en: "I didn't go anywhere yesterday." },
+  { lesson: 5, jp: "あさってから やすみです。", romaji: "Asatte kara yasumi desu.", en: "The holiday starts the day after tomorrow." },
+
+  // Lesson 6 — object o + verb + de(place) + masen ka
+  { lesson: 6, jp: "まいあさ パンを たべます。", romaji: "Maiasa pan o tabemasu.", en: "I eat bread every morning." },
+  { lesson: 6, jp: "なにを のみますか。", romaji: "Nani o nomimasu ka.", en: "What will you drink?" },
+  { lesson: 6, jp: "コーヒーを のみます。", romaji: "Kōhī o nomimasu.", en: "I will drink coffee." },
+  { lesson: 6, jp: "きのう ともだちに あいました。", romaji: "Kinō tomodachi ni aimashita.", en: "I met a friend yesterday." },
+  { lesson: 6, jp: "デパートで かばんを かいました。", romaji: "Depāto de kaban o kaimashita.", en: "I bought a bag at the department store." },
+  { lesson: 6, jp: "うちで しゅくだいを します。", romaji: "Uchi de shukudai o shimasu.", en: "I do homework at home." },
+  { lesson: 6, jp: "いっしょに ごはんを たべませんか。", romaji: "Issho ni gohan o tabemasen ka.", en: "Won't you have a meal with me?" },
+  { lesson: 6, jp: "ええ、いいですね。", romaji: "Ē, ii desu ne.", en: "Yes, that sounds good." },
+  { lesson: 6, jp: "としょかんで ほんを よみます。", romaji: "Toshokan de hon o yomimasu.", en: "I read books at the library." },
+  { lesson: 6, jp: "しゃしんを とりませんか。", romaji: "Shashin o torimasen ka.", en: "Shall we take a photo?" },
+
+  // Lesson 7 — agemasu / moraimasu + de(tool) + ni(person) + mō / mada
+  { lesson: 7, jp: "わたしは ともだちに プレゼントを あげました。", romaji: "Watashi wa tomodachi ni purezento o agemashita.", en: "I gave my friend a present." },
+  { lesson: 7, jp: "ちちに とけいを もらいました。", romaji: "Chichi ni tokei o moraimashita.", en: "I received a watch from my father." },
+  { lesson: 7, jp: "はしで ごはんを たべます。", romaji: "Hashi de gohan o tabemasu.", en: "I eat with chopsticks." },
+  { lesson: 7, jp: "にほんごで メールを かきます。", romaji: "Nihongo de mēru o kakimasu.", en: "I write emails in Japanese." },
+  { lesson: 7, jp: "たなかさんは わたしに にほんごを おしえます。", romaji: "Tanaka-san wa watashi ni nihongo o oshiemasu.", en: "Mr. Tanaka teaches me Japanese." },
+  { lesson: 7, jp: "ケータイで ははに でんわを かけました。", romaji: "Kētai de haha ni denwa o kakemashita.", en: "I called my mother on the cell phone." },
+  { lesson: 7, jp: "もう ばんごはんを たべましたか。", romaji: "Mō bangohan o tabemashita ka.", en: "Have you eaten dinner yet?" },
+  { lesson: 7, jp: "はい、もう たべました。", romaji: "Hai, mō tabemashita.", en: "Yes, I've already eaten." },
+  { lesson: 7, jp: "いいえ、まだです。", romaji: "Iie, mada desu.", en: "No, not yet." },
+  { lesson: 7, jp: "すてきな シャツですね。", romaji: "Suteki na shatsu desu ne.", en: "What a nice shirt!" },
+
+  // Lesson 8 — i-adj / na-adj + donna + ga + amari
+  { lesson: 8, jp: "にほんごは おもしろいです。", romaji: "Nihongo wa omoshiroi desu.", en: "Japanese is interesting." },
+  { lesson: 8, jp: "このほんは あまり おもしろくないです。", romaji: "Kono hon wa amari omoshirokunai desu.", en: "This book is not very interesting." },
+  { lesson: 8, jp: "しんかんせんは とても はやいです。", romaji: "Shinkansen wa totemo hayai desu.", en: "The Shinkansen is very fast." },
+  { lesson: 8, jp: "たなかさんは どんな ひとですか。", romaji: "Tanaka-san wa donna hito desu ka.", en: "What kind of person is Mr. Tanaka?" },
+  { lesson: 8, jp: "たなかさんは しんせつな ひとです。", romaji: "Tanaka-san wa shinsetsu na hito desu.", en: "Mr. Tanaka is a kind person." },
+  { lesson: 8, jp: "ふじさんは たかい やまです。", romaji: "Fujisan wa takai yama desu.", en: "Mt. Fuji is a tall mountain." },
+  { lesson: 8, jp: "このレストランは おいしいですが、たかいです。", romaji: "Kono resutoran wa oishii desu ga, takai desu.", en: "This restaurant is delicious but expensive." },
+  { lesson: 8, jp: "きょうとは しずかで きれいです。", romaji: "Kyōto wa shizuka de kirei desu.", en: "Kyoto is quiet and beautiful." },
+  { lesson: 8, jp: "このとけいは あたらしくないです。", romaji: "Kono tokei wa atarashikunai desu.", en: "This watch isn't new." },
+  { lesson: 8, jp: "にほんの たべものは とても おいしいです。", romaji: "Nihon no tabemono wa totemo oishii desu.", en: "Japanese food is very delicious." },
+
+  // Lesson 9 — ga wakarimasu / suki / arimasu + kara (because)
+  { lesson: 9, jp: "わたしは にほんごが すこし わかります。", romaji: "Watashi wa nihongo ga sukoshi wakarimasu.", en: "I understand a little Japanese." },
+  { lesson: 9, jp: "かんじは ぜんぜん わかりません。", romaji: "Kanji wa zenzen wakarimasen.", en: "I don't understand kanji at all." },
+  { lesson: 9, jp: "わたしは スポーツが すきです。", romaji: "Watashi wa supōtsu ga suki desu.", en: "I like sports." },
+  { lesson: 9, jp: "いぬが きらいです。", romaji: "Inu ga kirai desu.", en: "I dislike dogs." },
+  { lesson: 9, jp: "やまださんは りょうりが じょうずです。", romaji: "Yamada-san wa ryōri ga jōzu desu.", en: "Mr. Yamada is good at cooking." },
+  { lesson: 9, jp: "きょうは いそがしいですから、いきません。", romaji: "Kyō wa isogashii desu kara, ikimasen.", en: "I'm busy today, so I won't go." },
+  { lesson: 9, jp: "どうして いきませんか。", romaji: "Dōshite ikimasen ka.", en: "Why aren't you going?" },
+  { lesson: 9, jp: "しけんが ありますから、べんきょうします。", romaji: "Shiken ga arimasu kara, benkyō shimasu.", en: "There's an exam, so I'll study." },
+  { lesson: 9, jp: "じかんが ありませんから、ざんねんです。", romaji: "Jikan ga arimasen kara, zannen desu.", en: "I don't have time, so it's a pity." },
+  { lesson: 9, jp: "やきゅうが だいすきです。", romaji: "Yakyū ga daisuki desu.", en: "I love baseball." },
+
+  // Lesson 10 — arimasu / imasu + location words
+  { lesson: 10, jp: "つくえの うえに ほんが あります。", romaji: "Tsukue no ue ni hon ga arimasu.", en: "There is a book on the desk." },
+  { lesson: 10, jp: "へやに だれが いますか。", romaji: "Heya ni dare ga imasu ka.", en: "Who is in the room?" },
+  { lesson: 10, jp: "へやに たなかさんが います。", romaji: "Heya ni Tanaka-san ga imasu.", en: "Mr. Tanaka is in the room." },
+  { lesson: 10, jp: "ぎんこうは えきの まえに あります。", romaji: "Ginkō wa eki no mae ni arimasu.", en: "The bank is in front of the station." },
+  { lesson: 10, jp: "コンビニは どこに ありますか。", romaji: "Konbini wa doko ni arimasu ka.", en: "Where is the convenience store?" },
+  { lesson: 10, jp: "コンビニは デパートと ぎんこうの あいだに あります。", romaji: "Konbini wa depāto to ginkō no aida ni arimasu.", en: "The convenience store is between the department store and the bank." },
+  { lesson: 10, jp: "テーブルの したに ねこが います。", romaji: "Tēburu no shita ni neko ga imasu.", en: "There is a cat under the table." },
+  { lesson: 10, jp: "へやに テレビや ラジオなどが あります。", romaji: "Heya ni terebi ya rajio nado ga arimasu.", en: "In the room there is a TV, a radio, and so on." },
+  { lesson: 10, jp: "ポストは ビルの となりに あります。", romaji: "Posuto wa biru no tonari ni arimasu.", en: "The mailbox is next to the building." },
+  { lesson: 10, jp: "なかに なにが ありますか。", romaji: "Naka ni nani ga arimasu ka.", en: "What is inside?" },
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const STORE_KEY = 'jp_practice_state_v1';
+
+const state = {
+  mode: 'flash',           // 'flash' | 'mcq' | 'sentences' | 'dictation'
+  lessons: new Set(),
+  current: null,
+  revealed: false,
+  seen: 0,
+  correct: 0,
+  streak: 0,
+  voice: null,
+  autoSpeak: true,
+};
+
+try {
+  const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+  if (saved && Array.isArray(saved.lessons)) saved.lessons.forEach(n => state.lessons.add(n));
+  if (saved && typeof saved.autoSpeak === 'boolean') state.autoSpeak = saved.autoSpeak;
+} catch (e) {}
+if (state.lessons.size === 0) {
+  [...new Set(VOCAB.map(v => v.lesson))].forEach(n => state.lessons.add(n));
+}
+function persist() {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify({
+      lessons: [...state.lessons],
+      autoSpeak: state.autoSpeak,
+    }));
+  } catch (e) {}
+}
+
+/* ============================================================
+   UTIL
+   ============================================================ */
+function getPool() {
+  const src = (state.mode === 'sentences') ? SENTENCES : VOCAB;
+  return src.filter(v => state.lessons.has(v.lesson));
+}
+function pickRandom(pool, exclude) {
+  if (!pool.length) return null;
+  let pick, tries = 0;
+  do {
+    pick = pool[Math.floor(Math.random() * pool.length)];
+    tries++;
+  } while (exclude && pool.length > 1 && pick === exclude && tries < 8);
+  return pick;
+}
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function normalize(s) {
+  return (s || '').toLowerCase().trim()
+    .replace(/[、。.,!?！？\s\-]/g, '')
+    .replace(/[āâ]/g, 'a').replace(/[īî]/g, 'i').replace(/[ūû]/g, 'u')
+    .replace(/[ēê]/g, 'e').replace(/[ōô]/g, 'o');
+}
+function speak(text) {
+  if (!('speechSynthesis' in window)) return;
+  try {
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'ja-JP';
+    if (state.voice) u.voice = state.voice;
+    u.rate = 0.9;
+    window.speechSynthesis.speak(u);
+  } catch (e) {}
+}
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const cardEl = document.getElementById('card');
+const statSeen = document.getElementById('stat-seen');
+const statCorrect = document.getElementById('stat-correct');
+const statStreak = document.getElementById('stat-streak');
+
+function updateStats() {
+  statSeen.textContent = state.seen;
+  statCorrect.textContent = state.correct;
+  statStreak.textContent = state.streak;
+}
+
+function render() {
+  const pool = getPool();
+  if (!pool.length) {
+    cardEl.innerHTML = '<div class="empty">Select at least one lesson to start.</div>';
+    return;
+  }
+  if (state.mode === 'flash') renderFlash(pool);
+  else if (state.mode === 'mcq') renderMCQ(pool);
+  else if (state.mode === 'sentences') renderSentences(pool);
+  else if (state.mode === 'dictation') renderDictation(pool);
+}
+
+function renderFlash(pool) {
+  if (!state.current) { state.current = pickRandom(pool); state.revealed = false; }
+  const v = state.current;
+  if (!state.revealed) {
+    cardEl.innerHTML = `
+      <span class="lesson-tag">Lesson ${v.lesson}</span>
+      <div class="prompt-label">Translate to Japanese</div>
+      <div class="prompt-en">${escapeHtml(v.en)}</div>
+      <div class="btn-row"><button class="btn primary" id="reveal">Show answer (Space)</button></div>`;
+    document.getElementById('reveal').onclick = () => { state.revealed = true; render(); if (state.autoSpeak) speak(state.current.jp); };
+  } else {
+    cardEl.innerHTML = `
+      <span class="lesson-tag">Lesson ${v.lesson}</span>
+      <div class="prompt-label">${escapeHtml(v.en)}</div>
+      <div class="answer-jp">${escapeHtml(v.jp)}</div>
+      <div class="answer-romaji">${escapeHtml(v.romaji)}</div>
+      <div class="btn-row">
+        <button class="btn icon" id="speak" title="Hear it (S)">🔊 Hear</button>
+        <button class="btn bad" id="miss">Didn't know</button>
+        <button class="btn good" id="hit">Got it!</button>
+      </div>`;
+    document.getElementById('speak').onclick = () => speak(v.jp);
+    document.getElementById('hit').onclick = () => grade(true);
+    document.getElementById('miss').onclick = () => grade(false);
+  }
+}
+
+function renderSentences(pool) {
+  if (!state.current) { state.current = pickRandom(pool); state.revealed = false; }
+  const v = state.current;
+  if (!state.revealed) {
+    cardEl.innerHTML = `
+      <span class="lesson-tag">Lesson ${v.lesson}</span>
+      <div class="prompt-label">Translate to Japanese</div>
+      <div class="prompt-en sentence">${escapeHtml(v.en)}</div>
+      <div class="btn-row"><button class="btn primary" id="reveal">Show answer (Space)</button></div>`;
+    document.getElementById('reveal').onclick = () => { state.revealed = true; render(); if (state.autoSpeak) speak(state.current.jp); };
+  } else {
+    cardEl.innerHTML = `
+      <span class="lesson-tag">Lesson ${v.lesson}</span>
+      <div class="prompt-label">${escapeHtml(v.en)}</div>
+      <div class="answer-jp sentence">${escapeHtml(v.jp)}</div>
+      <div class="answer-romaji sentence">${escapeHtml(v.romaji)}</div>
+      <div class="btn-row">
+        <button class="btn icon" id="speak" title="Hear it (S)">🔊 Hear</button>
+        <button class="btn bad" id="miss">Didn't know</button>
+        <button class="btn good" id="hit">Got it!</button>
+      </div>`;
+    document.getElementById('speak').onclick = () => speak(v.jp);
+    document.getElementById('hit').onclick = () => grade(true);
+    document.getElementById('miss').onclick = () => grade(false);
+  }
+}
+
+function grade(correct) {
+  state.seen++;
+  if (correct) { state.correct++; state.streak++; } else { state.streak = 0; }
+  updateStats();
+  state.current = pickRandom(getPool(), state.current);
+  state.revealed = false;
+  render();
+}
+
+function renderMCQ(pool) {
+  if (!state.current) {
+    state.current = pickRandom(pool);
+    state.choices = buildChoices(pool, state.current);
+    state.answered = false;
+  }
+  const v = state.current;
+  cardEl.innerHTML = `
+    <span class="lesson-tag">Lesson ${v.lesson}</span>
+    <div class="prompt-label">Pick the Japanese for</div>
+    <div class="prompt-en">${escapeHtml(v.en)}</div>
+    <div class="choices" id="choices"></div>
+    <div class="btn-row" id="next-row" style="display:none;">
+      <button class="btn primary" id="next">Next (Space)</button>
+    </div>`;
+  const cEl = document.getElementById('choices');
+  state.choices.forEach((c, i) => {
+    const div = document.createElement('div');
+    div.className = 'choice';
+    div.innerHTML = `<div>${escapeHtml(c.jp)}</div><div class="answer-romaji" style="font-size:13px;margin-top:6px;">${i+1}</div>`;
+    div.onclick = () => answerMCQ(c, div);
+    cEl.appendChild(div);
+  });
+}
+function buildChoices(pool, correct) {
+  const distractors = shuffle(pool.filter(v => v !== correct && v.jp !== correct.jp)).slice(0, 3);
+  return shuffle([correct, ...distractors]);
+}
+function answerMCQ(picked, el) {
+  if (state.answered) return;
+  state.answered = true;
+  state.seen++;
+  const isCorrect = picked.jp === state.current.jp;
+  if (isCorrect) { state.correct++; state.streak++; el.classList.add('correct'); }
+  else { state.streak = 0; el.classList.add('wrong'); }
+  document.querySelectorAll('.choice').forEach(c => {
+    c.classList.add('disabled');
+    if (c.textContent.includes(state.current.jp)) c.classList.add('correct');
+  });
+  if (state.autoSpeak) speak(state.current.jp);
+  updateStats();
+  document.getElementById('next-row').style.display = 'flex';
+  document.getElementById('next').onclick = nextMCQ;
+}
+function nextMCQ() {
+  state.current = pickRandom(getPool(), state.current);
+  state.choices = buildChoices(getPool(), state.current);
+  state.answered = false;
+  render();
+}
+
+function renderDictation(pool) {
+  if (!state.current) { state.current = pickRandom(pool); state.dictAttempted = false; }
+  const v = state.current;
+  cardEl.innerHTML = `
+    <span class="lesson-tag">Lesson ${v.lesson}</span>
+    <div class="prompt-label">Listen and type the meaning (or romaji)</div>
+    <div class="btn-row">
+      <button class="btn primary" id="play">🔊 Play audio</button>
+      <button class="btn" id="play-slow">🐢 Slow</button>
+    </div>
+    <input class="dictation-input" id="dict-input" placeholder="Type English meaning or romaji…" autocomplete="off" autocapitalize="off" autocorrect="off" />
+    <div class="dictation-feedback" id="dict-feedback"></div>
+    <div class="btn-row">
+      <button class="btn" id="dict-show">Show answer</button>
+      <button class="btn primary" id="dict-check">Check</button>
+      <button class="btn" id="dict-next">Skip / Next →</button>
+    </div>`;
+  const input = document.getElementById('dict-input');
+  setTimeout(() => input.focus(), 50);
+  document.getElementById('play').onclick = () => speak(v.jp);
+  document.getElementById('play-slow').onclick = () => {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(v.jp);
+    u.lang = 'ja-JP';
+    if (state.voice) u.voice = state.voice;
+    u.rate = 0.55;
+    window.speechSynthesis.speak(u);
+  };
+  document.getElementById('dict-check').onclick = checkDictation;
+  document.getElementById('dict-show').onclick = () => {
+    document.getElementById('dict-feedback').innerHTML =
+      `<span>Answer: <strong>${escapeHtml(v.jp)}</strong> · ${escapeHtml(v.romaji)} · ${escapeHtml(v.en)}</span>`;
+  };
+  document.getElementById('dict-next').onclick = () => {
+    state.current = pickRandom(getPool(), state.current);
+    state.dictAttempted = false;
+    render();
+  };
+  input.onkeydown = (e) => { if (e.key === 'Enter') checkDictation(); };
+  /* iOS: no auto-play; user taps Play */
+}
+function checkDictation() {
+  const v = state.current;
+  const input = document.getElementById('dict-input');
+  const fb = document.getElementById('dict-feedback');
+  if (!input.value.trim()) return;
+  const guess = normalize(input.value);
+  const okEn = normalize(v.en).split(/[,/;]|\bor\b/).some(part => part && (guess === normalize(part) || (normalize(part).includes(guess) && guess.length >= 3)));
+  const okRomaji = normalize(v.romaji) === guess;
+  const okJp = v.jp.replace(/\s/g,'') === input.value.trim().replace(/\s/g,'');
+  const correct = okEn || okRomaji || okJp;
+  if (!state.dictAttempted) {
+    state.seen++;
+    state.dictAttempted = true;
+    if (correct) { state.correct++; state.streak++; } else { state.streak = 0; }
+    updateStats();
+  }
+  if (correct) {
+    fb.innerHTML = `<span class="feedback-correct">✓ Correct! <strong>${escapeHtml(v.jp)}</strong> · ${escapeHtml(v.romaji)} · ${escapeHtml(v.en)}</span>`;
+    setTimeout(() => {
+      state.current = pickRandom(getPool(), state.current);
+      state.dictAttempted = false;
+      render();
+    }, 1200);
+  } else {
+    fb.innerHTML = `<span class="feedback-wrong">✗ Try again — or click Show answer.</span>`;
+  }
+}
+
+/* ============================================================
+   CONTROLS
+   ============================================================ */
+document.querySelectorAll('.mode-tabs button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('.mode-tabs button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    state.mode = b.dataset.mode;
+    state.current = null;
+    render();
+  };
+});
+
+const lessonPillsEl = document.getElementById('lesson-pills');
+const allLessons = [...new Set([...VOCAB, ...SENTENCES].map(v => v.lesson))].sort((a,b)=>a-b);
+allLessons.forEach(n => {
+  const pill = document.createElement('div');
+  pill.className = 'lesson-pill' + (state.lessons.has(n) ? ' active' : '');
+  pill.textContent = `L${n}`;
+  pill.onclick = () => {
+    if (state.lessons.has(n)) state.lessons.delete(n); else state.lessons.add(n);
+    pill.classList.toggle('active');
+    state.current = null;
+    persist();
+    render();
+  };
+  lessonPillsEl.appendChild(pill);
+});
+document.getElementById('lessons-all').onclick = () => {
+  allLessons.forEach(n => state.lessons.add(n));
+  document.querySelectorAll('.lesson-pill').forEach(p => p.classList.add('active'));
+  state.current = null;
+  persist();
+  render();
+};
+document.getElementById('lessons-none').onclick = () => {
+  state.lessons.clear();
+  document.querySelectorAll('.lesson-pill').forEach(p => p.classList.remove('active'));
+  state.current = null;
+  persist();
+  render();
+};
+
+document.getElementById('auto-speak').checked = state.autoSpeak;
+document.getElementById('auto-speak').onchange = (e) => { state.autoSpeak = e.target.checked; persist(); };
+
+const voiceSelect = document.getElementById('voice-select');
+function loadVoices() {
+  if (!('speechSynthesis' in window)) {
+    voiceSelect.innerHTML = '<option>Browser has no TTS</option>';
+    return;
+  }
+  const voices = window.speechSynthesis.getVoices();
+  const ja = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('ja'));
+  const list = ja.length ? ja : voices;
+  if (!list.length) { voiceSelect.innerHTML = '<option>Loading…</option>'; return; }
+  voiceSelect.innerHTML = '';
+  list.forEach((v, i) => {
+    const o = document.createElement('option');
+    o.value = i;
+    o.textContent = `${v.name} (${v.lang})`;
+    voiceSelect.appendChild(o);
+  });
+  state.voice = list[0];
+  voiceSelect.onchange = () => { state.voice = list[+voiceSelect.value]; };
+}
+loadVoices();
+if ('speechSynthesis' in window) window.speechSynthesis.onvoiceschanged = loadVoices;
+
+document.addEventListener('keydown', (e) => {
+  if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) return;
+  if (e.code === 'Space') {
+    e.preventDefault();
+    if (state.mode === 'flash' || state.mode === 'sentences') {
+      if (!state.revealed) { state.revealed = true; render(); if (state.autoSpeak) speak(state.current.jp); }
+      else { grade(true); }
+    } else if (state.mode === 'mcq' && state.answered) {
+      nextMCQ();
+    }
+  } else if (e.key === 's' || e.key === 'S') {
+    if (state.current) speak(state.current.jp);
+  } else if (state.mode === 'mcq' && !state.answered && /^[1-4]$/.test(e.key)) {
+    const idx = +e.key - 1;
+    const choices = document.querySelectorAll('.choice');
+    if (choices[idx]) choices[idx].click();
+  }
+});
+
+updateStats();
+render();
+</script>
+</body>
+</html>
