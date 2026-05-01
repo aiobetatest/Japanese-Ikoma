@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Japanese Practice — Dai Ka</title>
+<title>Japanese Practice · Dai Ka</title>
 
-<meta name="theme-color" content="#0f172a">
+<meta name="theme-color" content="#0b1020">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,182 +13,177 @@
 <meta name="application-name" content="Japanese Practice">
 <meta name="format-detection" content="telephone=no">
 
-<link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="%230f172a"/><text x="50" y="68" font-size="60" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" fill="%2338bdf8" font-weight="700">日</text></svg>'>
-<link rel="apple-touch-icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="%230f172a"/><text x="50" y="68" font-size="60" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" fill="%2338bdf8" font-weight="700">日</text></svg>'>
-<link rel="manifest" href='data:application/manifest+json;utf8,{"name":"Japanese Practice","short_name":"日本語","start_url":".","display":"standalone","background_color":"%230f172a","theme_color":"%230f172a","icons":[{"src":"data:image/svg+xml;utf8,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 100 100%22%3E%3Crect width%3D%22100%22 height%3D%22100%22 rx%3D%2222%22 fill%3D%22%230f172a%22/%3E%3Ctext x%3D%2250%22 y%3D%2268%22 font-size%3D%2260%22 text-anchor%3D%22middle%22 font-family%3D%22sans-serif%22 fill%3D%22%2338bdf8%22 font-weight%3D%22700%22%3E%E6%97%A5%3C/text%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml"}]}'>
+<link rel="icon" type="image/svg+xml" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%237c83ff"/><stop offset="1" stop-color="%23ec4899"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="%230b1020"/><text x="50" y="68" font-size="60" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" fill="url(%23g)" font-weight="700">日</text></svg>'>
+<link rel="apple-touch-icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="%237c83ff"/><stop offset="1" stop-color="%23ec4899"/></linearGradient></defs><rect width="100" height="100" rx="22" fill="%230b1020"/><text x="50" y="68" font-size="60" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" fill="url(%23g)" font-weight="700">日</text></svg>'>
+<link rel="manifest" href='data:application/manifest+json;utf8,{"name":"Japanese Practice","short_name":"日本語","start_url":".","display":"standalone","background_color":"%230b1020","theme_color":"%230b1020","icons":[{"src":"data:image/svg+xml;utf8,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 100 100%22%3E%3Crect width%3D%22100%22 height%3D%22100%22 rx%3D%2222%22 fill%3D%22%230b1020%22/%3E%3Ctext x%3D%2250%22 y%3D%2268%22 font-size%3D%2260%22 text-anchor%3D%22middle%22 font-family%3D%22sans-serif%22 fill%3D%22%237c83ff%22 font-weight%3D%22700%22%3E%E6%97%A5%3C/text%3E%3C/svg%3E","sizes":"any","type":"image/svg+xml"}]}'>
 
 <style>
-  :root {
-    --bg: #0f172a;
-    --panel: #1e293b;
-    --panel-2: #334155;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --accent: #38bdf8;
-    --accent-2: #f472b6;
-    --good: #22c55e;
-    --bad: #ef4444;
-    --warn: #f59e0b;
-    --border: #334155;
+  :root, [data-theme="dark"] {
+    --bg: #0b1020;
+    --bg-grad: radial-gradient(1200px 600px at 0% -10%, #1d1b4b 0%, transparent 60%),
+               radial-gradient(900px 600px at 100% 110%, #0f3460 0%, transparent 55%),
+               linear-gradient(180deg, #0b1020 0%, #0a0d1f 100%);
+    --panel: rgba(20, 26, 51, 0.72);
+    --panel-2: rgba(40, 48, 84, 0.6);
+    --panel-solid: #141a33;
+    --text: #e8ecff;
+    --muted: #8b93b8;
+    --accent: #7c83ff;
+    --accent-2: #ec4899;
+    --accent-glow: rgba(124, 131, 255, 0.35);
+    --good: #34d399;
+    --bad: #f87171;
+    --warn: #fbbf24;
+    --border: rgba(148, 163, 184, 0.15);
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    --on-accent: #0b1020;
+  }
+  [data-theme="light"] {
+    --bg: #f5f7fb;
+    --bg-grad: radial-gradient(1200px 600px at 0% -10%, #e0e7ff 0%, transparent 60%),
+               radial-gradient(900px 600px at 100% 110%, #fce7f3 0%, transparent 55%),
+               linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+    --panel: rgba(255, 255, 255, 0.85);
+    --panel-2: rgba(243, 244, 251, 0.95);
+    --panel-solid: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --accent: #6366f1;
+    --accent-2: #ec4899;
+    --accent-glow: rgba(99, 102, 241, 0.25);
+    --good: #16a34a;
+    --bad: #dc2626;
+    --warn: #d97706;
+    --border: rgba(100, 116, 139, 0.18);
+    --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    --on-accent: #ffffff;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
     background: var(--bg);
+    background-image: var(--bg-grad);
+    background-attachment: fixed;
     color: var(--text);
     min-height: 100vh;
     -webkit-text-size-adjust: 100%;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   header {
-    padding: 16px 24px;
+    padding: 18px 28px;
     border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    background: var(--panel);
+    position: sticky; top: 0; z-index: 5;
   }
-  h1 { margin: 0; font-size: 20px; font-weight: 600; }
-  h1 .ja { color: var(--accent); margin-right: 8px; }
-  .stats { font-size: 13px; color: var(--muted); }
+  h1 { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+  h1 .ja {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-right: 10px; font-weight: 800;
+  }
+  .stats { font-size: 13px; color: var(--muted); display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
   .stats span { color: var(--text); font-weight: 600; }
   .streak-pill {
-    background: var(--panel-2);
-    color: var(--warn);
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 12px;
-    margin-left: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+    background: var(--panel-2); color: var(--warn);
+    padding: 4px 10px; border-radius: 999px;
+    font-size: 12px; margin-left: 8px;
+    display: inline-flex; align-items: center; gap: 4px;
+    border: 1px solid var(--border);
   }
+  .theme-toggle {
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    width: 36px; height: 36px; border-radius: 10px;
+    cursor: pointer; font-size: 16px;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all 0.2s; margin-left: 12px;
+  }
+  .theme-toggle:hover { border-color: var(--accent); transform: scale(1.05); }
 
   .container { max-width: 900px; margin: 0 auto; padding: 24px; }
 
   .controls {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 20px;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 16px; padding: 18px; margin-bottom: 20px;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow);
   }
   .controls-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
   .controls-row:last-child { margin-bottom: 0; }
   .controls label {
-    font-size: 12px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-right: 8px;
+    font-size: 12px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.05em; margin-right: 8px;
   }
 
   .mode-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
   .mode-tabs button {
-    background: var(--panel-2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 8px 14px;
-    border-radius: 8px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.15s;
-    font-family: inherit;
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    padding: 9px 14px; border-radius: 10px; font-size: 14px;
+    cursor: pointer; transition: all 0.18s; font-family: inherit; font-weight: 500;
   }
-  .mode-tabs button:hover { border-color: var(--accent); }
+  .mode-tabs button:hover { border-color: var(--accent); transform: translateY(-1px); }
   .mode-tabs button.active {
-    background: var(--accent);
-    color: #0f172a;
-    border-color: var(--accent);
-    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: var(--on-accent); border-color: transparent; font-weight: 600;
+    box-shadow: 0 6px 18px var(--accent-glow);
   }
 
   .lesson-pills { display: flex; gap: 6px; flex-wrap: wrap; }
   .lesson-pill {
-    background: var(--panel-2);
-    color: var(--muted);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 999px;
-    font-size: 13px;
-    cursor: pointer;
-    user-select: none;
-    transition: all 0.1s;
-    position: relative;
+    background: var(--panel-2); color: var(--muted); border: 1px solid var(--border);
+    padding: 4px 10px; border-radius: 999px; font-size: 13px;
+    cursor: pointer; user-select: none; transition: all 0.15s; position: relative;
   }
   .lesson-pill:hover { border-color: var(--accent); }
   .lesson-pill.active {
-    background: var(--accent);
-    color: #0f172a;
-    border-color: var(--accent);
-    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: var(--on-accent); border-color: transparent; font-weight: 600;
+    box-shadow: 0 3px 10px var(--accent-glow);
   }
-  .lesson-pill .pct {
-    font-size: 10px;
-    opacity: 0.8;
-    margin-left: 4px;
-  }
+  .lesson-pill .pct { font-size: 10px; opacity: 0.8; margin-left: 4px; }
 
   select, input[type="text"], input[type="search"] {
-    background: var(--panel-2);
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-family: inherit;
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    padding: 8px 12px; border-radius: 8px; font-size: 14px; font-family: inherit;
   }
   input[type="search"] { -webkit-appearance: none; appearance: none; }
 
   .toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    user-select: none;
-    font-size: 13px;
-    color: var(--muted);
+    display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer; user-select: none; font-size: 13px; color: var(--muted);
   }
   .toggle input { accent-color: var(--accent); }
 
   .seg {
-    display: inline-flex;
-    background: var(--panel-2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 2px;
-    gap: 0;
+    display: inline-flex; background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 2px;
   }
   .seg button {
-    background: transparent;
-    color: var(--muted);
-    border: 0;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    cursor: pointer;
-    font-family: inherit;
+    background: transparent; color: var(--muted); border: 0;
+    padding: 7px 14px; border-radius: 8px; font-size: 13px;
+    cursor: pointer; font-family: inherit; font-weight: 500; transition: all 0.18s;
   }
   .seg button.active {
-    background: var(--accent);
-    color: #0f172a;
-    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: var(--on-accent); font-weight: 600; box-shadow: 0 2px 8px var(--accent-glow);
   }
 
   .search-box { position: relative; flex: 1; min-width: 200px; }
   .search-box input { width: 100%; padding-left: 32px; }
   .search-box::before {
-    content: "🔍";
-    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    content: "🔍"; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
     font-size: 13px; opacity: 0.6;
   }
   .search-results {
     position: absolute; top: 100%; left: 0; right: 0;
-    background: var(--panel); border: 1px solid var(--border);
-    border-radius: 8px; margin-top: 4px;
+    background: var(--panel-solid); border: 1px solid var(--border);
+    border-radius: 10px; margin-top: 4px;
     max-height: 280px; overflow-y: auto; z-index: 10;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    box-shadow: var(--shadow);
   }
   .search-result { padding: 10px 14px; cursor: pointer; border-bottom: 1px solid var(--border); font-size: 14px; }
   .search-result:last-child { border-bottom: 0; }
@@ -198,19 +193,32 @@
 
   .card {
     background: var(--panel); border: 1px solid var(--border);
-    border-radius: 16px; padding: 48px 32px; text-align: center;
+    border-radius: 20px; padding: 52px 36px; text-align: center;
     min-height: 360px; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; gap: 16px;
+    justify-content: center; align-items: center; gap: 18px;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow);
+    position: relative; overflow: hidden;
   }
-  .prompt-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
-  .prompt-en { font-size: 32px; font-weight: 600; line-height: 1.3; max-width: 600px; }
+  .card::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 0%, var(--accent-glow) 0%, transparent 50%);
+    pointer-events: none; opacity: 0.6;
+  }
+  .card > * { position: relative; z-index: 1; }
+  .prompt-label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; }
+  .prompt-en { font-size: 32px; font-weight: 700; line-height: 1.3; max-width: 600px; letter-spacing: -0.01em; }
   .prompt-jp {
-    font-size: 48px; font-weight: 600; color: var(--accent);
+    font-size: 52px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
     line-height: 1.2; max-width: 720px;
   }
   .answer-jp {
-    font-size: 56px; font-weight: 600; color: var(--accent);
+    font-size: 60px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
     line-height: 1.2;
   }
@@ -220,8 +228,8 @@
   .answer-romaji { font-size: 18px; color: var(--muted); font-style: italic; }
   .answer-romaji.sentence { font-size: 16px; }
   .answer-en { font-size: 22px; }
-  .lesson-tag { font-size: 11px; color: var(--muted); background: var(--panel-2); padding: 3px 8px; border-radius: 999px; }
-  .box-tag { font-size: 10px; color: var(--muted); background: var(--panel-2); padding: 2px 8px; border-radius: 999px; margin-left: 6px; }
+  .lesson-tag { font-size: 11px; color: var(--muted); background: var(--panel-2); padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); }
+  .box-tag { font-size: 10px; color: var(--muted); background: var(--panel-2); padding: 3px 9px; border-radius: 999px; margin-left: 6px; border: 1px solid var(--border); }
   .box-tag.b1, .box-tag.b2 { color: var(--bad); }
   .box-tag.b3 { color: var(--warn); }
   .box-tag.b4, .box-tag.b5 { color: var(--good); }
@@ -229,44 +237,67 @@
   .btn-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
   button.btn {
     background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
-    padding: 10px 18px; border-radius: 8px; font-size: 15px; cursor: pointer;
-    transition: all 0.15s; font-family: inherit;
+    padding: 11px 20px; border-radius: 10px; font-size: 15px; cursor: pointer;
+    transition: all 0.18s; font-family: inherit; font-weight: 500;
   }
-  button.btn:hover { border-color: var(--accent); }
-  button.btn.primary { background: var(--accent); color: #0f172a; border-color: var(--accent); font-weight: 600; }
-  button.btn.primary:hover { background: #0ea5e9; }
-  button.btn.good { background: var(--good); border-color: var(--good); color: white; }
-  button.btn.bad  { background: var(--bad);  border-color: var(--bad);  color: white; }
-  button.btn.icon { padding: 10px 14px; }
+  button.btn:hover { border-color: var(--accent); transform: translateY(-1px); }
+  button.btn.primary {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    color: var(--on-accent); border-color: transparent; font-weight: 600;
+    box-shadow: 0 6px 18px var(--accent-glow);
+  }
+  button.btn.primary:hover { box-shadow: 0 10px 24px var(--accent-glow); transform: translateY(-2px); }
+  button.btn.good {
+    background: linear-gradient(135deg, var(--good) 0%, #10b981 100%);
+    border-color: transparent; color: white;
+    box-shadow: 0 4px 14px rgba(52, 211, 153, 0.3);
+  }
+  button.btn.bad {
+    background: linear-gradient(135deg, var(--bad) 0%, #ef4444 100%);
+    border-color: transparent; color: white;
+    box-shadow: 0 4px 14px rgba(248, 113, 113, 0.3);
+  }
+  button.btn.icon { padding: 11px 14px; }
 
   .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 520px; margin-top: 20px; }
   .choice {
-    background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px;
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 12px;
     padding: 18px 14px; cursor: pointer; text-align: center; font-size: 24px;
     font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
-    transition: all 0.15s;
+    transition: all 0.18s; font-weight: 600;
   }
-  .choice:hover { border-color: var(--accent); }
-  .choice.correct { background: var(--good); border-color: var(--good); color: white; }
-  .choice.wrong { background: var(--bad); border-color: var(--bad); color: white; }
+  .choice:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 16px var(--accent-glow); }
+  .choice.correct {
+    background: linear-gradient(135deg, var(--good) 0%, #10b981 100%);
+    border-color: transparent; color: white;
+    box-shadow: 0 4px 14px rgba(52, 211, 153, 0.4);
+  }
+  .choice.wrong {
+    background: linear-gradient(135deg, var(--bad) 0%, #ef4444 100%);
+    border-color: transparent; color: white;
+    box-shadow: 0 4px 14px rgba(248, 113, 113, 0.4);
+  }
   .choice.disabled { pointer-events: none; opacity: 0.6; }
 
-  .dictation-input { width: 100%; max-width: 420px; padding: 14px 16px; font-size: 18px; margin-top: 16px; }
+  .dictation-input { width: 100%; max-width: 420px; padding: 14px 16px; font-size: 18px; margin-top: 16px; border-radius: 10px; }
   .dictation-feedback { margin-top: 12px; font-size: 14px; min-height: 20px; }
   .feedback-correct { color: var(--good); }
   .feedback-wrong { color: var(--bad); }
 
   .canvas-wrap {
     width: 100%; max-width: 420px; background: white;
-    border-radius: 10px; border: 2px solid var(--border);
+    border-radius: 12px; border: 2px solid var(--border);
     margin-top: 12px; position: relative; aspect-ratio: 2 / 1; touch-action: none;
+    box-shadow: var(--shadow);
   }
-  .canvas-wrap canvas { width: 100%; height: 100%; display: block; border-radius: 8px; }
+  .canvas-wrap canvas { width: 100%; height: 100%; display: block; border-radius: 10px; }
   .canvas-tools { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
 
   .summary {
     background: var(--panel); border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px; margin-top: 16px; text-align: left;
+    border-radius: 16px; padding: 22px; margin-top: 16px; text-align: left;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow);
   }
   .summary h3 { margin: 0 0 8px 0; font-size: 16px; }
   .summary .miss-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
@@ -284,29 +315,29 @@
       padding-left: env(safe-area-inset-left);
       padding-right: env(safe-area-inset-right);
     }
-    header { padding: 10px 14px; flex-direction: column; align-items: flex-start; gap: 4px; }
+    header { padding: 12px 16px; flex-direction: column; align-items: flex-start; gap: 6px; }
     h1 { font-size: 17px; }
     h1 .ja { margin-right: 6px; }
-    .stats { font-size: 11px; line-height: 1.4; }
+    .stats { font-size: 11px; line-height: 1.4; flex-wrap: wrap; }
     .container { padding: 12px; }
-    .controls { padding: 12px; border-radius: 10px; margin-bottom: 14px; }
+    .controls { padding: 12px; border-radius: 12px; margin-bottom: 14px; }
     .controls-row { flex-direction: column; align-items: stretch; gap: 8px; margin-bottom: 10px; }
     .controls label { margin-right: 0; margin-bottom: 2px; font-size: 11px; }
     .mode-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: 100%; }
-    .mode-tabs button { padding: 10px 8px; font-size: 14px; min-height: 40px; }
+    .mode-tabs button { padding: 11px 8px; font-size: 14px; min-height: 42px; }
     .lesson-pills { width: 100%; gap: 6px; }
     .lesson-pill { padding: 6px 12px; font-size: 14px; min-height: 32px; display: inline-flex; align-items: center; }
     #lessons-all, #lessons-none { flex: 1; max-width: 80px; }
     select { width: 100%; min-height: 40px; padding: 8px 10px; }
     .toggle { font-size: 13px; }
-    .seg button { padding: 8px 14px; font-size: 14px; min-height: 36px; }
-    .card { padding: 24px 14px; min-height: 260px; border-radius: 12px; gap: 14px; }
+    .seg button { padding: 9px 14px; font-size: 14px; min-height: 38px; }
+    .card { padding: 28px 16px; min-height: 280px; border-radius: 16px; gap: 14px; }
     .prompt-label { font-size: 11px; }
-    .prompt-en { font-size: 22px; line-height: 1.3; }
+    .prompt-en { font-size: 24px; line-height: 1.3; }
     .prompt-en.sentence { font-size: 18px; line-height: 1.45; }
-    .prompt-jp { font-size: 36px; }
+    .prompt-jp { font-size: 38px; }
     .prompt-jp.sentence { font-size: 22px; line-height: 1.45; }
-    .answer-jp { font-size: 38px; }
+    .answer-jp { font-size: 42px; }
     .answer-jp.sentence { font-size: 22px; line-height: 1.45; }
     .answer-romaji { font-size: 15px; }
     .answer-romaji.sentence { font-size: 14px; }
@@ -321,16 +352,18 @@
     .help-text { display: none; }
     footer { font-size: 11px; padding: 18px 14px; }
     .canvas-wrap { aspect-ratio: 1.6 / 1; }
+    .theme-toggle { width: 32px; height: 32px; font-size: 14px; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1><span class="ja">日本語</span>Practice — Dai Ka</h1>
+  <h1><span class="ja">日本語</span>Practice · Dai Ka</h1>
   <div class="stats">
     <span id="stat-seen">0</span> seen · <span id="stat-correct">0</span> correct · streak
     <span class="streak-pill">🔥 <span id="stat-streak-day">0</span>d</span>
+    <button class="theme-toggle" id="theme-toggle" title="Toggle light / dark">🌙</button>
   </div>
 </header>
 
@@ -396,12 +429,12 @@
   </div>
 
   <div class="help-text">
-    Tip: <strong>Space</strong> flips / continues, <strong>1–4</strong> picks a choice, <strong>S</strong> hears the word again.
+    Tip: <strong>Space</strong> flips / continues, <strong>1-4</strong> picks a choice, <strong>S</strong> hears the word again.
   </div>
 </div>
 
 <footer>
-  Vocab + sentences cover Lessons 1–10 (Dai_Ka.pdf). Hiragana + Katakana writing modes use the standard 46-char chart, with optional dakuten/handakuten. Progress saved in your browser.
+  Vocab + sentences cover Lessons 1-10 (Dai_Ka.pdf). Hiragana + Katakana writing modes use the standard 46-char chart, with optional dakuten/handakuten. Progress saved in your browser.
 </footer>
 
 <script>
@@ -899,7 +932,7 @@ const VOCAB = [
 ];
 
 const SENTENCES = [
-  // Lesson 1 — AはBです / occupation / nationality / introductions
+  // Lesson 1 · AはBです / occupation / nationality / introductions
   { lesson: 1, jp: "わたしは アファクです。", romaji: "Watashi wa Afaqu desu.", en: "I am Afaq." },
   { lesson: 1, jp: "アファクさんは ぎんこういんです。", romaji: "Afaqu-san wa ginkōin desu.", en: "Mr. Afaq is a bank employee." },
   { lesson: 1, jp: "わたしは パキスタンじんです。", romaji: "Watashi wa Pakisutan-jin desu.", en: "I am Pakistani." },
@@ -911,7 +944,7 @@ const SENTENCES = [
   { lesson: 1, jp: "わたしは アメリカから きました。", romaji: "Watashi wa Amerika kara kimashita.", en: "I came from America." },
   { lesson: 1, jp: "しつれいですが、おなまえは？", romaji: "Shitsurei desu ga, o-namae wa?", en: "Excuse me, may I have your name?" },
 
-  // Lesson 2 — kore/sore/are + ～の～
+  // Lesson 2 · kore/sore/are + ～の～
   { lesson: 2, jp: "これは ほんです。", romaji: "Kore wa hon desu.", en: "This is a book." },
   { lesson: 2, jp: "それは じしょですか。", romaji: "Sore wa jisho desu ka.", en: "Is that a dictionary?" },
   { lesson: 2, jp: "あれは なんですか。", romaji: "Are wa nan desu ka.", en: "What is that over there?" },
@@ -923,7 +956,7 @@ const SENTENCES = [
   { lesson: 2, jp: "これは えいごで なんですか。", romaji: "Kore wa eigo de nan desu ka.", en: "What is this in English?" },
   { lesson: 2, jp: "ちがいます。それは ボールペンじゃ ありません。", romaji: "Chigaimasu. Sore wa bōrupen ja arimasen.", en: "No. That isn't a ballpoint pen." },
 
-  // Lesson 3 — koko/soko/asoko + price + floor
+  // Lesson 3 · koko/soko/asoko + price + floor
   { lesson: 3, jp: "ここは きょうしつです。", romaji: "Koko wa kyōshitsu desu.", en: "Here is a classroom." },
   { lesson: 3, jp: "トイレは あそこです。", romaji: "Toire wa asoko desu.", en: "The toilet is over there." },
   { lesson: 3, jp: "でんわは どこですか。", romaji: "Denwa wa doko desu ka.", en: "Where is the telephone?" },
@@ -935,7 +968,7 @@ const SENTENCES = [
   { lesson: 3, jp: "じゃあ、これを ください。", romaji: "Jā, kore o kudasai.", en: "Then, please give me this." },
   { lesson: 3, jp: "うけつけは いっかいです。", romaji: "Uketsuke wa ikkai desu.", en: "Reception is on the 1st floor." },
 
-  // Lesson 4 — time / daily routines / from–to
+  // Lesson 4 · time / daily routines / from-to
   { lesson: 4, jp: "いま なんじですか。", romaji: "Ima nanji desu ka.", en: "What time is it now?" },
   { lesson: 4, jp: "いま くじはんです。", romaji: "Ima kuji-han desu.", en: "It's 9:30 now." },
   { lesson: 4, jp: "わたしは まいあさ ろくじに おきます。", romaji: "Watashi wa maiasa rokuji ni okimasu.", en: "I get up at 6:00 every morning." },
@@ -947,7 +980,7 @@ const SENTENCES = [
   { lesson: 4, jp: "しけんは なんじから なんじまでですか。", romaji: "Shiken wa nanji kara nanji made desu ka.", en: "From what time to what time is the exam?" },
   { lesson: 4, jp: "ひるやすみは じゅうにじから いちじまでです。", romaji: "Hiruyasumi wa jūniji kara ichiji made desu.", en: "Lunch break is from 12 to 1." },
 
-  // Lesson 5 — ikimasu / kimasu / kaerimasu + de + e + to
+  // Lesson 5 · ikimasu / kimasu / kaerimasu + de + e + to
   { lesson: 5, jp: "わたしは とうきょうへ いきます。", romaji: "Watashi wa Tōkyō e ikimasu.", en: "I am going to Tokyo." },
   { lesson: 5, jp: "あした がっこうへ いきます。", romaji: "Ashita gakkō e ikimasu.", en: "I'll go to school tomorrow." },
   { lesson: 5, jp: "でんしゃで がっこうへ いきます。", romaji: "Densha de gakkō e ikimasu.", en: "I go to school by train." },
@@ -959,7 +992,7 @@ const SENTENCES = [
   { lesson: 5, jp: "きのう どこへも いきませんでした。", romaji: "Kinō doko e mo ikimasen deshita.", en: "I didn't go anywhere yesterday." },
   { lesson: 5, jp: "あさってから やすみです。", romaji: "Asatte kara yasumi desu.", en: "The holiday starts the day after tomorrow." },
 
-  // Lesson 6 — object o + verb + de(place) + masen ka
+  // Lesson 6 · object o + verb + de(place) + masen ka
   { lesson: 6, jp: "まいあさ パンを たべます。", romaji: "Maiasa pan o tabemasu.", en: "I eat bread every morning." },
   { lesson: 6, jp: "なにを のみますか。", romaji: "Nani o nomimasu ka.", en: "What will you drink?" },
   { lesson: 6, jp: "コーヒーを のみます。", romaji: "Kōhī o nomimasu.", en: "I will drink coffee." },
@@ -971,7 +1004,7 @@ const SENTENCES = [
   { lesson: 6, jp: "としょかんで ほんを よみます。", romaji: "Toshokan de hon o yomimasu.", en: "I read books at the library." },
   { lesson: 6, jp: "しゃしんを とりませんか。", romaji: "Shashin o torimasen ka.", en: "Shall we take a photo?" },
 
-  // Lesson 7 — agemasu / moraimasu + de(tool) + ni(person) + mō / mada
+  // Lesson 7 · agemasu / moraimasu + de(tool) + ni(person) + mō / mada
   { lesson: 7, jp: "わたしは ともだちに プレゼントを あげました。", romaji: "Watashi wa tomodachi ni purezento o agemashita.", en: "I gave my friend a present." },
   { lesson: 7, jp: "ちちに とけいを もらいました。", romaji: "Chichi ni tokei o moraimashita.", en: "I received a watch from my father." },
   { lesson: 7, jp: "はしで ごはんを たべます。", romaji: "Hashi de gohan o tabemasu.", en: "I eat with chopsticks." },
@@ -983,7 +1016,7 @@ const SENTENCES = [
   { lesson: 7, jp: "いいえ、まだです。", romaji: "Iie, mada desu.", en: "No, not yet." },
   { lesson: 7, jp: "すてきな シャツですね。", romaji: "Suteki na shatsu desu ne.", en: "What a nice shirt!" },
 
-  // Lesson 8 — i-adj / na-adj + donna + ga + amari
+  // Lesson 8 · i-adj / na-adj + donna + ga + amari
   { lesson: 8, jp: "にほんごは おもしろいです。", romaji: "Nihongo wa omoshiroi desu.", en: "Japanese is interesting." },
   { lesson: 8, jp: "このほんは あまり おもしろくないです。", romaji: "Kono hon wa amari omoshirokunai desu.", en: "This book is not very interesting." },
   { lesson: 8, jp: "しんかんせんは とても はやいです。", romaji: "Shinkansen wa totemo hayai desu.", en: "The Shinkansen is very fast." },
@@ -995,7 +1028,7 @@ const SENTENCES = [
   { lesson: 8, jp: "このとけいは あたらしくないです。", romaji: "Kono tokei wa atarashikunai desu.", en: "This watch isn't new." },
   { lesson: 8, jp: "にほんの たべものは とても おいしいです。", romaji: "Nihon no tabemono wa totemo oishii desu.", en: "Japanese food is very delicious." },
 
-  // Lesson 9 — ga wakarimasu / suki / arimasu + kara (because)
+  // Lesson 9 · ga wakarimasu / suki / arimasu + kara (because)
   { lesson: 9, jp: "わたしは にほんごが すこし わかります。", romaji: "Watashi wa nihongo ga sukoshi wakarimasu.", en: "I understand a little Japanese." },
   { lesson: 9, jp: "かんじは ぜんぜん わかりません。", romaji: "Kanji wa zenzen wakarimasen.", en: "I don't understand kanji at all." },
   { lesson: 9, jp: "わたしは スポーツが すきです。", romaji: "Watashi wa supōtsu ga suki desu.", en: "I like sports." },
@@ -1007,7 +1040,7 @@ const SENTENCES = [
   { lesson: 9, jp: "じかんが ありませんから、ざんねんです。", romaji: "Jikan ga arimasen kara, zannen desu.", en: "I don't have time, so it's a pity." },
   { lesson: 9, jp: "やきゅうが だいすきです。", romaji: "Yakyū ga daisuki desu.", en: "I love baseball." },
 
-  // Lesson 10 — arimasu / imasu + location words
+  // Lesson 10 · arimasu / imasu + location words
   { lesson: 10, jp: "つくえの うえに ほんが あります。", romaji: "Tsukue no ue ni hon ga arimasu.", en: "There is a book on the desk." },
   { lesson: 10, jp: "へやに だれが いますか。", romaji: "Heya ni dare ga imasu ka.", en: "Who is in the room?" },
   { lesson: 10, jp: "へやに たなかさんが います。", romaji: "Heya ni Tanaka-san ga imasu.", en: "Mr. Tanaka is in the room." },
@@ -1090,12 +1123,12 @@ const state = {
   streak: 0,
   lastDay: null,
   totalSeen: 0,
+  decks: {},
 };
 
 function cardKey(item, kind) {
   return `${kind}:${item.lesson}:${item.jp}`;
 }
-
 function loadStore() {
   try {
     const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
@@ -1115,16 +1148,11 @@ function loadStore() {
 function saveStore() {
   try {
     localStorage.setItem(STORE_KEY, JSON.stringify({
-      lessons: [...state.lessons],
-      autoSpeak: state.autoSpeak,
-      direction: state.direction,
-      dictMode: state.dictMode,
-      kanaSet: state.kanaSet,
-      progress: state.progress,
-      kanaProgress: state.kanaProgress,
-      streak: state.streak,
-      lastDay: state.lastDay,
-      totalSeen: state.totalSeen,
+      lessons: [...state.lessons], autoSpeak: state.autoSpeak,
+      direction: state.direction, dictMode: state.dictMode,
+      kanaSet: state.kanaSet, progress: state.progress,
+      kanaProgress: state.kanaProgress, streak: state.streak,
+      lastDay: state.lastDay, totalSeen: state.totalSeen,
     }));
   } catch (e) {}
 }
@@ -1132,7 +1160,6 @@ loadStore();
 if (state.lessons.size === 0) {
   [...new Set(VOCAB.map(v => v.lesson))].forEach(n => state.lessons.add(n));
 }
-
 function bumpStreak() {
   const t = todayStr();
   if (state.lastDay === t) return;
@@ -1146,10 +1173,9 @@ function bumpStreak() {
 }
 
 /* ============================================================
-   SMART PICKER (Leitner)
+   PROGRESS RECORDING
    ============================================================ */
 const BOX_WEIGHTS = { 1: 8, 2: 5, 3: 3, 4: 2, 5: 1 };
-
 function getBox(item, kind) {
   const k = cardKey(item, kind);
   return (state.progress[k] && state.progress[k].box) || 2;
@@ -1168,25 +1194,6 @@ function recordResult(item, kind, correct) {
   bumpStreak();
   saveStore();
 }
-function pickSmart(pool, kind, exclude) {
-  if (!pool.length) return null;
-  const now = Date.now();
-  const weighted = pool.map(item => {
-    const k = cardKey(item, kind);
-    const p = state.progress[k];
-    const box = (p && p.box) || 2;
-    const w = BOX_WEIGHTS[box] || 5;
-    const since = p ? (now - (p.lastSeen || 0)) / 60000 : 999;
-    const lru = since < 1 ? 0.2 : (since > 30 ? 1.3 : 1);
-    return { item, weight: w * lru };
-  });
-  const filtered = exclude ? weighted.filter(x => x.item !== exclude) : weighted;
-  const final = filtered.length ? filtered : weighted;
-  const total = final.reduce((s, x) => s + x.weight, 0);
-  let r = Math.random() * total;
-  for (const x of final) if ((r -= x.weight) <= 0) return x.item;
-  return final[final.length - 1].item;
-}
 function shuffle(arr) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
@@ -1200,6 +1207,49 @@ function currentSource() { return (state.mode === 'sentences') ? SENTENCES : VOC
 function getPool() { return currentSource().filter(v => state.lessons.has(v.lesson)); }
 function isKanaMode() { return state.mode === 'hira' || state.mode === 'kata'; }
 
+/* ============================================================
+   DECK PICKER (no-repeat until all seen)
+   ============================================================ */
+function deckKey(kind) {
+  if (kind === 'kana') return `kana:${state.mode}:${state.kanaSet}`;
+  return `${kind}:` + [...state.lessons].sort((a,b)=>a-b).join(',');
+}
+function buildDeck(pool, kind) {
+  const decorated = pool.map(item => {
+    let box;
+    if (kind === 'kana') {
+      const p = state.kanaProgress[kanaKey(item)];
+      box = (p && p.box) || 2;
+    } else {
+      const p = state.progress[cardKey(item, kind)];
+      box = (p && p.box) || 2;
+    }
+    const score = box + Math.random() * 2;
+    return { item, score };
+  });
+  decorated.sort((a, b) => a.score - b.score);
+  return decorated.map(d => d.item);
+}
+function pickFromDeck(pool, kind) {
+  if (!pool.length) return null;
+  const k = deckKey(kind);
+  const d = state.decks[k];
+  if (!d || !d.queue || d.queue.length === 0 || d.poolSize !== pool.length) {
+    state.decks[k] = { queue: buildDeck(pool, kind), poolSize: pool.length };
+  }
+  return state.decks[k].queue.shift() || null;
+}
+function requeueCard(item, kind) {
+  const k = deckKey(kind);
+  const d = state.decks[k];
+  if (!d || !d.queue) return;
+  const pos = Math.min(3 + Math.floor(Math.random() * 3), d.queue.length);
+  d.queue.splice(pos, 0, item);
+}
+
+/* ============================================================
+   NORMALISATION + TTS + UTIL
+   ============================================================ */
 function normalize(s) {
   return (s || '').toLowerCase().trim()
     .replace(/[、。.,!?！？\s\-]/g, '')
@@ -1283,11 +1333,11 @@ function render() {
 }
 
 function renderFlash(pool) {
-  if (!state.current) { state.current = pickSmart(pool, 'vocab'); state.revealed = false; }
+  if (!state.current) { state.current = pickFromDeck(pool, 'vocab'); state.revealed = false; }
   flashLike(pool, state.current, 'vocab', false);
 }
 function renderSentences(pool) {
-  if (!state.current) { state.current = pickSmart(pool, 'sent'); state.revealed = false; }
+  if (!state.current) { state.current = pickFromDeck(pool, 'sent'); state.revealed = false; }
   flashLike(pool, state.current, 'sent', true);
 }
 function flashLike(pool, v, kind, isSentence) {
@@ -1344,15 +1394,16 @@ function flashLike(pool, v, kind, isSentence) {
 function grade(correct, kind) {
   const v = state.current;
   recordResult(v, kind, correct);
+  if (!correct) requeueCard(v, kind);
   updateStats();
-  state.current = pickSmart(getPool(), kind, v);
+  state.current = pickFromDeck(getPool(), kind);
   state.revealed = false;
   render();
 }
 
 function renderMCQ(pool) {
   if (!state.current) {
-    state.current = pickSmart(pool, 'vocab');
+    state.current = pickFromDeck(pool, 'vocab');
     state.choices = buildChoices(pool, state.current);
     state.answered = false;
   }
@@ -1388,6 +1439,7 @@ function answerMCQ(picked, el) {
   const v = state.current;
   const ok = picked.jp === v.jp;
   recordResult(v, 'vocab', ok);
+  if (!ok) requeueCard(v, 'vocab');
   if (ok) el.classList.add('correct'); else el.classList.add('wrong');
   document.querySelectorAll('.choice').forEach(c => {
     c.classList.add('disabled');
@@ -1399,7 +1451,7 @@ function answerMCQ(picked, el) {
   document.getElementById('next').onclick = nextMCQ;
 }
 function nextMCQ() {
-  state.current = pickSmart(getPool(), 'vocab', state.current);
+  state.current = pickFromDeck(getPool(), 'vocab');
   state.choices = buildChoices(getPool(), state.current);
   state.answered = false;
   render();
@@ -1409,7 +1461,7 @@ function nextMCQ() {
    DICTATION
    ============================================================ */
 function renderDictation(pool) {
-  if (!state.current) { state.current = pickSmart(pool, 'vocab'); state.dictAttempted = false; }
+  if (!state.current) { state.current = pickFromDeck(pool, 'vocab'); state.dictAttempted = false; }
   const v = state.current;
   const box = getBox(v, 'vocab');
 
@@ -1432,8 +1484,7 @@ function renderDictation(pool) {
   } else {
     const ph = state.dictMode === 'kana' ? 'Type the kana (use Japanese keyboard)…' : 'Type English meaning or romaji…';
     const acap = state.dictMode === 'kana' ? 'on' : 'off';
-    bodyHTML = `
-      <input class="dictation-input" id="dict-input" placeholder="${ph}" autocomplete="off" autocapitalize="${acap}" autocorrect="off" />`;
+    bodyHTML = `<input class="dictation-input" id="dict-input" placeholder="${ph}" autocomplete="off" autocapitalize="${acap}" autocorrect="off" />`;
   }
 
   cardEl.innerHTML = `
@@ -1470,7 +1521,7 @@ function renderDictation(pool) {
   document.getElementById('play').onclick = () => speak(v.jp);
   document.getElementById('play-slow').onclick = () => speakSlow(v.jp);
   document.getElementById('dict-next').onclick = () => {
-    state.current = pickSmart(getPool(), 'vocab', state.current);
+    state.current = pickFromDeck(getPool(), 'vocab');
     state.dictAttempted = false;
     render();
   };
@@ -1485,12 +1536,12 @@ function renderDictation(pool) {
     };
     document.getElementById('draw-hit').onclick = () => {
       if (!state.dictAttempted) { recordResult(v, 'vocab', true); state.dictAttempted = true; updateStats(); }
-      state.current = pickSmart(getPool(), 'vocab', v);
+      state.current = pickFromDeck(getPool(), 'vocab');
       state.dictAttempted = false;
       render();
     };
     document.getElementById('draw-miss').onclick = () => {
-      if (!state.dictAttempted) { recordResult(v, 'vocab', false); state.dictAttempted = true; updateStats(); }
+      if (!state.dictAttempted) { recordResult(v, 'vocab', false); requeueCard(v, 'vocab'); state.dictAttempted = true; updateStats(); }
       document.getElementById('dict-feedback').innerHTML =
         `<span class="feedback-wrong">Answer: <strong>${escapeHtml(v.jp)}</strong> · ${escapeHtml(v.romaji)} · ${escapeHtml(v.en)}</span>`;
     };
@@ -1499,7 +1550,7 @@ function renderDictation(pool) {
     setTimeout(() => input.focus(), 50);
     document.getElementById('dict-check').onclick = checkDictation;
     document.getElementById('dict-show').onclick = () => {
-      if (!state.dictAttempted) { recordResult(v, 'vocab', false); state.dictAttempted = true; updateStats(); }
+      if (!state.dictAttempted) { recordResult(v, 'vocab', false); requeueCard(v, 'vocab'); state.dictAttempted = true; updateStats(); }
       document.getElementById('dict-feedback').innerHTML =
         `<span>Answer: <strong>${escapeHtml(v.jp)}</strong> · ${escapeHtml(v.romaji)} · ${escapeHtml(v.en)}</span>`;
     };
@@ -1518,23 +1569,24 @@ function checkDictation() {
   const correct = (state.dictMode === 'kana') ? okJp : (okEn || okRomaji || okJp);
   if (!state.dictAttempted) {
     recordResult(v, 'vocab', correct);
+    if (!correct) requeueCard(v, 'vocab');
     state.dictAttempted = true;
     updateStats();
   }
   if (correct) {
     fb.innerHTML = `<span class="feedback-correct">✓ Correct! <strong>${escapeHtml(v.jp)}</strong> · ${escapeHtml(v.romaji)} · ${escapeHtml(v.en)}</span>`;
     setTimeout(() => {
-      state.current = pickSmart(getPool(), 'vocab', v);
+      state.current = pickFromDeck(getPool(), 'vocab');
       state.dictAttempted = false;
       render();
     }, 1100);
   } else {
-    fb.innerHTML = `<span class="feedback-wrong">✗ Try again — or click Show answer.</span>`;
+    fb.innerHTML = `<span class="feedback-wrong">✗ Try again · or click Show answer.</span>`;
   }
 }
 
 /* ============================================================
-   DRAWING CANVAS (shared by Dictation Draw + Hiragana + Katakana)
+   DRAWING CANVAS (shared by Dictation Draw + Kana modes)
    ============================================================ */
 let canvasCtx = null;
 let canvasStrokes = [];
@@ -1553,7 +1605,7 @@ function setupCanvas() {
   canvasCtx.lineWidth = 6;
   canvasCtx.lineCap = 'round';
   canvasCtx.lineJoin = 'round';
-  canvasCtx.strokeStyle = '#0f172a';
+  canvasCtx.strokeStyle = '#0b1020';
   canvasStrokes = [];
   canvasCurrent = null;
   redrawCanvas();
@@ -1610,7 +1662,7 @@ function canvasClear() { canvasStrokes = []; canvasCurrent = null; redrawCanvas(
 function canvasUndo() { canvasStrokes.pop(); redrawCanvas(); }
 
 /* ============================================================
-   KANA WRITING (Hiragana + Katakana modes)
+   KANA WRITING
    ============================================================ */
 function getKanaPool() {
   const out = [];
@@ -1642,24 +1694,7 @@ function recordKanaResult(item, ok) {
   bumpStreak();
   saveStore();
 }
-function pickSmartKana(pool, exclude) {
-  if (!pool.length) return null;
-  const now = Date.now();
-  const weighted = pool.map(item => {
-    const p = state.kanaProgress[kanaKey(item)];
-    const box = (p && p.box) || 2;
-    const w = BOX_WEIGHTS[box] || 5;
-    const since = p ? (now - (p.lastSeen || 0)) / 60000 : 999;
-    const lru = since < 1 ? 0.2 : (since > 30 ? 1.3 : 1);
-    return { item, weight: w * lru };
-  });
-  const filtered = exclude ? weighted.filter(x => x.item !== exclude) : weighted;
-  const final = filtered.length ? filtered : weighted;
-  const total = final.reduce((s, x) => s + x.weight, 0);
-  let r = Math.random() * total;
-  for (const x of final) if ((r -= x.weight) <= 0) return x.item;
-  return final[final.length - 1].item;
-}
+
 function renderKana() {
   const pool = getKanaPool();
   if (!pool.length) {
@@ -1667,7 +1702,7 @@ function renderKana() {
     return;
   }
   if (!state.current) {
-    state.current = pickSmartKana(pool);
+    state.current = pickFromDeck(pool, 'kana');
     state.revealed = false;
   }
   const v = state.current;
@@ -1681,7 +1716,7 @@ function renderKana() {
         <span class="box-tag b${box}">box ${box}</span>
       </div>
       <div class="prompt-label">Write the kana for</div>
-      <div class="prompt-en" style="font-size:48px; font-style:italic; color:var(--accent-2);">${escapeHtml(v.romaji)}</div>
+      <div class="prompt-en" style="font-size:48px; font-style:italic; background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">${escapeHtml(v.romaji)}</div>
       <div class="canvas-wrap"><canvas id="draw-canvas"></canvas></div>
       <div class="canvas-tools">
         <button class="btn" id="canvas-clear">Clear</button>
@@ -1707,14 +1742,15 @@ function renderKana() {
     document.getElementById('khit').onclick = () => {
       recordKanaResult(v, true);
       updateStats();
-      state.current = pickSmartKana(getKanaPool(), v);
+      state.current = pickFromDeck(getKanaPool(), 'kana');
       state.revealed = false;
       render();
     };
     document.getElementById('kmiss').onclick = () => {
       recordKanaResult(v, false);
+      requeueCard(v, 'kana');
       updateStats();
-      state.current = pickSmartKana(getKanaPool(), v);
+      state.current = pickFromDeck(getKanaPool(), 'kana');
       state.revealed = false;
       render();
     };
@@ -1732,11 +1768,9 @@ function startQuiz() {
   for (let i = 0; i < 10; i++) {
     const useSent = (i % 4 === 3) && sentPool.length;
     const pool = useSent ? sentPool : vocabPool;
-    const kind = useSent ? 'sent' : 'vocab';
-    const item = pickSmart(pool, kind);
-    const subModes = useSent ? ['sentence'] : ['flash','mcq','dictation'];
-    const sub = subModes[Math.floor(Math.random() * subModes.length)];
-    items.push({ item, kind, sub });
+    const sub = useSent ? 'sentence' : ['flash','mcq','dictation'][Math.floor(Math.random()*3)];
+    const item = pool[Math.floor(Math.random() * pool.length)];
+    items.push({ item, kind: useSent ? 'sent' : 'vocab', sub });
   }
   state.quiz = { items, idx: 0, correct: 0, misses: [] };
   render();
@@ -1746,9 +1780,8 @@ function endQuiz() {
   state.quiz = null;
   const missHTML = q.misses.length
     ? `<div class="miss-list">${q.misses.map(m => `
-        <div class="miss-item"><span class="jp">${escapeHtml(m.item.jp)}</span> ${escapeHtml(m.item.romaji)} — ${escapeHtml(m.item.en)}</div>
-       `).join('')}</div>`
-    : '<div style="color:var(--good); margin-top:8px;">Perfect — no misses.</div>';
+        <div class="miss-item"><span class="jp">${escapeHtml(m.item.jp)}</span> ${escapeHtml(m.item.romaji)} · ${escapeHtml(m.item.en)}</div>`).join('')}</div>`
+    : '<div style="color:var(--good); margin-top:8px;">Perfect · no misses.</div>';
   cardEl.innerHTML = `
     <div class="summary">
       <h3>Quiz complete: ${q.correct} / 10 correct</h3>
@@ -1769,7 +1802,7 @@ function renderQuiz() {
   if (q.idx >= q.items.length) { endQuiz(); return; }
   const cur = q.items[q.idx];
   const v = cur.item;
-  const progressLine = `<div class="prompt-label">Quiz ${q.idx + 1} / 10 — ${cur.sub.toUpperCase()}</div>`;
+  const progressLine = `<div class="prompt-label">Quiz ${q.idx + 1} / 10 · ${cur.sub.toUpperCase()}</div>`;
 
   if (cur.sub === 'flash' || cur.sub === 'sentence') {
     cardEl.innerHTML = `
@@ -1865,7 +1898,6 @@ function quizGrade(ok, cur) {
   render();
 }
 function showQuizNext(ok, cur, v) {
-  // Show full answer + an explicit Next button so the user controls pace.
   const lessonTag = `<span class="lesson-tag">Lesson ${v.lesson}</span>`;
   const banner = ok
     ? `<div class="feedback-correct" style="font-size:18px; font-weight:600;">✓ Correct</div>`
@@ -1903,9 +1935,9 @@ function runSearch(q) {
     searchResults.innerHTML = '<div class="search-result" style="color:var(--muted);">No match.</div>';
   } else {
     searchResults.innerHTML = matches.map(m => `
-      <div class="search-result" data-src="${m._src}" data-jp="${escapeHtml(m.jp)}">
+      <div class="search-result">
         <span class="jp">${escapeHtml(m.jp)}</span>
-        <span>${escapeHtml(m.romaji)} — ${escapeHtml(m.en)}</span>
+        <span>${escapeHtml(m.romaji)} · ${escapeHtml(m.en)}</span>
         <div class="meta">L${m.lesson} · ${m._src === 'sent' ? 'sentence' : 'vocab'}</div>
       </div>`).join('');
     searchResults.querySelectorAll('.search-result').forEach((el, i) => {
@@ -2007,6 +2039,25 @@ document.getElementById('lessons-none').onclick = () => {
 
 document.getElementById('auto-speak').checked = state.autoSpeak;
 document.getElementById('auto-speak').onchange = (e) => { state.autoSpeak = e.target.checked; saveStore(); };
+
+// Theme toggle (light / dark)
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.textContent = (t === 'light') ? '☀️' : '🌙';
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', t === 'light' ? '#f5f7fb' : '#0b1020');
+}
+const savedTheme = (() => {
+  try { return localStorage.getItem('jp_theme') || 'dark'; } catch (e) { return 'dark'; }
+})();
+applyTheme(savedTheme);
+document.getElementById('theme-toggle').onclick = () => {
+  const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+  const next = (cur === 'dark') ? 'light' : 'dark';
+  applyTheme(next);
+  try { localStorage.setItem('jp_theme', next); } catch (e) {}
+};
 
 const voiceSelect = document.getElementById('voice-select');
 function loadVoices() {
