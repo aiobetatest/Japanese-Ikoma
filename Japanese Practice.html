@@ -317,24 +317,27 @@
   }
   .review-row {
     display: grid;
-    grid-template-columns: minmax(120px, 1.4fr) minmax(80px, 1fr) 2fr auto;
-    gap: 12px;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 16px;
     align-items: center;
-    padding: 10px 12px;
+    padding: 12px 14px;
     border-radius: 10px;
     background: var(--panel-2);
     border: 1px solid var(--border);
     margin-bottom: 6px;
     text-align: left;
-    font-size: 14px;
+    font-size: 15px;
   }
+  .review-row .ren {
+    color: var(--text); font-weight: 500; line-height: 1.35;
+  }
+  .review-row .rjpwrap { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
   .review-row .rjp {
     font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
-    font-weight: 700; font-size: 18px; color: var(--accent);
-    word-break: break-word;
+    font-weight: 700; font-size: 19px; color: var(--accent);
+    word-break: break-word; line-height: 1.25;
   }
-  .review-row .rromaji { color: var(--muted); font-style: italic; }
-  .review-row .ren { color: var(--text); }
+  .review-row .rromaji { color: var(--muted); font-style: italic; font-size: 13px; }
   .review-row .rspeak {
     background: transparent; border: 1px solid var(--border);
     color: var(--text); border-radius: 8px; cursor: pointer;
@@ -349,13 +352,13 @@
   @media (max-width: 700px) {
     .review-row {
       grid-template-columns: 1fr auto;
-      grid-template-areas: "jp speak" "romaji speak" "en en";
-      row-gap: 4px;
+      grid-template-areas: "en speak" "jpwrap speak";
+      row-gap: 6px;
+      padding: 12px;
     }
-    .review-row .rjp { grid-area: jp; }
-    .review-row .rromaji { grid-area: romaji; font-size: 13px; }
-    .review-row .ren { grid-area: en; font-size: 14px; padding-top: 4px; border-top: 1px dashed var(--border); margin-top: 4px; }
-    .review-row .rspeak { grid-area: speak; }
+    .review-row .ren { grid-area: en; font-weight: 600; font-size: 15px; }
+    .review-row .rjpwrap { grid-area: jpwrap; padding-top: 6px; border-top: 1px dashed var(--border); }
+    .review-row .rspeak { grid-area: speak; align-self: center; }
     .review-card { padding: 16px 12px; }
   }
   .empty { text-align: center; color: var(--muted); padding: 40px 20px; }
@@ -1404,18 +1407,22 @@ function renderReview() {
     const pct = totalCards ? Math.round(100 * (masteredV + masteredS) / totalCards) : 0;
     const rowsV = vocab.map((v, i) => `
       <div class="review-row" data-kind="vocab" data-idx="${VOCAB.indexOf(v)}">
-        <div class="rjp">${escapeHtml(v.jp)}</div>
-        <div class="rromaji">${escapeHtml(v.romaji)}</div>
         <div class="ren">${escapeHtml(v.en)}</div>
+        <div class="rjpwrap">
+          <div class="rjp">${escapeHtml(v.jp)}</div>
+          <div class="rromaji">${escapeHtml(v.romaji)}</div>
+        </div>
         <button class="rspeak" type="button" aria-label="Hear">🔊</button>
       </div>`).join('');
     const rowsS = sents.length ? `
       <div class="review-header" style="margin-top:14px;">L${n} · Sentences (${sents.length})</div>
       ${sents.map((v) => `
         <div class="review-row" data-kind="sent" data-idx="${SENTENCES.indexOf(v)}">
-          <div class="rjp">${escapeHtml(v.jp)}</div>
-          <div class="rromaji">${escapeHtml(v.romaji)}</div>
           <div class="ren">${escapeHtml(v.en)}</div>
+          <div class="rjpwrap">
+            <div class="rjp">${escapeHtml(v.jp)}</div>
+            <div class="rromaji">${escapeHtml(v.romaji)}</div>
+          </div>
           <button class="rspeak" type="button" aria-label="Hear">🔊</button>
         </div>`).join('')}` : '';
     return `
