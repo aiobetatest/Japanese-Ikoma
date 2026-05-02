@@ -345,10 +345,30 @@
   }
   .review-row .rspeak:hover { border-color: var(--accent); background: var(--panel); }
   .review-empty { text-align: center; color: var(--muted); padding: 40px 20px; }
+
+  .review-vocab-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 10px;
+  }
+  .review-vocab-grid .review-row { margin-bottom: 0; }
+  @media (max-width: 700px) {
+    .review-vocab-grid { grid-template-columns: 1fr; }
+  }
   .review-bar {
     display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
     margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
   }
+
+  .review-vocab-grid .review-row {
+    grid-template-columns: 1fr 1.2fr auto;
+    padding: 10px 12px;
+    gap: 10px;
+    font-size: 14px;
+  }
+  .review-vocab-grid .review-row .rjp { font-size: 18px; }
+  .review-vocab-grid .review-row .rromaji { font-size: 12px; }
+
   @media (max-width: 700px) {
     .review-row {
       grid-template-columns: 1fr auto;
@@ -1405,7 +1425,7 @@ function renderReview() {
     const masteredV = vocab.filter(v => getBox(v, 'vocab') >= 4).length;
     const masteredS = sents.filter(v => getBox(v, 'sent') >= 4).length;
     const pct = totalCards ? Math.round(100 * (masteredV + masteredS) / totalCards) : 0;
-    const rowsV = vocab.map((v, i) => `
+    const rowsV = `<div class="review-vocab-grid">` + vocab.map((v, i) => `
       <div class="review-row" data-kind="vocab" data-idx="${VOCAB.indexOf(v)}">
         <div class="ren">${escapeHtml(v.en)}</div>
         <div class="rjpwrap">
@@ -1413,7 +1433,7 @@ function renderReview() {
           <div class="rromaji">${escapeHtml(v.romaji)}</div>
         </div>
         <button class="rspeak" type="button" aria-label="Hear">🔊</button>
-      </div>`).join('');
+      </div>`).join('') + `</div>`;
     const rowsS = sents.length ? `
       <div class="review-header" style="margin-top:14px;">L${n} · Sentences (${sents.length})</div>
       ${sents.map((v) => `
