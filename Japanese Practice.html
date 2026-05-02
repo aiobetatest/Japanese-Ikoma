@@ -346,6 +346,21 @@
   .review-row .rspeak:hover { border-color: var(--accent); background: var(--panel); }
   .review-empty { text-align: center; color: var(--muted); padding: 40px 20px; }
 
+
+  .blank-line { display: inline-block; min-width: 60px; padding: 0 8px; border-bottom: 2px solid var(--accent); margin: 0 4px; color: var(--accent-2); font-weight: 700; }
+  .shu-prompt { font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif; font-size: 24px; line-height: 1.5; max-width: 720px; }
+  .shu-en { font-size: 14px; color: var(--muted); margin-top: 8px; max-width: 600px; line-height: 1.4; }
+  .shu-input { width: 100%; max-width: 200px; padding: 12px; font-size: 22px; text-align: center; font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif; margin-top: 12px; }
+  .shu-mcq { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 360px; width: 100%; margin-top: 16px; }
+  .shu-mcq button { padding: 14px; font-size: 22px; font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif; }
+  .shu-explain { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 14px; font-size: 14px; max-width: 600px; line-height: 1.5; text-align: left; }
+  .shu-explain strong { color: var(--accent); }
+  .shu-gen-prompt { font-size: 64px; font-weight: 800; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  @media (max-width: 700px) {
+    .shu-prompt { font-size: 18px; }
+    .shu-gen-prompt { font-size: 44px; }
+    .shu-mcq { grid-template-columns: 1fr 1fr; }
+  }
   .review-vocab-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -463,6 +478,7 @@
         <button data-mode="dictation">Dictation</button>
         <button data-mode="hira">Hiragana</button>
         <button data-mode="kata">Katakana</button>
+        <button data-mode="shukudai">📚 Shukudai</button>
       </div>
     </div>
 
@@ -473,6 +489,30 @@
       <button class="btn icon" id="lessons-none" style="padding: 4px 10px; font-size: 12px;">None</button>
     </div>
 
+    
+    <div class="controls-row" id="shukudai-row" style="display:none;">
+      <label>Drill</label>
+      <div class="mode-tabs" id="shu-cats" style="flex-wrap:wrap;">
+        <button data-cat="particles" class="active">Particles</button>
+        <button data-cat="verbs">Verb forms</button>
+        <button data-cat="adjectives">Adjectives</button>
+        <button data-cat="family">Family</button>
+        <button data-cat="professions">Professions</button>
+        <button data-cat="places">Places</button>
+        <button data-cat="numbers">Numbers</button>
+        <button data-cat="money">Money</button>
+        <button data-cat="time">Time</button>
+        <button data-cat="dates">Dates</button>
+        <button data-cat="counters">Counters</button>
+      </div>
+    </div>
+    <div class="controls-row" id="shukudai-mode-row" style="display:none;">
+      <label>Answer</label>
+      <div class="seg" id="shu-input">
+        <button data-input="type" class="active">Type</button>
+        <button data-input="mcq">Multiple choice</button>
+      </div>
+    </div>
     <div class="controls-row" id="kana-row" style="display:none;">
       <label>Set</label>
       <div class="seg" id="kana-set">
@@ -523,661 +563,2508 @@
 
 <script>
 const VOCAB = [
-  // ---------- Lesson 1 ----------
-  { lesson: 1, jp: "わたし", romaji: "watashi", en: "I" },
-  { lesson: 1, jp: "あなた", romaji: "anata", en: "you" },
-  { lesson: 1, jp: "あのひと", romaji: "ano hito", en: "that person, he/she" },
-  { lesson: 1, jp: "あのかた", romaji: "ano kata", en: "that person (polite)" },
-  { lesson: 1, jp: "さん", romaji: "san", en: "Mr./Ms. (suffix)" },
-  { lesson: 1, jp: "ちゃん", romaji: "chan", en: "suffix added to a child's name" },
-  { lesson: 1, jp: "じん", romaji: "jin", en: "suffix meaning a national of (e.g. America-jin)" },
-  { lesson: 1, jp: "せんせい", romaji: "sensei", en: "teacher, instructor" },
-  { lesson: 1, jp: "きょうし", romaji: "kyōshi", en: "teacher, instructor" },
-  { lesson: 1, jp: "がくせい", romaji: "gakusei", en: "student" },
-  { lesson: 1, jp: "かいしゃいん", romaji: "kaishain", en: "company employee" },
-  { lesson: 1, jp: "しゃいん", romaji: "shain", en: "employee of company" },
-  { lesson: 1, jp: "ぎんこういん", romaji: "ginkōin", en: "bank employee" },
-  { lesson: 1, jp: "いしゃ", romaji: "isha", en: "medical doctor" },
-  { lesson: 1, jp: "けんきゅうしゃ", romaji: "kenkyūsha", en: "researcher, scholar" },
-  { lesson: 1, jp: "だいがく", romaji: "daigaku", en: "university" },
-  { lesson: 1, jp: "びょういん", romaji: "byōin", en: "hospital" },
-  { lesson: 1, jp: "だれ", romaji: "dare", en: "who" },
-  { lesson: 1, jp: "どなた", romaji: "donata", en: "who (polite)" },
-  { lesson: 1, jp: "さい", romaji: "sai", en: "years old" },
-  { lesson: 1, jp: "なんさい", romaji: "nansai", en: "how old" },
-  { lesson: 1, jp: "おいくつ", romaji: "oikutsu", en: "how old (polite)" },
-  { lesson: 1, jp: "はい", romaji: "hai", en: "yes" },
-  { lesson: 1, jp: "いいえ", romaji: "iie", en: "no" },
-  { lesson: 1, jp: "はじめまして", romaji: "hajimemashite", en: "How do you do" },
-  { lesson: 1, jp: "から きました", romaji: "kara kimashita", en: "I came from" },
-  { lesson: 1, jp: "どうぞ よろしく", romaji: "dōzo yoroshiku", en: "pleased to meet you" },
-  { lesson: 1, jp: "しつれいですが", romaji: "shitsurei desu ga", en: "excuse me but…" },
-  { lesson: 1, jp: "おなまえは？", romaji: "o-namae wa?", en: "May I have your name?" },
-  { lesson: 1, jp: "こちらはさんです", romaji: "kochira wa san desu", en: "This is Mr./Ms." },
-  { lesson: 1, jp: "アメリカ", romaji: "Amerika", en: "America" },
-  { lesson: 1, jp: "イギリス", romaji: "Igirisu", en: "U.K." },
-  { lesson: 1, jp: "インド", romaji: "Indo", en: "India" },
-  { lesson: 1, jp: "インドネシア", romaji: "Indoneshia", en: "Indonesia" },
-  { lesson: 1, jp: "かんこく", romaji: "Kankoku", en: "Korea" },
-  { lesson: 1, jp: "タイ", romaji: "Tai", en: "Thailand" },
-  { lesson: 1, jp: "ちゅうごく", romaji: "Chūgoku", en: "China" },
-  { lesson: 1, jp: "ドイツ", romaji: "Doitsu", en: "Germany" },
-  { lesson: 1, jp: "にほん", romaji: "Nihon", en: "Japan" },
-  { lesson: 1, jp: "ブラジル", romaji: "Burajiru", en: "Brazil" },
-
-  // ---------- Lesson 2 ----------
-  { lesson: 2, jp: "これ", romaji: "kore", en: "this (thing here)" },
-  { lesson: 2, jp: "それ", romaji: "sore", en: "that (thing near you)" },
-  { lesson: 2, jp: "あれ", romaji: "are", en: "that (thing over there)" },
-  { lesson: 2, jp: "この", romaji: "kono", en: "this" },
-  { lesson: 2, jp: "その", romaji: "sono", en: "that near you" },
-  { lesson: 2, jp: "あの", romaji: "ano", en: "that over there" },
-  { lesson: 2, jp: "ほん", romaji: "hon", en: "book" },
-  { lesson: 2, jp: "じしょ", romaji: "jisho", en: "dictionary" },
-  { lesson: 2, jp: "ざっし", romaji: "zasshi", en: "magazine" },
-  { lesson: 2, jp: "しんぶん", romaji: "shinbun", en: "newspaper" },
-  { lesson: 2, jp: "ノート", romaji: "nōto", en: "notebook" },
-  { lesson: 2, jp: "てちょう", romaji: "techō", en: "pocket notebook" },
-  { lesson: 2, jp: "めいし", romaji: "meishi", en: "business card" },
-  { lesson: 2, jp: "カード", romaji: "kādo", en: "card" },
-  { lesson: 2, jp: "えんぴつ", romaji: "enpitsu", en: "pencil" },
-  { lesson: 2, jp: "ボールペン", romaji: "bōrupen", en: "ballpoint pen" },
-  { lesson: 2, jp: "シャープペンシル", romaji: "shāpu penshiru", en: "mechanical / propelling pencil" },
-  { lesson: 2, jp: "かぎ", romaji: "kagi", en: "key" },
-  { lesson: 2, jp: "とけい", romaji: "tokei", en: "watch, clock" },
-  { lesson: 2, jp: "かさ", romaji: "kasa", en: "umbrella" },
-  { lesson: 2, jp: "かばん", romaji: "kaban", en: "bag, briefcase" },
-  { lesson: 2, jp: "シーディー", romaji: "shīdī", en: "CD" },
-  { lesson: 2, jp: "テレビ", romaji: "terebi", en: "television" },
-  { lesson: 2, jp: "ラジオ", romaji: "rajio", en: "radio" },
-  { lesson: 2, jp: "カメラ", romaji: "kamera", en: "camera" },
-  { lesson: 2, jp: "コンピューター", romaji: "konpyūtā", en: "computer" },
-  { lesson: 2, jp: "くるま", romaji: "kuruma", en: "automobile, car" },
-  { lesson: 2, jp: "つくえ", romaji: "tsukue", en: "desk" },
-  { lesson: 2, jp: "いす", romaji: "isu", en: "chair" },
-  { lesson: 2, jp: "チョコレート", romaji: "chokorēto", en: "chocolate" },
-  { lesson: 2, jp: "コーヒー", romaji: "kōhī", en: "coffee" },
-  { lesson: 2, jp: "おみやげ", romaji: "o-miyage", en: "souvenir, present" },
-  { lesson: 2, jp: "えいご", romaji: "eigo", en: "English language" },
-  { lesson: 2, jp: "にほんご", romaji: "nihongo", en: "Japanese language" },
-  { lesson: 2, jp: "ご", romaji: "go", en: "language" },
-  { lesson: 2, jp: "なん", romaji: "nan", en: "what" },
-  { lesson: 2, jp: "そう", romaji: "sō", en: "so" },
-  { lesson: 2, jp: "そうです", romaji: "sō desu", en: "That's right" },
-  { lesson: 2, jp: "ちがいます", romaji: "chigaimasu", en: "No, it isn't" },
-
-  // ---------- Lesson 3 ----------
-  { lesson: 3, jp: "ここ", romaji: "koko", en: "here, this place" },
-  { lesson: 3, jp: "そこ", romaji: "soko", en: "there, that place near you" },
-  { lesson: 3, jp: "あそこ", romaji: "asoko", en: "that place over there" },
-  { lesson: 3, jp: "どこ", romaji: "doko", en: "where" },
-  { lesson: 3, jp: "こちら", romaji: "kochira", en: "this way / this place (polite)" },
-  { lesson: 3, jp: "そちら", romaji: "sochira", en: "that way / that place near you (polite)" },
-  { lesson: 3, jp: "あちら", romaji: "achira", en: "that way over there (polite)" },
-  { lesson: 3, jp: "どちら", romaji: "dochira", en: "which way (polite for どこ)" },
-  { lesson: 3, jp: "きょうしつ", romaji: "kyōshitsu", en: "classroom" },
-  { lesson: 3, jp: "しょくどう", romaji: "shokudō", en: "dining hall, canteen" },
-  { lesson: 3, jp: "じむしょ", romaji: "jimusho", en: "office" },
-  { lesson: 3, jp: "かいぎしつ", romaji: "kaigishitsu", en: "conference / meeting room" },
-  { lesson: 3, jp: "うけつけ", romaji: "uketsuke", en: "reception desk" },
-  { lesson: 3, jp: "ロビー", romaji: "robī", en: "lobby" },
-  { lesson: 3, jp: "へや", romaji: "heya", en: "room" },
-  { lesson: 3, jp: "トイレ", romaji: "toire", en: "toilet" },
-  { lesson: 3, jp: "おてあらい", romaji: "o-tearai", en: "toilet (polite)" },
-  { lesson: 3, jp: "かいだん", romaji: "kaidan", en: "staircase" },
-  { lesson: 3, jp: "エレベーター", romaji: "erebētā", en: "lift, elevator" },
-  { lesson: 3, jp: "エスカレーター", romaji: "esukarētā", en: "escalator" },
-  { lesson: 3, jp: "じどうはんばいき", romaji: "jidō hanbaiki", en: "vending machine" },
-  { lesson: 3, jp: "でんわ", romaji: "denwa", en: "telephone, phone call" },
-  { lesson: 3, jp: "おくに", romaji: "o-kuni", en: "country" },
-  { lesson: 3, jp: "かいしゃ", romaji: "kaisha", en: "company" },
-  { lesson: 3, jp: "うち", romaji: "uchi", en: "house, home" },
-  { lesson: 3, jp: "くつ", romaji: "kutsu", en: "shoes" },
-  { lesson: 3, jp: "ネクタイ", romaji: "nekutai", en: "tie, necktie" },
-  { lesson: 3, jp: "ワイン", romaji: "wain", en: "wine" },
-  { lesson: 3, jp: "うりば", romaji: "uriba", en: "department, counter (in dept store)" },
-  { lesson: 3, jp: "ちか", romaji: "chika", en: "basement" },
-  { lesson: 3, jp: "かい", romaji: "kai", en: "floor" },
-  { lesson: 3, jp: "なんがい", romaji: "nangai", en: "what floor" },
-  { lesson: 3, jp: "えん", romaji: "en", en: "yen" },
-  { lesson: 3, jp: "いくら", romaji: "ikura", en: "how much" },
-  { lesson: 3, jp: "ひゃく", romaji: "hyaku", en: "hundred" },
-  { lesson: 3, jp: "せん", romaji: "sen", en: "thousand" },
-  { lesson: 3, jp: "まん", romaji: "man", en: "ten thousand" },
-  { lesson: 3, jp: "いらっしゃいませ", romaji: "irasshaimase", en: "Welcome (in a shop)" },
-  { lesson: 3, jp: "みせて ください", romaji: "misete kudasai", en: "Please show me" },
-  { lesson: 3, jp: "じゃあ", romaji: "jā", en: "well, then" },
-  { lesson: 3, jp: "を ください", romaji: "o kudasai", en: "Give me please" },
-  { lesson: 3, jp: "イタリア", romaji: "Itaria", en: "Italy" },
-  { lesson: 3, jp: "スイス", romaji: "Suisu", en: "Switzerland" },
-  { lesson: 3, jp: "フランス", romaji: "Furansu", en: "France" },
-  { lesson: 3, jp: "ジャカルタ", romaji: "Jakaruta", en: "Jakarta" },
-  { lesson: 3, jp: "バンコク", romaji: "Bankoku", en: "Bangkok" },
-  { lesson: 3, jp: "ベルリン", romaji: "Berurin", en: "Berlin" },
-
-  // ---------- Lesson 4 ----------
-  { lesson: 4, jp: "おきます", romaji: "okimasu", en: "get up, wake up" },
-  { lesson: 4, jp: "ねます", romaji: "nemasu", en: "sleep, go to bed" },
-  { lesson: 4, jp: "はたらきます", romaji: "hatarakimasu", en: "work" },
-  { lesson: 4, jp: "やすみます", romaji: "yasumimasu", en: "take a rest, take a holiday" },
-  { lesson: 4, jp: "べんきょうします", romaji: "benkyō shimasu", en: "study" },
-  { lesson: 4, jp: "おわります", romaji: "owarimasu", en: "finish" },
-  { lesson: 4, jp: "デパート", romaji: "depāto", en: "department store" },
-  { lesson: 4, jp: "ぎんこう", romaji: "ginkō", en: "bank" },
-  { lesson: 4, jp: "ゆうびんきょく", romaji: "yūbinkyoku", en: "post office" },
-  { lesson: 4, jp: "としょかん", romaji: "toshokan", en: "library" },
-  { lesson: 4, jp: "びじゅつかん", romaji: "bijutsukan", en: "art museum, gallery" },
-  { lesson: 4, jp: "いま", romaji: "ima", en: "now" },
-  { lesson: 4, jp: "じ", romaji: "ji", en: "o'clock" },
-  { lesson: 4, jp: "ふん／ぷん", romaji: "fun / pun", en: "minute" },
-  { lesson: 4, jp: "はん", romaji: "han", en: "half (thirty)" },
-  { lesson: 4, jp: "なんじ", romaji: "nanji", en: "what time" },
-  { lesson: 4, jp: "なんぷん", romaji: "nanpun", en: "what minute" },
-  { lesson: 4, jp: "ごぜん", romaji: "gozen", en: "a.m., morning" },
-  { lesson: 4, jp: "ごご", romaji: "gogo", en: "p.m., afternoon" },
-  { lesson: 4, jp: "あさ", romaji: "asa", en: "morning" },
-  { lesson: 4, jp: "ひる", romaji: "hiru", en: "daytime, noon" },
-  { lesson: 4, jp: "ばん", romaji: "ban", en: "night, evening" },
-  { lesson: 4, jp: "よる", romaji: "yoru", en: "night" },
-  { lesson: 4, jp: "おととい", romaji: "ototoi", en: "day before yesterday" },
-  { lesson: 4, jp: "きのう", romaji: "kinō", en: "yesterday" },
-  { lesson: 4, jp: "きょう", romaji: "kyō", en: "today" },
-  { lesson: 4, jp: "あした", romaji: "ashita", en: "tomorrow" },
-  { lesson: 4, jp: "あさって", romaji: "asatte", en: "day after tomorrow" },
-  { lesson: 4, jp: "けさ", romaji: "kesa", en: "this morning" },
-  { lesson: 4, jp: "こんばん", romaji: "konban", en: "this evening, tonight" },
-  { lesson: 4, jp: "やすみ", romaji: "yasumi", en: "holiday, day off" },
-  { lesson: 4, jp: "ひるやすみ", romaji: "hiruyasumi", en: "lunch break" },
-  { lesson: 4, jp: "しけん", romaji: "shiken", en: "examination, test" },
-  { lesson: 4, jp: "かいぎ", romaji: "kaigi", en: "meeting, conference" },
-  { lesson: 4, jp: "えいが", romaji: "eiga", en: "film, movie" },
-  { lesson: 4, jp: "まいあさ", romaji: "maiasa", en: "every morning" },
-  { lesson: 4, jp: "まいばん", romaji: "maiban", en: "every night" },
-  { lesson: 4, jp: "まいにち", romaji: "mainichi", en: "every day" },
-  { lesson: 4, jp: "げつようび", romaji: "getsuyōbi", en: "Monday" },
-  { lesson: 4, jp: "かようび", romaji: "kayōbi", en: "Tuesday" },
-  { lesson: 4, jp: "すいようび", romaji: "suiyōbi", en: "Wednesday" },
-  { lesson: 4, jp: "もくようび", romaji: "mokuyōbi", en: "Thursday" },
-  { lesson: 4, jp: "きんようび", romaji: "kinyōbi", en: "Friday" },
-  { lesson: 4, jp: "どようび", romaji: "doyōbi", en: "Saturday" },
-  { lesson: 4, jp: "にちようび", romaji: "nichiyōbi", en: "Sunday" },
-  { lesson: 4, jp: "なんようび", romaji: "nanyōbi", en: "what day of the week" },
-  { lesson: 4, jp: "から", romaji: "kara", en: "from" },
-  { lesson: 4, jp: "まで", romaji: "made", en: "up to / until" },
-  { lesson: 4, jp: "と", romaji: "to", en: "and" },
-  { lesson: 4, jp: "ばんごう", romaji: "bangō", en: "number" },
-  { lesson: 4, jp: "なんばん", romaji: "nanban", en: "what number" },
-  { lesson: 4, jp: "ニューヨーク", romaji: "Nyū Yōku", en: "New York" },
-  { lesson: 4, jp: "ペキン", romaji: "Pekin", en: "Beijing" },
-  { lesson: 4, jp: "ロサンゼルス", romaji: "Rosanzerusu", en: "Los Angeles" },
-  { lesson: 4, jp: "ロンドン", romaji: "Rondon", en: "London" },
-
-  // ---------- Lesson 5 ----------
-  { lesson: 5, jp: "いきます", romaji: "ikimasu", en: "go" },
-  { lesson: 5, jp: "きます", romaji: "kimasu", en: "come" },
-  { lesson: 5, jp: "かえります", romaji: "kaerimasu", en: "go home, return" },
-  { lesson: 5, jp: "がっこう", romaji: "gakkō", en: "school" },
-  { lesson: 5, jp: "スーパー", romaji: "sūpā", en: "supermarket" },
-  { lesson: 5, jp: "えき", romaji: "eki", en: "station" },
-  { lesson: 5, jp: "ひこうき", romaji: "hikōki", en: "airplane" },
-  { lesson: 5, jp: "ふね", romaji: "fune", en: "ship" },
-  { lesson: 5, jp: "でんしゃ", romaji: "densha", en: "electric train" },
-  { lesson: 5, jp: "ちかてつ", romaji: "chikatetsu", en: "underground, subway" },
-  { lesson: 5, jp: "しんかんせん", romaji: "shinkansen", en: "the Shinkansen, bullet train" },
-  { lesson: 5, jp: "バス", romaji: "basu", en: "bus" },
-  { lesson: 5, jp: "タクシー", romaji: "takushī", en: "taxi" },
-  { lesson: 5, jp: "じてんしゃ", romaji: "jitensha", en: "bicycle" },
-  { lesson: 5, jp: "あるいて", romaji: "aruite", en: "on foot" },
-  { lesson: 5, jp: "ひと", romaji: "hito", en: "person, people" },
-  { lesson: 5, jp: "ともだち", romaji: "tomodachi", en: "friend" },
-  { lesson: 5, jp: "かれ", romaji: "kare", en: "he, boyfriend" },
-  { lesson: 5, jp: "かのじょ", romaji: "kanojo", en: "she, girlfriend" },
-  { lesson: 5, jp: "かぞく", romaji: "kazoku", en: "family" },
-  { lesson: 5, jp: "ひとりで", romaji: "hitori de", en: "alone, by oneself" },
-  { lesson: 5, jp: "せんしゅう", romaji: "senshū", en: "last week" },
-  { lesson: 5, jp: "こんしゅう", romaji: "konshū", en: "this week" },
-  { lesson: 5, jp: "らいしゅう", romaji: "raishū", en: "next week" },
-  { lesson: 5, jp: "せんげつ", romaji: "sengetsu", en: "last month" },
-  { lesson: 5, jp: "こんげつ", romaji: "kongetsu", en: "this month" },
-  { lesson: 5, jp: "らいげつ", romaji: "raigetsu", en: "next month" },
-  { lesson: 5, jp: "きょねん", romaji: "kyonen", en: "last year" },
-  { lesson: 5, jp: "ことし", romaji: "kotoshi", en: "this year" },
-  { lesson: 5, jp: "らいねん", romaji: "rainen", en: "next year" },
-  { lesson: 5, jp: "がつ", romaji: "gatsu", en: "month (of year)" },
-  { lesson: 5, jp: "なんがつ", romaji: "nangatsu", en: "what month" },
-  { lesson: 5, jp: "ついたち", romaji: "tsuitachi", en: "1st of month" },
-  { lesson: 5, jp: "ふつか", romaji: "futsuka", en: "2nd, two days" },
-  { lesson: 5, jp: "みっか", romaji: "mikka", en: "3rd, three days" },
-  { lesson: 5, jp: "よっか", romaji: "yokka", en: "4th, four days" },
-  { lesson: 5, jp: "いつか", romaji: "itsuka", en: "5th, five days" },
-  { lesson: 5, jp: "むいか", romaji: "muika", en: "6th, six days" },
-  { lesson: 5, jp: "なのか", romaji: "nanoka", en: "7th, seven days" },
-  { lesson: 5, jp: "ようか", romaji: "yōka", en: "8th, eight days" },
-  { lesson: 5, jp: "ここのか", romaji: "kokonoka", en: "9th, nine days" },
-  { lesson: 5, jp: "とおか", romaji: "tōka", en: "10th, ten days" },
-  { lesson: 5, jp: "じゅうよっか", romaji: "jūyokka", en: "14th, fourteen days" },
-  { lesson: 5, jp: "はつか", romaji: "hatsuka", en: "20th, twenty days" },
-  { lesson: 5, jp: "にじゅうよっか", romaji: "nijūyokka", en: "24th, twenty-four days" },
-  { lesson: 5, jp: "にち", romaji: "nichi", en: "day of month" },
-  { lesson: 5, jp: "なんにち", romaji: "nannichi", en: "what day of month" },
-  { lesson: 5, jp: "いつ", romaji: "itsu", en: "when" },
-  { lesson: 5, jp: "たんじょうび", romaji: "tanjōbi", en: "birthday" },
-  { lesson: 5, jp: "ありがとう ございました", romaji: "arigatō gozaimashita", en: "Thank you very much" },
-  { lesson: 5, jp: "どう いたしまして", romaji: "dō itashimashite", en: "You're welcome" },
-  { lesson: 5, jp: "いっぱい", romaji: "ippai", en: "filled, full" },
-  { lesson: 5, jp: "つぎの", romaji: "tsugi no", en: "next" },
-  { lesson: 5, jp: "ふつう", romaji: "futsū", en: "local train" },
-  { lesson: 5, jp: "きゅうこう", romaji: "kyūkō", en: "rapid train" },
-  { lesson: 5, jp: "とっきゅう", romaji: "tokkyū", en: "express train" },
-
-  // ---------- Lesson 6 ----------
-  { lesson: 6, jp: "たべます", romaji: "tabemasu", en: "eat" },
-  { lesson: 6, jp: "のみます", romaji: "nomimasu", en: "drink" },
-  { lesson: 6, jp: "すいます", romaji: "suimasu", en: "smoke (cigarettes)" },
-  { lesson: 6, jp: "みます", romaji: "mimasu", en: "see, look, watch" },
-  { lesson: 6, jp: "ききます", romaji: "kikimasu", en: "hear, listen" },
-  { lesson: 6, jp: "よみます", romaji: "yomimasu", en: "read" },
-  { lesson: 6, jp: "かきます", romaji: "kakimasu", en: "write, draw, paint" },
-  { lesson: 6, jp: "かいます", romaji: "kaimasu", en: "buy" },
-  { lesson: 6, jp: "とります", romaji: "torimasu", en: "take (a photograph)" },
-  { lesson: 6, jp: "します", romaji: "shimasu", en: "do" },
-  { lesson: 6, jp: "あいます", romaji: "aimasu", en: "meet (a friend)" },
-  { lesson: 6, jp: "ごはん", romaji: "gohan", en: "meal, cooked rice" },
-  { lesson: 6, jp: "あさごはん", romaji: "asa-gohan", en: "breakfast" },
-  { lesson: 6, jp: "ひるごはん", romaji: "hiru-gohan", en: "lunch" },
-  { lesson: 6, jp: "ばんごはん", romaji: "ban-gohan", en: "supper, dinner" },
-  { lesson: 6, jp: "パン", romaji: "pan", en: "bread" },
-  { lesson: 6, jp: "たまご", romaji: "tamago", en: "egg" },
-  { lesson: 6, jp: "にく", romaji: "niku", en: "meat" },
-  { lesson: 6, jp: "さかな", romaji: "sakana", en: "fish" },
-  { lesson: 6, jp: "やさい", romaji: "yasai", en: "vegetable" },
-  { lesson: 6, jp: "くだもの", romaji: "kudamono", en: "fruit" },
-  { lesson: 6, jp: "みず", romaji: "mizu", en: "water" },
-  { lesson: 6, jp: "おちゃ", romaji: "o-cha", en: "tea (green)" },
-  { lesson: 6, jp: "こうちゃ", romaji: "kōcha", en: "black tea" },
-  { lesson: 6, jp: "ぎゅうにゅう", romaji: "gyūnyū", en: "milk" },
-  { lesson: 6, jp: "ミルク", romaji: "miruku", en: "milk" },
-  { lesson: 6, jp: "ジュース", romaji: "jūsu", en: "juice" },
-  { lesson: 6, jp: "ビール", romaji: "bīru", en: "beer" },
-  { lesson: 6, jp: "おさけ", romaji: "o-sake", en: "alcohol, sake" },
-  { lesson: 6, jp: "たばこ", romaji: "tabako", en: "cigarette" },
-  { lesson: 6, jp: "てがみ", romaji: "tegami", en: "letter" },
-  { lesson: 6, jp: "レポート", romaji: "repōto", en: "report" },
-  { lesson: 6, jp: "しゃしん", romaji: "shashin", en: "photograph" },
-  { lesson: 6, jp: "ビデオ", romaji: "bideo", en: "video tape" },
-  { lesson: 6, jp: "みせ", romaji: "mise", en: "shop, store" },
-  { lesson: 6, jp: "にわ", romaji: "niwa", en: "garden" },
-  { lesson: 6, jp: "しゅくだい", romaji: "shukudai", en: "homework" },
-  { lesson: 6, jp: "テニス", romaji: "tenisu", en: "tennis" },
-  { lesson: 6, jp: "サッカー", romaji: "sakkā", en: "soccer" },
-  { lesson: 6, jp: "おはなみ", romaji: "o-hanami", en: "cherry-blossom viewing" },
-  { lesson: 6, jp: "なに", romaji: "nani", en: "what" },
-  { lesson: 6, jp: "いっしょに", romaji: "issho ni", en: "together" },
-  { lesson: 6, jp: "ちょっと", romaji: "chotto", en: "a little, a little while" },
-  { lesson: 6, jp: "いつも", romaji: "itsumo", en: "always" },
-  { lesson: 6, jp: "ときどき", romaji: "tokidoki", en: "sometimes" },
-  { lesson: 6, jp: "それから", romaji: "sorekara", en: "after that, then" },
-  { lesson: 6, jp: "ええ", romaji: "ē", en: "yes" },
-  { lesson: 6, jp: "いいですね", romaji: "ii desu ne", en: "That's good / sounds good" },
-  { lesson: 6, jp: "わかりました", romaji: "wakarimashita", en: "I see, understood" },
-
-  // ---------- Lesson 7 ----------
-  { lesson: 7, jp: "きります", romaji: "kirimasu", en: "cut, slice" },
-  { lesson: 7, jp: "おくります", romaji: "okurimasu", en: "send" },
-  { lesson: 7, jp: "あげます", romaji: "agemasu", en: "give" },
-  { lesson: 7, jp: "もらいます", romaji: "moraimasu", en: "receive" },
-  { lesson: 7, jp: "かします", romaji: "kashimasu", en: "lend" },
-  { lesson: 7, jp: "かります", romaji: "karimasu", en: "borrow" },
-  { lesson: 7, jp: "おしえます", romaji: "oshiemasu", en: "teach" },
-  { lesson: 7, jp: "ならいます", romaji: "naraimasu", en: "learn" },
-  { lesson: 7, jp: "かけます (でんわを)", romaji: "kakemasu (denwa o)", en: "make a phone call" },
-  { lesson: 7, jp: "て", romaji: "te", en: "hand, arm" },
-  { lesson: 7, jp: "はし", romaji: "hashi", en: "chopsticks" },
-  { lesson: 7, jp: "スプーン", romaji: "supūn", en: "spoon" },
-  { lesson: 7, jp: "ナイフ", romaji: "naifu", en: "knife" },
-  { lesson: 7, jp: "フォーク", romaji: "fōku", en: "fork" },
-  { lesson: 7, jp: "はさみ", romaji: "hasami", en: "scissors" },
-  { lesson: 7, jp: "パソコン", romaji: "pasokon", en: "personal computer" },
-  { lesson: 7, jp: "ケータイ", romaji: "kētai", en: "mobile phone, cell phone" },
-  { lesson: 7, jp: "メール", romaji: "mēru", en: "e-mail" },
-  { lesson: 7, jp: "ねんがじょう", romaji: "nengajō", en: "New Year's greeting card" },
-  { lesson: 7, jp: "パンチ", romaji: "panchi", en: "punch (hole punch)" },
-  { lesson: 7, jp: "ホッチキス", romaji: "hocchikisu", en: "stapler" },
-  { lesson: 7, jp: "セロテープ", romaji: "serotēpu", en: "Sellotape, Scotch tape" },
-  { lesson: 7, jp: "けしゴム", romaji: "keshigomu", en: "rubber, eraser" },
-  { lesson: 7, jp: "かみ", romaji: "kami", en: "paper" },
-  { lesson: 7, jp: "はな", romaji: "hana", en: "flower, blossom" },
-  { lesson: 7, jp: "シャツ", romaji: "shatsu", en: "shirt" },
-  { lesson: 7, jp: "プレゼント", romaji: "purezento", en: "present, gift" },
-  { lesson: 7, jp: "にもつ", romaji: "nimotsu", en: "luggage, baggage, parcel" },
-  { lesson: 7, jp: "おかね", romaji: "o-kane", en: "money" },
-  { lesson: 7, jp: "きっぷ", romaji: "kippu", en: "ticket" },
-  { lesson: 7, jp: "クリスマス", romaji: "kurisumasu", en: "Christmas" },
-  { lesson: 7, jp: "ちち", romaji: "chichi", en: "my father" },
-  { lesson: 7, jp: "はは", romaji: "haha", en: "my mother" },
-  { lesson: 7, jp: "おとうさん", romaji: "otōsan", en: "someone else's father" },
-  { lesson: 7, jp: "おかあさん", romaji: "okāsan", en: "someone else's mother" },
-  { lesson: 7, jp: "もう", romaji: "mō", en: "already" },
-  { lesson: 7, jp: "まだ", romaji: "mada", en: "not yet" },
-  { lesson: 7, jp: "これから", romaji: "kore kara", en: "from now on, soon" },
-  { lesson: 7, jp: "いらっしゃい", romaji: "irasshai", en: "welcome (to a guest)" },
-  { lesson: 7, jp: "しつれいします", romaji: "shitsurei shimasu", en: "excuse me / I'll be going" },
-  { lesson: 7, jp: "いただきます", romaji: "itadakimasu", en: "thanks (before a meal)" },
-  { lesson: 7, jp: "ごちそうさまでした", romaji: "gochisōsama deshita", en: "thanks for the meal" },
-  { lesson: 7, jp: "すてきですね", romaji: "suteki desu ne", en: "what a nice" },
-  { lesson: 7, jp: "スペイン", romaji: "Supein", en: "Spain" },
-
-  // ---------- Lesson 8 ----------
-  { lesson: 8, jp: "ハンサム[な]", romaji: "hansamu", en: "handsome" },
-  { lesson: 8, jp: "きれい[な]", romaji: "kirei", en: "beautiful, clean" },
-  { lesson: 8, jp: "しずか[な]", romaji: "shizuka", en: "quiet" },
-  { lesson: 8, jp: "にぎやか[な]", romaji: "nigiyaka", en: "lively" },
-  { lesson: 8, jp: "ゆうめい[な]", romaji: "yūmei", en: "famous" },
-  { lesson: 8, jp: "しんせつ[な]", romaji: "shinsetsu", en: "kind, considerate" },
-  { lesson: 8, jp: "げんき[な]", romaji: "genki", en: "healthy, energetic" },
-  { lesson: 8, jp: "ひま[な]", romaji: "hima", en: "free time" },
-  { lesson: 8, jp: "べんり[な]", romaji: "benri", en: "convenient" },
-  { lesson: 8, jp: "すてき[な]", romaji: "suteki", en: "fine, nice, wonderful" },
-  { lesson: 8, jp: "おおきい", romaji: "ōkii", en: "big, large" },
-  { lesson: 8, jp: "ちいさい", romaji: "chiisai", en: "small, little" },
-  { lesson: 8, jp: "あたらしい", romaji: "atarashii", en: "new, fresh" },
-  { lesson: 8, jp: "ふるい", romaji: "furui", en: "old (of things, not age)" },
-  { lesson: 8, jp: "いい", romaji: "ii", en: "good" },
-  { lesson: 8, jp: "わるい", romaji: "warui", en: "bad" },
-  { lesson: 8, jp: "あつい", romaji: "atsui", en: "hot" },
-  { lesson: 8, jp: "さむい", romaji: "samui", en: "cold (temperature)" },
-  { lesson: 8, jp: "つめたい", romaji: "tsumetai", en: "cold (to touch)" },
-  { lesson: 8, jp: "むずかしい", romaji: "muzukashii", en: "difficult" },
-  { lesson: 8, jp: "やさしい", romaji: "yasashii", en: "easy / kind" },
-  { lesson: 8, jp: "たかい", romaji: "takai", en: "expensive, tall, high" },
-  { lesson: 8, jp: "やすい", romaji: "yasui", en: "inexpensive, cheap" },
-  { lesson: 8, jp: "ひくい", romaji: "hikui", en: "low" },
-  { lesson: 8, jp: "おもしろい", romaji: "omoshiroi", en: "interesting" },
-  { lesson: 8, jp: "おいしい", romaji: "oishii", en: "delicious, tasty" },
-  { lesson: 8, jp: "いそがしい", romaji: "isogashii", en: "busy" },
-  { lesson: 8, jp: "たのしい", romaji: "tanoshii", en: "enjoyable" },
-  { lesson: 8, jp: "しろい", romaji: "shiroi", en: "white" },
-  { lesson: 8, jp: "くろい", romaji: "kuroi", en: "black" },
-  { lesson: 8, jp: "あかい", romaji: "akai", en: "red" },
-  { lesson: 8, jp: "あおい", romaji: "aoi", en: "blue" },
-  { lesson: 8, jp: "さくら", romaji: "sakura", en: "cherry (blossom)" },
-  { lesson: 8, jp: "やま", romaji: "yama", en: "mountain" },
-  { lesson: 8, jp: "まち", romaji: "machi", en: "town, city" },
-  { lesson: 8, jp: "たべもの", romaji: "tabemono", en: "food" },
-  { lesson: 8, jp: "ところ", romaji: "tokoro", en: "place, location" },
-  { lesson: 8, jp: "りょう", romaji: "ryō", en: "dormitory" },
-  { lesson: 8, jp: "レストラン", romaji: "resutoran", en: "restaurant" },
-  { lesson: 8, jp: "せいかつ", romaji: "seikatsu", en: "life" },
-  { lesson: 8, jp: "おしごと", romaji: "o-shigoto", en: "work, business" },
-  { lesson: 8, jp: "どう", romaji: "dō", en: "how, what" },
-  { lesson: 8, jp: "どんな", romaji: "donna", en: "what kind of" },
-  { lesson: 8, jp: "どれ", romaji: "dore", en: "which" },
-  { lesson: 8, jp: "とても", romaji: "totemo", en: "very" },
-  { lesson: 8, jp: "あまり", romaji: "amari", en: "not so much (with neg.)" },
-  { lesson: 8, jp: "そして", romaji: "soshite", en: "and (joining sentences)" },
-  { lesson: 8, jp: "が、", romaji: "ga", en: "but" },
-  { lesson: 8, jp: "ふじさん", romaji: "Fuji-san", en: "Mt. Fuji" },
-
-  // ---------- Lesson 9 ----------
-  { lesson: 9, jp: "わかります", romaji: "wakarimasu", en: "understand" },
-  { lesson: 9, jp: "あります", romaji: "arimasu", en: "have" },
-  { lesson: 9, jp: "すき[な]", romaji: "suki", en: "like" },
-  { lesson: 9, jp: "きらい[な]", romaji: "kirai", en: "dislike" },
-  { lesson: 9, jp: "じょうず[な]", romaji: "jōzu", en: "good at, skilful" },
-  { lesson: 9, jp: "へた[な]", romaji: "heta", en: "poor at, unskilful" },
-  { lesson: 9, jp: "のみもの", romaji: "nomimono", en: "drinks" },
-  { lesson: 9, jp: "りょうり", romaji: "ryōri", en: "dish (cooked food), cuisine" },
-  { lesson: 9, jp: "スポーツ", romaji: "supōtsu", en: "sport" },
-  { lesson: 9, jp: "やきゅう", romaji: "yakyū", en: "baseball" },
-  { lesson: 9, jp: "ダンス", romaji: "dansu", en: "dance" },
-  { lesson: 9, jp: "りょこう", romaji: "ryokō", en: "travel, trip" },
-  { lesson: 9, jp: "おんがく", romaji: "ongaku", en: "music" },
-  { lesson: 9, jp: "うた", romaji: "uta", en: "song" },
-  { lesson: 9, jp: "クラシック", romaji: "kurashikku", en: "classical music" },
-  { lesson: 9, jp: "ジャズ", romaji: "jazu", en: "jazz" },
-  { lesson: 9, jp: "コンサート", romaji: "konsāto", en: "concert" },
-  { lesson: 9, jp: "カラオケ", romaji: "karaoke", en: "karaoke" },
-  { lesson: 9, jp: "かぶき", romaji: "kabuki", en: "kabuki (traditional drama)" },
-  { lesson: 9, jp: "え", romaji: "e", en: "picture, drawing" },
-  { lesson: 9, jp: "じ", romaji: "ji", en: "letter, character" },
-  { lesson: 9, jp: "かんじ", romaji: "kanji", en: "Chinese character (kanji)" },
-  { lesson: 9, jp: "ひらがな", romaji: "hiragana", en: "hiragana script" },
-  { lesson: 9, jp: "かたかな", romaji: "katakana", en: "katakana script" },
-  { lesson: 9, jp: "ローマじ", romaji: "rōmaji", en: "Roman alphabet, romaji" },
-  { lesson: 9, jp: "こまかい おかね", romaji: "komakai o-kane", en: "small change" },
-  { lesson: 9, jp: "チケット", romaji: "chiketto", en: "ticket" },
-  { lesson: 9, jp: "じかん", romaji: "jikan", en: "time" },
-  { lesson: 9, jp: "ようじ", romaji: "yōji", en: "something to do, errand" },
-  { lesson: 9, jp: "やくそく", romaji: "yakusoku", en: "appointment, promise" },
-  { lesson: 9, jp: "アルバイト", romaji: "arubaito", en: "side job, part-time work" },
-  { lesson: 9, jp: "ごしゅじん", romaji: "go-shujin", en: "(someone else's) husband" },
-  { lesson: 9, jp: "しゅじん", romaji: "shujin", en: "my husband" },
-  { lesson: 9, jp: "おくさん", romaji: "okusan", en: "(someone else's) wife" },
-  { lesson: 9, jp: "つま", romaji: "tsuma", en: "my wife" },
-  { lesson: 9, jp: "かない", romaji: "kanai", en: "my wife" },
-  { lesson: 9, jp: "こども", romaji: "kodomo", en: "child" },
-  { lesson: 9, jp: "だいたい", romaji: "daitai", en: "mostly, roughly" },
-  { lesson: 9, jp: "たくさん", romaji: "takusan", en: "many, much" },
-  { lesson: 9, jp: "すこし", romaji: "sukoshi", en: "a little, a few" },
-  { lesson: 9, jp: "ぜんぜん", romaji: "zenzen", en: "not at all (with neg.)" },
-  { lesson: 9, jp: "はやく", romaji: "hayaku", en: "early, quickly, fast" },
-  { lesson: 9, jp: "から", romaji: "kara", en: "because, since" },
-  { lesson: 9, jp: "どうして", romaji: "dōshite", en: "why" },
-  { lesson: 9, jp: "ざんねんですね", romaji: "zannen desu ne", en: "I'm sorry, that's a pity" },
-  { lesson: 9, jp: "だめですか", romaji: "dame desu ka", en: "is it not possible?" },
-
-  // ---------- Lesson 10 ----------
-  { lesson: 10, jp: "あります", romaji: "arimasu", en: "exist, be (inanimate)" },
-  { lesson: 10, jp: "います", romaji: "imasu", en: "exist (animate, person/animal)" },
-  { lesson: 10, jp: "いろいろ[な]", romaji: "iroiro", en: "various, variety of" },
-  { lesson: 10, jp: "おとこのひと", romaji: "otoko no hito", en: "man" },
-  { lesson: 10, jp: "おんなのひと", romaji: "onna no hito", en: "woman" },
-  { lesson: 10, jp: "おとこのこ", romaji: "otoko no ko", en: "boy" },
-  { lesson: 10, jp: "おんなのこ", romaji: "onna no ko", en: "girl" },
-  { lesson: 10, jp: "いぬ", romaji: "inu", en: "dog" },
-  { lesson: 10, jp: "ねこ", romaji: "neko", en: "cat" },
-  { lesson: 10, jp: "パンダ", romaji: "panda", en: "panda" },
-  { lesson: 10, jp: "ぞう", romaji: "zō", en: "elephant" },
-  { lesson: 10, jp: "き", romaji: "ki", en: "tree, wood" },
-  { lesson: 10, jp: "もの", romaji: "mono", en: "thing" },
-  { lesson: 10, jp: "でんち", romaji: "denchi", en: "battery" },
-  { lesson: 10, jp: "はこ", romaji: "hako", en: "box" },
-  { lesson: 10, jp: "スイッチ", romaji: "suicchi", en: "switch" },
-  { lesson: 10, jp: "れいぞうこ", romaji: "reizōko", en: "refrigerator" },
-  { lesson: 10, jp: "テーブル", romaji: "tēburu", en: "table" },
-  { lesson: 10, jp: "ベッド", romaji: "beddo", en: "bed" },
-  { lesson: 10, jp: "たな", romaji: "tana", en: "shelf" },
-  { lesson: 10, jp: "ドア", romaji: "doa", en: "door" },
-  { lesson: 10, jp: "まど", romaji: "mado", en: "window" },
-  { lesson: 10, jp: "ポスト", romaji: "posuto", en: "postbox, mailbox" },
-  { lesson: 10, jp: "ビル", romaji: "biru", en: "building" },
-  { lesson: 10, jp: "エーティーエム", romaji: "ētīemu", en: "ATM, cash machine" },
-  { lesson: 10, jp: "コンビニ", romaji: "konbini", en: "convenience store" },
-  { lesson: 10, jp: "こうえん", romaji: "kōen", en: "park" },
-  { lesson: 10, jp: "きっさてん", romaji: "kissaten", en: "coffee shop" },
-  { lesson: 10, jp: "のりば", romaji: "noriba", en: "place to catch taxi/bus, stand" },
-  { lesson: 10, jp: "けん", romaji: "ken", en: "prefecture" },
-  { lesson: 10, jp: "うえ", romaji: "ue", en: "on, above, over" },
-  { lesson: 10, jp: "した", romaji: "shita", en: "under, below, beneath" },
-  { lesson: 10, jp: "まえ", romaji: "mae", en: "front, before" },
-  { lesson: 10, jp: "うしろ", romaji: "ushiro", en: "back, behind" },
-  { lesson: 10, jp: "みぎ", romaji: "migi", en: "right (side)" },
-  { lesson: 10, jp: "ひだり", romaji: "hidari", en: "left (side)" },
-  { lesson: 10, jp: "なか", romaji: "naka", en: "in, inside" },
-  { lesson: 10, jp: "そと", romaji: "soto", en: "outside" },
-  { lesson: 10, jp: "となり", romaji: "tonari", en: "next to, next door" },
-  { lesson: 10, jp: "ちかく", romaji: "chikaku", en: "near, vicinity" },
-  { lesson: 10, jp: "あいだ", romaji: "aida", en: "between, among" },
-  { lesson: 10, jp: "やなど", romaji: "ya nado", en: "and and so on" },
-  { lesson: 10, jp: "どうも すみません", romaji: "dōmo sumimasen", en: "Thank you / I'm sorry" },
-  { lesson: 10, jp: "ナンプラー", romaji: "nanpurā", en: "fish sauce (nam pla)" },
-  { lesson: 10, jp: "コーナー", romaji: "kōnā", en: "corner, section" },
-  { lesson: 10, jp: "いちばん した", romaji: "ichiban shita", en: "the bottom" },
+  { lesson: 1, jp: "わたし", romaji: "watashi", en: "I", id: "vocab:1:わたし" },
+  { lesson: 1, jp: "あなた", romaji: "anata", en: "you", id: "vocab:1:あなた" },
+  { lesson: 1, jp: "あのひと", romaji: "ano hito", en: "that person, he/she", id: "vocab:1:あのひと" },
+  { lesson: 1, jp: "あのかた", romaji: "ano kata", en: "that person (polite)", id: "vocab:1:あのかた" },
+  { lesson: 1, jp: "さん", romaji: "san", en: "Mr./Ms. (suffix)", id: "vocab:1:さん" },
+  { lesson: 1, jp: "ちゃん", romaji: "chan", en: "suffix added to a child's name", id: "vocab:1:ちゃん" },
+  { lesson: 1, jp: "じん", romaji: "jin", en: "suffix meaning a national of (e.g. America-jin)", id: "vocab:1:じん" },
+  { lesson: 1, jp: "せんせい", romaji: "sensei", en: "teacher, instructor", id: "vocab:1:せんせい" },
+  { lesson: 1, jp: "きょうし", romaji: "kyōshi", en: "teacher, instructor", id: "vocab:1:きょうし" },
+  { lesson: 1, jp: "がくせい", romaji: "gakusei", en: "student", id: "vocab:1:がくせい" },
+  { lesson: 1, jp: "かいしゃいん", romaji: "kaishain", en: "company employee", id: "vocab:1:かいしゃいん" },
+  { lesson: 1, jp: "しゃいん", romaji: "shain", en: "employee of company", id: "vocab:1:しゃいん" },
+  { lesson: 1, jp: "ぎんこういん", romaji: "ginkōin", en: "bank employee", id: "vocab:1:ぎんこういん" },
+  { lesson: 1, jp: "いしゃ", romaji: "isha", en: "medical doctor", id: "vocab:1:いしゃ" },
+  { lesson: 1, jp: "けんきゅうしゃ", romaji: "kenkyūsha", en: "researcher, scholar", id: "vocab:1:けんきゅうしゃ" },
+  { lesson: 1, jp: "だいがく", romaji: "daigaku", en: "university", id: "vocab:1:だいがく" },
+  { lesson: 1, jp: "びょういん", romaji: "byōin", en: "hospital", id: "vocab:1:びょういん" },
+  { lesson: 1, jp: "だれ", romaji: "dare", en: "who", id: "vocab:1:だれ" },
+  { lesson: 1, jp: "どなた", romaji: "donata", en: "who (polite)", id: "vocab:1:どなた" },
+  { lesson: 1, jp: "さい", romaji: "sai", en: "years old", id: "vocab:1:さい" },
+  { lesson: 1, jp: "なんさい", romaji: "nansai", en: "how old", id: "vocab:1:なんさい" },
+  { lesson: 1, jp: "おいくつ", romaji: "oikutsu", en: "how old (polite)", id: "vocab:1:おいくつ" },
+  { lesson: 1, jp: "はい", romaji: "hai", en: "yes", id: "vocab:1:はい" },
+  { lesson: 1, jp: "いいえ", romaji: "iie", en: "no", id: "vocab:1:いいえ" },
+  { lesson: 1, jp: "はじめまして", romaji: "hajimemashite", en: "How do you do", id: "vocab:1:はじめまして" },
+  { lesson: 1, jp: "から きました", romaji: "kara kimashita", en: "I came from", id: "vocab:1:から きました" },
+  { lesson: 1, jp: "どうぞ よろしく", romaji: "dōzo yoroshiku", en: "pleased to meet you", id: "vocab:1:どうぞ よろしく" },
+  { lesson: 1, jp: "しつれいですが", romaji: "shitsurei desu ga", en: "excuse me but…", id: "vocab:1:しつれいですが" },
+  { lesson: 1, jp: "おなまえは？", romaji: "o-namae wa?", en: "May I have your name?", id: "vocab:1:おなまえは？" },
+  { lesson: 1, jp: "こちらはさんです", romaji: "kochira wa san desu", en: "This is Mr./Ms.", id: "vocab:1:こちらはさんです" },
+  { lesson: 1, jp: "アメリカ", romaji: "Amerika", en: "America", id: "vocab:1:アメリカ" },
+  { lesson: 1, jp: "イギリス", romaji: "Igirisu", en: "U.K.", id: "vocab:1:イギリス" },
+  { lesson: 1, jp: "インド", romaji: "Indo", en: "India", id: "vocab:1:インド" },
+  { lesson: 1, jp: "インドネシア", romaji: "Indoneshia", en: "Indonesia", id: "vocab:1:インドネシア" },
+  { lesson: 1, jp: "かんこく", romaji: "Kankoku", en: "Korea", id: "vocab:1:かんこく" },
+  { lesson: 1, jp: "タイ", romaji: "Tai", en: "Thailand", id: "vocab:1:タイ" },
+  { lesson: 1, jp: "ちゅうごく", romaji: "Chūgoku", en: "China", id: "vocab:1:ちゅうごく" },
+  { lesson: 1, jp: "ドイツ", romaji: "Doitsu", en: "Germany", id: "vocab:1:ドイツ" },
+  { lesson: 1, jp: "にほん", romaji: "Nihon", en: "Japan", id: "vocab:1:にほん" },
+  { lesson: 1, jp: "ブラジル", romaji: "Burajiru", en: "Brazil", id: "vocab:1:ブラジル" },
+  { lesson: 2, jp: "これ", romaji: "kore", en: "this (thing here)", id: "vocab:2:これ" },
+  { lesson: 2, jp: "それ", romaji: "sore", en: "that (thing near you)", id: "vocab:2:それ" },
+  { lesson: 2, jp: "あれ", romaji: "are", en: "that (thing over there)", id: "vocab:2:あれ" },
+  { lesson: 2, jp: "この", romaji: "kono", en: "this", id: "vocab:2:この" },
+  { lesson: 2, jp: "その", romaji: "sono", en: "that near you", id: "vocab:2:その" },
+  { lesson: 2, jp: "あの", romaji: "ano", en: "that over there", id: "vocab:2:あの" },
+  { lesson: 2, jp: "ほん", romaji: "hon", en: "book", id: "vocab:2:ほん" },
+  { lesson: 2, jp: "じしょ", romaji: "jisho", en: "dictionary", id: "vocab:2:じしょ" },
+  { lesson: 2, jp: "ざっし", romaji: "zasshi", en: "magazine", id: "vocab:2:ざっし" },
+  { lesson: 2, jp: "しんぶん", romaji: "shinbun", en: "newspaper", id: "vocab:2:しんぶん" },
+  { lesson: 2, jp: "ノート", romaji: "nōto", en: "notebook", id: "vocab:2:ノート" },
+  { lesson: 2, jp: "てちょう", romaji: "techō", en: "pocket notebook", id: "vocab:2:てちょう" },
+  { lesson: 2, jp: "めいし", romaji: "meishi", en: "business card", id: "vocab:2:めいし" },
+  { lesson: 2, jp: "カード", romaji: "kādo", en: "card", id: "vocab:2:カード" },
+  { lesson: 2, jp: "えんぴつ", romaji: "enpitsu", en: "pencil", id: "vocab:2:えんぴつ" },
+  { lesson: 2, jp: "ボールペン", romaji: "bōrupen", en: "ballpoint pen", id: "vocab:2:ボールペン" },
+  { lesson: 2, jp: "シャープペンシル", romaji: "shāpu penshiru", en: "mechanical / propelling pencil", id: "vocab:2:シャープペンシル" },
+  { lesson: 2, jp: "かぎ", romaji: "kagi", en: "key", id: "vocab:2:かぎ" },
+  { lesson: 2, jp: "とけい", romaji: "tokei", en: "watch, clock", id: "vocab:2:とけい" },
+  { lesson: 2, jp: "かさ", romaji: "kasa", en: "umbrella", id: "vocab:2:かさ" },
+  { lesson: 2, jp: "かばん", romaji: "kaban", en: "bag, briefcase", id: "vocab:2:かばん" },
+  { lesson: 2, jp: "シーディー", romaji: "shīdī", en: "CD", id: "vocab:2:シーディー" },
+  { lesson: 2, jp: "テレビ", romaji: "terebi", en: "television", id: "vocab:2:テレビ" },
+  { lesson: 2, jp: "ラジオ", romaji: "rajio", en: "radio", id: "vocab:2:ラジオ" },
+  { lesson: 2, jp: "カメラ", romaji: "kamera", en: "camera", id: "vocab:2:カメラ" },
+  { lesson: 2, jp: "コンピューター", romaji: "konpyūtā", en: "computer", id: "vocab:2:コンピューター" },
+  { lesson: 2, jp: "くるま", romaji: "kuruma", en: "automobile, car", id: "vocab:2:くるま" },
+  { lesson: 2, jp: "つくえ", romaji: "tsukue", en: "desk", id: "vocab:2:つくえ" },
+  { lesson: 2, jp: "いす", romaji: "isu", en: "chair", id: "vocab:2:いす" },
+  { lesson: 2, jp: "チョコレート", romaji: "chokorēto", en: "chocolate", id: "vocab:2:チョコレート" },
+  { lesson: 2, jp: "コーヒー", romaji: "kōhī", en: "coffee", id: "vocab:2:コーヒー" },
+  { lesson: 2, jp: "おみやげ", romaji: "o-miyage", en: "souvenir, present", id: "vocab:2:おみやげ" },
+  { lesson: 2, jp: "えいご", romaji: "eigo", en: "English language", id: "vocab:2:えいご" },
+  { lesson: 2, jp: "にほんご", romaji: "nihongo", en: "Japanese language", id: "vocab:2:にほんご" },
+  { lesson: 2, jp: "ご", romaji: "go", en: "language", id: "vocab:2:ご" },
+  { lesson: 2, jp: "なん", romaji: "nan", en: "what", id: "vocab:2:なん" },
+  { lesson: 2, jp: "そう", romaji: "sō", en: "so", id: "vocab:2:そう" },
+  { lesson: 2, jp: "そうです", romaji: "sō desu", en: "That's right", id: "vocab:2:そうです" },
+  { lesson: 2, jp: "ちがいます", romaji: "chigaimasu", en: "No, it isn't", id: "vocab:2:ちがいます" },
+  { lesson: 3, jp: "ここ", romaji: "koko", en: "here, this place", id: "vocab:3:ここ" },
+  { lesson: 3, jp: "そこ", romaji: "soko", en: "there, that place near you", id: "vocab:3:そこ" },
+  { lesson: 3, jp: "あそこ", romaji: "asoko", en: "that place over there", id: "vocab:3:あそこ" },
+  { lesson: 3, jp: "どこ", romaji: "doko", en: "where", id: "vocab:3:どこ" },
+  { lesson: 3, jp: "こちら", romaji: "kochira", en: "this way / this place (polite)", id: "vocab:3:こちら" },
+  { lesson: 3, jp: "そちら", romaji: "sochira", en: "that way / that place near you (polite)", id: "vocab:3:そちら" },
+  { lesson: 3, jp: "あちら", romaji: "achira", en: "that way over there (polite)", id: "vocab:3:あちら" },
+  { lesson: 3, jp: "どちら", romaji: "dochira", en: "which way (polite for どこ)", id: "vocab:3:どちら" },
+  { lesson: 3, jp: "きょうしつ", romaji: "kyōshitsu", en: "classroom", id: "vocab:3:きょうしつ" },
+  { lesson: 3, jp: "しょくどう", romaji: "shokudō", en: "dining hall, canteen", id: "vocab:3:しょくどう" },
+  { lesson: 3, jp: "じむしょ", romaji: "jimusho", en: "office", id: "vocab:3:じむしょ" },
+  { lesson: 3, jp: "かいぎしつ", romaji: "kaigishitsu", en: "conference / meeting room", id: "vocab:3:かいぎしつ" },
+  { lesson: 3, jp: "うけつけ", romaji: "uketsuke", en: "reception desk", id: "vocab:3:うけつけ" },
+  { lesson: 3, jp: "ロビー", romaji: "robī", en: "lobby", id: "vocab:3:ロビー" },
+  { lesson: 3, jp: "へや", romaji: "heya", en: "room", id: "vocab:3:へや" },
+  { lesson: 3, jp: "トイレ", romaji: "toire", en: "toilet", id: "vocab:3:トイレ" },
+  { lesson: 3, jp: "おてあらい", romaji: "o-tearai", en: "toilet (polite)", id: "vocab:3:おてあらい" },
+  { lesson: 3, jp: "かいだん", romaji: "kaidan", en: "staircase", id: "vocab:3:かいだん" },
+  { lesson: 3, jp: "エレベーター", romaji: "erebētā", en: "lift, elevator", id: "vocab:3:エレベーター" },
+  { lesson: 3, jp: "エスカレーター", romaji: "esukarētā", en: "escalator", id: "vocab:3:エスカレーター" },
+  { lesson: 3, jp: "じどうはんばいき", romaji: "jidō hanbaiki", en: "vending machine", id: "vocab:3:じどうはんばいき" },
+  { lesson: 3, jp: "でんわ", romaji: "denwa", en: "telephone, phone call", id: "vocab:3:でんわ" },
+  { lesson: 3, jp: "おくに", romaji: "o-kuni", en: "country", id: "vocab:3:おくに" },
+  { lesson: 3, jp: "かいしゃ", romaji: "kaisha", en: "company", id: "vocab:3:かいしゃ" },
+  { lesson: 3, jp: "うち", romaji: "uchi", en: "house, home", id: "vocab:3:うち" },
+  { lesson: 3, jp: "くつ", romaji: "kutsu", en: "shoes", id: "vocab:3:くつ" },
+  { lesson: 3, jp: "ネクタイ", romaji: "nekutai", en: "tie, necktie", id: "vocab:3:ネクタイ" },
+  { lesson: 3, jp: "ワイン", romaji: "wain", en: "wine", id: "vocab:3:ワイン" },
+  { lesson: 3, jp: "うりば", romaji: "uriba", en: "department, counter (in dept store)", id: "vocab:3:うりば" },
+  { lesson: 3, jp: "ちか", romaji: "chika", en: "basement", id: "vocab:3:ちか" },
+  { lesson: 3, jp: "かい", romaji: "kai", en: "floor", id: "vocab:3:かい" },
+  { lesson: 3, jp: "なんがい", romaji: "nangai", en: "what floor", id: "vocab:3:なんがい" },
+  { lesson: 3, jp: "えん", romaji: "en", en: "yen", id: "vocab:3:えん" },
+  { lesson: 3, jp: "いくら", romaji: "ikura", en: "how much", id: "vocab:3:いくら" },
+  { lesson: 3, jp: "ひゃく", romaji: "hyaku", en: "hundred", id: "vocab:3:ひゃく" },
+  { lesson: 3, jp: "せん", romaji: "sen", en: "thousand", id: "vocab:3:せん" },
+  { lesson: 3, jp: "まん", romaji: "man", en: "ten thousand", id: "vocab:3:まん" },
+  { lesson: 3, jp: "いらっしゃいませ", romaji: "irasshaimase", en: "Welcome (in a shop)", id: "vocab:3:いらっしゃいませ" },
+  { lesson: 3, jp: "みせて ください", romaji: "misete kudasai", en: "Please show me", id: "vocab:3:みせて ください" },
+  { lesson: 3, jp: "じゃあ", romaji: "jā", en: "well, then", id: "vocab:3:じゃあ" },
+  { lesson: 3, jp: "を ください", romaji: "o kudasai", en: "Give me please", id: "vocab:3:を ください" },
+  { lesson: 3, jp: "イタリア", romaji: "Itaria", en: "Italy", id: "vocab:3:イタリア" },
+  { lesson: 3, jp: "スイス", romaji: "Suisu", en: "Switzerland", id: "vocab:3:スイス" },
+  { lesson: 3, jp: "フランス", romaji: "Furansu", en: "France", id: "vocab:3:フランス" },
+  { lesson: 3, jp: "ジャカルタ", romaji: "Jakaruta", en: "Jakarta", id: "vocab:3:ジャカルタ" },
+  { lesson: 3, jp: "バンコク", romaji: "Bankoku", en: "Bangkok", id: "vocab:3:バンコク" },
+  { lesson: 3, jp: "ベルリン", romaji: "Berurin", en: "Berlin", id: "vocab:3:ベルリン" },
+  { lesson: 4, jp: "おきます", romaji: "okimasu", en: "get up, wake up", id: "vocab:4:おきます" },
+  { lesson: 4, jp: "ねます", romaji: "nemasu", en: "sleep, go to bed", id: "vocab:4:ねます" },
+  { lesson: 4, jp: "はたらきます", romaji: "hatarakimasu", en: "work", id: "vocab:4:はたらきます" },
+  { lesson: 4, jp: "やすみます", romaji: "yasumimasu", en: "take a rest, take a holiday", id: "vocab:4:やすみます" },
+  { lesson: 4, jp: "べんきょうします", romaji: "benkyō shimasu", en: "study", id: "vocab:4:べんきょうします" },
+  { lesson: 4, jp: "おわります", romaji: "owarimasu", en: "finish", id: "vocab:4:おわります" },
+  { lesson: 4, jp: "デパート", romaji: "depāto", en: "department store", id: "vocab:4:デパート" },
+  { lesson: 4, jp: "ぎんこう", romaji: "ginkō", en: "bank", id: "vocab:4:ぎんこう" },
+  { lesson: 4, jp: "ゆうびんきょく", romaji: "yūbinkyoku", en: "post office", id: "vocab:4:ゆうびんきょく" },
+  { lesson: 4, jp: "としょかん", romaji: "toshokan", en: "library", id: "vocab:4:としょかん" },
+  { lesson: 4, jp: "びじゅつかん", romaji: "bijutsukan", en: "art museum, gallery", id: "vocab:4:びじゅつかん" },
+  { lesson: 4, jp: "いま", romaji: "ima", en: "now", id: "vocab:4:いま" },
+  { lesson: 4, jp: "じ", romaji: "ji", en: "o'clock", id: "vocab:4:じ" },
+  { lesson: 4, jp: "ふん／ぷん", romaji: "fun / pun", en: "minute", id: "vocab:4:ふん／ぷん" },
+  { lesson: 4, jp: "はん", romaji: "han", en: "half (thirty)", id: "vocab:4:はん" },
+  { lesson: 4, jp: "なんじ", romaji: "nanji", en: "what time", id: "vocab:4:なんじ" },
+  { lesson: 4, jp: "なんぷん", romaji: "nanpun", en: "what minute", id: "vocab:4:なんぷん" },
+  { lesson: 4, jp: "ごぜん", romaji: "gozen", en: "a.m., morning", id: "vocab:4:ごぜん" },
+  { lesson: 4, jp: "ごご", romaji: "gogo", en: "p.m., afternoon", id: "vocab:4:ごご" },
+  { lesson: 4, jp: "あさ", romaji: "asa", en: "morning", id: "vocab:4:あさ" },
+  { lesson: 4, jp: "ひる", romaji: "hiru", en: "daytime, noon", id: "vocab:4:ひる" },
+  { lesson: 4, jp: "ばん", romaji: "ban", en: "night, evening", id: "vocab:4:ばん" },
+  { lesson: 4, jp: "よる", romaji: "yoru", en: "night", id: "vocab:4:よる" },
+  { lesson: 4, jp: "おととい", romaji: "ototoi", en: "day before yesterday", id: "vocab:4:おととい" },
+  { lesson: 4, jp: "きのう", romaji: "kinō", en: "yesterday", id: "vocab:4:きのう" },
+  { lesson: 4, jp: "きょう", romaji: "kyō", en: "today", id: "vocab:4:きょう" },
+  { lesson: 4, jp: "あした", romaji: "ashita", en: "tomorrow", id: "vocab:4:あした" },
+  { lesson: 4, jp: "あさって", romaji: "asatte", en: "day after tomorrow", id: "vocab:4:あさって" },
+  { lesson: 4, jp: "けさ", romaji: "kesa", en: "this morning", id: "vocab:4:けさ" },
+  { lesson: 4, jp: "こんばん", romaji: "konban", en: "this evening, tonight", id: "vocab:4:こんばん" },
+  { lesson: 4, jp: "やすみ", romaji: "yasumi", en: "holiday, day off", id: "vocab:4:やすみ" },
+  { lesson: 4, jp: "ひるやすみ", romaji: "hiruyasumi", en: "lunch break", id: "vocab:4:ひるやすみ" },
+  { lesson: 4, jp: "しけん", romaji: "shiken", en: "examination, test", id: "vocab:4:しけん" },
+  { lesson: 4, jp: "かいぎ", romaji: "kaigi", en: "meeting, conference", id: "vocab:4:かいぎ" },
+  { lesson: 4, jp: "えいが", romaji: "eiga", en: "film, movie", id: "vocab:4:えいが" },
+  { lesson: 4, jp: "まいあさ", romaji: "maiasa", en: "every morning", id: "vocab:4:まいあさ" },
+  { lesson: 4, jp: "まいばん", romaji: "maiban", en: "every night", id: "vocab:4:まいばん" },
+  { lesson: 4, jp: "まいにち", romaji: "mainichi", en: "every day", id: "vocab:4:まいにち" },
+  { lesson: 4, jp: "げつようび", romaji: "getsuyōbi", en: "Monday", id: "vocab:4:げつようび" },
+  { lesson: 4, jp: "かようび", romaji: "kayōbi", en: "Tuesday", id: "vocab:4:かようび" },
+  { lesson: 4, jp: "すいようび", romaji: "suiyōbi", en: "Wednesday", id: "vocab:4:すいようび" },
+  { lesson: 4, jp: "もくようび", romaji: "mokuyōbi", en: "Thursday", id: "vocab:4:もくようび" },
+  { lesson: 4, jp: "きんようび", romaji: "kinyōbi", en: "Friday", id: "vocab:4:きんようび" },
+  { lesson: 4, jp: "どようび", romaji: "doyōbi", en: "Saturday", id: "vocab:4:どようび" },
+  { lesson: 4, jp: "にちようび", romaji: "nichiyōbi", en: "Sunday", id: "vocab:4:にちようび" },
+  { lesson: 4, jp: "なんようび", romaji: "nanyōbi", en: "what day of the week", id: "vocab:4:なんようび" },
+  { lesson: 4, jp: "から", romaji: "kara", en: "from", id: "vocab:4:から" },
+  { lesson: 4, jp: "まで", romaji: "made", en: "up to / until", id: "vocab:4:まで" },
+  { lesson: 4, jp: "と", romaji: "to", en: "and", id: "vocab:4:と" },
+  { lesson: 4, jp: "ばんごう", romaji: "bangō", en: "number", id: "vocab:4:ばんごう" },
+  { lesson: 4, jp: "なんばん", romaji: "nanban", en: "what number", id: "vocab:4:なんばん" },
+  { lesson: 4, jp: "ニューヨーク", romaji: "Nyū Yōku", en: "New York", id: "vocab:4:ニューヨーク" },
+  { lesson: 4, jp: "ペキン", romaji: "Pekin", en: "Beijing", id: "vocab:4:ペキン" },
+  { lesson: 4, jp: "ロサンゼルス", romaji: "Rosanzerusu", en: "Los Angeles", id: "vocab:4:ロサンゼルス" },
+  { lesson: 4, jp: "ロンドン", romaji: "Rondon", en: "London", id: "vocab:4:ロンドン" },
+  { lesson: 5, jp: "いきます", romaji: "ikimasu", en: "go", id: "vocab:5:いきます" },
+  { lesson: 5, jp: "きます", romaji: "kimasu", en: "come", id: "vocab:5:きます" },
+  { lesson: 5, jp: "かえります", romaji: "kaerimasu", en: "go home, return", id: "vocab:5:かえります" },
+  { lesson: 5, jp: "がっこう", romaji: "gakkō", en: "school", id: "vocab:5:がっこう" },
+  { lesson: 5, jp: "スーパー", romaji: "sūpā", en: "supermarket", id: "vocab:5:スーパー" },
+  { lesson: 5, jp: "えき", romaji: "eki", en: "station", id: "vocab:5:えき" },
+  { lesson: 5, jp: "ひこうき", romaji: "hikōki", en: "airplane", id: "vocab:5:ひこうき" },
+  { lesson: 5, jp: "ふね", romaji: "fune", en: "ship", id: "vocab:5:ふね" },
+  { lesson: 5, jp: "でんしゃ", romaji: "densha", en: "electric train", id: "vocab:5:でんしゃ" },
+  { lesson: 5, jp: "ちかてつ", romaji: "chikatetsu", en: "underground, subway", id: "vocab:5:ちかてつ" },
+  { lesson: 5, jp: "しんかんせん", romaji: "shinkansen", en: "the Shinkansen, bullet train", id: "vocab:5:しんかんせん" },
+  { lesson: 5, jp: "バス", romaji: "basu", en: "bus", id: "vocab:5:バス" },
+  { lesson: 5, jp: "タクシー", romaji: "takushī", en: "taxi", id: "vocab:5:タクシー" },
+  { lesson: 5, jp: "じてんしゃ", romaji: "jitensha", en: "bicycle", id: "vocab:5:じてんしゃ" },
+  { lesson: 5, jp: "あるいて", romaji: "aruite", en: "on foot", id: "vocab:5:あるいて" },
+  { lesson: 5, jp: "ひと", romaji: "hito", en: "person, people", id: "vocab:5:ひと" },
+  { lesson: 5, jp: "ともだち", romaji: "tomodachi", en: "friend", id: "vocab:5:ともだち" },
+  { lesson: 5, jp: "かれ", romaji: "kare", en: "he, boyfriend", id: "vocab:5:かれ" },
+  { lesson: 5, jp: "かのじょ", romaji: "kanojo", en: "she, girlfriend", id: "vocab:5:かのじょ" },
+  { lesson: 5, jp: "かぞく", romaji: "kazoku", en: "family", id: "vocab:5:かぞく" },
+  { lesson: 5, jp: "ひとりで", romaji: "hitori de", en: "alone, by oneself", id: "vocab:5:ひとりで" },
+  { lesson: 5, jp: "せんしゅう", romaji: "senshū", en: "last week", id: "vocab:5:せんしゅう" },
+  { lesson: 5, jp: "こんしゅう", romaji: "konshū", en: "this week", id: "vocab:5:こんしゅう" },
+  { lesson: 5, jp: "らいしゅう", romaji: "raishū", en: "next week", id: "vocab:5:らいしゅう" },
+  { lesson: 5, jp: "せんげつ", romaji: "sengetsu", en: "last month", id: "vocab:5:せんげつ" },
+  { lesson: 5, jp: "こんげつ", romaji: "kongetsu", en: "this month", id: "vocab:5:こんげつ" },
+  { lesson: 5, jp: "らいげつ", romaji: "raigetsu", en: "next month", id: "vocab:5:らいげつ" },
+  { lesson: 5, jp: "きょねん", romaji: "kyonen", en: "last year", id: "vocab:5:きょねん" },
+  { lesson: 5, jp: "ことし", romaji: "kotoshi", en: "this year", id: "vocab:5:ことし" },
+  { lesson: 5, jp: "らいねん", romaji: "rainen", en: "next year", id: "vocab:5:らいねん" },
+  { lesson: 5, jp: "がつ", romaji: "gatsu", en: "month (of year)", id: "vocab:5:がつ" },
+  { lesson: 5, jp: "なんがつ", romaji: "nangatsu", en: "what month", id: "vocab:5:なんがつ" },
+  { lesson: 5, jp: "ついたち", romaji: "tsuitachi", en: "1st of month", id: "vocab:5:ついたち" },
+  { lesson: 5, jp: "ふつか", romaji: "futsuka", en: "2nd, two days", id: "vocab:5:ふつか" },
+  { lesson: 5, jp: "みっか", romaji: "mikka", en: "3rd, three days", id: "vocab:5:みっか" },
+  { lesson: 5, jp: "よっか", romaji: "yokka", en: "4th, four days", id: "vocab:5:よっか" },
+  { lesson: 5, jp: "いつか", romaji: "itsuka", en: "5th, five days", id: "vocab:5:いつか" },
+  { lesson: 5, jp: "むいか", romaji: "muika", en: "6th, six days", id: "vocab:5:むいか" },
+  { lesson: 5, jp: "なのか", romaji: "nanoka", en: "7th, seven days", id: "vocab:5:なのか" },
+  { lesson: 5, jp: "ようか", romaji: "yōka", en: "8th, eight days", id: "vocab:5:ようか" },
+  { lesson: 5, jp: "ここのか", romaji: "kokonoka", en: "9th, nine days", id: "vocab:5:ここのか" },
+  { lesson: 5, jp: "とおか", romaji: "tōka", en: "10th, ten days", id: "vocab:5:とおか" },
+  { lesson: 5, jp: "じゅうよっか", romaji: "jūyokka", en: "14th, fourteen days", id: "vocab:5:じゅうよっか" },
+  { lesson: 5, jp: "はつか", romaji: "hatsuka", en: "20th, twenty days", id: "vocab:5:はつか" },
+  { lesson: 5, jp: "にじゅうよっか", romaji: "nijūyokka", en: "24th, twenty-four days", id: "vocab:5:にじゅうよっか" },
+  { lesson: 5, jp: "にち", romaji: "nichi", en: "day of month", id: "vocab:5:にち" },
+  { lesson: 5, jp: "なんにち", romaji: "nannichi", en: "what day of month", id: "vocab:5:なんにち" },
+  { lesson: 5, jp: "いつ", romaji: "itsu", en: "when", id: "vocab:5:いつ" },
+  { lesson: 5, jp: "たんじょうび", romaji: "tanjōbi", en: "birthday", id: "vocab:5:たんじょうび" },
+  { lesson: 5, jp: "ありがとう ございました", romaji: "arigatō gozaimashita", en: "Thank you very much", id: "vocab:5:ありがとう ございました" },
+  { lesson: 5, jp: "どう いたしまして", romaji: "dō itashimashite", en: "You're welcome", id: "vocab:5:どう いたしまして" },
+  { lesson: 5, jp: "いっぱい", romaji: "ippai", en: "filled, full", id: "vocab:5:いっぱい" },
+  { lesson: 5, jp: "つぎの", romaji: "tsugi no", en: "next", id: "vocab:5:つぎの" },
+  { lesson: 5, jp: "ふつう", romaji: "futsū", en: "local train", id: "vocab:5:ふつう" },
+  { lesson: 5, jp: "きゅうこう", romaji: "kyūkō", en: "rapid train", id: "vocab:5:きゅうこう" },
+  { lesson: 5, jp: "とっきゅう", romaji: "tokkyū", en: "express train", id: "vocab:5:とっきゅう" },
+  { lesson: 6, jp: "たべます", romaji: "tabemasu", en: "eat", id: "vocab:6:たべます" },
+  { lesson: 6, jp: "のみます", romaji: "nomimasu", en: "drink", id: "vocab:6:のみます" },
+  { lesson: 6, jp: "すいます", romaji: "suimasu", en: "smoke (cigarettes)", id: "vocab:6:すいます" },
+  { lesson: 6, jp: "みます", romaji: "mimasu", en: "see, look, watch", id: "vocab:6:みます" },
+  { lesson: 6, jp: "ききます", romaji: "kikimasu", en: "hear, listen", id: "vocab:6:ききます" },
+  { lesson: 6, jp: "よみます", romaji: "yomimasu", en: "read", id: "vocab:6:よみます" },
+  { lesson: 6, jp: "かきます", romaji: "kakimasu", en: "write, draw, paint", id: "vocab:6:かきます" },
+  { lesson: 6, jp: "かいます", romaji: "kaimasu", en: "buy", id: "vocab:6:かいます" },
+  { lesson: 6, jp: "とります", romaji: "torimasu", en: "take (a photograph)", id: "vocab:6:とります" },
+  { lesson: 6, jp: "します", romaji: "shimasu", en: "do", id: "vocab:6:します" },
+  { lesson: 6, jp: "あいます", romaji: "aimasu", en: "meet (a friend)", id: "vocab:6:あいます" },
+  { lesson: 6, jp: "ごはん", romaji: "gohan", en: "meal, cooked rice", id: "vocab:6:ごはん" },
+  { lesson: 6, jp: "あさごはん", romaji: "asa-gohan", en: "breakfast", id: "vocab:6:あさごはん" },
+  { lesson: 6, jp: "ひるごはん", romaji: "hiru-gohan", en: "lunch", id: "vocab:6:ひるごはん" },
+  { lesson: 6, jp: "ばんごはん", romaji: "ban-gohan", en: "supper, dinner", id: "vocab:6:ばんごはん" },
+  { lesson: 6, jp: "パン", romaji: "pan", en: "bread", id: "vocab:6:パン" },
+  { lesson: 6, jp: "たまご", romaji: "tamago", en: "egg", id: "vocab:6:たまご" },
+  { lesson: 6, jp: "にく", romaji: "niku", en: "meat", id: "vocab:6:にく" },
+  { lesson: 6, jp: "さかな", romaji: "sakana", en: "fish", id: "vocab:6:さかな" },
+  { lesson: 6, jp: "やさい", romaji: "yasai", en: "vegetable", id: "vocab:6:やさい" },
+  { lesson: 6, jp: "くだもの", romaji: "kudamono", en: "fruit", id: "vocab:6:くだもの" },
+  { lesson: 6, jp: "みず", romaji: "mizu", en: "water", id: "vocab:6:みず" },
+  { lesson: 6, jp: "おちゃ", romaji: "o-cha", en: "tea (green)", id: "vocab:6:おちゃ" },
+  { lesson: 6, jp: "こうちゃ", romaji: "kōcha", en: "black tea", id: "vocab:6:こうちゃ" },
+  { lesson: 6, jp: "ぎゅうにゅう", romaji: "gyūnyū", en: "milk", id: "vocab:6:ぎゅうにゅう" },
+  { lesson: 6, jp: "ミルク", romaji: "miruku", en: "milk", id: "vocab:6:ミルク" },
+  { lesson: 6, jp: "ジュース", romaji: "jūsu", en: "juice", id: "vocab:6:ジュース" },
+  { lesson: 6, jp: "ビール", romaji: "bīru", en: "beer", id: "vocab:6:ビール" },
+  { lesson: 6, jp: "おさけ", romaji: "o-sake", en: "alcohol, sake", id: "vocab:6:おさけ" },
+  { lesson: 6, jp: "たばこ", romaji: "tabako", en: "cigarette", id: "vocab:6:たばこ" },
+  { lesson: 6, jp: "てがみ", romaji: "tegami", en: "letter", id: "vocab:6:てがみ" },
+  { lesson: 6, jp: "レポート", romaji: "repōto", en: "report", id: "vocab:6:レポート" },
+  { lesson: 6, jp: "しゃしん", romaji: "shashin", en: "photograph", id: "vocab:6:しゃしん" },
+  { lesson: 6, jp: "ビデオ", romaji: "bideo", en: "video tape", id: "vocab:6:ビデオ" },
+  { lesson: 6, jp: "みせ", romaji: "mise", en: "shop, store", id: "vocab:6:みせ" },
+  { lesson: 6, jp: "にわ", romaji: "niwa", en: "garden", id: "vocab:6:にわ" },
+  { lesson: 6, jp: "しゅくだい", romaji: "shukudai", en: "homework", id: "vocab:6:しゅくだい" },
+  { lesson: 6, jp: "テニス", romaji: "tenisu", en: "tennis", id: "vocab:6:テニス" },
+  { lesson: 6, jp: "サッカー", romaji: "sakkā", en: "soccer", id: "vocab:6:サッカー" },
+  { lesson: 6, jp: "おはなみ", romaji: "o-hanami", en: "cherry-blossom viewing", id: "vocab:6:おはなみ" },
+  { lesson: 6, jp: "なに", romaji: "nani", en: "what", id: "vocab:6:なに" },
+  { lesson: 6, jp: "いっしょに", romaji: "issho ni", en: "together", id: "vocab:6:いっしょに" },
+  { lesson: 6, jp: "ちょっと", romaji: "chotto", en: "a little, a little while", id: "vocab:6:ちょっと" },
+  { lesson: 6, jp: "いつも", romaji: "itsumo", en: "always", id: "vocab:6:いつも" },
+  { lesson: 6, jp: "ときどき", romaji: "tokidoki", en: "sometimes", id: "vocab:6:ときどき" },
+  { lesson: 6, jp: "それから", romaji: "sorekara", en: "after that, then", id: "vocab:6:それから" },
+  { lesson: 6, jp: "ええ", romaji: "ē", en: "yes", id: "vocab:6:ええ" },
+  { lesson: 6, jp: "いいですね", romaji: "ii desu ne", en: "That's good / sounds good", id: "vocab:6:いいですね" },
+  { lesson: 6, jp: "わかりました", romaji: "wakarimashita", en: "I see, understood", id: "vocab:6:わかりました" },
+  { lesson: 7, jp: "きります", romaji: "kirimasu", en: "cut, slice", id: "vocab:7:きります" },
+  { lesson: 7, jp: "おくります", romaji: "okurimasu", en: "send", id: "vocab:7:おくります" },
+  { lesson: 7, jp: "あげます", romaji: "agemasu", en: "give", id: "vocab:7:あげます" },
+  { lesson: 7, jp: "もらいます", romaji: "moraimasu", en: "receive", id: "vocab:7:もらいます" },
+  { lesson: 7, jp: "かします", romaji: "kashimasu", en: "lend", id: "vocab:7:かします" },
+  { lesson: 7, jp: "かります", romaji: "karimasu", en: "borrow", id: "vocab:7:かります" },
+  { lesson: 7, jp: "おしえます", romaji: "oshiemasu", en: "teach", id: "vocab:7:おしえます" },
+  { lesson: 7, jp: "ならいます", romaji: "naraimasu", en: "learn", id: "vocab:7:ならいます" },
+  { lesson: 7, jp: "かけます (でんわを)", romaji: "kakemasu (denwa o)", en: "make a phone call", id: "vocab:7:かけます (でんわを)" },
+  { lesson: 7, jp: "て", romaji: "te", en: "hand, arm", id: "vocab:7:て" },
+  { lesson: 7, jp: "はし", romaji: "hashi", en: "chopsticks", id: "vocab:7:はし" },
+  { lesson: 7, jp: "スプーン", romaji: "supūn", en: "spoon", id: "vocab:7:スプーン" },
+  { lesson: 7, jp: "ナイフ", romaji: "naifu", en: "knife", id: "vocab:7:ナイフ" },
+  { lesson: 7, jp: "フォーク", romaji: "fōku", en: "fork", id: "vocab:7:フォーク" },
+  { lesson: 7, jp: "はさみ", romaji: "hasami", en: "scissors", id: "vocab:7:はさみ" },
+  { lesson: 7, jp: "パソコン", romaji: "pasokon", en: "personal computer", id: "vocab:7:パソコン" },
+  { lesson: 7, jp: "ケータイ", romaji: "kētai", en: "mobile phone, cell phone", id: "vocab:7:ケータイ" },
+  { lesson: 7, jp: "メール", romaji: "mēru", en: "e-mail", id: "vocab:7:メール" },
+  { lesson: 7, jp: "ねんがじょう", romaji: "nengajō", en: "New Year's greeting card", id: "vocab:7:ねんがじょう" },
+  { lesson: 7, jp: "パンチ", romaji: "panchi", en: "punch (hole punch)", id: "vocab:7:パンチ" },
+  { lesson: 7, jp: "ホッチキス", romaji: "hocchikisu", en: "stapler", id: "vocab:7:ホッチキス" },
+  { lesson: 7, jp: "セロテープ", romaji: "serotēpu", en: "Sellotape, Scotch tape", id: "vocab:7:セロテープ" },
+  { lesson: 7, jp: "けしゴム", romaji: "keshigomu", en: "rubber, eraser", id: "vocab:7:けしゴム" },
+  { lesson: 7, jp: "かみ", romaji: "kami", en: "paper", id: "vocab:7:かみ" },
+  { lesson: 7, jp: "はな", romaji: "hana", en: "flower, blossom", id: "vocab:7:はな" },
+  { lesson: 7, jp: "シャツ", romaji: "shatsu", en: "shirt", id: "vocab:7:シャツ" },
+  { lesson: 7, jp: "プレゼント", romaji: "purezento", en: "present, gift", id: "vocab:7:プレゼント" },
+  { lesson: 7, jp: "にもつ", romaji: "nimotsu", en: "luggage, baggage, parcel", id: "vocab:7:にもつ" },
+  { lesson: 7, jp: "おかね", romaji: "o-kane", en: "money", id: "vocab:7:おかね" },
+  { lesson: 7, jp: "きっぷ", romaji: "kippu", en: "ticket", id: "vocab:7:きっぷ" },
+  { lesson: 7, jp: "クリスマス", romaji: "kurisumasu", en: "Christmas", id: "vocab:7:クリスマス" },
+  { lesson: 7, jp: "ちち", romaji: "chichi", en: "my father", id: "vocab:7:ちち" },
+  { lesson: 7, jp: "はは", romaji: "haha", en: "my mother", id: "vocab:7:はは" },
+  { lesson: 7, jp: "おとうさん", romaji: "otōsan", en: "someone else's father", id: "vocab:7:おとうさん" },
+  { lesson: 7, jp: "おかあさん", romaji: "okāsan", en: "someone else's mother", id: "vocab:7:おかあさん" },
+  { lesson: 7, jp: "もう", romaji: "mō", en: "already", id: "vocab:7:もう" },
+  { lesson: 7, jp: "まだ", romaji: "mada", en: "not yet", id: "vocab:7:まだ" },
+  { lesson: 7, jp: "これから", romaji: "kore kara", en: "from now on, soon", id: "vocab:7:これから" },
+  { lesson: 7, jp: "いらっしゃい", romaji: "irasshai", en: "welcome (to a guest)", id: "vocab:7:いらっしゃい" },
+  { lesson: 7, jp: "しつれいします", romaji: "shitsurei shimasu", en: "excuse me / I'll be going", id: "vocab:7:しつれいします" },
+  { lesson: 7, jp: "いただきます", romaji: "itadakimasu", en: "thanks (before a meal)", id: "vocab:7:いただきます" },
+  { lesson: 7, jp: "ごちそうさまでした", romaji: "gochisōsama deshita", en: "thanks for the meal", id: "vocab:7:ごちそうさまでした" },
+  { lesson: 7, jp: "すてきですね", romaji: "suteki desu ne", en: "what a nice", id: "vocab:7:すてきですね" },
+  { lesson: 7, jp: "スペイン", romaji: "Supein", en: "Spain", id: "vocab:7:スペイン" },
+  { lesson: 8, jp: "ハンサム[な]", romaji: "hansamu", en: "handsome", id: "vocab:8:ハンサム[な]" },
+  { lesson: 8, jp: "きれい[な]", romaji: "kirei", en: "beautiful, clean", id: "vocab:8:きれい[な]" },
+  { lesson: 8, jp: "しずか[な]", romaji: "shizuka", en: "quiet", id: "vocab:8:しずか[な]" },
+  { lesson: 8, jp: "にぎやか[な]", romaji: "nigiyaka", en: "lively", id: "vocab:8:にぎやか[な]" },
+  { lesson: 8, jp: "ゆうめい[な]", romaji: "yūmei", en: "famous", id: "vocab:8:ゆうめい[な]" },
+  { lesson: 8, jp: "しんせつ[な]", romaji: "shinsetsu", en: "kind, considerate", id: "vocab:8:しんせつ[な]" },
+  { lesson: 8, jp: "げんき[な]", romaji: "genki", en: "healthy, energetic", id: "vocab:8:げんき[な]" },
+  { lesson: 8, jp: "ひま[な]", romaji: "hima", en: "free time", id: "vocab:8:ひま[な]" },
+  { lesson: 8, jp: "べんり[な]", romaji: "benri", en: "convenient", id: "vocab:8:べんり[な]" },
+  { lesson: 8, jp: "すてき[な]", romaji: "suteki", en: "fine, nice, wonderful", id: "vocab:8:すてき[な]" },
+  { lesson: 8, jp: "おおきい", romaji: "ōkii", en: "big, large", id: "vocab:8:おおきい" },
+  { lesson: 8, jp: "ちいさい", romaji: "chiisai", en: "small, little", id: "vocab:8:ちいさい" },
+  { lesson: 8, jp: "あたらしい", romaji: "atarashii", en: "new, fresh", id: "vocab:8:あたらしい" },
+  { lesson: 8, jp: "ふるい", romaji: "furui", en: "old (of things, not age)", id: "vocab:8:ふるい" },
+  { lesson: 8, jp: "いい", romaji: "ii", en: "good", id: "vocab:8:いい" },
+  { lesson: 8, jp: "わるい", romaji: "warui", en: "bad", id: "vocab:8:わるい" },
+  { lesson: 8, jp: "あつい", romaji: "atsui", en: "hot", id: "vocab:8:あつい" },
+  { lesson: 8, jp: "さむい", romaji: "samui", en: "cold (temperature)", id: "vocab:8:さむい" },
+  { lesson: 8, jp: "つめたい", romaji: "tsumetai", en: "cold (to touch)", id: "vocab:8:つめたい" },
+  { lesson: 8, jp: "むずかしい", romaji: "muzukashii", en: "difficult", id: "vocab:8:むずかしい" },
+  { lesson: 8, jp: "やさしい", romaji: "yasashii", en: "easy / kind", id: "vocab:8:やさしい" },
+  { lesson: 8, jp: "たかい", romaji: "takai", en: "expensive, tall, high", id: "vocab:8:たかい" },
+  { lesson: 8, jp: "やすい", romaji: "yasui", en: "inexpensive, cheap", id: "vocab:8:やすい" },
+  { lesson: 8, jp: "ひくい", romaji: "hikui", en: "low", id: "vocab:8:ひくい" },
+  { lesson: 8, jp: "おもしろい", romaji: "omoshiroi", en: "interesting", id: "vocab:8:おもしろい" },
+  { lesson: 8, jp: "おいしい", romaji: "oishii", en: "delicious, tasty", id: "vocab:8:おいしい" },
+  { lesson: 8, jp: "いそがしい", romaji: "isogashii", en: "busy", id: "vocab:8:いそがしい" },
+  { lesson: 8, jp: "たのしい", romaji: "tanoshii", en: "enjoyable", id: "vocab:8:たのしい" },
+  { lesson: 8, jp: "しろい", romaji: "shiroi", en: "white", id: "vocab:8:しろい" },
+  { lesson: 8, jp: "くろい", romaji: "kuroi", en: "black", id: "vocab:8:くろい" },
+  { lesson: 8, jp: "あかい", romaji: "akai", en: "red", id: "vocab:8:あかい" },
+  { lesson: 8, jp: "あおい", romaji: "aoi", en: "blue", id: "vocab:8:あおい" },
+  { lesson: 8, jp: "さくら", romaji: "sakura", en: "cherry (blossom)", id: "vocab:8:さくら" },
+  { lesson: 8, jp: "やま", romaji: "yama", en: "mountain", id: "vocab:8:やま" },
+  { lesson: 8, jp: "まち", romaji: "machi", en: "town, city", id: "vocab:8:まち" },
+  { lesson: 8, jp: "たべもの", romaji: "tabemono", en: "food", id: "vocab:8:たべもの" },
+  { lesson: 8, jp: "ところ", romaji: "tokoro", en: "place, location", id: "vocab:8:ところ" },
+  { lesson: 8, jp: "りょう", romaji: "ryō", en: "dormitory", id: "vocab:8:りょう" },
+  { lesson: 8, jp: "レストラン", romaji: "resutoran", en: "restaurant", id: "vocab:8:レストラン" },
+  { lesson: 8, jp: "せいかつ", romaji: "seikatsu", en: "life", id: "vocab:8:せいかつ" },
+  { lesson: 8, jp: "おしごと", romaji: "o-shigoto", en: "work, business", id: "vocab:8:おしごと" },
+  { lesson: 8, jp: "どう", romaji: "dō", en: "how, what", id: "vocab:8:どう" },
+  { lesson: 8, jp: "どんな", romaji: "donna", en: "what kind of", id: "vocab:8:どんな" },
+  { lesson: 8, jp: "どれ", romaji: "dore", en: "which", id: "vocab:8:どれ" },
+  { lesson: 8, jp: "とても", romaji: "totemo", en: "very", id: "vocab:8:とても" },
+  { lesson: 8, jp: "あまり", romaji: "amari", en: "not so much (with neg.)", id: "vocab:8:あまり" },
+  { lesson: 8, jp: "そして", romaji: "soshite", en: "and (joining sentences)", id: "vocab:8:そして" },
+  { lesson: 8, jp: "が、", romaji: "ga", en: "but", id: "vocab:8:が、" },
+  { lesson: 8, jp: "ふじさん", romaji: "Fuji-san", en: "Mt. Fuji", id: "vocab:8:ふじさん" },
+  { lesson: 9, jp: "わかります", romaji: "wakarimasu", en: "understand", id: "vocab:9:わかります" },
+  { lesson: 9, jp: "あります", romaji: "arimasu", en: "have", id: "vocab:9:あります" },
+  { lesson: 9, jp: "すき[な]", romaji: "suki", en: "like", id: "vocab:9:すき[な]" },
+  { lesson: 9, jp: "きらい[な]", romaji: "kirai", en: "dislike", id: "vocab:9:きらい[な]" },
+  { lesson: 9, jp: "じょうず[な]", romaji: "jōzu", en: "good at, skilful", id: "vocab:9:じょうず[な]" },
+  { lesson: 9, jp: "へた[な]", romaji: "heta", en: "poor at, unskilful", id: "vocab:9:へた[な]" },
+  { lesson: 9, jp: "のみもの", romaji: "nomimono", en: "drinks", id: "vocab:9:のみもの" },
+  { lesson: 9, jp: "りょうり", romaji: "ryōri", en: "dish (cooked food), cuisine", id: "vocab:9:りょうり" },
+  { lesson: 9, jp: "スポーツ", romaji: "supōtsu", en: "sport", id: "vocab:9:スポーツ" },
+  { lesson: 9, jp: "やきゅう", romaji: "yakyū", en: "baseball", id: "vocab:9:やきゅう" },
+  { lesson: 9, jp: "ダンス", romaji: "dansu", en: "dance", id: "vocab:9:ダンス" },
+  { lesson: 9, jp: "りょこう", romaji: "ryokō", en: "travel, trip", id: "vocab:9:りょこう" },
+  { lesson: 9, jp: "おんがく", romaji: "ongaku", en: "music", id: "vocab:9:おんがく" },
+  { lesson: 9, jp: "うた", romaji: "uta", en: "song", id: "vocab:9:うた" },
+  { lesson: 9, jp: "クラシック", romaji: "kurashikku", en: "classical music", id: "vocab:9:クラシック" },
+  { lesson: 9, jp: "ジャズ", romaji: "jazu", en: "jazz", id: "vocab:9:ジャズ" },
+  { lesson: 9, jp: "コンサート", romaji: "konsāto", en: "concert", id: "vocab:9:コンサート" },
+  { lesson: 9, jp: "カラオケ", romaji: "karaoke", en: "karaoke", id: "vocab:9:カラオケ" },
+  { lesson: 9, jp: "かぶき", romaji: "kabuki", en: "kabuki (traditional drama)", id: "vocab:9:かぶき" },
+  { lesson: 9, jp: "え", romaji: "e", en: "picture, drawing", id: "vocab:9:え" },
+  { lesson: 9, jp: "じ", romaji: "ji", en: "letter, character", id: "vocab:9:じ" },
+  { lesson: 9, jp: "かんじ", romaji: "kanji", en: "Chinese character (kanji)", id: "vocab:9:かんじ" },
+  { lesson: 9, jp: "ひらがな", romaji: "hiragana", en: "hiragana script", id: "vocab:9:ひらがな" },
+  { lesson: 9, jp: "かたかな", romaji: "katakana", en: "katakana script", id: "vocab:9:かたかな" },
+  { lesson: 9, jp: "ローマじ", romaji: "rōmaji", en: "Roman alphabet, romaji", id: "vocab:9:ローマじ" },
+  { lesson: 9, jp: "こまかい おかね", romaji: "komakai o-kane", en: "small change", id: "vocab:9:こまかい おかね" },
+  { lesson: 9, jp: "チケット", romaji: "chiketto", en: "ticket", id: "vocab:9:チケット" },
+  { lesson: 9, jp: "じかん", romaji: "jikan", en: "time", id: "vocab:9:じかん" },
+  { lesson: 9, jp: "ようじ", romaji: "yōji", en: "something to do, errand", id: "vocab:9:ようじ" },
+  { lesson: 9, jp: "やくそく", romaji: "yakusoku", en: "appointment, promise", id: "vocab:9:やくそく" },
+  { lesson: 9, jp: "アルバイト", romaji: "arubaito", en: "side job, part-time work", id: "vocab:9:アルバイト" },
+  { lesson: 9, jp: "ごしゅじん", romaji: "go-shujin", en: "(someone else's) husband", id: "vocab:9:ごしゅじん" },
+  { lesson: 9, jp: "しゅじん", romaji: "shujin", en: "my husband", id: "vocab:9:しゅじん" },
+  { lesson: 9, jp: "おくさん", romaji: "okusan", en: "(someone else's) wife", id: "vocab:9:おくさん" },
+  { lesson: 9, jp: "つま", romaji: "tsuma", en: "my wife", id: "vocab:9:つま" },
+  { lesson: 9, jp: "かない", romaji: "kanai", en: "my wife", id: "vocab:9:かない" },
+  { lesson: 9, jp: "こども", romaji: "kodomo", en: "child", id: "vocab:9:こども" },
+  { lesson: 9, jp: "だいたい", romaji: "daitai", en: "mostly, roughly", id: "vocab:9:だいたい" },
+  { lesson: 9, jp: "たくさん", romaji: "takusan", en: "many, much", id: "vocab:9:たくさん" },
+  { lesson: 9, jp: "すこし", romaji: "sukoshi", en: "a little, a few", id: "vocab:9:すこし" },
+  { lesson: 9, jp: "ぜんぜん", romaji: "zenzen", en: "not at all (with neg.)", id: "vocab:9:ぜんぜん" },
+  { lesson: 9, jp: "はやく", romaji: "hayaku", en: "early, quickly, fast", id: "vocab:9:はやく" },
+  { lesson: 9, jp: "から", romaji: "kara", en: "because, since", id: "vocab:9:から" },
+  { lesson: 9, jp: "どうして", romaji: "dōshite", en: "why", id: "vocab:9:どうして" },
+  { lesson: 9, jp: "ざんねんですね", romaji: "zannen desu ne", en: "I'm sorry, that's a pity", id: "vocab:9:ざんねんですね" },
+  { lesson: 9, jp: "だめですか", romaji: "dame desu ka", en: "is it not possible?", id: "vocab:9:だめですか" },
+  { lesson: 10, jp: "あります", romaji: "arimasu", en: "exist, be (inanimate)", id: "vocab:10:あります" },
+  { lesson: 10, jp: "います", romaji: "imasu", en: "exist (animate, person/animal)", id: "vocab:10:います" },
+  { lesson: 10, jp: "いろいろ[な]", romaji: "iroiro", en: "various, variety of", id: "vocab:10:いろいろ[な]" },
+  { lesson: 10, jp: "おとこのひと", romaji: "otoko no hito", en: "man", id: "vocab:10:おとこのひと" },
+  { lesson: 10, jp: "おんなのひと", romaji: "onna no hito", en: "woman", id: "vocab:10:おんなのひと" },
+  { lesson: 10, jp: "おとこのこ", romaji: "otoko no ko", en: "boy", id: "vocab:10:おとこのこ" },
+  { lesson: 10, jp: "おんなのこ", romaji: "onna no ko", en: "girl", id: "vocab:10:おんなのこ" },
+  { lesson: 10, jp: "いぬ", romaji: "inu", en: "dog", id: "vocab:10:いぬ" },
+  { lesson: 10, jp: "ねこ", romaji: "neko", en: "cat", id: "vocab:10:ねこ" },
+  { lesson: 10, jp: "パンダ", romaji: "panda", en: "panda", id: "vocab:10:パンダ" },
+  { lesson: 10, jp: "ぞう", romaji: "zō", en: "elephant", id: "vocab:10:ぞう" },
+  { lesson: 10, jp: "き", romaji: "ki", en: "tree, wood", id: "vocab:10:き" },
+  { lesson: 10, jp: "もの", romaji: "mono", en: "thing", id: "vocab:10:もの" },
+  { lesson: 10, jp: "でんち", romaji: "denchi", en: "battery", id: "vocab:10:でんち" },
+  { lesson: 10, jp: "はこ", romaji: "hako", en: "box", id: "vocab:10:はこ" },
+  { lesson: 10, jp: "スイッチ", romaji: "suicchi", en: "switch", id: "vocab:10:スイッチ" },
+  { lesson: 10, jp: "れいぞうこ", romaji: "reizōko", en: "refrigerator", id: "vocab:10:れいぞうこ" },
+  { lesson: 10, jp: "テーブル", romaji: "tēburu", en: "table", id: "vocab:10:テーブル" },
+  { lesson: 10, jp: "ベッド", romaji: "beddo", en: "bed", id: "vocab:10:ベッド" },
+  { lesson: 10, jp: "たな", romaji: "tana", en: "shelf", id: "vocab:10:たな" },
+  { lesson: 10, jp: "ドア", romaji: "doa", en: "door", id: "vocab:10:ドア" },
+  { lesson: 10, jp: "まど", romaji: "mado", en: "window", id: "vocab:10:まど" },
+  { lesson: 10, jp: "ポスト", romaji: "posuto", en: "postbox, mailbox", id: "vocab:10:ポスト" },
+  { lesson: 10, jp: "ビル", romaji: "biru", en: "building", id: "vocab:10:ビル" },
+  { lesson: 10, jp: "エーティーエム", romaji: "ētīemu", en: "ATM, cash machine", id: "vocab:10:エーティーエム" },
+  { lesson: 10, jp: "コンビニ", romaji: "konbini", en: "convenience store", id: "vocab:10:コンビニ" },
+  { lesson: 10, jp: "こうえん", romaji: "kōen", en: "park", id: "vocab:10:こうえん" },
+  { lesson: 10, jp: "きっさてん", romaji: "kissaten", en: "coffee shop", id: "vocab:10:きっさてん" },
+  { lesson: 10, jp: "のりば", romaji: "noriba", en: "place to catch taxi/bus, stand", id: "vocab:10:のりば" },
+  { lesson: 10, jp: "けん", romaji: "ken", en: "prefecture", id: "vocab:10:けん" },
+  { lesson: 10, jp: "うえ", romaji: "ue", en: "on, above, over", id: "vocab:10:うえ" },
+  { lesson: 10, jp: "した", romaji: "shita", en: "under, below, beneath", id: "vocab:10:した" },
+  { lesson: 10, jp: "まえ", romaji: "mae", en: "front, before", id: "vocab:10:まえ" },
+  { lesson: 10, jp: "うしろ", romaji: "ushiro", en: "back, behind", id: "vocab:10:うしろ" },
+  { lesson: 10, jp: "みぎ", romaji: "migi", en: "right (side)", id: "vocab:10:みぎ" },
+  { lesson: 10, jp: "ひだり", romaji: "hidari", en: "left (side)", id: "vocab:10:ひだり" },
+  { lesson: 10, jp: "なか", romaji: "naka", en: "in, inside", id: "vocab:10:なか" },
+  { lesson: 10, jp: "そと", romaji: "soto", en: "outside", id: "vocab:10:そと" },
+  { lesson: 10, jp: "となり", romaji: "tonari", en: "next to, next door", id: "vocab:10:となり" },
+  { lesson: 10, jp: "ちかく", romaji: "chikaku", en: "near, vicinity", id: "vocab:10:ちかく" },
+  { lesson: 10, jp: "あいだ", romaji: "aida", en: "between, among", id: "vocab:10:あいだ" },
+  { lesson: 10, jp: "やなど", romaji: "ya nado", en: "and and so on", id: "vocab:10:やなど" },
+  { lesson: 10, jp: "どうも すみません", romaji: "dōmo sumimasen", en: "Thank you / I'm sorry", id: "vocab:10:どうも すみません" },
+  { lesson: 10, jp: "ナンプラー", romaji: "nanpurā", en: "fish sauce (nam pla)", id: "vocab:10:ナンプラー" },
+  { lesson: 10, jp: "コーナー", romaji: "kōnā", en: "corner, section", id: "vocab:10:コーナー" },
+  { lesson: 10, jp: "いちばん した", romaji: "ichiban shita", en: "the bottom", id: "vocab:10:いちばん した" },
 ];
 
 const SENTENCES = [
-  // Lesson 1 · AはBです / occupation / nationality / introductions
-  { lesson: 1, jp: "わたしは アファクです。", romaji: "Watashi wa Afaqu desu.", en: "I am Afaq." },
-  { lesson: 1, jp: "アファクさんは ぎんこういんです。", romaji: "Afaqu-san wa ginkōin desu.", en: "Mr. Afaq is a bank employee." },
-  { lesson: 1, jp: "わたしは パキスタンじんです。", romaji: "Watashi wa Pakisutan-jin desu.", en: "I am Pakistani." },
-  { lesson: 1, jp: "あのひとは だれですか。", romaji: "Ano hito wa dare desu ka.", en: "Who is that person?" },
-  { lesson: 1, jp: "たなかさんは せんせいですか。", romaji: "Tanaka-san wa sensei desu ka.", en: "Is Mr. Tanaka a teacher?" },
-  { lesson: 1, jp: "いいえ、せんせいじゃ ありません。", romaji: "Iie, sensei ja arimasen.", en: "No, he is not a teacher." },
-  { lesson: 1, jp: "はじめまして。どうぞ よろしく。", romaji: "Hajimemashite. Dōzo yoroshiku.", en: "How do you do. Pleased to meet you." },
-  { lesson: 1, jp: "こちらは スズキさんです。", romaji: "Kochira wa Suzuki-san desu.", en: "This is Mr. Suzuki." },
-  { lesson: 1, jp: "わたしは アメリカから きました。", romaji: "Watashi wa Amerika kara kimashita.", en: "I came from America." },
-  { lesson: 1, jp: "しつれいですが、おなまえは？", romaji: "Shitsurei desu ga, o-namae wa?", en: "Excuse me, may I have your name?" },
-
-  // Lesson 2 · kore/sore/are + ～の～
-  { lesson: 2, jp: "これは ほんです。", romaji: "Kore wa hon desu.", en: "This is a book." },
-  { lesson: 2, jp: "それは じしょですか。", romaji: "Sore wa jisho desu ka.", en: "Is that a dictionary?" },
-  { lesson: 2, jp: "あれは なんですか。", romaji: "Are wa nan desu ka.", en: "What is that over there?" },
-  { lesson: 2, jp: "これは わたしの かさです。", romaji: "Kore wa watashi no kasa desu.", en: "This is my umbrella." },
-  { lesson: 2, jp: "このほんは わたしのです。", romaji: "Kono hon wa watashi no desu.", en: "This book is mine." },
-  { lesson: 2, jp: "それは にほんごの ほんです。", romaji: "Sore wa nihongo no hon desu.", en: "That is a Japanese-language book." },
-  { lesson: 2, jp: "あの かばんは だれのですか。", romaji: "Ano kaban wa dare no desu ka.", en: "Whose bag is that?" },
-  { lesson: 2, jp: "これは チョコレートです。どうぞ。", romaji: "Kore wa chokorēto desu. Dōzo.", en: "This is chocolate. Please (have some)." },
-  { lesson: 2, jp: "これは えいごで なんですか。", romaji: "Kore wa eigo de nan desu ka.", en: "What is this in English?" },
-  { lesson: 2, jp: "ちがいます。それは ボールペンじゃ ありません。", romaji: "Chigaimasu. Sore wa bōrupen ja arimasen.", en: "No. That isn't a ballpoint pen." },
-
-  // Lesson 3 · koko/soko/asoko + price + floor
-  { lesson: 3, jp: "ここは きょうしつです。", romaji: "Koko wa kyōshitsu desu.", en: "Here is a classroom." },
-  { lesson: 3, jp: "トイレは あそこです。", romaji: "Toire wa asoko desu.", en: "The toilet is over there." },
-  { lesson: 3, jp: "でんわは どこですか。", romaji: "Denwa wa doko desu ka.", en: "Where is the telephone?" },
-  { lesson: 3, jp: "おくには どちらですか。", romaji: "O-kuni wa dochira desu ka.", en: "Where are you from? (polite)" },
-  { lesson: 3, jp: "これは いくらですか。", romaji: "Kore wa ikura desu ka.", en: "How much is this?" },
-  { lesson: 3, jp: "このほんは せんえんです。", romaji: "Kono hon wa sen-en desu.", en: "This book is 1,000 yen." },
-  { lesson: 3, jp: "ネクタイうりばは なんがいですか。", romaji: "Nekutai uriba wa nan-gai desu ka.", en: "What floor is the necktie counter on?" },
-  { lesson: 3, jp: "すみません、これを みせて ください。", romaji: "Sumimasen, kore o misete kudasai.", en: "Excuse me, please show me this." },
-  { lesson: 3, jp: "じゃあ、これを ください。", romaji: "Jā, kore o kudasai.", en: "Then, please give me this." },
-  { lesson: 3, jp: "うけつけは いっかいです。", romaji: "Uketsuke wa ikkai desu.", en: "Reception is on the 1st floor." },
-
-  // Lesson 4 · time / daily routines / from-to
-  { lesson: 4, jp: "いま なんじですか。", romaji: "Ima nanji desu ka.", en: "What time is it now?" },
-  { lesson: 4, jp: "いま くじはんです。", romaji: "Ima kuji-han desu.", en: "It's 9:30 now." },
-  { lesson: 4, jp: "わたしは まいあさ ろくじに おきます。", romaji: "Watashi wa maiasa rokuji ni okimasu.", en: "I get up at 6:00 every morning." },
-  { lesson: 4, jp: "ぎんこうは くじから さんじまでです。", romaji: "Ginkō wa kuji kara sanji made desu.", en: "The bank is open from 9 to 3." },
-  { lesson: 4, jp: "きょうは げつようびです。", romaji: "Kyō wa getsuyōbi desu.", en: "Today is Monday." },
-  { lesson: 4, jp: "やすみは どようびと にちようびです。", romaji: "Yasumi wa doyōbi to nichiyōbi desu.", en: "The holidays are Saturday and Sunday." },
-  { lesson: 4, jp: "きのう ろくじまで はたらきました。", romaji: "Kinō rokuji made hatarakimashita.", en: "I worked until six yesterday." },
-  { lesson: 4, jp: "あした べんきょうしません。", romaji: "Ashita benkyō shimasen.", en: "I won't study tomorrow." },
-  { lesson: 4, jp: "しけんは なんじから なんじまでですか。", romaji: "Shiken wa nanji kara nanji made desu ka.", en: "From what time to what time is the exam?" },
-  { lesson: 4, jp: "ひるやすみは じゅうにじから いちじまでです。", romaji: "Hiruyasumi wa jūniji kara ichiji made desu.", en: "Lunch break is from 12 to 1." },
-
-  // Lesson 5 · ikimasu / kimasu / kaerimasu + de + e + to
-  { lesson: 5, jp: "わたしは とうきょうへ いきます。", romaji: "Watashi wa Tōkyō e ikimasu.", en: "I am going to Tokyo." },
-  { lesson: 5, jp: "あした がっこうへ いきます。", romaji: "Ashita gakkō e ikimasu.", en: "I'll go to school tomorrow." },
-  { lesson: 5, jp: "でんしゃで がっこうへ いきます。", romaji: "Densha de gakkō e ikimasu.", en: "I go to school by train." },
-  { lesson: 5, jp: "ともだちと きょうとへ いきます。", romaji: "Tomodachi to Kyōto e ikimasu.", en: "I'm going to Kyoto with a friend." },
-  { lesson: 5, jp: "ひとりで うちへ かえります。", romaji: "Hitori de uchi e kaerimasu.", en: "I'm going home alone." },
-  { lesson: 5, jp: "らいしゅう にほんへ きます。", romaji: "Raishū Nihon e kimasu.", en: "I'm coming to Japan next week." },
-  { lesson: 5, jp: "たんじょうびは なんがつ なんにちですか。", romaji: "Tanjōbi wa nangatsu nannichi desu ka.", en: "What month and day is your birthday?" },
-  { lesson: 5, jp: "わたしの たんじょうびは くがつ ついたちです。", romaji: "Watashi no tanjōbi wa kugatsu tsuitachi desu.", en: "My birthday is September 1st." },
-  { lesson: 5, jp: "きのう どこへも いきませんでした。", romaji: "Kinō doko e mo ikimasen deshita.", en: "I didn't go anywhere yesterday." },
-  { lesson: 5, jp: "あさってから やすみです。", romaji: "Asatte kara yasumi desu.", en: "The holiday starts the day after tomorrow." },
-
-  // Lesson 6 · object o + verb + de(place) + masen ka
-  { lesson: 6, jp: "まいあさ パンを たべます。", romaji: "Maiasa pan o tabemasu.", en: "I eat bread every morning." },
-  { lesson: 6, jp: "なにを のみますか。", romaji: "Nani o nomimasu ka.", en: "What will you drink?" },
-  { lesson: 6, jp: "コーヒーを のみます。", romaji: "Kōhī o nomimasu.", en: "I will drink coffee." },
-  { lesson: 6, jp: "きのう ともだちに あいました。", romaji: "Kinō tomodachi ni aimashita.", en: "I met a friend yesterday." },
-  { lesson: 6, jp: "デパートで かばんを かいました。", romaji: "Depāto de kaban o kaimashita.", en: "I bought a bag at the department store." },
-  { lesson: 6, jp: "うちで しゅくだいを します。", romaji: "Uchi de shukudai o shimasu.", en: "I do homework at home." },
-  { lesson: 6, jp: "いっしょに ごはんを たべませんか。", romaji: "Issho ni gohan o tabemasen ka.", en: "Won't you have a meal with me?" },
-  { lesson: 6, jp: "ええ、いいですね。", romaji: "Ē, ii desu ne.", en: "Yes, that sounds good." },
-  { lesson: 6, jp: "としょかんで ほんを よみます。", romaji: "Toshokan de hon o yomimasu.", en: "I read books at the library." },
-  { lesson: 6, jp: "しゃしんを とりませんか。", romaji: "Shashin o torimasen ka.", en: "Shall we take a photo?" },
-
-  // Lesson 7 · agemasu / moraimasu + de(tool) + ni(person) + mō / mada
-  { lesson: 7, jp: "わたしは ともだちに プレゼントを あげました。", romaji: "Watashi wa tomodachi ni purezento o agemashita.", en: "I gave my friend a present." },
-  { lesson: 7, jp: "ちちに とけいを もらいました。", romaji: "Chichi ni tokei o moraimashita.", en: "I received a watch from my father." },
-  { lesson: 7, jp: "はしで ごはんを たべます。", romaji: "Hashi de gohan o tabemasu.", en: "I eat with chopsticks." },
-  { lesson: 7, jp: "にほんごで メールを かきます。", romaji: "Nihongo de mēru o kakimasu.", en: "I write emails in Japanese." },
-  { lesson: 7, jp: "たなかさんは わたしに にほんごを おしえます。", romaji: "Tanaka-san wa watashi ni nihongo o oshiemasu.", en: "Mr. Tanaka teaches me Japanese." },
-  { lesson: 7, jp: "ケータイで ははに でんわを かけました。", romaji: "Kētai de haha ni denwa o kakemashita.", en: "I called my mother on the cell phone." },
-  { lesson: 7, jp: "もう ばんごはんを たべましたか。", romaji: "Mō bangohan o tabemashita ka.", en: "Have you eaten dinner yet?" },
-  { lesson: 7, jp: "はい、もう たべました。", romaji: "Hai, mō tabemashita.", en: "Yes, I've already eaten." },
-  { lesson: 7, jp: "いいえ、まだです。", romaji: "Iie, mada desu.", en: "No, not yet." },
-  { lesson: 7, jp: "すてきな シャツですね。", romaji: "Suteki na shatsu desu ne.", en: "What a nice shirt!" },
-
-  // Lesson 8 · i-adj / na-adj + donna + ga + amari
-  { lesson: 8, jp: "にほんごは おもしろいです。", romaji: "Nihongo wa omoshiroi desu.", en: "Japanese is interesting." },
-  { lesson: 8, jp: "このほんは あまり おもしろくないです。", romaji: "Kono hon wa amari omoshirokunai desu.", en: "This book is not very interesting." },
-  { lesson: 8, jp: "しんかんせんは とても はやいです。", romaji: "Shinkansen wa totemo hayai desu.", en: "The Shinkansen is very fast." },
-  { lesson: 8, jp: "たなかさんは どんな ひとですか。", romaji: "Tanaka-san wa donna hito desu ka.", en: "What kind of person is Mr. Tanaka?" },
-  { lesson: 8, jp: "たなかさんは しんせつな ひとです。", romaji: "Tanaka-san wa shinsetsu na hito desu.", en: "Mr. Tanaka is a kind person." },
-  { lesson: 8, jp: "ふじさんは たかい やまです。", romaji: "Fujisan wa takai yama desu.", en: "Mt. Fuji is a tall mountain." },
-  { lesson: 8, jp: "このレストランは おいしいですが、たかいです。", romaji: "Kono resutoran wa oishii desu ga, takai desu.", en: "This restaurant is delicious but expensive." },
-  { lesson: 8, jp: "きょうとは しずかで きれいです。", romaji: "Kyōto wa shizuka de kirei desu.", en: "Kyoto is quiet and beautiful." },
-  { lesson: 8, jp: "このとけいは あたらしくないです。", romaji: "Kono tokei wa atarashikunai desu.", en: "This watch isn't new." },
-  { lesson: 8, jp: "にほんの たべものは とても おいしいです。", romaji: "Nihon no tabemono wa totemo oishii desu.", en: "Japanese food is very delicious." },
-
-  // Lesson 9 · ga wakarimasu / suki / arimasu + kara (because)
-  { lesson: 9, jp: "わたしは にほんごが すこし わかります。", romaji: "Watashi wa nihongo ga sukoshi wakarimasu.", en: "I understand a little Japanese." },
-  { lesson: 9, jp: "かんじは ぜんぜん わかりません。", romaji: "Kanji wa zenzen wakarimasen.", en: "I don't understand kanji at all." },
-  { lesson: 9, jp: "わたしは スポーツが すきです。", romaji: "Watashi wa supōtsu ga suki desu.", en: "I like sports." },
-  { lesson: 9, jp: "いぬが きらいです。", romaji: "Inu ga kirai desu.", en: "I dislike dogs." },
-  { lesson: 9, jp: "やまださんは りょうりが じょうずです。", romaji: "Yamada-san wa ryōri ga jōzu desu.", en: "Mr. Yamada is good at cooking." },
-  { lesson: 9, jp: "きょうは いそがしいですから、いきません。", romaji: "Kyō wa isogashii desu kara, ikimasen.", en: "I'm busy today, so I won't go." },
-  { lesson: 9, jp: "どうして いきませんか。", romaji: "Dōshite ikimasen ka.", en: "Why aren't you going?" },
-  { lesson: 9, jp: "しけんが ありますから、べんきょうします。", romaji: "Shiken ga arimasu kara, benkyō shimasu.", en: "There's an exam, so I'll study." },
-  { lesson: 9, jp: "じかんが ありませんから、ざんねんです。", romaji: "Jikan ga arimasen kara, zannen desu.", en: "I don't have time, so it's a pity." },
-  { lesson: 9, jp: "やきゅうが だいすきです。", romaji: "Yakyū ga daisuki desu.", en: "I love baseball." },
-
-  // Lesson 10 · arimasu / imasu + location words
-  { lesson: 10, jp: "つくえの うえに ほんが あります。", romaji: "Tsukue no ue ni hon ga arimasu.", en: "There is a book on the desk." },
-  { lesson: 10, jp: "へやに だれが いますか。", romaji: "Heya ni dare ga imasu ka.", en: "Who is in the room?" },
-  { lesson: 10, jp: "へやに たなかさんが います。", romaji: "Heya ni Tanaka-san ga imasu.", en: "Mr. Tanaka is in the room." },
-  { lesson: 10, jp: "ぎんこうは えきの まえに あります。", romaji: "Ginkō wa eki no mae ni arimasu.", en: "The bank is in front of the station." },
-  { lesson: 10, jp: "コンビニは どこに ありますか。", romaji: "Konbini wa doko ni arimasu ka.", en: "Where is the convenience store?" },
-  { lesson: 10, jp: "コンビニは デパートと ぎんこうの あいだに あります。", romaji: "Konbini wa depāto to ginkō no aida ni arimasu.", en: "The convenience store is between the department store and the bank." },
-  { lesson: 10, jp: "テーブルの したに ねこが います。", romaji: "Tēburu no shita ni neko ga imasu.", en: "There is a cat under the table." },
-  { lesson: 10, jp: "へやに テレビや ラジオなどが あります。", romaji: "Heya ni terebi ya rajio nado ga arimasu.", en: "In the room there is a TV, a radio, and so on." },
-  { lesson: 10, jp: "ポストは ビルの となりに あります。", romaji: "Posuto wa biru no tonari ni arimasu.", en: "The mailbox is next to the building." },
-  { lesson: 10, jp: "なかに なにが ありますか。", romaji: "Naka ni nani ga arimasu ka.", en: "What is inside?" },
+  { lesson: 1, jp: "わたしは アファクです。", romaji: "Watashi wa Afaqu desu.", en: "I am Afaq.", id: "sent:1:0" },
+  { lesson: 1, jp: "アファクさんは ぎんこういんです。", romaji: "Afaqu-san wa ginkōin desu.", en: "Mr. Afaq is a bank employee.", id: "sent:1:1" },
+  { lesson: 1, jp: "わたしは パキスタンじんです。", romaji: "Watashi wa Pakisutan-jin desu.", en: "I am Pakistani.", id: "sent:1:2" },
+  { lesson: 1, jp: "あのひとは だれですか。", romaji: "Ano hito wa dare desu ka.", en: "Who is that person?", id: "sent:1:3" },
+  { lesson: 1, jp: "たなかさんは せんせいですか。", romaji: "Tanaka-san wa sensei desu ka.", en: "Is Mr. Tanaka a teacher?", id: "sent:1:4" },
+  { lesson: 1, jp: "いいえ、せんせいじゃ ありません。", romaji: "Iie, sensei ja arimasen.", en: "No, he is not a teacher.", id: "sent:1:5" },
+  { lesson: 1, jp: "はじめまして。どうぞ よろしく。", romaji: "Hajimemashite. Dōzo yoroshiku.", en: "How do you do. Pleased to meet you.", id: "sent:1:6" },
+  { lesson: 1, jp: "こちらは スズキさんです。", romaji: "Kochira wa Suzuki-san desu.", en: "This is Mr. Suzuki.", id: "sent:1:7" },
+  { lesson: 1, jp: "わたしは アメリカから きました。", romaji: "Watashi wa Amerika kara kimashita.", en: "I came from America.", id: "sent:1:8" },
+  { lesson: 1, jp: "しつれいですが、おなまえは？", romaji: "Shitsurei desu ga, o-namae wa?", en: "Excuse me, may I have your name?", id: "sent:1:9" },
+  { lesson: 2, jp: "これは ほんです。", romaji: "Kore wa hon desu.", en: "This is a book.", id: "sent:2:10" },
+  { lesson: 2, jp: "それは じしょですか。", romaji: "Sore wa jisho desu ka.", en: "Is that a dictionary?", id: "sent:2:11" },
+  { lesson: 2, jp: "あれは なんですか。", romaji: "Are wa nan desu ka.", en: "What is that over there?", id: "sent:2:12" },
+  { lesson: 2, jp: "これは わたしの かさです。", romaji: "Kore wa watashi no kasa desu.", en: "This is my umbrella.", id: "sent:2:13" },
+  { lesson: 2, jp: "このほんは わたしのです。", romaji: "Kono hon wa watashi no desu.", en: "This book is mine.", id: "sent:2:14" },
+  { lesson: 2, jp: "それは にほんごの ほんです。", romaji: "Sore wa nihongo no hon desu.", en: "That is a Japanese-language book.", id: "sent:2:15" },
+  { lesson: 2, jp: "あの かばんは だれのですか。", romaji: "Ano kaban wa dare no desu ka.", en: "Whose bag is that?", id: "sent:2:16" },
+  { lesson: 2, jp: "これは チョコレートです。どうぞ。", romaji: "Kore wa chokorēto desu. Dōzo.", en: "This is chocolate. Please (have some).", id: "sent:2:17" },
+  { lesson: 2, jp: "これは えいごで なんですか。", romaji: "Kore wa eigo de nan desu ka.", en: "What is this in English?", id: "sent:2:18" },
+  { lesson: 2, jp: "ちがいます。それは ボールペンじゃ ありません。", romaji: "Chigaimasu. Sore wa bōrupen ja arimasen.", en: "No. That isn't a ballpoint pen.", id: "sent:2:19" },
+  { lesson: 3, jp: "ここは きょうしつです。", romaji: "Koko wa kyōshitsu desu.", en: "Here is a classroom.", id: "sent:3:20" },
+  { lesson: 3, jp: "トイレは あそこです。", romaji: "Toire wa asoko desu.", en: "The toilet is over there.", id: "sent:3:21" },
+  { lesson: 3, jp: "でんわは どこですか。", romaji: "Denwa wa doko desu ka.", en: "Where is the telephone?", id: "sent:3:22" },
+  { lesson: 3, jp: "おくには どちらですか。", romaji: "O-kuni wa dochira desu ka.", en: "Where are you from? (polite)", id: "sent:3:23" },
+  { lesson: 3, jp: "これは いくらですか。", romaji: "Kore wa ikura desu ka.", en: "How much is this?", id: "sent:3:24" },
+  { lesson: 3, jp: "このほんは せんえんです。", romaji: "Kono hon wa sen-en desu.", en: "This book is 1,000 yen.", id: "sent:3:25" },
+  { lesson: 3, jp: "ネクタイうりばは なんがいですか。", romaji: "Nekutai uriba wa nan-gai desu ka.", en: "What floor is the necktie counter on?", id: "sent:3:26" },
+  { lesson: 3, jp: "すみません、これを みせて ください。", romaji: "Sumimasen, kore o misete kudasai.", en: "Excuse me, please show me this.", id: "sent:3:27" },
+  { lesson: 3, jp: "じゃあ、これを ください。", romaji: "Jā, kore o kudasai.", en: "Then, please give me this.", id: "sent:3:28" },
+  { lesson: 3, jp: "うけつけは いっかいです。", romaji: "Uketsuke wa ikkai desu.", en: "Reception is on the 1st floor.", id: "sent:3:29" },
+  { lesson: 4, jp: "いま なんじですか。", romaji: "Ima nanji desu ka.", en: "What time is it now?", id: "sent:4:30" },
+  { lesson: 4, jp: "いま くじはんです。", romaji: "Ima kuji-han desu.", en: "It's 9:30 now.", id: "sent:4:31" },
+  { lesson: 4, jp: "わたしは まいあさ ろくじに おきます。", romaji: "Watashi wa maiasa rokuji ni okimasu.", en: "I get up at 6:00 every morning.", id: "sent:4:32" },
+  { lesson: 4, jp: "ぎんこうは くじから さんじまでです。", romaji: "Ginkō wa kuji kara sanji made desu.", en: "The bank is open from 9 to 3.", id: "sent:4:33" },
+  { lesson: 4, jp: "きょうは げつようびです。", romaji: "Kyō wa getsuyōbi desu.", en: "Today is Monday.", id: "sent:4:34" },
+  { lesson: 4, jp: "やすみは どようびと にちようびです。", romaji: "Yasumi wa doyōbi to nichiyōbi desu.", en: "The holidays are Saturday and Sunday.", id: "sent:4:35" },
+  { lesson: 4, jp: "きのう ろくじまで はたらきました。", romaji: "Kinō rokuji made hatarakimashita.", en: "I worked until six yesterday.", id: "sent:4:36" },
+  { lesson: 4, jp: "あした べんきょうしません。", romaji: "Ashita benkyō shimasen.", en: "I won't study tomorrow.", id: "sent:4:37" },
+  { lesson: 4, jp: "しけんは なんじから なんじまでですか。", romaji: "Shiken wa nanji kara nanji made desu ka.", en: "From what time to what time is the exam?", id: "sent:4:38" },
+  { lesson: 4, jp: "ひるやすみは じゅうにじから いちじまでです。", romaji: "Hiruyasumi wa jūniji kara ichiji made desu.", en: "Lunch break is from 12 to 1.", id: "sent:4:39" },
+  { lesson: 5, jp: "わたしは とうきょうへ いきます。", romaji: "Watashi wa Tōkyō e ikimasu.", en: "I am going to Tokyo.", id: "sent:5:40" },
+  { lesson: 5, jp: "あした がっこうへ いきます。", romaji: "Ashita gakkō e ikimasu.", en: "I'll go to school tomorrow.", id: "sent:5:41" },
+  { lesson: 5, jp: "でんしゃで がっこうへ いきます。", romaji: "Densha de gakkō e ikimasu.", en: "I go to school by train.", id: "sent:5:42" },
+  { lesson: 5, jp: "ともだちと きょうとへ いきます。", romaji: "Tomodachi to Kyōto e ikimasu.", en: "I'm going to Kyoto with a friend.", id: "sent:5:43" },
+  { lesson: 5, jp: "ひとりで うちへ かえります。", romaji: "Hitori de uchi e kaerimasu.", en: "I'm going home alone.", id: "sent:5:44" },
+  { lesson: 5, jp: "らいしゅう にほんへ きます。", romaji: "Raishū Nihon e kimasu.", en: "I'm coming to Japan next week.", id: "sent:5:45" },
+  { lesson: 5, jp: "たんじょうびは なんがつ なんにちですか。", romaji: "Tanjōbi wa nangatsu nannichi desu ka.", en: "What month and day is your birthday?", id: "sent:5:46" },
+  { lesson: 5, jp: "わたしの たんじょうびは くがつ ついたちです。", romaji: "Watashi no tanjōbi wa kugatsu tsuitachi desu.", en: "My birthday is September 1st.", id: "sent:5:47" },
+  { lesson: 5, jp: "きのう どこへも いきませんでした。", romaji: "Kinō doko e mo ikimasen deshita.", en: "I didn't go anywhere yesterday.", id: "sent:5:48" },
+  { lesson: 5, jp: "あさってから やすみです。", romaji: "Asatte kara yasumi desu.", en: "The holiday starts the day after tomorrow.", id: "sent:5:49" },
+  { lesson: 6, jp: "まいあさ パンを たべます。", romaji: "Maiasa pan o tabemasu.", en: "I eat bread every morning.", id: "sent:6:50" },
+  { lesson: 6, jp: "なにを のみますか。", romaji: "Nani o nomimasu ka.", en: "What will you drink?", id: "sent:6:51" },
+  { lesson: 6, jp: "コーヒーを のみます。", romaji: "Kōhī o nomimasu.", en: "I will drink coffee.", id: "sent:6:52" },
+  { lesson: 6, jp: "きのう ともだちに あいました。", romaji: "Kinō tomodachi ni aimashita.", en: "I met a friend yesterday.", id: "sent:6:53" },
+  { lesson: 6, jp: "デパートで かばんを かいました。", romaji: "Depāto de kaban o kaimashita.", en: "I bought a bag at the department store.", id: "sent:6:54" },
+  { lesson: 6, jp: "うちで しゅくだいを します。", romaji: "Uchi de shukudai o shimasu.", en: "I do homework at home.", id: "sent:6:55" },
+  { lesson: 6, jp: "いっしょに ごはんを たべませんか。", romaji: "Issho ni gohan o tabemasen ka.", en: "Won't you have a meal with me?", id: "sent:6:56" },
+  { lesson: 6, jp: "ええ、いいですね。", romaji: "Ē, ii desu ne.", en: "Yes, that sounds good.", id: "sent:6:57" },
+  { lesson: 6, jp: "としょかんで ほんを よみます。", romaji: "Toshokan de hon o yomimasu.", en: "I read books at the library.", id: "sent:6:58" },
+  { lesson: 6, jp: "しゃしんを とりませんか。", romaji: "Shashin o torimasen ka.", en: "Shall we take a photo?", id: "sent:6:59" },
+  { lesson: 7, jp: "わたしは ともだちに プレゼントを あげました。", romaji: "Watashi wa tomodachi ni purezento o agemashita.", en: "I gave my friend a present.", id: "sent:7:60" },
+  { lesson: 7, jp: "ちちに とけいを もらいました。", romaji: "Chichi ni tokei o moraimashita.", en: "I received a watch from my father.", id: "sent:7:61" },
+  { lesson: 7, jp: "はしで ごはんを たべます。", romaji: "Hashi de gohan o tabemasu.", en: "I eat with chopsticks.", id: "sent:7:62" },
+  { lesson: 7, jp: "にほんごで メールを かきます。", romaji: "Nihongo de mēru o kakimasu.", en: "I write emails in Japanese.", id: "sent:7:63" },
+  { lesson: 7, jp: "たなかさんは わたしに にほんごを おしえます。", romaji: "Tanaka-san wa watashi ni nihongo o oshiemasu.", en: "Mr. Tanaka teaches me Japanese.", id: "sent:7:64" },
+  { lesson: 7, jp: "ケータイで ははに でんわを かけました。", romaji: "Kētai de haha ni denwa o kakemashita.", en: "I called my mother on the cell phone.", id: "sent:7:65" },
+  { lesson: 7, jp: "もう ばんごはんを たべましたか。", romaji: "Mō bangohan o tabemashita ka.", en: "Have you eaten dinner yet?", id: "sent:7:66" },
+  { lesson: 7, jp: "はい、もう たべました。", romaji: "Hai, mō tabemashita.", en: "Yes, I've already eaten.", id: "sent:7:67" },
+  { lesson: 7, jp: "いいえ、まだです。", romaji: "Iie, mada desu.", en: "No, not yet.", id: "sent:7:68" },
+  { lesson: 7, jp: "すてきな シャツですね。", romaji: "Suteki na shatsu desu ne.", en: "What a nice shirt!", id: "sent:7:69" },
+  { lesson: 8, jp: "にほんごは おもしろいです。", romaji: "Nihongo wa omoshiroi desu.", en: "Japanese is interesting.", id: "sent:8:70" },
+  { lesson: 8, jp: "このほんは あまり おもしろくないです。", romaji: "Kono hon wa amari omoshirokunai desu.", en: "This book is not very interesting.", id: "sent:8:71" },
+  { lesson: 8, jp: "しんかんせんは とても はやいです。", romaji: "Shinkansen wa totemo hayai desu.", en: "The Shinkansen is very fast.", id: "sent:8:72" },
+  { lesson: 8, jp: "たなかさんは どんな ひとですか。", romaji: "Tanaka-san wa donna hito desu ka.", en: "What kind of person is Mr. Tanaka?", id: "sent:8:73" },
+  { lesson: 8, jp: "たなかさんは しんせつな ひとです。", romaji: "Tanaka-san wa shinsetsu na hito desu.", en: "Mr. Tanaka is a kind person.", id: "sent:8:74" },
+  { lesson: 8, jp: "ふじさんは たかい やまです。", romaji: "Fujisan wa takai yama desu.", en: "Mt. Fuji is a tall mountain.", id: "sent:8:75" },
+  { lesson: 8, jp: "このレストランは おいしいですが、たかいです。", romaji: "Kono resutoran wa oishii desu ga, takai desu.", en: "This restaurant is delicious but expensive.", id: "sent:8:76" },
+  { lesson: 8, jp: "きょうとは しずかで きれいです。", romaji: "Kyōto wa shizuka de kirei desu.", en: "Kyoto is quiet and beautiful.", id: "sent:8:77" },
+  { lesson: 8, jp: "このとけいは あたらしくないです。", romaji: "Kono tokei wa atarashikunai desu.", en: "This watch isn't new.", id: "sent:8:78" },
+  { lesson: 8, jp: "にほんの たべものは とても おいしいです。", romaji: "Nihon no tabemono wa totemo oishii desu.", en: "Japanese food is very delicious.", id: "sent:8:79" },
+  { lesson: 9, jp: "わたしは にほんごが すこし わかります。", romaji: "Watashi wa nihongo ga sukoshi wakarimasu.", en: "I understand a little Japanese.", id: "sent:9:80" },
+  { lesson: 9, jp: "かんじは ぜんぜん わかりません。", romaji: "Kanji wa zenzen wakarimasen.", en: "I don't understand kanji at all.", id: "sent:9:81" },
+  { lesson: 9, jp: "わたしは スポーツが すきです。", romaji: "Watashi wa supōtsu ga suki desu.", en: "I like sports.", id: "sent:9:82" },
+  { lesson: 9, jp: "いぬが きらいです。", romaji: "Inu ga kirai desu.", en: "I dislike dogs.", id: "sent:9:83" },
+  { lesson: 9, jp: "やまださんは りょうりが じょうずです。", romaji: "Yamada-san wa ryōri ga jōzu desu.", en: "Mr. Yamada is good at cooking.", id: "sent:9:84" },
+  { lesson: 9, jp: "きょうは いそがしいですから、いきません。", romaji: "Kyō wa isogashii desu kara, ikimasen.", en: "I'm busy today, so I won't go.", id: "sent:9:85" },
+  { lesson: 9, jp: "どうして いきませんか。", romaji: "Dōshite ikimasen ka.", en: "Why aren't you going?", id: "sent:9:86" },
+  { lesson: 9, jp: "しけんが ありますから、べんきょうします。", romaji: "Shiken ga arimasu kara, benkyō shimasu.", en: "There's an exam, so I'll study.", id: "sent:9:87" },
+  { lesson: 9, jp: "じかんが ありませんから、ざんねんです。", romaji: "Jikan ga arimasen kara, zannen desu.", en: "I don't have time, so it's a pity.", id: "sent:9:88" },
+  { lesson: 9, jp: "やきゅうが だいすきです。", romaji: "Yakyū ga daisuki desu.", en: "I love baseball.", id: "sent:9:89" },
+  { lesson: 10, jp: "つくえの うえに ほんが あります。", romaji: "Tsukue no ue ni hon ga arimasu.", en: "There is a book on the desk.", id: "sent:10:90" },
+  { lesson: 10, jp: "へやに だれが いますか。", romaji: "Heya ni dare ga imasu ka.", en: "Who is in the room?", id: "sent:10:91" },
+  { lesson: 10, jp: "へやに たなかさんが います。", romaji: "Heya ni Tanaka-san ga imasu.", en: "Mr. Tanaka is in the room.", id: "sent:10:92" },
+  { lesson: 10, jp: "ぎんこうは えきの まえに あります。", romaji: "Ginkō wa eki no mae ni arimasu.", en: "The bank is in front of the station.", id: "sent:10:93" },
+  { lesson: 10, jp: "コンビニは どこに ありますか。", romaji: "Konbini wa doko ni arimasu ka.", en: "Where is the convenience store?", id: "sent:10:94" },
+  { lesson: 10, jp: "コンビニは デパートと ぎんこうの あいだに あります。", romaji: "Konbini wa depāto to ginkō no aida ni arimasu.", en: "The convenience store is between the department store and the bank.", id: "sent:10:95" },
+  { lesson: 10, jp: "テーブルの したに ねこが います。", romaji: "Tēburu no shita ni neko ga imasu.", en: "There is a cat under the table.", id: "sent:10:96" },
+  { lesson: 10, jp: "へやに テレビや ラジオなどが あります。", romaji: "Heya ni terebi ya rajio nado ga arimasu.", en: "In the room there is a TV, a radio, and so on.", id: "sent:10:97" },
+  { lesson: 10, jp: "ポストは ビルの となりに あります。", romaji: "Posuto wa biru no tonari ni arimasu.", en: "The mailbox is next to the building.", id: "sent:10:98" },
+  { lesson: 10, jp: "なかに なにが ありますか。", romaji: "Naka ni nani ga arimasu ka.", en: "What is inside?", id: "sent:10:99" },
 ];
 
 /* ============================================================
    KANA CHARTS
    ============================================================ */
 const HIRAGANA_BASIC = [
-  {romaji:'a',kana:'あ'},{romaji:'i',kana:'い'},{romaji:'u',kana:'う'},{romaji:'e',kana:'え'},{romaji:'o',kana:'お'},
-  {romaji:'ka',kana:'か'},{romaji:'ki',kana:'き'},{romaji:'ku',kana:'く'},{romaji:'ke',kana:'け'},{romaji:'ko',kana:'こ'},
-  {romaji:'sa',kana:'さ'},{romaji:'shi',kana:'し'},{romaji:'su',kana:'す'},{romaji:'se',kana:'せ'},{romaji:'so',kana:'そ'},
-  {romaji:'ta',kana:'た'},{romaji:'chi',kana:'ち'},{romaji:'tsu',kana:'つ'},{romaji:'te',kana:'て'},{romaji:'to',kana:'と'},
-  {romaji:'na',kana:'な'},{romaji:'ni',kana:'に'},{romaji:'nu',kana:'ぬ'},{romaji:'ne',kana:'ね'},{romaji:'no',kana:'の'},
-  {romaji:'ha',kana:'は'},{romaji:'hi',kana:'ひ'},{romaji:'fu',kana:'ふ'},{romaji:'he',kana:'へ'},{romaji:'ho',kana:'ほ'},
-  {romaji:'ma',kana:'ま'},{romaji:'mi',kana:'み'},{romaji:'mu',kana:'む'},{romaji:'me',kana:'め'},{romaji:'mo',kana:'も'},
-  {romaji:'ya',kana:'や'},{romaji:'yu',kana:'ゆ'},{romaji:'yo',kana:'よ'},
-  {romaji:'ra',kana:'ら'},{romaji:'ri',kana:'り'},{romaji:'ru',kana:'る'},{romaji:'re',kana:'れ'},{romaji:'ro',kana:'ろ'},
-  {romaji:'wa',kana:'わ'},{romaji:'wo',kana:'を'},{romaji:'n',kana:'ん'},
+  { romaji: "a", kana: "あ", script: "hiragana" },
+  { romaji: "i", kana: "い", script: "hiragana" },
+  { romaji: "u", kana: "う", script: "hiragana" },
+  { romaji: "e", kana: "え", script: "hiragana" },
+  { romaji: "o", kana: "お", script: "hiragana" },
+  { romaji: "ka", kana: "か", script: "hiragana" },
+  { romaji: "ki", kana: "き", script: "hiragana" },
+  { romaji: "ku", kana: "く", script: "hiragana" },
+  { romaji: "ke", kana: "け", script: "hiragana" },
+  { romaji: "ko", kana: "こ", script: "hiragana" },
+  { romaji: "sa", kana: "さ", script: "hiragana" },
+  { romaji: "shi", kana: "し", script: "hiragana" },
+  { romaji: "su", kana: "す", script: "hiragana" },
+  { romaji: "se", kana: "せ", script: "hiragana" },
+  { romaji: "so", kana: "そ", script: "hiragana" },
+  { romaji: "ta", kana: "た", script: "hiragana" },
+  { romaji: "chi", kana: "ち", script: "hiragana" },
+  { romaji: "tsu", kana: "つ", script: "hiragana" },
+  { romaji: "te", kana: "て", script: "hiragana" },
+  { romaji: "to", kana: "と", script: "hiragana" },
+  { romaji: "na", kana: "な", script: "hiragana" },
+  { romaji: "ni", kana: "に", script: "hiragana" },
+  { romaji: "nu", kana: "ぬ", script: "hiragana" },
+  { romaji: "ne", kana: "ね", script: "hiragana" },
+  { romaji: "no", kana: "の", script: "hiragana" },
+  { romaji: "ha", kana: "は", script: "hiragana" },
+  { romaji: "hi", kana: "ひ", script: "hiragana" },
+  { romaji: "fu", kana: "ふ", script: "hiragana" },
+  { romaji: "he", kana: "へ", script: "hiragana" },
+  { romaji: "ho", kana: "ほ", script: "hiragana" },
+  { romaji: "ma", kana: "ま", script: "hiragana" },
+  { romaji: "mi", kana: "み", script: "hiragana" },
+  { romaji: "mu", kana: "む", script: "hiragana" },
+  { romaji: "me", kana: "め", script: "hiragana" },
+  { romaji: "mo", kana: "も", script: "hiragana" },
+  { romaji: "ya", kana: "や", script: "hiragana" },
+  { romaji: "yu", kana: "ゆ", script: "hiragana" },
+  { romaji: "yo", kana: "よ", script: "hiragana" },
+  { romaji: "ra", kana: "ら", script: "hiragana" },
+  { romaji: "ri", kana: "り", script: "hiragana" },
+  { romaji: "ru", kana: "る", script: "hiragana" },
+  { romaji: "re", kana: "れ", script: "hiragana" },
+  { romaji: "ro", kana: "ろ", script: "hiragana" },
+  { romaji: "wa", kana: "わ", script: "hiragana" },
+  { romaji: "wo", kana: "を", script: "hiragana" },
+  { romaji: "n", kana: "ん", script: "hiragana" },
 ];
 const HIRAGANA_DAKUTEN = [
-  {romaji:'ga',kana:'が'},{romaji:'gi',kana:'ぎ'},{romaji:'gu',kana:'ぐ'},{romaji:'ge',kana:'げ'},{romaji:'go',kana:'ご'},
-  {romaji:'za',kana:'ざ'},{romaji:'ji',kana:'じ'},{romaji:'zu',kana:'ず'},{romaji:'ze',kana:'ぜ'},{romaji:'zo',kana:'ぞ'},
-  {romaji:'da',kana:'だ'},{romaji:'di',kana:'ぢ'},{romaji:'du',kana:'づ'},{romaji:'de',kana:'で'},{romaji:'do',kana:'ど'},
-  {romaji:'ba',kana:'ば'},{romaji:'bi',kana:'び'},{romaji:'bu',kana:'ぶ'},{romaji:'be',kana:'べ'},{romaji:'bo',kana:'ぼ'},
-  {romaji:'pa',kana:'ぱ'},{romaji:'pi',kana:'ぴ'},{romaji:'pu',kana:'ぷ'},{romaji:'pe',kana:'ぺ'},{romaji:'po',kana:'ぽ'},
+  { romaji: "ga", kana: "が", script: "hiragana" },
+  { romaji: "gi", kana: "ぎ", script: "hiragana" },
+  { romaji: "gu", kana: "ぐ", script: "hiragana" },
+  { romaji: "ge", kana: "げ", script: "hiragana" },
+  { romaji: "go", kana: "ご", script: "hiragana" },
+  { romaji: "za", kana: "ざ", script: "hiragana" },
+  { romaji: "ji", kana: "じ", script: "hiragana" },
+  { romaji: "zu", kana: "ず", script: "hiragana" },
+  { romaji: "ze", kana: "ぜ", script: "hiragana" },
+  { romaji: "zo", kana: "ぞ", script: "hiragana" },
+  { romaji: "da", kana: "だ", script: "hiragana" },
+  { romaji: "di", kana: "ぢ", script: "hiragana" },
+  { romaji: "du", kana: "づ", script: "hiragana" },
+  { romaji: "de", kana: "で", script: "hiragana" },
+  { romaji: "do", kana: "ど", script: "hiragana" },
+  { romaji: "ba", kana: "ば", script: "hiragana" },
+  { romaji: "bi", kana: "び", script: "hiragana" },
+  { romaji: "bu", kana: "ぶ", script: "hiragana" },
+  { romaji: "be", kana: "べ", script: "hiragana" },
+  { romaji: "bo", kana: "ぼ", script: "hiragana" },
+  { romaji: "pa", kana: "ぱ", script: "hiragana" },
+  { romaji: "pi", kana: "ぴ", script: "hiragana" },
+  { romaji: "pu", kana: "ぷ", script: "hiragana" },
+  { romaji: "pe", kana: "ぺ", script: "hiragana" },
+  { romaji: "po", kana: "ぽ", script: "hiragana" },
 ];
 const KATAKANA_BASIC = [
-  {romaji:'a',kana:'ア'},{romaji:'i',kana:'イ'},{romaji:'u',kana:'ウ'},{romaji:'e',kana:'エ'},{romaji:'o',kana:'オ'},
-  {romaji:'ka',kana:'カ'},{romaji:'ki',kana:'キ'},{romaji:'ku',kana:'ク'},{romaji:'ke',kana:'ケ'},{romaji:'ko',kana:'コ'},
-  {romaji:'sa',kana:'サ'},{romaji:'shi',kana:'シ'},{romaji:'su',kana:'ス'},{romaji:'se',kana:'セ'},{romaji:'so',kana:'ソ'},
-  {romaji:'ta',kana:'タ'},{romaji:'chi',kana:'チ'},{romaji:'tsu',kana:'ツ'},{romaji:'te',kana:'テ'},{romaji:'to',kana:'ト'},
-  {romaji:'na',kana:'ナ'},{romaji:'ni',kana:'ニ'},{romaji:'nu',kana:'ヌ'},{romaji:'ne',kana:'ネ'},{romaji:'no',kana:'ノ'},
-  {romaji:'ha',kana:'ハ'},{romaji:'hi',kana:'ヒ'},{romaji:'fu',kana:'フ'},{romaji:'he',kana:'ヘ'},{romaji:'ho',kana:'ホ'},
-  {romaji:'ma',kana:'マ'},{romaji:'mi',kana:'ミ'},{romaji:'mu',kana:'ム'},{romaji:'me',kana:'メ'},{romaji:'mo',kana:'モ'},
-  {romaji:'ya',kana:'ヤ'},{romaji:'yu',kana:'ユ'},{romaji:'yo',kana:'ヨ'},
-  {romaji:'ra',kana:'ラ'},{romaji:'ri',kana:'リ'},{romaji:'ru',kana:'ル'},{romaji:'re',kana:'レ'},{romaji:'ro',kana:'ロ'},
-  {romaji:'wa',kana:'ワ'},{romaji:'wo',kana:'ヲ'},{romaji:'n',kana:'ン'},
+  { romaji: "a", kana: "ア", script: "katakana" },
+  { romaji: "i", kana: "イ", script: "katakana" },
+  { romaji: "u", kana: "ウ", script: "katakana" },
+  { romaji: "e", kana: "エ", script: "katakana" },
+  { romaji: "o", kana: "オ", script: "katakana" },
+  { romaji: "ka", kana: "カ", script: "katakana" },
+  { romaji: "ki", kana: "キ", script: "katakana" },
+  { romaji: "ku", kana: "ク", script: "katakana" },
+  { romaji: "ke", kana: "ケ", script: "katakana" },
+  { romaji: "ko", kana: "コ", script: "katakana" },
+  { romaji: "sa", kana: "サ", script: "katakana" },
+  { romaji: "shi", kana: "シ", script: "katakana" },
+  { romaji: "su", kana: "ス", script: "katakana" },
+  { romaji: "se", kana: "セ", script: "katakana" },
+  { romaji: "so", kana: "ソ", script: "katakana" },
+  { romaji: "ta", kana: "タ", script: "katakana" },
+  { romaji: "chi", kana: "チ", script: "katakana" },
+  { romaji: "tsu", kana: "ツ", script: "katakana" },
+  { romaji: "te", kana: "テ", script: "katakana" },
+  { romaji: "to", kana: "ト", script: "katakana" },
+  { romaji: "na", kana: "ナ", script: "katakana" },
+  { romaji: "ni", kana: "ニ", script: "katakana" },
+  { romaji: "nu", kana: "ヌ", script: "katakana" },
+  { romaji: "ne", kana: "ネ", script: "katakana" },
+  { romaji: "no", kana: "ノ", script: "katakana" },
+  { romaji: "ha", kana: "ハ", script: "katakana" },
+  { romaji: "hi", kana: "ヒ", script: "katakana" },
+  { romaji: "fu", kana: "フ", script: "katakana" },
+  { romaji: "he", kana: "ヘ", script: "katakana" },
+  { romaji: "ho", kana: "ホ", script: "katakana" },
+  { romaji: "ma", kana: "マ", script: "katakana" },
+  { romaji: "mi", kana: "ミ", script: "katakana" },
+  { romaji: "mu", kana: "ム", script: "katakana" },
+  { romaji: "me", kana: "メ", script: "katakana" },
+  { romaji: "mo", kana: "モ", script: "katakana" },
+  { romaji: "ya", kana: "ヤ", script: "katakana" },
+  { romaji: "yu", kana: "ユ", script: "katakana" },
+  { romaji: "yo", kana: "ヨ", script: "katakana" },
+  { romaji: "ra", kana: "ラ", script: "katakana" },
+  { romaji: "ri", kana: "リ", script: "katakana" },
+  { romaji: "ru", kana: "ル", script: "katakana" },
+  { romaji: "re", kana: "レ", script: "katakana" },
+  { romaji: "ro", kana: "ロ", script: "katakana" },
+  { romaji: "wa", kana: "ワ", script: "katakana" },
+  { romaji: "wo", kana: "ヲ", script: "katakana" },
+  { romaji: "n", kana: "ン", script: "katakana" },
 ];
 const KATAKANA_DAKUTEN = [
-  {romaji:'ga',kana:'ガ'},{romaji:'gi',kana:'ギ'},{romaji:'gu',kana:'グ'},{romaji:'ge',kana:'ゲ'},{romaji:'go',kana:'ゴ'},
-  {romaji:'za',kana:'ザ'},{romaji:'ji',kana:'ジ'},{romaji:'zu',kana:'ズ'},{romaji:'ze',kana:'ゼ'},{romaji:'zo',kana:'ゾ'},
-  {romaji:'da',kana:'ダ'},{romaji:'di',kana:'ヂ'},{romaji:'du',kana:'ヅ'},{romaji:'de',kana:'デ'},{romaji:'do',kana:'ド'},
-  {romaji:'ba',kana:'バ'},{romaji:'bi',kana:'ビ'},{romaji:'bu',kana:'ブ'},{romaji:'be',kana:'ベ'},{romaji:'bo',kana:'ボ'},
-  {romaji:'pa',kana:'パ'},{romaji:'pi',kana:'ピ'},{romaji:'pu',kana:'プ'},{romaji:'pe',kana:'ペ'},{romaji:'po',kana:'ポ'},
+  { romaji: "ga", kana: "ガ", script: "katakana" },
+  { romaji: "gi", kana: "ギ", script: "katakana" },
+  { romaji: "gu", kana: "グ", script: "katakana" },
+  { romaji: "ge", kana: "ゲ", script: "katakana" },
+  { romaji: "go", kana: "ゴ", script: "katakana" },
+  { romaji: "za", kana: "ザ", script: "katakana" },
+  { romaji: "ji", kana: "ジ", script: "katakana" },
+  { romaji: "zu", kana: "ズ", script: "katakana" },
+  { romaji: "ze", kana: "ゼ", script: "katakana" },
+  { romaji: "zo", kana: "ゾ", script: "katakana" },
+  { romaji: "da", kana: "ダ", script: "katakana" },
+  { romaji: "di", kana: "ヂ", script: "katakana" },
+  { romaji: "du", kana: "ヅ", script: "katakana" },
+  { romaji: "de", kana: "デ", script: "katakana" },
+  { romaji: "do", kana: "ド", script: "katakana" },
+  { romaji: "ba", kana: "バ", script: "katakana" },
+  { romaji: "bi", kana: "ビ", script: "katakana" },
+  { romaji: "bu", kana: "ブ", script: "katakana" },
+  { romaji: "be", kana: "ベ", script: "katakana" },
+  { romaji: "bo", kana: "ボ", script: "katakana" },
+  { romaji: "pa", kana: "パ", script: "katakana" },
+  { romaji: "pi", kana: "ピ", script: "katakana" },
+  { romaji: "pu", kana: "プ", script: "katakana" },
+  { romaji: "pe", kana: "ペ", script: "katakana" },
+  { romaji: "po", kana: "ポ", script: "katakana" },
 ];
+const SHUKUDAI = {
+  "generators": {
+    "numbers": {
+      "enabled": true,
+      "maxValue": 9999
+    },
+    "money": {
+      "enabled": true,
+      "currencies": [
+        "yen",
+        "dollar",
+        "cent"
+      ]
+    },
+    "time": {
+      "enabled": true
+    },
+    "dates": {
+      "enabled": true
+    },
+    "counters": {
+      "enabled": true,
+      "types": [
+        "general",
+        "people",
+        "age",
+        "floor"
+      ]
+    }
+  },
+  "banks": {
+    "particles": [
+      {
+        "lesson": 1,
+        "jp": "わたし___ アファクです。",
+        "answer": "は",
+        "choices": [],
+        "romaji": "Watashi ___ Afaqu desu.",
+        "en": "I am Afaq.",
+        "explanation": "は marks the topic — \"as for me, I am Afaq\".",
+        "id": "shukudai:particles:0000"
+      },
+      {
+        "lesson": 1,
+        "jp": "ミラーさん___ アメリカじんです。",
+        "answer": "は",
+        "choices": [],
+        "romaji": "Mirā-san ___ Amerikajin desu.",
+        "en": "Mr. Miller is American.",
+        "explanation": "は marks the topic of the sentence.",
+        "id": "shukudai:particles:0001"
+      },
+      {
+        "lesson": 1,
+        "jp": "わたし___ パキスタンじんです。",
+        "answer": "は",
+        "choices": [],
+        "romaji": "Watashi ___ Pakisutanjin desu.",
+        "en": "I am Pakistani.",
+        "explanation": "は = topic marker.",
+        "id": "shukudai:particles:0002"
+      },
+      {
+        "lesson": 1,
+        "jp": "カリナさん___ がくせいですか。",
+        "answer": "は",
+        "choices": [],
+        "romaji": "Karina-san ___ gakusei desu ka.",
+        "en": "Is Karina a student?",
+        "explanation": "は marks topic in yes/no questions.",
+        "id": "shukudai:particles:0003"
+      },
+      {
+        "lesson": 1,
+        "jp": "たなかさん___ かいしゃいんです。",
+        "answer": "は",
+        "choices": [],
+        "romaji": "Tanaka-san ___ kaishain desu.",
+        "en": "Mr. Tanaka is a company employee.",
+        "explanation": "は = topic.",
+        "id": "shukudai:particles:0004"
+      },
+      {
+        "lesson": 1,
+        "jp": "IMC___ しゃいんです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "IMC ___ shain desu.",
+        "en": "I am an IMC employee.",
+        "explanation": "の links one noun to another — \"company-of employee\".",
+        "id": "shukudai:particles:0005"
+      },
+      {
+        "lesson": 1,
+        "jp": "パワーでんき___ しゃいんです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Pawādenki ___ shain desu.",
+        "en": "I am a Power Electric employee.",
+        "explanation": "の = \"of/belongs to\" — \"a Power-Electric employee\".",
+        "id": "shukudai:particles:0006"
+      },
+      {
+        "lesson": 1,
+        "jp": "さくらだいがく___ がくせいです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Sakura-daigaku ___ gakusei desu.",
+        "en": "I am a Sakura University student.",
+        "explanation": "の links university to student.",
+        "id": "shukudai:particles:0007"
+      },
+      {
+        "lesson": 1,
+        "jp": "こべびょういん___ いしゃです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Kōbe-byōin ___ isha desu.",
+        "en": "I am a doctor at Kobe Hospital.",
+        "explanation": "の = of/at — affiliation.",
+        "id": "shukudai:particles:0008"
+      },
+      {
+        "lesson": 2,
+        "jp": "これは わたし___ ほんです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Kore wa watashi ___ hon desu.",
+        "en": "This is my book.",
+        "explanation": "の after a person = possessive — \"my book\".",
+        "id": "shukudai:particles:0009"
+      },
+      {
+        "lesson": 2,
+        "jp": "これは にほんご___ ほんです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Kore wa nihongo ___ hon desu.",
+        "en": "This is a Japanese-language book.",
+        "explanation": "の links one noun to another.",
+        "id": "shukudai:particles:0010"
+      },
+      {
+        "lesson": 2,
+        "jp": "それは あなた___ かさですか。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Sore wa anata ___ kasa desu ka.",
+        "en": "Is that your umbrella?",
+        "explanation": "の = possessive, \"your umbrella\".",
+        "id": "shukudai:particles:0011"
+      },
+      {
+        "lesson": 2,
+        "jp": "あの ノートは だれ___ ですか。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Ano nōto wa dare ___ desu ka.",
+        "en": "Whose notebook is that?",
+        "explanation": "だれの = \"whose\".",
+        "id": "shukudai:particles:0012"
+      },
+      {
+        "lesson": 2,
+        "jp": "ミラーさん___ かばんです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Mirā-san ___ kaban desu.",
+        "en": "(It's) Mr. Miller's bag.",
+        "explanation": "の after a name = possessive.",
+        "id": "shukudai:particles:0013"
+      },
+      {
+        "lesson": 2,
+        "jp": "にほんご___ ざっしです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Nihongo ___ zasshi desu.",
+        "en": "A Japanese-language magazine.",
+        "explanation": "の connects two nouns: \"Japanese-language magazine\".",
+        "id": "shukudai:particles:0014"
+      },
+      {
+        "lesson": 2,
+        "jp": "これは サントスさん___ ほん___ どちらですか。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Kore wa Santosu-san ___ hon des ka.",
+        "en": "Is this Mr. Santos's book?",
+        "explanation": "の = possessive.",
+        "id": "shukudai:particles:0015"
+      },
+      {
+        "lesson": 2,
+        "jp": "あれは カメラ___ ほんです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Are wa kamera ___ hon desu.",
+        "en": "That over there is a camera book.",
+        "explanation": "の links nouns.",
+        "id": "shukudai:particles:0016"
+      },
+      {
+        "lesson": 3,
+        "jp": "これは ドイツ___ くるまです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Kore wa Doitsu ___ kuruma desu.",
+        "en": "This is a German car.",
+        "explanation": "の attached to a country = \"made in / from\" that country.",
+        "id": "shukudai:particles:0017"
+      },
+      {
+        "lesson": 3,
+        "jp": "これは どこ___ ワインですか。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Kore wa doko ___ wain desu ka.",
+        "en": "Where is this wine from?",
+        "explanation": "どこのN = \"N from where\".",
+        "id": "shukudai:particles:0018"
+      },
+      {
+        "lesson": 3,
+        "jp": "イタリア___ ワインです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Itaria ___ wain desu.",
+        "en": "It's Italian wine.",
+        "explanation": "の after country = origin.",
+        "id": "shukudai:particles:0019"
+      },
+      {
+        "lesson": 3,
+        "jp": "にほん___ かばんです。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Nihon ___ kaban desu.",
+        "en": "A Japanese bag.",
+        "explanation": "の links country to noun.",
+        "id": "shukudai:particles:0020"
+      },
+      {
+        "lesson": 4,
+        "jp": "まいあさ 6じ___ おきます。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Maiasa 6-ji ___ okimasu.",
+        "en": "I get up at 6 every morning.",
+        "explanation": "に marks a specific time-of-day (numbers).",
+        "id": "shukudai:particles:0021"
+      },
+      {
+        "lesson": 4,
+        "jp": "7じはん___ あさごはんを たべます。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "7-ji-han ___ asagohan o tabemasu.",
+        "en": "I eat breakfast at 7:30.",
+        "explanation": "に on numeric time.",
+        "id": "shukudai:particles:0022"
+      },
+      {
+        "lesson": 4,
+        "jp": "12じ___ 1じ___ ひるやすみです。",
+        "answer": "から",
+        "choices": [],
+        "romaji": "12-ji ___ 1-ji ___ hiruyasumi desu.",
+        "en": "Lunch break is from 12 to 1.",
+        "explanation": "から = from. (Pair: ~まで = until.)",
+        "id": "shukudai:particles:0023"
+      },
+      {
+        "lesson": 4,
+        "jp": "ぎんこうは 9じ___ 3じまでです。",
+        "answer": "から",
+        "choices": [],
+        "romaji": "Ginkō wa 9-ji ___ 3-ji made desu.",
+        "en": "The bank is from 9 to 3.",
+        "explanation": "から marks the start.",
+        "id": "shukudai:particles:0024"
+      },
+      {
+        "lesson": 4,
+        "jp": "しけんは 9じから 11じ___ です。",
+        "answer": "まで",
+        "choices": [],
+        "romaji": "Shiken wa 9-ji kara 11-ji ___ desu.",
+        "en": "The exam is from 9 to 11.",
+        "explanation": "まで = until/to.",
+        "id": "shukudai:particles:0025"
+      },
+      {
+        "lesson": 4,
+        "jp": "やすみは どようび___ にちようびです。",
+        "answer": "と",
+        "choices": [],
+        "romaji": "Yasumi wa doyōbi ___ nichiyōbi desu.",
+        "en": "The holidays are Saturday and Sunday.",
+        "explanation": "と connects two nouns of the same kind (and).",
+        "id": "shukudai:particles:0026"
+      },
+      {
+        "lesson": 4,
+        "jp": "IMCは アメリカ___ にほんの かいしゃです。",
+        "answer": "と",
+        "choices": [],
+        "romaji": "IMC wa Amerika ___ Nihon no kaisha desu.",
+        "en": "IMC is an American and Japanese company.",
+        "explanation": "と = and (joining nouns).",
+        "id": "shukudai:particles:0027"
+      },
+      {
+        "lesson": 4,
+        "jp": "まいあさ 6じ___ はたらきます。",
+        "answer": "から",
+        "choices": [],
+        "romaji": "Maiasa 6-ji ___ hatarakimasu.",
+        "en": "I work from 6 every morning.",
+        "explanation": "から = from.",
+        "id": "shukudai:particles:0028"
+      },
+      {
+        "lesson": 4,
+        "jp": "なんじ___ なんじまで はたらきますか。",
+        "answer": "から",
+        "choices": [],
+        "romaji": "Nan-ji ___ nan-ji made hatarakimasu ka.",
+        "en": "From what time to what time do you work?",
+        "explanation": "から / まで pair on time-ranges.",
+        "id": "shukudai:particles:0029"
+      },
+      {
+        "lesson": 5,
+        "jp": "らいしゅう にほん___ いきます。",
+        "answer": "へ",
+        "choices": [],
+        "romaji": "Raishū Nihon ___ ikimasu.",
+        "en": "I'll go to Japan next week.",
+        "explanation": "へ marks the destination of motion.",
+        "id": "shukudai:particles:0030"
+      },
+      {
+        "lesson": 5,
+        "jp": "うち___ かえります。",
+        "answer": "へ",
+        "choices": [],
+        "romaji": "Uchi ___ kaerimasu.",
+        "en": "I'll go home.",
+        "explanation": "へ marks where you are heading.",
+        "id": "shukudai:particles:0031"
+      },
+      {
+        "lesson": 5,
+        "jp": "あした がっこう___ いきます。",
+        "answer": "へ",
+        "choices": [],
+        "romaji": "Ashita gakkō ___ ikimasu.",
+        "en": "I'll go to school tomorrow.",
+        "explanation": "へ = direction-to.",
+        "id": "shukudai:particles:0032"
+      },
+      {
+        "lesson": 5,
+        "jp": "でんしゃ___ がっこうへ いきます。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Densha ___ gakkō e ikimasu.",
+        "en": "I go to school by train.",
+        "explanation": "で on a vehicle = means of transport (\"by train\").",
+        "id": "shukudai:particles:0033"
+      },
+      {
+        "lesson": 5,
+        "jp": "バス___ きます。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Basu ___ kimasu.",
+        "en": "I come by bus.",
+        "explanation": "で = means/instrument.",
+        "id": "shukudai:particles:0034"
+      },
+      {
+        "lesson": 5,
+        "jp": "じてんしゃ___ いきます。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Jitensha ___ ikimasu.",
+        "en": "I go by bicycle.",
+        "explanation": "で = transport.",
+        "id": "shukudai:particles:0035"
+      },
+      {
+        "lesson": 5,
+        "jp": "ともだち___ きょうとへ いきます。",
+        "answer": "と",
+        "choices": [],
+        "romaji": "Tomodachi ___ Kyōto e ikimasu.",
+        "en": "I go to Kyoto with a friend.",
+        "explanation": "と after a person = \"together with\".",
+        "id": "shukudai:particles:0036"
+      },
+      {
+        "lesson": 5,
+        "jp": "かぞく___ あそびます。",
+        "answer": "と",
+        "choices": [],
+        "romaji": "Kazoku ___ asobimasu.",
+        "en": "I'll play/hang out with my family.",
+        "explanation": "と marks the companion.",
+        "id": "shukudai:particles:0037"
+      },
+      {
+        "lesson": 5,
+        "jp": "たんじょうびは 9がつ ついたち___ です。",
+        "answer": "は",
+        "choices": [],
+        "romaji": "Tanjōbi wa 9-gatsu tsuitachi ___ desu.",
+        "en": "My birthday is September 1st.",
+        "explanation": "(no particle here at the end before です — answers blank as は/etc., or show in 大学___5じに → に etc.)",
+        "id": "shukudai:particles:0038"
+      },
+      {
+        "lesson": 5,
+        "jp": "たんじょうび___ なんがつ なんにちですか。",
+        "answer": "は",
+        "choices": [],
+        "romaji": "Tanjōbi ___ nan-gatsu nan-nichi desu ka.",
+        "en": "When (what month/day) is your birthday?",
+        "explanation": "は = topic.",
+        "id": "shukudai:particles:0039"
+      },
+      {
+        "lesson": 5,
+        "jp": "4がつ 1にち___ にほんへ きました。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "4-gatsu 1-nichi ___ Nihon e kimashita.",
+        "en": "I came to Japan on April 1st.",
+        "explanation": "に on a specific date.",
+        "id": "shukudai:particles:0040"
+      },
+      {
+        "lesson": 5,
+        "jp": "まいばん 11じ___ ねます。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Maiban 11-ji ___ nemasu.",
+        "en": "I sleep at 11 every night.",
+        "explanation": "に on a numeric time.",
+        "id": "shukudai:particles:0041"
+      },
+      {
+        "lesson": 6,
+        "jp": "まいあさ パン___ たべます。",
+        "answer": "を",
+        "choices": [],
+        "romaji": "Maiasa pan ___ tabemasu.",
+        "en": "I eat bread every morning.",
+        "explanation": "を marks the direct object of the verb.",
+        "id": "shukudai:particles:0042"
+      },
+      {
+        "lesson": 6,
+        "jp": "コーヒー___ のみます。",
+        "answer": "を",
+        "choices": [],
+        "romaji": "Kōhī ___ nomimasu.",
+        "en": "I drink coffee.",
+        "explanation": "を marks the object.",
+        "id": "shukudai:particles:0043"
+      },
+      {
+        "lesson": 6,
+        "jp": "しんぶん___ よみます。",
+        "answer": "を",
+        "choices": [],
+        "romaji": "Shinbun ___ yomimasu.",
+        "en": "I read the newspaper.",
+        "explanation": "を = direct object.",
+        "id": "shukudai:particles:0044"
+      },
+      {
+        "lesson": 6,
+        "jp": "デパート___ かばん___ かいました。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Depāto ___ kaban ___ kaimashita.",
+        "en": "I bought a bag at the department store.",
+        "explanation": "で marks where an action takes place.",
+        "id": "shukudai:particles:0045"
+      },
+      {
+        "lesson": 6,
+        "jp": "うち___ しゅくだいを します。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Uchi ___ shukudai o shimasu.",
+        "en": "I do homework at home.",
+        "explanation": "で = location of action.",
+        "id": "shukudai:particles:0046"
+      },
+      {
+        "lesson": 6,
+        "jp": "としょかん___ ほんを よみます。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Toshokan ___ hon o yomimasu.",
+        "en": "I read books at the library.",
+        "explanation": "で = where the action happens.",
+        "id": "shukudai:particles:0047"
+      },
+      {
+        "lesson": 6,
+        "jp": "ともだち___ あいました。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Tomodachi ___ aimashita.",
+        "en": "I met a friend.",
+        "explanation": "に marks the person being met (indirect target).",
+        "id": "shukudai:particles:0048"
+      },
+      {
+        "lesson": 6,
+        "jp": "なに___ たべますか。",
+        "answer": "を",
+        "choices": [],
+        "romaji": "Nani ___ tabemasu ka.",
+        "en": "What will you eat?",
+        "explanation": "を after the question word \"what\" object.",
+        "id": "shukudai:particles:0049"
+      },
+      {
+        "lesson": 6,
+        "jp": "いっしょに しゃしん___ とりませんか。",
+        "answer": "を",
+        "choices": [],
+        "romaji": "Issho ni shashin ___ torimasen ka.",
+        "en": "Won't you take a photo with me?",
+        "explanation": "を marks \"photo\" as the object of \"take\".",
+        "id": "shukudai:particles:0050"
+      },
+      {
+        "lesson": 6,
+        "jp": "うち___ パンを たべます。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Uchi ___ pan o tabemasu.",
+        "en": "I eat bread at home.",
+        "explanation": "で = place of action.",
+        "id": "shukudai:particles:0051"
+      },
+      {
+        "lesson": 7,
+        "jp": "はし___ ごはんを たべます。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Hashi ___ gohan o tabemasu.",
+        "en": "I eat with chopsticks.",
+        "explanation": "で marks the tool/means.",
+        "id": "shukudai:particles:0052"
+      },
+      {
+        "lesson": 7,
+        "jp": "にほんご___ メールを かきます。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Nihongo ___ mēru o kakimasu.",
+        "en": "I write emails in Japanese.",
+        "explanation": "で on a language = \"in (that language)\".",
+        "id": "shukudai:particles:0053"
+      },
+      {
+        "lesson": 7,
+        "jp": "えいご___ はなします。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Eigo ___ hanashimasu.",
+        "en": "I speak in English.",
+        "explanation": "で = means/medium.",
+        "id": "shukudai:particles:0054"
+      },
+      {
+        "lesson": 7,
+        "jp": "ともだち___ プレゼントを あげました。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Tomodachi ___ purezento o agemashita.",
+        "en": "I gave my friend a present.",
+        "explanation": "に after a person = \"to (the person)\" — indirect object.",
+        "id": "shukudai:particles:0055"
+      },
+      {
+        "lesson": 7,
+        "jp": "ちち___ とけいを もらいました。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Chichi ___ tokei o moraimashita.",
+        "en": "I received a watch from my father.",
+        "explanation": "に with もらいます = \"from (the person)\".",
+        "id": "shukudai:particles:0056"
+      },
+      {
+        "lesson": 7,
+        "jp": "たなかさんは わたし___ にほんごを おしえます。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Tanaka-san wa watashi ___ nihongo o oshiemasu.",
+        "en": "Mr. Tanaka teaches me Japanese.",
+        "explanation": "に = \"to me\" (indirect object).",
+        "id": "shukudai:particles:0057"
+      },
+      {
+        "lesson": 7,
+        "jp": "はは___ でんわを かけました。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Haha ___ denwa o kakemashita.",
+        "en": "I called my mother.",
+        "explanation": "に on the person being called.",
+        "id": "shukudai:particles:0058"
+      },
+      {
+        "lesson": 7,
+        "jp": "ハサミ___ かみを きります。",
+        "answer": "で",
+        "choices": [],
+        "romaji": "Hasami ___ kami o kirimasu.",
+        "en": "I cut paper with scissors.",
+        "explanation": "で = tool.",
+        "id": "shukudai:particles:0059"
+      },
+      {
+        "lesson": 9,
+        "jp": "わたしは スポーツ___ すきです。",
+        "answer": "が",
+        "choices": [],
+        "romaji": "Watashi wa supōtsu ___ suki desu.",
+        "en": "I like sports.",
+        "explanation": "が marks what you like with すき (the object of preference).",
+        "id": "shukudai:particles:0060"
+      },
+      {
+        "lesson": 9,
+        "jp": "いぬ___ きらいです。",
+        "answer": "が",
+        "choices": [],
+        "romaji": "Inu ___ kirai desu.",
+        "en": "I dislike dogs.",
+        "explanation": "が with きらい = the disliked thing.",
+        "id": "shukudai:particles:0061"
+      },
+      {
+        "lesson": 9,
+        "jp": "にほんご___ すこし わかります。",
+        "answer": "が",
+        "choices": [],
+        "romaji": "Nihongo ___ sukoshi wakarimasu.",
+        "en": "I understand a little Japanese.",
+        "explanation": "が with わかります marks what is understood.",
+        "id": "shukudai:particles:0062"
+      },
+      {
+        "lesson": 9,
+        "jp": "やまださんは りょうり___ じょうずです。",
+        "answer": "が",
+        "choices": [],
+        "romaji": "Yamada-san wa ryōri ___ jōzu desu.",
+        "en": "Mr. Yamada is good at cooking.",
+        "explanation": "が marks the skill area for じょうず/へた.",
+        "id": "shukudai:particles:0063"
+      },
+      {
+        "lesson": 9,
+        "jp": "いそがしいです___、いきません。",
+        "answer": "から",
+        "choices": [],
+        "romaji": "Isogashii desu ___, ikimasen.",
+        "en": "I'm busy, so I won't go.",
+        "explanation": "から after a clause = \"because\".",
+        "id": "shukudai:particles:0064"
+      },
+      {
+        "lesson": 9,
+        "jp": "しけんが あります___、べんきょうします。",
+        "answer": "から",
+        "choices": [],
+        "romaji": "Shiken ga arimasu ___, benkyō shimasu.",
+        "en": "I have an exam, so I'll study.",
+        "explanation": "から chains a reason to a consequence.",
+        "id": "shukudai:particles:0065"
+      },
+      {
+        "lesson": 9,
+        "jp": "じかんが ありません___、ざんねんです。",
+        "answer": "から",
+        "choices": [],
+        "romaji": "Jikan ga arimasen ___, zannen desu.",
+        "en": "I don't have time, so I'm sorry.",
+        "explanation": "から = because.",
+        "id": "shukudai:particles:0066"
+      },
+      {
+        "lesson": 9,
+        "jp": "やきゅう___ だいすきです。",
+        "answer": "が",
+        "choices": [],
+        "romaji": "Yakyū ___ daisuki desu.",
+        "en": "I love baseball.",
+        "explanation": "が with すき/だいすき.",
+        "id": "shukudai:particles:0067"
+      },
+      {
+        "lesson": 10,
+        "jp": "つくえの うえ___ ほんが あります。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Tsukue no ue ___ hon ga arimasu.",
+        "en": "There is a book on the desk.",
+        "explanation": "に on a location with あります/います = \"exists at\".",
+        "id": "shukudai:particles:0068"
+      },
+      {
+        "lesson": 10,
+        "jp": "へや___ だれが いますか。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Heya ___ dare ga imasu ka.",
+        "en": "Who is in the room?",
+        "explanation": "に on the place of existence.",
+        "id": "shukudai:particles:0069"
+      },
+      {
+        "lesson": 10,
+        "jp": "ぎんこうは えきの まえ___ あります。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Ginkō wa eki no mae ___ arimasu.",
+        "en": "The bank is in front of the station.",
+        "explanation": "に marks where the bank is located.",
+        "id": "shukudai:particles:0070"
+      },
+      {
+        "lesson": 10,
+        "jp": "コンビニは デパート___ ぎんこうの あいだに あります。",
+        "answer": "と",
+        "choices": [],
+        "romaji": "Konbini wa depāto ___ ginkō no aida ni arimasu.",
+        "en": "The convenience store is between the department store and the bank.",
+        "explanation": "と connects two nouns (\"A and B\").",
+        "id": "shukudai:particles:0071"
+      },
+      {
+        "lesson": 10,
+        "jp": "へやに テレビ___ ラジオなどが あります。",
+        "answer": "や",
+        "choices": [],
+        "romaji": "Heya ni terebi ___ rajio nado ga arimasu.",
+        "en": "In the room there is a TV, a radio, and so on.",
+        "explanation": "や = \"and\" for an incomplete list (commonly with ~など).",
+        "id": "shukudai:particles:0072"
+      },
+      {
+        "lesson": 10,
+        "jp": "なか___ なにが ありますか。",
+        "answer": "に",
+        "choices": [],
+        "romaji": "Naka ___ nani ga arimasu ka.",
+        "en": "What is inside?",
+        "explanation": "に on the location.",
+        "id": "shukudai:particles:0073"
+      },
+      {
+        "lesson": 10,
+        "jp": "いす___ うえに ねこが います。",
+        "answer": "の",
+        "choices": [],
+        "romaji": "Isu ___ ue ni neko ga imasu.",
+        "en": "There is a cat on the chair.",
+        "explanation": "の links the noun to a position word (\"chair-of top\").",
+        "id": "shukudai:particles:0074"
+      }
+    ],
+    "verbs": [
+      {
+        "lesson": 4,
+        "jp": "まいあさ 6じに ___。",
+        "answer": "おきます",
+        "romaji": "Maiasa 6-ji ni ___",
+        "en": "I get up at 6 every morning.",
+        "explanation": "Habitual / future = ~ます.",
+        "id": "shukudai:verbs:0000"
+      },
+      {
+        "lesson": 4,
+        "jp": "きのう 11じに ___。",
+        "answer": "ねました",
+        "romaji": "Kinō 11-ji ni ___",
+        "en": "I slept at 11 yesterday.",
+        "explanation": "Past affirmative = ~ました.",
+        "id": "shukudai:verbs:0001"
+      },
+      {
+        "lesson": 4,
+        "jp": "あした しけんが ありますから、テレビを ___。",
+        "answer": "みません",
+        "romaji": "Ashita shiken ga arimasu kara, terebi o ___",
+        "en": "Tomorrow there's an exam, so I won't watch TV.",
+        "explanation": "Negative non-past = ~ません.",
+        "id": "shukudai:verbs:0002"
+      },
+      {
+        "lesson": 4,
+        "jp": "おととい うちで ___ でした。",
+        "answer": "べんきょうしません",
+        "romaji": "Ototoi uchi de ___ deshita.",
+        "en": "Day before yesterday I didn't study at home.",
+        "explanation": "Negative past = ~ませんでした.",
+        "id": "shukudai:verbs:0003"
+      },
+      {
+        "lesson": 4,
+        "jp": "まいばん 12じまで ___。",
+        "answer": "はたらきます",
+        "romaji": "Maiban 12-ji made ___",
+        "en": "I work until 12 every night.",
+        "explanation": "~ます for habitual.",
+        "id": "shukudai:verbs:0004"
+      },
+      {
+        "lesson": 5,
+        "jp": "らいしゅう にほんへ ___。",
+        "answer": "いきます",
+        "romaji": "Raishū Nihon e ___",
+        "en": "I'll go to Japan next week.",
+        "explanation": "Future = ~ます.",
+        "id": "shukudai:verbs:0005"
+      },
+      {
+        "lesson": 5,
+        "jp": "ともだちと きょうとへ ___。",
+        "answer": "いきました",
+        "romaji": "Tomodachi to Kyōto e ___",
+        "en": "I went to Kyoto with a friend.",
+        "explanation": "Past = ~ました.",
+        "id": "shukudai:verbs:0006"
+      },
+      {
+        "lesson": 5,
+        "jp": "きのう どこへも ___ でした。",
+        "answer": "いきません",
+        "romaji": "Kinō doko e mo ___ deshita.",
+        "en": "I didn't go anywhere yesterday.",
+        "explanation": "Negative past = ~ませんでした.",
+        "id": "shukudai:verbs:0007"
+      },
+      {
+        "lesson": 6,
+        "jp": "まいあさ パンを ___。",
+        "answer": "たべます",
+        "romaji": "Maiasa pan o ___",
+        "en": "I eat bread every morning.",
+        "explanation": "~ます for habit.",
+        "id": "shukudai:verbs:0008"
+      },
+      {
+        "lesson": 6,
+        "jp": "きのう ともだちに ___。",
+        "answer": "あいました",
+        "romaji": "Kinō tomodachi ni ___",
+        "en": "I met a friend yesterday.",
+        "explanation": "Past = ~ました.",
+        "id": "shukudai:verbs:0009"
+      },
+      {
+        "lesson": 6,
+        "jp": "こうえんで しゃしんを ___ か。",
+        "answer": "とりました",
+        "romaji": "Kōen de shashin o ___ ka.",
+        "en": "Did you take photos in the park?",
+        "explanation": "Past question.",
+        "id": "shukudai:verbs:0010"
+      },
+      {
+        "lesson": 6,
+        "jp": "にほんごを ___ か。",
+        "answer": "はなします",
+        "romaji": "Nihongo o ___ ka.",
+        "en": "Do you speak Japanese?",
+        "explanation": "~ます for habit.",
+        "id": "shukudai:verbs:0011"
+      },
+      {
+        "lesson": 7,
+        "jp": "たなかさんに プレゼントを ___。",
+        "answer": "あげました",
+        "romaji": "Tanaka-san ni purezento o ___",
+        "en": "I gave Mr. Tanaka a present.",
+        "explanation": "Past affirmative.",
+        "id": "shukudai:verbs:0012"
+      },
+      {
+        "lesson": 7,
+        "jp": "ははに とけいを ___。",
+        "answer": "もらいました",
+        "romaji": "Haha ni tokei o ___",
+        "en": "I received a watch from my mother.",
+        "explanation": "Past affirmative.",
+        "id": "shukudai:verbs:0013"
+      },
+      {
+        "lesson": 7,
+        "jp": "もう ばんごはんを ___ か。",
+        "answer": "たべました",
+        "romaji": "Mō bangohan o ___ ka.",
+        "en": "Have you eaten dinner already?",
+        "explanation": "もう + past = \"already done\".",
+        "id": "shukudai:verbs:0014"
+      },
+      {
+        "lesson": 7,
+        "jp": "いいえ、まだ ___。",
+        "answer": "たべていません",
+        "romaji": "Iie, mada ___",
+        "en": "No, not yet.",
+        "explanation": "Lit: not eaten yet.",
+        "id": "shukudai:verbs:0015"
+      },
+      {
+        "lesson": 9,
+        "jp": "いそがしいですから、テニスを ___。",
+        "answer": "しません",
+        "romaji": "Isogashii desu kara, tenisu o ___",
+        "en": "I'm busy, so I won't play tennis.",
+        "explanation": "Negative non-past = ~ません.",
+        "id": "shukudai:verbs:0016"
+      },
+      {
+        "lesson": 9,
+        "jp": "おかねが ありませんから、なにも ___ でした。",
+        "answer": "かいません",
+        "romaji": "Okane ga arimasen kara, nani mo ___ deshita.",
+        "en": "I had no money, so I didn't buy anything.",
+        "explanation": "Negative past.",
+        "id": "shukudai:verbs:0017"
+      },
+      {
+        "lesson": 10,
+        "jp": "うちに ねこが ___。",
+        "answer": "います",
+        "romaji": "Uchi ni neko ga ___",
+        "en": "There is a cat at home.",
+        "explanation": "います for animate beings.",
+        "id": "shukudai:verbs:0018"
+      },
+      {
+        "lesson": 10,
+        "jp": "つくえの うえに ほんが ___ か。",
+        "answer": "あります",
+        "romaji": "Tsukue no ue ni hon ga ___ ka.",
+        "en": "Is there a book on the desk?",
+        "explanation": "あります for inanimate things.",
+        "id": "shukudai:verbs:0019"
+      }
+    ],
+    "adjectives": [
+      {
+        "lesson": 8,
+        "jp": "このほんは おもしろくないです。 → English negative i-adj of「おもしろい」?",
+        "answer": "おもしろくない",
+        "romaji": "kono hon wa omoshirokunai desu",
+        "en": "This book is not interesting.",
+        "explanation": "い-adj negative: drop い → くない. おもしろい → おもしろくない.",
+        "id": "shukudai:adjectives:0000"
+      },
+      {
+        "lesson": 8,
+        "jp": "「たかい」の ひていけいは ___ です。",
+        "answer": "たかくない",
+        "romaji": "takai → ___",
+        "en": "The negative form of takai is ___.",
+        "explanation": "い-adj negative: たかい → たかくない.",
+        "id": "shukudai:adjectives:0001"
+      },
+      {
+        "lesson": 8,
+        "jp": "「おおきい」の ひていけいは ___ です。",
+        "answer": "おおきくない",
+        "romaji": "ōkii → ___",
+        "en": "Negative of ōkii.",
+        "explanation": "い-adj: おおきい → おおきくない (drop final い, add くない).",
+        "id": "shukudai:adjectives:0002"
+      },
+      {
+        "lesson": 8,
+        "jp": "「いい」の ひていけいは ___ です。",
+        "answer": "よくない",
+        "romaji": "ii → ___",
+        "en": "Negative of ii.",
+        "explanation": "いい is irregular: based on よい. よくない (not よくない but いいくない is wrong).",
+        "id": "shukudai:adjectives:0003"
+      },
+      {
+        "lesson": 8,
+        "jp": "たなかさんは しんせつ___ ありません。",
+        "answer": "じゃ",
+        "romaji": "Tanaka-san wa shinsetsu ___ arimasen",
+        "en": "Mr. Tanaka is not kind.",
+        "explanation": "な-adj negative: ~じゃありません (or ~ではありません more formal).",
+        "id": "shukudai:adjectives:0004"
+      },
+      {
+        "lesson": 8,
+        "jp": "このまちは しずか___ ないです。",
+        "answer": "じゃ",
+        "romaji": "Kono machi wa shizuka ___ nai desu",
+        "en": "This town is not quiet.",
+        "explanation": "な-adj negative.",
+        "id": "shukudai:adjectives:0005"
+      },
+      {
+        "lesson": 8,
+        "jp": "たかい → たかかった (past). やすい → ___。",
+        "answer": "やすかった",
+        "romaji": "takai → takakatta. yasui → ___",
+        "en": "Past of yasui.",
+        "explanation": "い-adj past: drop い → かった.",
+        "id": "shukudai:adjectives:0006"
+      },
+      {
+        "lesson": 8,
+        "jp": "にほんごは むずかしい___、おもしろいです。",
+        "answer": "ですが",
+        "romaji": "Nihongo wa muzukashii ___, omoshiroi desu",
+        "en": "Japanese is difficult but interesting.",
+        "explanation": "い-adj +ですが = \"X is ~, but…\".",
+        "id": "shukudai:adjectives:0007"
+      },
+      {
+        "lesson": 8,
+        "jp": "きょうとは しずか___、きれいです。",
+        "answer": "で",
+        "romaji": "Kyōto wa shizuka ___, kirei desu",
+        "en": "Kyoto is quiet and beautiful.",
+        "explanation": "な-adj +で = \"and\" between two な-adj clauses.",
+        "id": "shukudai:adjectives:0008"
+      }
+    ],
+    "family": [
+      {
+        "lesson": 7,
+        "jp": "わたしの ___ です (own father).",
+        "answer": "ちち",
+        "romaji": "watashi no ___ desu",
+        "en": "my father",
+        "explanation": "Own family: ちち = my father.",
+        "id": "shukudai:family:0000"
+      },
+      {
+        "lesson": 7,
+        "jp": "わたしの ___ です (own mother).",
+        "answer": "はは",
+        "romaji": "watashi no ___ desu",
+        "en": "my mother",
+        "explanation": "Own family: はは = my mother.",
+        "id": "shukudai:family:0001"
+      },
+      {
+        "lesson": 7,
+        "jp": "(someone else's father)",
+        "answer": "おとうさん",
+        "romaji": "someone else's father",
+        "en": "someone else's father",
+        "explanation": "Honorific for others: おとうさん.",
+        "id": "shukudai:family:0002"
+      },
+      {
+        "lesson": 7,
+        "jp": "(someone else's mother)",
+        "answer": "おかあさん",
+        "romaji": "someone else's mother",
+        "en": "someone else's mother",
+        "explanation": "Honorific for others: おかあさん.",
+        "id": "shukudai:family:0003"
+      },
+      {
+        "lesson": 9,
+        "jp": "わたしの ___ です (my husband).",
+        "answer": "しゅじん",
+        "romaji": "watashi no ___ desu",
+        "en": "my husband",
+        "explanation": "Own: しゅじん (also つま is wife). For others: ごしゅじん.",
+        "id": "shukudai:family:0004"
+      },
+      {
+        "lesson": 9,
+        "jp": "(someone else's husband, polite)",
+        "answer": "ごしゅじん",
+        "romaji": "someone else's husband",
+        "en": "someone else's husband",
+        "explanation": "ごしゅじん is polite for \"your/their husband\".",
+        "id": "shukudai:family:0005"
+      },
+      {
+        "lesson": 9,
+        "jp": "わたしの ___ です (my wife).",
+        "answer": "つま",
+        "romaji": "watashi no ___ desu",
+        "en": "my wife",
+        "explanation": "Own: つま or かない. For others: おくさん.",
+        "id": "shukudai:family:0006"
+      },
+      {
+        "lesson": 9,
+        "jp": "(someone else's wife, polite)",
+        "answer": "おくさん",
+        "romaji": "someone else's wife",
+        "en": "someone else's wife",
+        "explanation": "Polite/honorific is おくさん.",
+        "id": "shukudai:family:0007"
+      },
+      {
+        "lesson": 9,
+        "jp": "(child, general)",
+        "answer": "こども",
+        "romaji": "kodomo",
+        "en": "child",
+        "explanation": "こども = child (used for own and others alike).",
+        "id": "shukudai:family:0008"
+      },
+      {
+        "lesson": 1,
+        "jp": "(older brother — own)",
+        "answer": "あに",
+        "romaji": "ani",
+        "en": "my older brother",
+        "explanation": "Own family: あに. For others: おにいさん.",
+        "id": "shukudai:family:0009"
+      },
+      {
+        "lesson": 1,
+        "jp": "(older sister — own)",
+        "answer": "あね",
+        "romaji": "ane",
+        "en": "my older sister",
+        "explanation": "Own family: あね. For others: おねえさん.",
+        "id": "shukudai:family:0010"
+      },
+      {
+        "lesson": 1,
+        "jp": "(younger brother — own)",
+        "answer": "おとうと",
+        "romaji": "otōto",
+        "en": "my younger brother",
+        "explanation": "Own family: おとうと. For others: おとうとさん.",
+        "id": "shukudai:family:0011"
+      },
+      {
+        "lesson": 1,
+        "jp": "(younger sister — own)",
+        "answer": "いもうと",
+        "romaji": "imōto",
+        "en": "my younger sister",
+        "explanation": "Own family: いもうと. For others: いもうとさん.",
+        "id": "shukudai:family:0012"
+      }
+    ],
+    "professions": [
+      {
+        "lesson": 1,
+        "jp": "かいしゃいん",
+        "romaji": "kaishain",
+        "en": "company employee",
+        "answer": "かいしゃいん",
+        "explanation": "かいしゃいん (kaishain) means \"company employee\".",
+        "id": "shukudai:professions:0000"
+      },
+      {
+        "lesson": 1,
+        "jp": "こうむいん",
+        "romaji": "kōmuin",
+        "en": "civil servant / public servant",
+        "answer": "こうむいん",
+        "explanation": "こうむいん (kōmuin) means \"civil servant / public servant\".",
+        "id": "shukudai:professions:0001"
+      },
+      {
+        "lesson": 1,
+        "jp": "えきいん",
+        "romaji": "ekiin",
+        "en": "station clerk",
+        "answer": "えきいん",
+        "explanation": "えきいん (ekiin) means \"station clerk\".",
+        "id": "shukudai:professions:0002"
+      },
+      {
+        "lesson": 1,
+        "jp": "ぎんこういん",
+        "romaji": "ginkōin",
+        "en": "bank clerk / bank employee",
+        "answer": "ぎんこういん",
+        "explanation": "ぎんこういん (ginkōin) means \"bank clerk / bank employee\".",
+        "id": "shukudai:professions:0003"
+      },
+      {
+        "lesson": 1,
+        "jp": "ゆうびんきょくいん",
+        "romaji": "yūbinkyokuin",
+        "en": "postal worker",
+        "answer": "ゆうびんきょくいん",
+        "explanation": "ゆうびんきょくいん (yūbinkyokuin) means \"postal worker\".",
+        "id": "shukudai:professions:0004"
+      },
+      {
+        "lesson": 1,
+        "jp": "てんいん",
+        "romaji": "ten'in",
+        "en": "shop clerk",
+        "answer": "てんいん",
+        "explanation": "てんいん (ten'in) means \"shop clerk\".",
+        "id": "shukudai:professions:0005"
+      },
+      {
+        "lesson": 1,
+        "jp": "ちょうり",
+        "romaji": "chōri",
+        "en": "cook / chef",
+        "answer": "ちょうり",
+        "explanation": "ちょうり (chōri) means \"cook / chef\".",
+        "id": "shukudai:professions:0006"
+      },
+      {
+        "lesson": 1,
+        "jp": "りようし",
+        "romaji": "riyōshi",
+        "en": "barber",
+        "answer": "りようし",
+        "explanation": "りようし (riyōshi) means \"barber\".",
+        "id": "shukudai:professions:0007"
+      },
+      {
+        "lesson": 1,
+        "jp": "びようし",
+        "romaji": "biyōshi",
+        "en": "beautician / hairdresser",
+        "answer": "びようし",
+        "explanation": "びようし (biyōshi) means \"beautician / hairdresser\".",
+        "id": "shukudai:professions:0008"
+      },
+      {
+        "lesson": 1,
+        "jp": "きょうし",
+        "romaji": "kyōshi",
+        "en": "teacher (general)",
+        "answer": "きょうし",
+        "explanation": "きょうし (kyōshi) means \"teacher (general)\".",
+        "id": "shukudai:professions:0009"
+      },
+      {
+        "lesson": 1,
+        "jp": "せんせい",
+        "romaji": "sensei",
+        "en": "teacher (when addressing/honoring)",
+        "answer": "せんせい",
+        "explanation": "せんせい (sensei) means \"teacher (when addressing/honoring)\".",
+        "id": "shukudai:professions:0010"
+      },
+      {
+        "lesson": 1,
+        "jp": "べんごし",
+        "romaji": "bengoshi",
+        "en": "lawyer",
+        "answer": "べんごし",
+        "explanation": "べんごし (bengoshi) means \"lawyer\".",
+        "id": "shukudai:professions:0011"
+      },
+      {
+        "lesson": 1,
+        "jp": "けんきゅうしゃ",
+        "romaji": "kenkyūsha",
+        "en": "researcher",
+        "answer": "けんきゅうしゃ",
+        "explanation": "けんきゅうしゃ (kenkyūsha) means \"researcher\".",
+        "id": "shukudai:professions:0012"
+      },
+      {
+        "lesson": 1,
+        "jp": "いしゃ",
+        "romaji": "isha",
+        "en": "doctor",
+        "answer": "いしゃ",
+        "explanation": "いしゃ (isha) means \"doctor\".",
+        "id": "shukudai:professions:0013"
+      },
+      {
+        "lesson": 1,
+        "jp": "かんごし",
+        "romaji": "kangoshi",
+        "en": "nurse",
+        "answer": "かんごし",
+        "explanation": "かんごし (kangoshi) means \"nurse\".",
+        "id": "shukudai:professions:0014"
+      },
+      {
+        "lesson": 1,
+        "jp": "うんてんしゅ",
+        "romaji": "untenshu",
+        "en": "driver",
+        "answer": "うんてんしゅ",
+        "explanation": "うんてんしゅ (untenshu) means \"driver\".",
+        "id": "shukudai:professions:0015"
+      },
+      {
+        "lesson": 1,
+        "jp": "けいさつかん",
+        "romaji": "keisatsukan",
+        "en": "police officer",
+        "answer": "けいさつかん",
+        "explanation": "けいさつかん (keisatsukan) means \"police officer\".",
+        "id": "shukudai:professions:0016"
+      },
+      {
+        "lesson": 1,
+        "jp": "がいこうかん",
+        "romaji": "gaikōkan",
+        "en": "diplomat",
+        "answer": "がいこうかん",
+        "explanation": "がいこうかん (gaikōkan) means \"diplomat\".",
+        "id": "shukudai:professions:0017"
+      },
+      {
+        "lesson": 1,
+        "jp": "せいじか",
+        "romaji": "seijika",
+        "en": "politician",
+        "answer": "せいじか",
+        "explanation": "せいじか (seijika) means \"politician\".",
+        "id": "shukudai:professions:0018"
+      },
+      {
+        "lesson": 1,
+        "jp": "がか",
+        "romaji": "gaka",
+        "en": "painter (artist)",
+        "answer": "がか",
+        "explanation": "がか (gaka) means \"painter (artist)\".",
+        "id": "shukudai:professions:0019"
+      },
+      {
+        "lesson": 1,
+        "jp": "かんごし",
+        "romaji": "kangoshi",
+        "en": "nurse",
+        "answer": "かんごし",
+        "explanation": "かんごし (kangoshi) means \"nurse\".",
+        "id": "shukudai:professions:0020"
+      },
+      {
+        "lesson": 1,
+        "jp": "さっか",
+        "romaji": "sakka",
+        "en": "author / writer",
+        "answer": "さっか",
+        "explanation": "さっか (sakka) means \"author / writer\".",
+        "id": "shukudai:professions:0021"
+      },
+      {
+        "lesson": 1,
+        "jp": "おんがくか",
+        "romaji": "ongakuka",
+        "en": "musician",
+        "answer": "おんがくか",
+        "explanation": "おんがくか (ongakuka) means \"musician\".",
+        "id": "shukudai:professions:0022"
+      },
+      {
+        "lesson": 1,
+        "jp": "けんちくか",
+        "romaji": "kenchikuka",
+        "en": "architect",
+        "answer": "けんちくか",
+        "explanation": "けんちくか (kenchikuka) means \"architect\".",
+        "id": "shukudai:professions:0023"
+      },
+      {
+        "lesson": 1,
+        "jp": "エンジニア",
+        "romaji": "enjinia",
+        "en": "engineer",
+        "answer": "エンジニア",
+        "explanation": "エンジニア (enjinia) means \"engineer\".",
+        "id": "shukudai:professions:0024"
+      },
+      {
+        "lesson": 1,
+        "jp": "デザイナー",
+        "romaji": "dezainā",
+        "en": "designer",
+        "answer": "デザイナー",
+        "explanation": "デザイナー (dezainā) means \"designer\".",
+        "id": "shukudai:professions:0025"
+      },
+      {
+        "lesson": 1,
+        "jp": "ジャーナリスト",
+        "romaji": "jānarisuto",
+        "en": "journalist",
+        "answer": "ジャーナリスト",
+        "explanation": "ジャーナリスト (jānarisuto) means \"journalist\".",
+        "id": "shukudai:professions:0026"
+      },
+      {
+        "lesson": 1,
+        "jp": "かしゅ",
+        "romaji": "kashu",
+        "en": "singer",
+        "answer": "かしゅ",
+        "explanation": "かしゅ (kashu) means \"singer\".",
+        "id": "shukudai:professions:0027"
+      },
+      {
+        "lesson": 1,
+        "jp": "はいゆう",
+        "romaji": "haiyū",
+        "en": "actor / actress",
+        "answer": "はいゆう",
+        "explanation": "はいゆう (haiyū) means \"actor / actress\".",
+        "id": "shukudai:professions:0028"
+      },
+      {
+        "lesson": 1,
+        "jp": "スポーツせんしゅ",
+        "romaji": "supōtsu senshu",
+        "en": "athlete",
+        "answer": "スポーツせんしゅ",
+        "explanation": "スポーツせんしゅ (supōtsu senshu) means \"athlete\".",
+        "id": "shukudai:professions:0029"
+      }
+    ],
+    "places": [
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "アメリカ",
+        "romaji": "Amerika",
+        "en": "America (USA)",
+        "answer": "アメリカ",
+        "explanation": "Country: America (USA).",
+        "id": "shukudai:places:0000"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "イギリス",
+        "romaji": "Igirisu",
+        "en": "United Kingdom",
+        "answer": "イギリス",
+        "explanation": "Country: United Kingdom.",
+        "id": "shukudai:places:0001"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "インド",
+        "romaji": "Indo",
+        "en": "India",
+        "answer": "インド",
+        "explanation": "Country: India.",
+        "id": "shukudai:places:0002"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "インドネシア",
+        "romaji": "Indoneshia",
+        "en": "Indonesia",
+        "answer": "インドネシア",
+        "explanation": "Country: Indonesia.",
+        "id": "shukudai:places:0003"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "かんこく",
+        "romaji": "Kankoku",
+        "en": "South Korea",
+        "answer": "かんこく",
+        "explanation": "Country: South Korea.",
+        "id": "shukudai:places:0004"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "タイ",
+        "romaji": "Tai",
+        "en": "Thailand",
+        "answer": "タイ",
+        "explanation": "Country: Thailand.",
+        "id": "shukudai:places:0005"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "ちゅうごく",
+        "romaji": "Chūgoku",
+        "en": "China",
+        "answer": "ちゅうごく",
+        "explanation": "Country: China.",
+        "id": "shukudai:places:0006"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "ドイツ",
+        "romaji": "Doitsu",
+        "en": "Germany",
+        "answer": "ドイツ",
+        "explanation": "Country: Germany.",
+        "id": "shukudai:places:0007"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "にほん",
+        "romaji": "Nihon",
+        "en": "Japan",
+        "answer": "にほん",
+        "explanation": "Country: Japan.",
+        "id": "shukudai:places:0008"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "ブラジル",
+        "romaji": "Burajiru",
+        "en": "Brazil",
+        "answer": "ブラジル",
+        "explanation": "Country: Brazil.",
+        "id": "shukudai:places:0009"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "イタリア",
+        "romaji": "Itaria",
+        "en": "Italy",
+        "answer": "イタリア",
+        "explanation": "Country: Italy.",
+        "id": "shukudai:places:0010"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "スイス",
+        "romaji": "Suisu",
+        "en": "Switzerland",
+        "answer": "スイス",
+        "explanation": "Country: Switzerland.",
+        "id": "shukudai:places:0011"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "フランス",
+        "romaji": "Furansu",
+        "en": "France",
+        "answer": "フランス",
+        "explanation": "Country: France.",
+        "id": "shukudai:places:0012"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "スペイン",
+        "romaji": "Supein",
+        "en": "Spain",
+        "answer": "スペイン",
+        "explanation": "Country: Spain.",
+        "id": "shukudai:places:0013"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "オーストラリア",
+        "romaji": "Ōsutoraria",
+        "en": "Australia",
+        "answer": "オーストラリア",
+        "explanation": "Country: Australia.",
+        "id": "shukudai:places:0014"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "カナダ",
+        "romaji": "Kanada",
+        "en": "Canada",
+        "answer": "カナダ",
+        "explanation": "Country: Canada.",
+        "id": "shukudai:places:0015"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "メキシコ",
+        "romaji": "Mekishiko",
+        "en": "Mexico",
+        "answer": "メキシコ",
+        "explanation": "Country: Mexico.",
+        "id": "shukudai:places:0016"
+      },
+      {
+        "lesson": 1,
+        "kind": "country",
+        "jp": "ロシア",
+        "romaji": "Roshia",
+        "en": "Russia",
+        "answer": "ロシア",
+        "explanation": "Country: Russia.",
+        "id": "shukudai:places:0017"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "ぎんこう",
+        "romaji": "ginkō",
+        "en": "bank",
+        "answer": "ぎんこう",
+        "explanation": "Place: bank.",
+        "id": "shukudai:places:0018"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "ゆうびんきょく",
+        "romaji": "yūbinkyoku",
+        "en": "post office",
+        "answer": "ゆうびんきょく",
+        "explanation": "Place: post office.",
+        "id": "shukudai:places:0019"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "としょかん",
+        "romaji": "toshokan",
+        "en": "library",
+        "answer": "としょかん",
+        "explanation": "Place: library.",
+        "id": "shukudai:places:0020"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "びじゅつかん",
+        "romaji": "bijutsukan",
+        "en": "art museum",
+        "answer": "びじゅつかん",
+        "explanation": "Place: art museum.",
+        "id": "shukudai:places:0021"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "デパート",
+        "romaji": "depāto",
+        "en": "department store",
+        "answer": "デパート",
+        "explanation": "Place: department store.",
+        "id": "shukudai:places:0022"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "スーパー",
+        "romaji": "sūpā",
+        "en": "supermarket",
+        "answer": "スーパー",
+        "explanation": "Place: supermarket.",
+        "id": "shukudai:places:0023"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "えき",
+        "romaji": "eki",
+        "en": "station",
+        "answer": "えき",
+        "explanation": "Place: station.",
+        "id": "shukudai:places:0024"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "がっこう",
+        "romaji": "gakkō",
+        "en": "school",
+        "answer": "がっこう",
+        "explanation": "Place: school.",
+        "id": "shukudai:places:0025"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "だいがく",
+        "romaji": "daigaku",
+        "en": "university",
+        "answer": "だいがく",
+        "explanation": "Place: university.",
+        "id": "shukudai:places:0026"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "びょういん",
+        "romaji": "byōin",
+        "en": "hospital",
+        "answer": "びょういん",
+        "explanation": "Place: hospital.",
+        "id": "shukudai:places:0027"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "レストラン",
+        "romaji": "resutoran",
+        "en": "restaurant",
+        "answer": "レストラン",
+        "explanation": "Place: restaurant.",
+        "id": "shukudai:places:0028"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "ホテル",
+        "romaji": "hoteru",
+        "en": "hotel",
+        "answer": "ホテル",
+        "explanation": "Place: hotel.",
+        "id": "shukudai:places:0029"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "こうえん",
+        "romaji": "kōen",
+        "en": "park",
+        "answer": "こうえん",
+        "explanation": "Place: park.",
+        "id": "shukudai:places:0030"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "コンビニ",
+        "romaji": "konbini",
+        "en": "convenience store",
+        "answer": "コンビニ",
+        "explanation": "Place: convenience store.",
+        "id": "shukudai:places:0031"
+      },
+      {
+        "lesson": 3,
+        "kind": "place",
+        "jp": "きっさてん",
+        "romaji": "kissaten",
+        "en": "coffee shop",
+        "answer": "きっさてん",
+        "explanation": "Place: coffee shop.",
+        "id": "shukudai:places:0032"
+      }
+    ]
+  }
+};
 HIRAGANA_BASIC.forEach(o => o.script = 'hiragana');
 HIRAGANA_DAKUTEN.forEach(o => o.script = 'hiragana');
 KATAKANA_BASIC.forEach(o => o.script = 'katakana');
@@ -2282,9 +4169,416 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+
+/* ============================================================
+   SHUKUDAI — drills + generators
+   ============================================================ */
+const SHU_BANK_KEYS = ['particles','verbs','adjectives','family','professions','places'];
+const SHU_GEN_KEYS  = ['numbers','money','time','dates','counters'];
+
+state.shuCat   = state.shuCat   || 'particles';
+state.shuInput = state.shuInput || 'type';
+state.shuItem  = null;
+
+// Persist these too
+(function() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if (s && s.shuCat) state.shuCat = s.shuCat;
+    if (s && s.shuInput) state.shuInput = s.shuInput;
+  } catch(e){}
+})();
+
+function isShuMode() { return state.mode === 'shukudai'; }
+function isShuBank() { return SHU_BANK_KEYS.includes(state.shuCat); }
+function isShuGen()  { return SHU_GEN_KEYS.includes(state.shuCat); }
+
+// Save extension — extend existing saveStore to include shuCat / shuInput
+const _origSave = saveStore;
+saveStore = function() {
+  _origSave.apply(null, arguments);
+  try {
+    const cur = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {};
+    cur.shuCat = state.shuCat;
+    cur.shuInput = state.shuInput;
+    localStorage.setItem(STORE_KEY, JSON.stringify(cur));
+  } catch(e){}
+};
+
+/* ---- Number → Japanese (basic) ---- */
+function numToJP(n) {
+  if (n < 0) return '-' + numToJP(-n);
+  if (n === 0) return 'ゼロ';
+  if (n < 10) return ['','いち','に','さん','よん','ご','ろく','なな','はち','きゅう'][n];
+  if (n < 20) return 'じゅう' + (n%10 ? numToJP(n%10) : '');
+  if (n < 100) {
+    const t = Math.floor(n/10);
+    return numToJP(t) + 'じゅう' + (n%10 ? numToJP(n%10) : '');
+  }
+  if (n < 1000) {
+    const h = Math.floor(n/100), r = n%100;
+    const hPrefix = {1:'ひゃく',2:'にひゃく',3:'さんびゃく',4:'よんひゃく',5:'ごひゃく',
+                     6:'ろっぴゃく',7:'ななひゃく',8:'はっぴゃく',9:'きゅうひゃく'}[h];
+    return hPrefix + (r ? numToJP(r) : '');
+  }
+  if (n < 10000) {
+    const t = Math.floor(n/1000), r = n%1000;
+    const tPrefix = {1:'せん',2:'にせん',3:'さんぜん',4:'よんせん',5:'ごせん',
+                     6:'ろくせん',7:'ななせん',8:'はっせん',9:'きゅうせん'}[t];
+    return tPrefix + (r ? numToJP(r) : '');
+  }
+  if (n < 100000000) {
+    const m = Math.floor(n/10000), r = n%10000;
+    return numToJP(m) + 'まん' + (r ? numToJP(r) : '');
+  }
+  return String(n);
+}
+function numToRomaji(n) {
+  if (n < 0) return '-' + numToRomaji(-n);
+  if (n === 0) return 'zero';
+  if (n < 10) return ['','ichi','ni','san','yon','go','roku','nana','hachi','kyū'][n];
+  if (n < 20) return 'jū' + (n%10 ? numToRomaji(n%10) : '');
+  if (n < 100) {
+    const t = Math.floor(n/10);
+    return numToRomaji(t) + 'jū' + (n%10 ? numToRomaji(n%10) : '');
+  }
+  if (n < 1000) {
+    const h = Math.floor(n/100), r = n%100;
+    const m = {1:'hyaku',2:'nihyaku',3:'sanbyaku',4:'yonhyaku',5:'gohyaku',
+               6:'roppyaku',7:'nanahyaku',8:'happyaku',9:'kyūhyaku'}[h];
+    return m + (r ? numToRomaji(r) : '');
+  }
+  if (n < 10000) {
+    const t = Math.floor(n/1000), r = n%1000;
+    const m = {1:'sen',2:'nisen',3:'sanzen',4:'yonsen',5:'gosen',
+               6:'rokusen',7:'nanasen',8:'hassen',9:'kyūsen'}[t];
+    return m + (r ? numToRomaji(r) : '');
+  }
+  if (n < 100000000) {
+    const M = Math.floor(n/10000), r = n%10000;
+    return numToRomaji(M) + 'man' + (r ? numToRomaji(r) : '');
+  }
+  return String(n);
+}
+
+/* ---- Time → Japanese ---- */
+const HOURS_JP = ['','いちじ','にじ','さんじ','よじ','ごじ','ろくじ','しちじ','はちじ','くじ','じゅうじ','じゅういちじ','じゅうにじ'];
+function minutesJP(m) {
+  if (m === 0) return '';
+  if (m === 30) return 'はん';
+  // Special readings for 1,3,4,6,8,10
+  const tail = {1:'いっぷん',2:'にふん',3:'さんぷん',4:'よんぷん',5:'ごふん',
+                6:'ろっぷん',7:'ななふん',8:'はっぷん',9:'きゅうふん',10:'じゅっぷん',
+                15:'じゅうごふん',20:'にじゅっぷん',30:'さんじゅっぷん',45:'よんじゅうごふん'};
+  if (tail[m]) return tail[m];
+  // Generic: build via numToJP + ふん/ぷん rules (approximate)
+  const tens = Math.floor(m/10), ones = m%10;
+  let lead = numToJP(tens*10);
+  if (ones) {
+    const onesPart = {1:'いっぷん',2:'にふん',3:'さんぷん',4:'よんぷん',5:'ごふん',
+                      6:'ろっぷん',7:'ななふん',8:'はっぷん',9:'きゅうふん'}[ones];
+    return lead + onesPart;
+  }
+  return lead + 'ぷん';
+}
+function timeToJP(h, m) { return HOURS_JP[h] + minutesJP(m); }
+
+/* ---- Money ---- */
+function moneyJP(amount, currency) {
+  if (currency === 'yen') return numToJP(amount) + 'えん';
+  if (currency === 'dollar') return numToJP(amount) + 'ドル';
+  if (currency === 'cent') {
+    // Special: 1->いっセント, 8->はっセント, 10->じゅっセント, 20→にじゅっセント
+    const map = {1:'いっセント',8:'はっセント',10:'じゅっセント',20:'にじゅっセント',100:'ひゃくセント'};
+    if (map[amount]) return map[amount];
+    return numToJP(amount) + 'セント';
+  }
+  return String(amount);
+}
+
+/* ---- Dates ---- */
+const MONTHS_JP = ['','いちがつ','にがつ','さんがつ','しがつ','ごがつ','ろくがつ','しちがつ','はちがつ','くがつ','じゅうがつ','じゅういちがつ','じゅうにがつ'];
+const DAYS_JP = ['','ついたち','ふつか','みっか','よっか','いつか','むいか','なのか','ようか','ここのか','とおか',
+                 'じゅういちにち','じゅうににち','じゅうさんにち','じゅうよっか','じゅうごにち','じゅうろくにち','じゅうしちにち','じゅうはちにち','じゅうくにち','はつか',
+                 'にじゅういちにち','にじゅうににち','にじゅうさんにち','にじゅうよっか','にじゅうごにち','にじゅうろくにち','にじゅうしちにち','にじゅうはちにち','にじゅうくにち','さんじゅうにち','さんじゅういちにち'];
+
+function dateToJP(month, day) { return MONTHS_JP[month] + ' ' + DAYS_JP[day]; }
+
+/* ---- Counters ---- */
+const COUNTER_FLOORS = {1:'いっかい',2:'にかい',3:'さんがい',4:'よんかい',5:'ごかい',
+                        6:'ろっかい',7:'ななかい',8:'はっかい',9:'きゅうかい',10:'じゅっかい'};
+const COUNTER_AGE = {1:'いっさい',2:'にさい',3:'さんさい',4:'よんさい',5:'ごさい',
+                     6:'ろくさい',7:'ななさい',8:'はっさい',9:'きゅうさい',10:'じゅっさい',
+                     20:'はたち',30:'さんじゅっさい',40:'よんじゅっさい'};
+const COUNTER_PEOPLE = {1:'ひとり',2:'ふたり',3:'さんにん',4:'よにん',5:'ごにん',
+                        6:'ろくにん',7:'ななにん',8:'はちにん',9:'きゅうにん',10:'じゅうにん'};
+const COUNTER_GENERAL = {1:'ひとつ',2:'ふたつ',3:'みっつ',4:'よっつ',5:'いつつ',
+                         6:'むっつ',7:'ななつ',8:'やっつ',9:'ここのつ',10:'とお'};
+
+/* ---- Generators ---- */
+function genNumber() {
+  const ranges = [9, 99, 999, 9999, 99999];
+  const max = ranges[Math.floor(Math.random()*ranges.length)];
+  const n = 1 + Math.floor(Math.random()*max);
+  return { prompt: String(n), answer: numToJP(n), romaji: numToRomaji(n), label: 'Read this number in Japanese:' };
+}
+function genMoney() {
+  const cur = ['yen','dollar','cent'][Math.floor(Math.random()*3)];
+  const cap = cur === 'yen' ? 9999 : (cur === 'dollar' ? 999 : 100);
+  const amount = 1 + Math.floor(Math.random()*cap);
+  const symbol = cur === 'yen' ? '¥' : (cur === 'dollar' ? '$' : '¢');
+  return {
+    prompt: symbol + amount.toLocaleString(),
+    answer: moneyJP(amount, cur),
+    romaji: '',
+    label: 'Read this amount in Japanese:',
+  };
+}
+function genTime() {
+  const h = 1 + Math.floor(Math.random()*12);
+  const minSet = [0,5,10,15,20,30,40,45,50];
+  const m = minSet[Math.floor(Math.random()*minSet.length)];
+  const fmt = String(h)+':'+String(m).padStart(2,'0');
+  return { prompt: fmt, answer: timeToJP(h, m), romaji: '', label: 'Tell the time in Japanese:' };
+}
+function genDate() {
+  const month = 1 + Math.floor(Math.random()*12);
+  const day = 1 + Math.floor(Math.random()*28);
+  return { prompt: month+'/'+day, answer: dateToJP(month, day), romaji: '', label: 'Read this date in Japanese:' };
+}
+function genCounter() {
+  const kinds = [
+    { name:'general', label:'general (~つ)', tbl: COUNTER_GENERAL, max: 10 },
+    { name:'people',  label:'people (~人)',  tbl: COUNTER_PEOPLE,  max: 10 },
+    { name:'age',     label:'age (~歳)',     tbl: COUNTER_AGE,     max: 10 },
+    { name:'floors',  label:'floors (~階)',  tbl: COUNTER_FLOORS,  max: 10 },
+  ];
+  const k = kinds[Math.floor(Math.random()*kinds.length)];
+  const n = 1 + Math.floor(Math.random()*k.max);
+  return { prompt: n + '  (' + k.label + ')', answer: k.tbl[n], romaji: '', label: 'How do you say this counter?' };
+}
+
+const SHU_GENERATORS = {
+  numbers: genNumber, money: genMoney, time: genTime, dates: genDate, counters: genCounter,
+};
+
+/* ---- Render Shukudai ---- */
+function renderShukudai() {
+  // Visibility
+  document.getElementById('lessons-row').style.display = isShuBank() ? 'flex' : 'none';
+  document.getElementById('kana-row').style.display = 'none';
+  document.getElementById('shukudai-row').style.display = 'flex';
+  document.getElementById('shukudai-mode-row').style.display = isShuBank() ? 'flex' : 'none';
+
+  // Sub-cat highlighting
+  document.querySelectorAll('#shu-cats button').forEach(b =>
+    b.classList.toggle('active', b.dataset.cat === state.shuCat));
+  document.querySelectorAll('#shu-input button').forEach(b =>
+    b.classList.toggle('active', b.dataset.input === state.shuInput));
+
+  if (isShuGen()) renderShuGenerator();
+  else if (isShuBank()) renderShuBank();
+}
+
+function renderShuGenerator() {
+  if (!state.shuItem || state.shuItem._cat !== state.shuCat) {
+    state.shuItem = { ...SHU_GENERATORS[state.shuCat](), _cat: state.shuCat, _revealed: false };
+  }
+  const it = state.shuItem;
+  const catLabel = state.shuCat[0].toUpperCase() + state.shuCat.slice(1);
+
+  if (!it._revealed) {
+    cardEl.innerHTML = `
+      <span class="lesson-tag">Shukudai · ${catLabel}</span>
+      <div class="prompt-label">${escapeHtml(it.label)}</div>
+      <div class="shu-gen-prompt">${escapeHtml(it.prompt)}</div>
+      <div class="btn-row"><button class="btn primary" id="shu-reveal">Show answer</button></div>`;
+    document.getElementById('shu-reveal').onclick = () => { it._revealed = true; render(); if (state.autoSpeak) speak(it.answer); };
+  } else {
+    cardEl.innerHTML = `
+      <span class="lesson-tag">Shukudai · ${catLabel}</span>
+      <div class="prompt-label">${escapeHtml(it.prompt)}</div>
+      <div class="answer-jp" style="font-size:48px;">${escapeHtml(it.answer)}</div>
+      ${it.romaji ? `<div class="answer-romaji">${escapeHtml(it.romaji)}</div>` : ''}
+      <div class="btn-row">
+        <button class="btn icon" id="shu-speak">🔊</button>
+        <button class="btn bad" id="shu-miss">Try again</button>
+        <button class="btn good" id="shu-hit">Got it!</button>
+      </div>`;
+    document.getElementById('shu-speak').onclick = () => speak(it.answer);
+    document.getElementById('shu-hit').onclick = () => { state.shuItem = null; render(); };
+    document.getElementById('shu-miss').onclick = () => { state.shuItem = null; render(); };
+  }
+}
+
+function shuBankPool() {
+  const items = (SHUKUDAI.banks[state.shuCat] || []).slice();
+  // For category bound to specific lessons, lesson filter applies (only on items with .lesson)
+  if (items.length && items[0].lesson != null && state.lessons.size) {
+    return items.filter(x => state.lessons.has(x.lesson));
+  }
+  return items;
+}
+
+function buildShuChoices(item, pool) {
+  // If item has predefined choices, use them. Otherwise generate from pool.
+  if (item.choices && item.choices.length) return shuffle(item.choices.slice());
+  const distractors = shuffle(pool.filter(x => x.answer !== item.answer)).slice(0, 3).map(x => x.answer);
+  return shuffle([item.answer, ...distractors]);
+}
+
+function renderShuBank() {
+  const pool = shuBankPool();
+  if (!pool.length) {
+    cardEl.innerHTML = '<div class="empty">No items in this drill (try selecting more lessons).</div>';
+    return;
+  }
+  if (!state.shuItem || state.shuItem._cat !== state.shuCat) {
+    state.shuItem = { ...pool[Math.floor(Math.random()*pool.length)] };
+    state.shuItem._cat = state.shuCat;
+    state.shuItem._answered = false;
+    state.shuItem._choices = buildShuChoices(state.shuItem, pool);
+  }
+  const it = state.shuItem;
+  const lesson = it.lesson != null ? `Lesson ${it.lesson}` : 'Shukudai';
+  const catLabel = state.shuCat[0].toUpperCase() + state.shuCat.slice(1);
+
+  // Render the prompt — replace ___ with a styled blank
+  const promptHTML = it.jp ? escapeHtml(it.jp).replace(/___|＿＿＿/g, '<span class="blank-line">&nbsp;</span>') : '';
+  const enHTML = it.en ? `<div class="shu-en">${escapeHtml(it.en)}</div>` : '';
+
+  let inputArea = '';
+  if (state.shuInput === 'type') {
+    inputArea = `
+      <input type="text" class="shu-input" id="shu-typed" placeholder="${state.shuCat==='particles' ? 'は が を の に へ で と …' : 'type answer'}" autocomplete="off" autocapitalize="off" autocorrect="off" />
+      <div class="btn-row">
+        <button class="btn" id="shu-show">Show answer</button>
+        <button class="btn primary" id="shu-check">Check</button>
+      </div>`;
+  } else {
+    inputArea = `
+      <div class="shu-mcq" id="shu-mcq"></div>`;
+  }
+
+  const explainArea = it._answered ? `
+    <div class="shu-explain">
+      <div><strong>${escapeHtml(it.answer)}</strong> ${it.romaji ? '· ' + escapeHtml(it.romaji) : ''}</div>
+      <div style="margin-top:6px;">${escapeHtml(it.explanation || '')}</div>
+    </div>
+    <div class="btn-row">
+      <button class="btn primary" id="shu-next">Next →</button>
+    </div>` : '';
+
+  cardEl.innerHTML = `
+    <div>
+      <span class="lesson-tag">${lesson} · ${catLabel}</span>
+    </div>
+    <div class="shu-prompt">${promptHTML || '<em>(no prompt)</em>'}</div>
+    ${enHTML}
+    ${!it._answered ? inputArea : `<div class="answer-jp" style="font-size:36px; margin-top:8px;">${escapeHtml(it.answer)}</div>` + explainArea}`;
+
+  if (!it._answered) {
+    if (state.shuInput === 'type') {
+      const input = document.getElementById('shu-typed');
+      setTimeout(() => input && input.focus(), 50);
+      const check = () => {
+        const guess = (input.value || '').trim();
+        if (!guess) return;
+        const ok = (guess === it.answer);
+        it._answered = true;
+        it._wasCorrect = ok;
+        if (ok) state.correct++;
+        state.totalSeen++;
+        state.seen++;
+        bumpStreak();
+        updateStats();
+        saveStore();
+        render();
+      };
+      document.getElementById('shu-check').onclick = check;
+      input.onkeydown = e => { if (e.key === 'Enter') check(); };
+      document.getElementById('shu-show').onclick = () => {
+        it._answered = true;
+        it._wasCorrect = false;
+        state.totalSeen++; state.seen++;
+        bumpStreak();
+        updateStats();
+        saveStore();
+        render();
+      };
+    } else {
+      const grid = document.getElementById('shu-mcq');
+      it._choices.forEach(c => {
+        const b = document.createElement('button');
+        b.className = 'btn';
+        b.textContent = c;
+        b.onclick = () => {
+          const ok = (c === it.answer);
+          it._answered = true;
+          it._wasCorrect = ok;
+          if (ok) state.correct++;
+          state.totalSeen++;
+          state.seen++;
+          bumpStreak();
+          updateStats();
+          saveStore();
+          render();
+        };
+        grid.appendChild(b);
+      });
+    }
+  } else {
+    document.getElementById('shu-next').onclick = () => {
+      state.shuItem = null;
+      render();
+    };
+  }
+}
+
+// Hook into render() dispatcher: insert shukudai branch
+const _origRender = render;
+render = function() {
+  if (state.quiz) { renderQuiz(); return; }
+  if (isShuMode()) {
+    document.getElementById('lessons-row').style.display = isShuBank() ? 'flex' : 'none';
+    document.getElementById('kana-row').style.display = 'none';
+    renderShukudai();
+    return;
+  }
+  document.getElementById('shukudai-row').style.display = 'none';
+  document.getElementById('shukudai-mode-row').style.display = 'none';
+  _origRender.apply(null, arguments);
+};
+
+// Wire mode tab "shukudai"
+document.querySelectorAll('.mode-tabs button[data-mode="shukudai"]').forEach(b => {
+  b.addEventListener('click', () => {
+    state.shuItem = null;
+  });
+});
+// Sub-category buttons
+document.querySelectorAll('#shu-cats button').forEach(b => {
+  b.onclick = () => {
+    state.shuCat = b.dataset.cat;
+    state.shuItem = null;
+    saveStore();
+    render();
+  };
+});
+// Type/MCQ toggle
+document.querySelectorAll('#shu-input button').forEach(b => {
+  b.onclick = () => {
+    state.shuInput = b.dataset.input;
+    state.shuItem = null;
+    saveStore();
+    render();
+  };
+});
+
 // Init
 updateStats();
 render();
 </script>
+<!-- built 2026-05-02T15:42:04.034897Z · vocab=471 sentences=100 kana=142 -->
 </body>
 </html>
