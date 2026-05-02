@@ -304,6 +304,60 @@
   .summary .miss-item { background: var(--panel-2); padding: 10px 12px; border-radius: 8px; font-size: 14px; }
   .summary .miss-item .jp { color: var(--accent); font-weight: 600; margin-right: 8px; }
 
+
+  .review-card { padding: 24px 20px; min-height: 200px; gap: 12px; align-items: stretch; }
+  .review-section { margin-top: 8px; }
+  .review-section + .review-section { margin-top: 24px; }
+  .review-header {
+    font-size: 13px; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    padding: 6px 0; margin-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+  }
+  .review-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 1.4fr) minmax(80px, 1fr) 2fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    margin-bottom: 6px;
+    text-align: left;
+    font-size: 14px;
+  }
+  .review-row .rjp {
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    font-weight: 700; font-size: 18px; color: var(--accent);
+    word-break: break-word;
+  }
+  .review-row .rromaji { color: var(--muted); font-style: italic; }
+  .review-row .ren { color: var(--text); }
+  .review-row .rspeak {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text); border-radius: 8px; cursor: pointer;
+    padding: 6px 10px; font-size: 14px; transition: all 0.15s;
+  }
+  .review-row .rspeak:hover { border-color: var(--accent); background: var(--panel); }
+  .review-empty { text-align: center; color: var(--muted); padding: 40px 20px; }
+  .review-bar {
+    display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
+  }
+  @media (max-width: 700px) {
+    .review-row {
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "jp speak" "romaji speak" "en en";
+      row-gap: 4px;
+    }
+    .review-row .rjp { grid-area: jp; }
+    .review-row .rromaji { grid-area: romaji; font-size: 13px; }
+    .review-row .ren { grid-area: en; font-size: 14px; padding-top: 4px; border-top: 1px dashed var(--border); margin-top: 4px; }
+    .review-row .rspeak { grid-area: speak; }
+    .review-card { padding: 16px 12px; }
+  }
   .empty { text-align: center; color: var(--muted); padding: 40px 20px; }
   footer { text-align: center; color: var(--muted); font-size: 12px; padding: 24px; border-top: 1px solid var(--border); margin-top: 40px; }
   .help-text { font-size: 13px; color: var(--muted); text-align: center; margin-top: 8px; }
@@ -373,7 +427,8 @@
     <div class="controls-row">
       <label>Mode</label>
       <div class="mode-tabs">
-        <button data-mode="flash" class="active">Flashcards</button>
+        <button data-mode="review" class="active">📖 Review</button>
+        <button data-mode="flash">Flashcards</button>
         <button data-mode="mcq">Multiple Choice</button>
         <button data-mode="sentences">Sentences</button>
         <button data-mode="dictation">Dictation</button>
@@ -1106,7 +1161,7 @@ const STORE_KEY = 'jp_practice_state_v2';
 const todayStr = () => new Date().toISOString().slice(0,10);
 
 const state = {
-  mode: 'flash',
+  mode: 'review',
   direction: 'en2jp',
   dictMode: 'romaji',
   kanaSet: 'basic',
@@ -1325,6 +1380,7 @@ function render() {
     cardEl.innerHTML = '<div class="empty">Select at least one lesson to start.</div>';
     return;
   }
+  if (state.mode === 'review') { renderReview(); return; }
   if (state.mode === 'flash') renderFlash(pool);
   else if (state.mode === 'mcq') renderMCQ(pool);
   else if (state.mode === 'sentences') renderSentences(pool);
@@ -1332,6 +1388,98 @@ function render() {
   refreshLessonPills();
 }
 
+
+function renderReview() {
+  const lessons = [...state.lessons].sort((a,b)=>a-b);
+  if (!lessons.length) {
+    cardEl.innerHTML = '<div class="review-empty">Pick at least one lesson to review.</div>';
+    return;
+  }
+  const sections = lessons.map(n => {
+    const vocab = VOCAB.filter(v => v.lesson === n);
+    const sents = SENTENCES.filter(v => v.lesson === n);
+    const totalCards = vocab.length + sents.length;
+    const masteredV = vocab.filter(v => getBox(v, 'vocab') >= 4).length;
+    const masteredS = sents.filter(v => getBox(v, 'sent') >= 4).length;
+    const pct = totalCards ? Math.round(100 * (masteredV + masteredS) / totalCards) : 0;
+    const rowsV = vocab.map((v, i) => `
+      <div class="review-row" data-kind="vocab" data-idx="${VOCAB.indexOf(v)}">
+        <div class="rjp">${escapeHtml(v.jp)}</div>
+        <div class="rromaji">${escapeHtml(v.romaji)}</div>
+        <div class="ren">${escapeHtml(v.en)}</div>
+        <button class="rspeak" type="button" aria-label="Hear">🔊</button>
+      </div>`).join('');
+    const rowsS = sents.length ? `
+      <div class="review-header" style="margin-top:14px;">L${n} · Sentences (${sents.length})</div>
+      ${sents.map((v) => `
+        <div class="review-row" data-kind="sent" data-idx="${SENTENCES.indexOf(v)}">
+          <div class="rjp">${escapeHtml(v.jp)}</div>
+          <div class="rromaji">${escapeHtml(v.romaji)}</div>
+          <div class="ren">${escapeHtml(v.en)}</div>
+          <button class="rspeak" type="button" aria-label="Hear">🔊</button>
+        </div>`).join('')}` : '';
+    return `
+      <div class="review-section">
+        <div class="review-header">Lesson ${n} · Vocab (${vocab.length}) · ${pct}% mastered</div>
+        ${rowsV}
+        ${rowsS}
+      </div>`;
+  }).join('');
+
+  cardEl.innerHTML = `
+    <div style="width:100%;">
+      ${sections}
+      <div class="review-bar">
+        <button class="btn" id="review-speak-all">🔊 Read all (selected lessons)</button>
+        <button class="btn primary" id="review-start-flash">Start Flashcards →</button>
+        <button class="btn" id="review-start-mcq">Start Multiple Choice</button>
+      </div>
+    </div>`;
+
+  // Wire row speak buttons
+  cardEl.querySelectorAll('.review-row').forEach(row => {
+    row.addEventListener('click', (e) => {
+      const kind = row.dataset.kind;
+      const idx = +row.dataset.idx;
+      const v = (kind === 'sent') ? SENTENCES[idx] : VOCAB[idx];
+      if (v) speak(v.jp);
+    });
+  });
+
+  // Bottom bar actions
+  document.getElementById('review-speak-all').onclick = () => readAllSelected();
+  document.getElementById('review-start-flash').onclick = () => switchToMode('flash');
+  document.getElementById('review-start-mcq').onclick = () => switchToMode('mcq');
+}
+
+function switchToMode(m) {
+  state.mode = m;
+  state.current = null;
+  document.querySelectorAll('.mode-tabs button').forEach(b => b.classList.toggle('active', b.dataset.mode === m));
+  render();
+}
+
+let _readAllTimer = null;
+function readAllSelected() {
+  if (_readAllTimer) { clearTimeout(_readAllTimer); _readAllTimer = null; if ('speechSynthesis' in window) window.speechSynthesis.cancel(); return; }
+  const lessons = [...state.lessons].sort((a,b)=>a-b);
+  const items = [];
+  lessons.forEach(n => {
+    VOCAB.filter(v => v.lesson === n).forEach(v => items.push(v));
+    SENTENCES.filter(v => v.lesson === n).forEach(v => items.push(v));
+  });
+  if (!items.length) return;
+  let i = 0;
+  const playNext = () => {
+    if (i >= items.length) { _readAllTimer = null; return; }
+    const v = items[i++];
+    speak(v.jp);
+    // Estimate reading time by length; minimum 1.6s, maximum 4s.
+    const dur = Math.min(4000, Math.max(1600, v.jp.length * 220));
+    _readAllTimer = setTimeout(playNext, dur);
+  };
+  playNext();
+}
 function renderFlash(pool) {
   if (!state.current) { state.current = pickFromDeck(pool, 'vocab'); state.revealed = false; }
   flashLike(pool, state.current, 'vocab', false);
