@@ -353,6 +353,14 @@
   .shu-input { width: 100%; max-width: 200px; padding: 12px; font-size: 22px; text-align: center; font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif; margin-top: 12px; }
   .shu-mcq { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 360px; width: 100%; margin-top: 16px; }
   .shu-mcq button { padding: 14px; font-size: 22px; font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif; }
+  .shu-prompt-en { font-size: 30px; font-weight: 700; line-height: 1.3; max-width: 600px; letter-spacing: -0.01em; }
+  .shu-sublabel { font-size: 16px; color: var(--muted); margin-top: -4px; }
+  .shu-explain { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 12px; font-size: 14px; max-width: 600px; line-height: 1.5; text-align: center; color: var(--muted); }
+  @media (max-width: 700px) {
+    .shu-prompt-en { font-size: 22px; }
+    .shu-sublabel { font-size: 14px; }
+  }
+
   .shu-explain { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-top: 14px; font-size: 14px; max-width: 600px; line-height: 1.5; text-align: left; }
   .shu-explain strong { color: var(--accent); }
   .shu-gen-prompt { font-size: 64px; font-weight: 800; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
@@ -493,10 +501,7 @@
     <div class="controls-row" id="shukudai-row" style="display:none;">
       <label>Drill</label>
       <div class="mode-tabs" id="shu-cats" style="flex-wrap:wrap;">
-        <button data-cat="particles" class="active">Particles</button>
-        <button data-cat="verbs">Verb forms</button>
-        <button data-cat="adjectives">Adjectives</button>
-        <button data-cat="family">Family</button>
+        <button data-cat="family" class="active">Family</button>
         <button data-cat="professions">Professions</button>
         <button data-cat="places">Places</button>
         <button data-cat="numbers">Numbers</button>
@@ -1323,1138 +1328,108 @@ const SHUKUDAI = {
     }
   },
   "banks": {
-    "particles": [
-      {
-        "lesson": 1,
-        "jp": "わたし___ アファクです。",
-        "answer": "は",
-        "choices": [],
-        "romaji": "Watashi ___ Afaqu desu.",
-        "en": "I am Afaq.",
-        "explanation": "は marks the topic — \"as for me, I am Afaq\".",
-        "id": "shukudai:particles:0000"
-      },
-      {
-        "lesson": 1,
-        "jp": "ミラーさん___ アメリカじんです。",
-        "answer": "は",
-        "choices": [],
-        "romaji": "Mirā-san ___ Amerikajin desu.",
-        "en": "Mr. Miller is American.",
-        "explanation": "は marks the topic of the sentence.",
-        "id": "shukudai:particles:0001"
-      },
-      {
-        "lesson": 1,
-        "jp": "わたし___ パキスタンじんです。",
-        "answer": "は",
-        "choices": [],
-        "romaji": "Watashi ___ Pakisutanjin desu.",
-        "en": "I am Pakistani.",
-        "explanation": "は = topic marker.",
-        "id": "shukudai:particles:0002"
-      },
-      {
-        "lesson": 1,
-        "jp": "カリナさん___ がくせいですか。",
-        "answer": "は",
-        "choices": [],
-        "romaji": "Karina-san ___ gakusei desu ka.",
-        "en": "Is Karina a student?",
-        "explanation": "は marks topic in yes/no questions.",
-        "id": "shukudai:particles:0003"
-      },
-      {
-        "lesson": 1,
-        "jp": "たなかさん___ かいしゃいんです。",
-        "answer": "は",
-        "choices": [],
-        "romaji": "Tanaka-san ___ kaishain desu.",
-        "en": "Mr. Tanaka is a company employee.",
-        "explanation": "は = topic.",
-        "id": "shukudai:particles:0004"
-      },
-      {
-        "lesson": 1,
-        "jp": "IMC___ しゃいんです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "IMC ___ shain desu.",
-        "en": "I am an IMC employee.",
-        "explanation": "の links one noun to another — \"company-of employee\".",
-        "id": "shukudai:particles:0005"
-      },
-      {
-        "lesson": 1,
-        "jp": "パワーでんき___ しゃいんです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Pawādenki ___ shain desu.",
-        "en": "I am a Power Electric employee.",
-        "explanation": "の = \"of/belongs to\" — \"a Power-Electric employee\".",
-        "id": "shukudai:particles:0006"
-      },
-      {
-        "lesson": 1,
-        "jp": "さくらだいがく___ がくせいです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Sakura-daigaku ___ gakusei desu.",
-        "en": "I am a Sakura University student.",
-        "explanation": "の links university to student.",
-        "id": "shukudai:particles:0007"
-      },
-      {
-        "lesson": 1,
-        "jp": "こべびょういん___ いしゃです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Kōbe-byōin ___ isha desu.",
-        "en": "I am a doctor at Kobe Hospital.",
-        "explanation": "の = of/at — affiliation.",
-        "id": "shukudai:particles:0008"
-      },
-      {
-        "lesson": 2,
-        "jp": "これは わたし___ ほんです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Kore wa watashi ___ hon desu.",
-        "en": "This is my book.",
-        "explanation": "の after a person = possessive — \"my book\".",
-        "id": "shukudai:particles:0009"
-      },
-      {
-        "lesson": 2,
-        "jp": "これは にほんご___ ほんです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Kore wa nihongo ___ hon desu.",
-        "en": "This is a Japanese-language book.",
-        "explanation": "の links one noun to another.",
-        "id": "shukudai:particles:0010"
-      },
-      {
-        "lesson": 2,
-        "jp": "それは あなた___ かさですか。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Sore wa anata ___ kasa desu ka.",
-        "en": "Is that your umbrella?",
-        "explanation": "の = possessive, \"your umbrella\".",
-        "id": "shukudai:particles:0011"
-      },
-      {
-        "lesson": 2,
-        "jp": "あの ノートは だれ___ ですか。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Ano nōto wa dare ___ desu ka.",
-        "en": "Whose notebook is that?",
-        "explanation": "だれの = \"whose\".",
-        "id": "shukudai:particles:0012"
-      },
-      {
-        "lesson": 2,
-        "jp": "ミラーさん___ かばんです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Mirā-san ___ kaban desu.",
-        "en": "(It's) Mr. Miller's bag.",
-        "explanation": "の after a name = possessive.",
-        "id": "shukudai:particles:0013"
-      },
-      {
-        "lesson": 2,
-        "jp": "にほんご___ ざっしです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Nihongo ___ zasshi desu.",
-        "en": "A Japanese-language magazine.",
-        "explanation": "の connects two nouns: \"Japanese-language magazine\".",
-        "id": "shukudai:particles:0014"
-      },
-      {
-        "lesson": 2,
-        "jp": "これは サントスさん___ ほん___ どちらですか。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Kore wa Santosu-san ___ hon des ka.",
-        "en": "Is this Mr. Santos's book?",
-        "explanation": "の = possessive.",
-        "id": "shukudai:particles:0015"
-      },
-      {
-        "lesson": 2,
-        "jp": "あれは カメラ___ ほんです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Are wa kamera ___ hon desu.",
-        "en": "That over there is a camera book.",
-        "explanation": "の links nouns.",
-        "id": "shukudai:particles:0016"
-      },
-      {
-        "lesson": 3,
-        "jp": "これは ドイツ___ くるまです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Kore wa Doitsu ___ kuruma desu.",
-        "en": "This is a German car.",
-        "explanation": "の attached to a country = \"made in / from\" that country.",
-        "id": "shukudai:particles:0017"
-      },
-      {
-        "lesson": 3,
-        "jp": "これは どこ___ ワインですか。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Kore wa doko ___ wain desu ka.",
-        "en": "Where is this wine from?",
-        "explanation": "どこのN = \"N from where\".",
-        "id": "shukudai:particles:0018"
-      },
-      {
-        "lesson": 3,
-        "jp": "イタリア___ ワインです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Itaria ___ wain desu.",
-        "en": "It's Italian wine.",
-        "explanation": "の after country = origin.",
-        "id": "shukudai:particles:0019"
-      },
-      {
-        "lesson": 3,
-        "jp": "にほん___ かばんです。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Nihon ___ kaban desu.",
-        "en": "A Japanese bag.",
-        "explanation": "の links country to noun.",
-        "id": "shukudai:particles:0020"
-      },
-      {
-        "lesson": 4,
-        "jp": "まいあさ 6じ___ おきます。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Maiasa 6-ji ___ okimasu.",
-        "en": "I get up at 6 every morning.",
-        "explanation": "に marks a specific time-of-day (numbers).",
-        "id": "shukudai:particles:0021"
-      },
-      {
-        "lesson": 4,
-        "jp": "7じはん___ あさごはんを たべます。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "7-ji-han ___ asagohan o tabemasu.",
-        "en": "I eat breakfast at 7:30.",
-        "explanation": "に on numeric time.",
-        "id": "shukudai:particles:0022"
-      },
-      {
-        "lesson": 4,
-        "jp": "12じ___ 1じ___ ひるやすみです。",
-        "answer": "から",
-        "choices": [],
-        "romaji": "12-ji ___ 1-ji ___ hiruyasumi desu.",
-        "en": "Lunch break is from 12 to 1.",
-        "explanation": "から = from. (Pair: ~まで = until.)",
-        "id": "shukudai:particles:0023"
-      },
-      {
-        "lesson": 4,
-        "jp": "ぎんこうは 9じ___ 3じまでです。",
-        "answer": "から",
-        "choices": [],
-        "romaji": "Ginkō wa 9-ji ___ 3-ji made desu.",
-        "en": "The bank is from 9 to 3.",
-        "explanation": "から marks the start.",
-        "id": "shukudai:particles:0024"
-      },
-      {
-        "lesson": 4,
-        "jp": "しけんは 9じから 11じ___ です。",
-        "answer": "まで",
-        "choices": [],
-        "romaji": "Shiken wa 9-ji kara 11-ji ___ desu.",
-        "en": "The exam is from 9 to 11.",
-        "explanation": "まで = until/to.",
-        "id": "shukudai:particles:0025"
-      },
-      {
-        "lesson": 4,
-        "jp": "やすみは どようび___ にちようびです。",
-        "answer": "と",
-        "choices": [],
-        "romaji": "Yasumi wa doyōbi ___ nichiyōbi desu.",
-        "en": "The holidays are Saturday and Sunday.",
-        "explanation": "と connects two nouns of the same kind (and).",
-        "id": "shukudai:particles:0026"
-      },
-      {
-        "lesson": 4,
-        "jp": "IMCは アメリカ___ にほんの かいしゃです。",
-        "answer": "と",
-        "choices": [],
-        "romaji": "IMC wa Amerika ___ Nihon no kaisha desu.",
-        "en": "IMC is an American and Japanese company.",
-        "explanation": "と = and (joining nouns).",
-        "id": "shukudai:particles:0027"
-      },
-      {
-        "lesson": 4,
-        "jp": "まいあさ 6じ___ はたらきます。",
-        "answer": "から",
-        "choices": [],
-        "romaji": "Maiasa 6-ji ___ hatarakimasu.",
-        "en": "I work from 6 every morning.",
-        "explanation": "から = from.",
-        "id": "shukudai:particles:0028"
-      },
-      {
-        "lesson": 4,
-        "jp": "なんじ___ なんじまで はたらきますか。",
-        "answer": "から",
-        "choices": [],
-        "romaji": "Nan-ji ___ nan-ji made hatarakimasu ka.",
-        "en": "From what time to what time do you work?",
-        "explanation": "から / まで pair on time-ranges.",
-        "id": "shukudai:particles:0029"
-      },
-      {
-        "lesson": 5,
-        "jp": "らいしゅう にほん___ いきます。",
-        "answer": "へ",
-        "choices": [],
-        "romaji": "Raishū Nihon ___ ikimasu.",
-        "en": "I'll go to Japan next week.",
-        "explanation": "へ marks the destination of motion.",
-        "id": "shukudai:particles:0030"
-      },
-      {
-        "lesson": 5,
-        "jp": "うち___ かえります。",
-        "answer": "へ",
-        "choices": [],
-        "romaji": "Uchi ___ kaerimasu.",
-        "en": "I'll go home.",
-        "explanation": "へ marks where you are heading.",
-        "id": "shukudai:particles:0031"
-      },
-      {
-        "lesson": 5,
-        "jp": "あした がっこう___ いきます。",
-        "answer": "へ",
-        "choices": [],
-        "romaji": "Ashita gakkō ___ ikimasu.",
-        "en": "I'll go to school tomorrow.",
-        "explanation": "へ = direction-to.",
-        "id": "shukudai:particles:0032"
-      },
-      {
-        "lesson": 5,
-        "jp": "でんしゃ___ がっこうへ いきます。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Densha ___ gakkō e ikimasu.",
-        "en": "I go to school by train.",
-        "explanation": "で on a vehicle = means of transport (\"by train\").",
-        "id": "shukudai:particles:0033"
-      },
-      {
-        "lesson": 5,
-        "jp": "バス___ きます。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Basu ___ kimasu.",
-        "en": "I come by bus.",
-        "explanation": "で = means/instrument.",
-        "id": "shukudai:particles:0034"
-      },
-      {
-        "lesson": 5,
-        "jp": "じてんしゃ___ いきます。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Jitensha ___ ikimasu.",
-        "en": "I go by bicycle.",
-        "explanation": "で = transport.",
-        "id": "shukudai:particles:0035"
-      },
-      {
-        "lesson": 5,
-        "jp": "ともだち___ きょうとへ いきます。",
-        "answer": "と",
-        "choices": [],
-        "romaji": "Tomodachi ___ Kyōto e ikimasu.",
-        "en": "I go to Kyoto with a friend.",
-        "explanation": "と after a person = \"together with\".",
-        "id": "shukudai:particles:0036"
-      },
-      {
-        "lesson": 5,
-        "jp": "かぞく___ あそびます。",
-        "answer": "と",
-        "choices": [],
-        "romaji": "Kazoku ___ asobimasu.",
-        "en": "I'll play/hang out with my family.",
-        "explanation": "と marks the companion.",
-        "id": "shukudai:particles:0037"
-      },
-      {
-        "lesson": 5,
-        "jp": "たんじょうびは 9がつ ついたち___ です。",
-        "answer": "は",
-        "choices": [],
-        "romaji": "Tanjōbi wa 9-gatsu tsuitachi ___ desu.",
-        "en": "My birthday is September 1st.",
-        "explanation": "(no particle here at the end before です — answers blank as は/etc., or show in 大学___5じに → に etc.)",
-        "id": "shukudai:particles:0038"
-      },
-      {
-        "lesson": 5,
-        "jp": "たんじょうび___ なんがつ なんにちですか。",
-        "answer": "は",
-        "choices": [],
-        "romaji": "Tanjōbi ___ nan-gatsu nan-nichi desu ka.",
-        "en": "When (what month/day) is your birthday?",
-        "explanation": "は = topic.",
-        "id": "shukudai:particles:0039"
-      },
-      {
-        "lesson": 5,
-        "jp": "4がつ 1にち___ にほんへ きました。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "4-gatsu 1-nichi ___ Nihon e kimashita.",
-        "en": "I came to Japan on April 1st.",
-        "explanation": "に on a specific date.",
-        "id": "shukudai:particles:0040"
-      },
-      {
-        "lesson": 5,
-        "jp": "まいばん 11じ___ ねます。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Maiban 11-ji ___ nemasu.",
-        "en": "I sleep at 11 every night.",
-        "explanation": "に on a numeric time.",
-        "id": "shukudai:particles:0041"
-      },
-      {
-        "lesson": 6,
-        "jp": "まいあさ パン___ たべます。",
-        "answer": "を",
-        "choices": [],
-        "romaji": "Maiasa pan ___ tabemasu.",
-        "en": "I eat bread every morning.",
-        "explanation": "を marks the direct object of the verb.",
-        "id": "shukudai:particles:0042"
-      },
-      {
-        "lesson": 6,
-        "jp": "コーヒー___ のみます。",
-        "answer": "を",
-        "choices": [],
-        "romaji": "Kōhī ___ nomimasu.",
-        "en": "I drink coffee.",
-        "explanation": "を marks the object.",
-        "id": "shukudai:particles:0043"
-      },
-      {
-        "lesson": 6,
-        "jp": "しんぶん___ よみます。",
-        "answer": "を",
-        "choices": [],
-        "romaji": "Shinbun ___ yomimasu.",
-        "en": "I read the newspaper.",
-        "explanation": "を = direct object.",
-        "id": "shukudai:particles:0044"
-      },
-      {
-        "lesson": 6,
-        "jp": "デパート___ かばん___ かいました。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Depāto ___ kaban ___ kaimashita.",
-        "en": "I bought a bag at the department store.",
-        "explanation": "で marks where an action takes place.",
-        "id": "shukudai:particles:0045"
-      },
-      {
-        "lesson": 6,
-        "jp": "うち___ しゅくだいを します。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Uchi ___ shukudai o shimasu.",
-        "en": "I do homework at home.",
-        "explanation": "で = location of action.",
-        "id": "shukudai:particles:0046"
-      },
-      {
-        "lesson": 6,
-        "jp": "としょかん___ ほんを よみます。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Toshokan ___ hon o yomimasu.",
-        "en": "I read books at the library.",
-        "explanation": "で = where the action happens.",
-        "id": "shukudai:particles:0047"
-      },
-      {
-        "lesson": 6,
-        "jp": "ともだち___ あいました。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Tomodachi ___ aimashita.",
-        "en": "I met a friend.",
-        "explanation": "に marks the person being met (indirect target).",
-        "id": "shukudai:particles:0048"
-      },
-      {
-        "lesson": 6,
-        "jp": "なに___ たべますか。",
-        "answer": "を",
-        "choices": [],
-        "romaji": "Nani ___ tabemasu ka.",
-        "en": "What will you eat?",
-        "explanation": "を after the question word \"what\" object.",
-        "id": "shukudai:particles:0049"
-      },
-      {
-        "lesson": 6,
-        "jp": "いっしょに しゃしん___ とりませんか。",
-        "answer": "を",
-        "choices": [],
-        "romaji": "Issho ni shashin ___ torimasen ka.",
-        "en": "Won't you take a photo with me?",
-        "explanation": "を marks \"photo\" as the object of \"take\".",
-        "id": "shukudai:particles:0050"
-      },
-      {
-        "lesson": 6,
-        "jp": "うち___ パンを たべます。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Uchi ___ pan o tabemasu.",
-        "en": "I eat bread at home.",
-        "explanation": "で = place of action.",
-        "id": "shukudai:particles:0051"
-      },
-      {
-        "lesson": 7,
-        "jp": "はし___ ごはんを たべます。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Hashi ___ gohan o tabemasu.",
-        "en": "I eat with chopsticks.",
-        "explanation": "で marks the tool/means.",
-        "id": "shukudai:particles:0052"
-      },
-      {
-        "lesson": 7,
-        "jp": "にほんご___ メールを かきます。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Nihongo ___ mēru o kakimasu.",
-        "en": "I write emails in Japanese.",
-        "explanation": "で on a language = \"in (that language)\".",
-        "id": "shukudai:particles:0053"
-      },
-      {
-        "lesson": 7,
-        "jp": "えいご___ はなします。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Eigo ___ hanashimasu.",
-        "en": "I speak in English.",
-        "explanation": "で = means/medium.",
-        "id": "shukudai:particles:0054"
-      },
-      {
-        "lesson": 7,
-        "jp": "ともだち___ プレゼントを あげました。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Tomodachi ___ purezento o agemashita.",
-        "en": "I gave my friend a present.",
-        "explanation": "に after a person = \"to (the person)\" — indirect object.",
-        "id": "shukudai:particles:0055"
-      },
-      {
-        "lesson": 7,
-        "jp": "ちち___ とけいを もらいました。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Chichi ___ tokei o moraimashita.",
-        "en": "I received a watch from my father.",
-        "explanation": "に with もらいます = \"from (the person)\".",
-        "id": "shukudai:particles:0056"
-      },
-      {
-        "lesson": 7,
-        "jp": "たなかさんは わたし___ にほんごを おしえます。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Tanaka-san wa watashi ___ nihongo o oshiemasu.",
-        "en": "Mr. Tanaka teaches me Japanese.",
-        "explanation": "に = \"to me\" (indirect object).",
-        "id": "shukudai:particles:0057"
-      },
-      {
-        "lesson": 7,
-        "jp": "はは___ でんわを かけました。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Haha ___ denwa o kakemashita.",
-        "en": "I called my mother.",
-        "explanation": "に on the person being called.",
-        "id": "shukudai:particles:0058"
-      },
-      {
-        "lesson": 7,
-        "jp": "ハサミ___ かみを きります。",
-        "answer": "で",
-        "choices": [],
-        "romaji": "Hasami ___ kami o kirimasu.",
-        "en": "I cut paper with scissors.",
-        "explanation": "で = tool.",
-        "id": "shukudai:particles:0059"
-      },
-      {
-        "lesson": 9,
-        "jp": "わたしは スポーツ___ すきです。",
-        "answer": "が",
-        "choices": [],
-        "romaji": "Watashi wa supōtsu ___ suki desu.",
-        "en": "I like sports.",
-        "explanation": "が marks what you like with すき (the object of preference).",
-        "id": "shukudai:particles:0060"
-      },
-      {
-        "lesson": 9,
-        "jp": "いぬ___ きらいです。",
-        "answer": "が",
-        "choices": [],
-        "romaji": "Inu ___ kirai desu.",
-        "en": "I dislike dogs.",
-        "explanation": "が with きらい = the disliked thing.",
-        "id": "shukudai:particles:0061"
-      },
-      {
-        "lesson": 9,
-        "jp": "にほんご___ すこし わかります。",
-        "answer": "が",
-        "choices": [],
-        "romaji": "Nihongo ___ sukoshi wakarimasu.",
-        "en": "I understand a little Japanese.",
-        "explanation": "が with わかります marks what is understood.",
-        "id": "shukudai:particles:0062"
-      },
-      {
-        "lesson": 9,
-        "jp": "やまださんは りょうり___ じょうずです。",
-        "answer": "が",
-        "choices": [],
-        "romaji": "Yamada-san wa ryōri ___ jōzu desu.",
-        "en": "Mr. Yamada is good at cooking.",
-        "explanation": "が marks the skill area for じょうず/へた.",
-        "id": "shukudai:particles:0063"
-      },
-      {
-        "lesson": 9,
-        "jp": "いそがしいです___、いきません。",
-        "answer": "から",
-        "choices": [],
-        "romaji": "Isogashii desu ___, ikimasen.",
-        "en": "I'm busy, so I won't go.",
-        "explanation": "から after a clause = \"because\".",
-        "id": "shukudai:particles:0064"
-      },
-      {
-        "lesson": 9,
-        "jp": "しけんが あります___、べんきょうします。",
-        "answer": "から",
-        "choices": [],
-        "romaji": "Shiken ga arimasu ___, benkyō shimasu.",
-        "en": "I have an exam, so I'll study.",
-        "explanation": "から chains a reason to a consequence.",
-        "id": "shukudai:particles:0065"
-      },
-      {
-        "lesson": 9,
-        "jp": "じかんが ありません___、ざんねんです。",
-        "answer": "から",
-        "choices": [],
-        "romaji": "Jikan ga arimasen ___, zannen desu.",
-        "en": "I don't have time, so I'm sorry.",
-        "explanation": "から = because.",
-        "id": "shukudai:particles:0066"
-      },
-      {
-        "lesson": 9,
-        "jp": "やきゅう___ だいすきです。",
-        "answer": "が",
-        "choices": [],
-        "romaji": "Yakyū ___ daisuki desu.",
-        "en": "I love baseball.",
-        "explanation": "が with すき/だいすき.",
-        "id": "shukudai:particles:0067"
-      },
-      {
-        "lesson": 10,
-        "jp": "つくえの うえ___ ほんが あります。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Tsukue no ue ___ hon ga arimasu.",
-        "en": "There is a book on the desk.",
-        "explanation": "に on a location with あります/います = \"exists at\".",
-        "id": "shukudai:particles:0068"
-      },
-      {
-        "lesson": 10,
-        "jp": "へや___ だれが いますか。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Heya ___ dare ga imasu ka.",
-        "en": "Who is in the room?",
-        "explanation": "に on the place of existence.",
-        "id": "shukudai:particles:0069"
-      },
-      {
-        "lesson": 10,
-        "jp": "ぎんこうは えきの まえ___ あります。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Ginkō wa eki no mae ___ arimasu.",
-        "en": "The bank is in front of the station.",
-        "explanation": "に marks where the bank is located.",
-        "id": "shukudai:particles:0070"
-      },
-      {
-        "lesson": 10,
-        "jp": "コンビニは デパート___ ぎんこうの あいだに あります。",
-        "answer": "と",
-        "choices": [],
-        "romaji": "Konbini wa depāto ___ ginkō no aida ni arimasu.",
-        "en": "The convenience store is between the department store and the bank.",
-        "explanation": "と connects two nouns (\"A and B\").",
-        "id": "shukudai:particles:0071"
-      },
-      {
-        "lesson": 10,
-        "jp": "へやに テレビ___ ラジオなどが あります。",
-        "answer": "や",
-        "choices": [],
-        "romaji": "Heya ni terebi ___ rajio nado ga arimasu.",
-        "en": "In the room there is a TV, a radio, and so on.",
-        "explanation": "や = \"and\" for an incomplete list (commonly with ~など).",
-        "id": "shukudai:particles:0072"
-      },
-      {
-        "lesson": 10,
-        "jp": "なか___ なにが ありますか。",
-        "answer": "に",
-        "choices": [],
-        "romaji": "Naka ___ nani ga arimasu ka.",
-        "en": "What is inside?",
-        "explanation": "に on the location.",
-        "id": "shukudai:particles:0073"
-      },
-      {
-        "lesson": 10,
-        "jp": "いす___ うえに ねこが います。",
-        "answer": "の",
-        "choices": [],
-        "romaji": "Isu ___ ue ni neko ga imasu.",
-        "en": "There is a cat on the chair.",
-        "explanation": "の links the noun to a position word (\"chair-of top\").",
-        "id": "shukudai:particles:0074"
-      }
-    ],
-    "verbs": [
-      {
-        "lesson": 4,
-        "jp": "まいあさ 6じに ___。",
-        "answer": "おきます",
-        "romaji": "Maiasa 6-ji ni ___",
-        "en": "I get up at 6 every morning.",
-        "explanation": "Habitual / future = ~ます.",
-        "id": "shukudai:verbs:0000"
-      },
-      {
-        "lesson": 4,
-        "jp": "きのう 11じに ___。",
-        "answer": "ねました",
-        "romaji": "Kinō 11-ji ni ___",
-        "en": "I slept at 11 yesterday.",
-        "explanation": "Past affirmative = ~ました.",
-        "id": "shukudai:verbs:0001"
-      },
-      {
-        "lesson": 4,
-        "jp": "あした しけんが ありますから、テレビを ___。",
-        "answer": "みません",
-        "romaji": "Ashita shiken ga arimasu kara, terebi o ___",
-        "en": "Tomorrow there's an exam, so I won't watch TV.",
-        "explanation": "Negative non-past = ~ません.",
-        "id": "shukudai:verbs:0002"
-      },
-      {
-        "lesson": 4,
-        "jp": "おととい うちで ___ でした。",
-        "answer": "べんきょうしません",
-        "romaji": "Ototoi uchi de ___ deshita.",
-        "en": "Day before yesterday I didn't study at home.",
-        "explanation": "Negative past = ~ませんでした.",
-        "id": "shukudai:verbs:0003"
-      },
-      {
-        "lesson": 4,
-        "jp": "まいばん 12じまで ___。",
-        "answer": "はたらきます",
-        "romaji": "Maiban 12-ji made ___",
-        "en": "I work until 12 every night.",
-        "explanation": "~ます for habitual.",
-        "id": "shukudai:verbs:0004"
-      },
-      {
-        "lesson": 5,
-        "jp": "らいしゅう にほんへ ___。",
-        "answer": "いきます",
-        "romaji": "Raishū Nihon e ___",
-        "en": "I'll go to Japan next week.",
-        "explanation": "Future = ~ます.",
-        "id": "shukudai:verbs:0005"
-      },
-      {
-        "lesson": 5,
-        "jp": "ともだちと きょうとへ ___。",
-        "answer": "いきました",
-        "romaji": "Tomodachi to Kyōto e ___",
-        "en": "I went to Kyoto with a friend.",
-        "explanation": "Past = ~ました.",
-        "id": "shukudai:verbs:0006"
-      },
-      {
-        "lesson": 5,
-        "jp": "きのう どこへも ___ でした。",
-        "answer": "いきません",
-        "romaji": "Kinō doko e mo ___ deshita.",
-        "en": "I didn't go anywhere yesterday.",
-        "explanation": "Negative past = ~ませんでした.",
-        "id": "shukudai:verbs:0007"
-      },
-      {
-        "lesson": 6,
-        "jp": "まいあさ パンを ___。",
-        "answer": "たべます",
-        "romaji": "Maiasa pan o ___",
-        "en": "I eat bread every morning.",
-        "explanation": "~ます for habit.",
-        "id": "shukudai:verbs:0008"
-      },
-      {
-        "lesson": 6,
-        "jp": "きのう ともだちに ___。",
-        "answer": "あいました",
-        "romaji": "Kinō tomodachi ni ___",
-        "en": "I met a friend yesterday.",
-        "explanation": "Past = ~ました.",
-        "id": "shukudai:verbs:0009"
-      },
-      {
-        "lesson": 6,
-        "jp": "こうえんで しゃしんを ___ か。",
-        "answer": "とりました",
-        "romaji": "Kōen de shashin o ___ ka.",
-        "en": "Did you take photos in the park?",
-        "explanation": "Past question.",
-        "id": "shukudai:verbs:0010"
-      },
-      {
-        "lesson": 6,
-        "jp": "にほんごを ___ か。",
-        "answer": "はなします",
-        "romaji": "Nihongo o ___ ka.",
-        "en": "Do you speak Japanese?",
-        "explanation": "~ます for habit.",
-        "id": "shukudai:verbs:0011"
-      },
-      {
-        "lesson": 7,
-        "jp": "たなかさんに プレゼントを ___。",
-        "answer": "あげました",
-        "romaji": "Tanaka-san ni purezento o ___",
-        "en": "I gave Mr. Tanaka a present.",
-        "explanation": "Past affirmative.",
-        "id": "shukudai:verbs:0012"
-      },
-      {
-        "lesson": 7,
-        "jp": "ははに とけいを ___。",
-        "answer": "もらいました",
-        "romaji": "Haha ni tokei o ___",
-        "en": "I received a watch from my mother.",
-        "explanation": "Past affirmative.",
-        "id": "shukudai:verbs:0013"
-      },
-      {
-        "lesson": 7,
-        "jp": "もう ばんごはんを ___ か。",
-        "answer": "たべました",
-        "romaji": "Mō bangohan o ___ ka.",
-        "en": "Have you eaten dinner already?",
-        "explanation": "もう + past = \"already done\".",
-        "id": "shukudai:verbs:0014"
-      },
-      {
-        "lesson": 7,
-        "jp": "いいえ、まだ ___。",
-        "answer": "たべていません",
-        "romaji": "Iie, mada ___",
-        "en": "No, not yet.",
-        "explanation": "Lit: not eaten yet.",
-        "id": "shukudai:verbs:0015"
-      },
-      {
-        "lesson": 9,
-        "jp": "いそがしいですから、テニスを ___。",
-        "answer": "しません",
-        "romaji": "Isogashii desu kara, tenisu o ___",
-        "en": "I'm busy, so I won't play tennis.",
-        "explanation": "Negative non-past = ~ません.",
-        "id": "shukudai:verbs:0016"
-      },
-      {
-        "lesson": 9,
-        "jp": "おかねが ありませんから、なにも ___ でした。",
-        "answer": "かいません",
-        "romaji": "Okane ga arimasen kara, nani mo ___ deshita.",
-        "en": "I had no money, so I didn't buy anything.",
-        "explanation": "Negative past.",
-        "id": "shukudai:verbs:0017"
-      },
-      {
-        "lesson": 10,
-        "jp": "うちに ねこが ___。",
-        "answer": "います",
-        "romaji": "Uchi ni neko ga ___",
-        "en": "There is a cat at home.",
-        "explanation": "います for animate beings.",
-        "id": "shukudai:verbs:0018"
-      },
-      {
-        "lesson": 10,
-        "jp": "つくえの うえに ほんが ___ か。",
-        "answer": "あります",
-        "romaji": "Tsukue no ue ni hon ga ___ ka.",
-        "en": "Is there a book on the desk?",
-        "explanation": "あります for inanimate things.",
-        "id": "shukudai:verbs:0019"
-      }
-    ],
-    "adjectives": [
-      {
-        "lesson": 8,
-        "jp": "このほんは おもしろくないです。 → English negative i-adj of「おもしろい」?",
-        "answer": "おもしろくない",
-        "romaji": "kono hon wa omoshirokunai desu",
-        "en": "This book is not interesting.",
-        "explanation": "い-adj negative: drop い → くない. おもしろい → おもしろくない.",
-        "id": "shukudai:adjectives:0000"
-      },
-      {
-        "lesson": 8,
-        "jp": "「たかい」の ひていけいは ___ です。",
-        "answer": "たかくない",
-        "romaji": "takai → ___",
-        "en": "The negative form of takai is ___.",
-        "explanation": "い-adj negative: たかい → たかくない.",
-        "id": "shukudai:adjectives:0001"
-      },
-      {
-        "lesson": 8,
-        "jp": "「おおきい」の ひていけいは ___ です。",
-        "answer": "おおきくない",
-        "romaji": "ōkii → ___",
-        "en": "Negative of ōkii.",
-        "explanation": "い-adj: おおきい → おおきくない (drop final い, add くない).",
-        "id": "shukudai:adjectives:0002"
-      },
-      {
-        "lesson": 8,
-        "jp": "「いい」の ひていけいは ___ です。",
-        "answer": "よくない",
-        "romaji": "ii → ___",
-        "en": "Negative of ii.",
-        "explanation": "いい is irregular: based on よい. よくない (not よくない but いいくない is wrong).",
-        "id": "shukudai:adjectives:0003"
-      },
-      {
-        "lesson": 8,
-        "jp": "たなかさんは しんせつ___ ありません。",
-        "answer": "じゃ",
-        "romaji": "Tanaka-san wa shinsetsu ___ arimasen",
-        "en": "Mr. Tanaka is not kind.",
-        "explanation": "な-adj negative: ~じゃありません (or ~ではありません more formal).",
-        "id": "shukudai:adjectives:0004"
-      },
-      {
-        "lesson": 8,
-        "jp": "このまちは しずか___ ないです。",
-        "answer": "じゃ",
-        "romaji": "Kono machi wa shizuka ___ nai desu",
-        "en": "This town is not quiet.",
-        "explanation": "な-adj negative.",
-        "id": "shukudai:adjectives:0005"
-      },
-      {
-        "lesson": 8,
-        "jp": "たかい → たかかった (past). やすい → ___。",
-        "answer": "やすかった",
-        "romaji": "takai → takakatta. yasui → ___",
-        "en": "Past of yasui.",
-        "explanation": "い-adj past: drop い → かった.",
-        "id": "shukudai:adjectives:0006"
-      },
-      {
-        "lesson": 8,
-        "jp": "にほんごは むずかしい___、おもしろいです。",
-        "answer": "ですが",
-        "romaji": "Nihongo wa muzukashii ___, omoshiroi desu",
-        "en": "Japanese is difficult but interesting.",
-        "explanation": "い-adj +ですが = \"X is ~, but…\".",
-        "id": "shukudai:adjectives:0007"
-      },
-      {
-        "lesson": 8,
-        "jp": "きょうとは しずか___、きれいです。",
-        "answer": "で",
-        "romaji": "Kyōto wa shizuka ___, kirei desu",
-        "en": "Kyoto is quiet and beautiful.",
-        "explanation": "な-adj +で = \"and\" between two な-adj clauses.",
-        "id": "shukudai:adjectives:0008"
-      }
-    ],
     "family": [
       {
         "lesson": 7,
-        "jp": "わたしの ___ です (own father).",
+        "prompt": "my father",
         "answer": "ちち",
         "romaji": "watashi no ___ desu",
-        "en": "my father",
         "explanation": "Own family: ちち = my father.",
         "id": "shukudai:family:0000"
       },
       {
         "lesson": 7,
-        "jp": "わたしの ___ です (own mother).",
+        "prompt": "my mother",
         "answer": "はは",
         "romaji": "watashi no ___ desu",
-        "en": "my mother",
         "explanation": "Own family: はは = my mother.",
         "id": "shukudai:family:0001"
       },
       {
         "lesson": 7,
-        "jp": "(someone else's father)",
+        "prompt": "someone else's father",
         "answer": "おとうさん",
         "romaji": "someone else's father",
-        "en": "someone else's father",
         "explanation": "Honorific for others: おとうさん.",
         "id": "shukudai:family:0002"
       },
       {
         "lesson": 7,
-        "jp": "(someone else's mother)",
+        "prompt": "someone else's mother",
         "answer": "おかあさん",
         "romaji": "someone else's mother",
-        "en": "someone else's mother",
         "explanation": "Honorific for others: おかあさん.",
         "id": "shukudai:family:0003"
       },
       {
         "lesson": 9,
-        "jp": "わたしの ___ です (my husband).",
+        "prompt": "my husband",
         "answer": "しゅじん",
         "romaji": "watashi no ___ desu",
-        "en": "my husband",
         "explanation": "Own: しゅじん (also つま is wife). For others: ごしゅじん.",
         "id": "shukudai:family:0004"
       },
       {
         "lesson": 9,
-        "jp": "(someone else's husband, polite)",
+        "prompt": "someone else's husband",
         "answer": "ごしゅじん",
         "romaji": "someone else's husband",
-        "en": "someone else's husband",
         "explanation": "ごしゅじん is polite for \"your/their husband\".",
         "id": "shukudai:family:0005"
       },
       {
         "lesson": 9,
-        "jp": "わたしの ___ です (my wife).",
+        "prompt": "my wife",
         "answer": "つま",
         "romaji": "watashi no ___ desu",
-        "en": "my wife",
         "explanation": "Own: つま or かない. For others: おくさん.",
         "id": "shukudai:family:0006"
       },
       {
         "lesson": 9,
-        "jp": "(someone else's wife, polite)",
+        "prompt": "someone else's wife",
         "answer": "おくさん",
         "romaji": "someone else's wife",
-        "en": "someone else's wife",
         "explanation": "Polite/honorific is おくさん.",
         "id": "shukudai:family:0007"
       },
       {
         "lesson": 9,
-        "jp": "(child, general)",
+        "prompt": "child",
         "answer": "こども",
         "romaji": "kodomo",
-        "en": "child",
         "explanation": "こども = child (used for own and others alike).",
         "id": "shukudai:family:0008"
       },
       {
         "lesson": 1,
-        "jp": "(older brother — own)",
+        "prompt": "my older brother",
         "answer": "あに",
         "romaji": "ani",
-        "en": "my older brother",
         "explanation": "Own family: あに. For others: おにいさん.",
         "id": "shukudai:family:0009"
       },
       {
         "lesson": 1,
-        "jp": "(older sister — own)",
+        "prompt": "my older sister",
         "answer": "あね",
         "romaji": "ane",
-        "en": "my older sister",
         "explanation": "Own family: あね. For others: おねえさん.",
         "id": "shukudai:family:0010"
       },
       {
         "lesson": 1,
-        "jp": "(younger brother — own)",
+        "prompt": "my younger brother",
         "answer": "おとうと",
         "romaji": "otōto",
-        "en": "my younger brother",
         "explanation": "Own family: おとうと. For others: おとうとさん.",
         "id": "shukudai:family:0011"
       },
       {
         "lesson": 1,
-        "jp": "(younger sister — own)",
+        "prompt": "my younger sister",
         "answer": "いもうと",
         "romaji": "imōto",
-        "en": "my younger sister",
         "explanation": "Own family: いもうと. For others: いもうとさん.",
         "id": "shukudai:family:0012"
       }
@@ -2462,603 +1437,499 @@ const SHUKUDAI = {
     "professions": [
       {
         "lesson": 1,
-        "jp": "かいしゃいん",
-        "romaji": "kaishain",
-        "en": "company employee",
+        "prompt": "company employee",
         "answer": "かいしゃいん",
+        "romaji": "kaishain",
         "explanation": "かいしゃいん (kaishain) means \"company employee\".",
         "id": "shukudai:professions:0000"
       },
       {
         "lesson": 1,
-        "jp": "こうむいん",
-        "romaji": "kōmuin",
-        "en": "civil servant / public servant",
+        "prompt": "civil servant / public servant",
         "answer": "こうむいん",
+        "romaji": "kōmuin",
         "explanation": "こうむいん (kōmuin) means \"civil servant / public servant\".",
         "id": "shukudai:professions:0001"
       },
       {
         "lesson": 1,
-        "jp": "えきいん",
-        "romaji": "ekiin",
-        "en": "station clerk",
+        "prompt": "station clerk",
         "answer": "えきいん",
+        "romaji": "ekiin",
         "explanation": "えきいん (ekiin) means \"station clerk\".",
         "id": "shukudai:professions:0002"
       },
       {
         "lesson": 1,
-        "jp": "ぎんこういん",
-        "romaji": "ginkōin",
-        "en": "bank clerk / bank employee",
+        "prompt": "bank clerk / bank employee",
         "answer": "ぎんこういん",
+        "romaji": "ginkōin",
         "explanation": "ぎんこういん (ginkōin) means \"bank clerk / bank employee\".",
         "id": "shukudai:professions:0003"
       },
       {
         "lesson": 1,
-        "jp": "ゆうびんきょくいん",
-        "romaji": "yūbinkyokuin",
-        "en": "postal worker",
+        "prompt": "postal worker",
         "answer": "ゆうびんきょくいん",
+        "romaji": "yūbinkyokuin",
         "explanation": "ゆうびんきょくいん (yūbinkyokuin) means \"postal worker\".",
         "id": "shukudai:professions:0004"
       },
       {
         "lesson": 1,
-        "jp": "てんいん",
-        "romaji": "ten'in",
-        "en": "shop clerk",
+        "prompt": "shop clerk",
         "answer": "てんいん",
+        "romaji": "ten'in",
         "explanation": "てんいん (ten'in) means \"shop clerk\".",
         "id": "shukudai:professions:0005"
       },
       {
         "lesson": 1,
-        "jp": "ちょうり",
-        "romaji": "chōri",
-        "en": "cook / chef",
+        "prompt": "cook / chef",
         "answer": "ちょうり",
+        "romaji": "chōri",
         "explanation": "ちょうり (chōri) means \"cook / chef\".",
         "id": "shukudai:professions:0006"
       },
       {
         "lesson": 1,
-        "jp": "りようし",
-        "romaji": "riyōshi",
-        "en": "barber",
+        "prompt": "barber",
         "answer": "りようし",
+        "romaji": "riyōshi",
         "explanation": "りようし (riyōshi) means \"barber\".",
         "id": "shukudai:professions:0007"
       },
       {
         "lesson": 1,
-        "jp": "びようし",
-        "romaji": "biyōshi",
-        "en": "beautician / hairdresser",
+        "prompt": "beautician / hairdresser",
         "answer": "びようし",
+        "romaji": "biyōshi",
         "explanation": "びようし (biyōshi) means \"beautician / hairdresser\".",
         "id": "shukudai:professions:0008"
       },
       {
         "lesson": 1,
-        "jp": "きょうし",
-        "romaji": "kyōshi",
-        "en": "teacher (general)",
+        "prompt": "teacher (general)",
         "answer": "きょうし",
+        "romaji": "kyōshi",
         "explanation": "きょうし (kyōshi) means \"teacher (general)\".",
         "id": "shukudai:professions:0009"
       },
       {
         "lesson": 1,
-        "jp": "せんせい",
-        "romaji": "sensei",
-        "en": "teacher (when addressing/honoring)",
+        "prompt": "teacher (when addressing/honoring)",
         "answer": "せんせい",
+        "romaji": "sensei",
         "explanation": "せんせい (sensei) means \"teacher (when addressing/honoring)\".",
         "id": "shukudai:professions:0010"
       },
       {
         "lesson": 1,
-        "jp": "べんごし",
-        "romaji": "bengoshi",
-        "en": "lawyer",
+        "prompt": "lawyer",
         "answer": "べんごし",
+        "romaji": "bengoshi",
         "explanation": "べんごし (bengoshi) means \"lawyer\".",
         "id": "shukudai:professions:0011"
       },
       {
         "lesson": 1,
-        "jp": "けんきゅうしゃ",
-        "romaji": "kenkyūsha",
-        "en": "researcher",
+        "prompt": "researcher",
         "answer": "けんきゅうしゃ",
+        "romaji": "kenkyūsha",
         "explanation": "けんきゅうしゃ (kenkyūsha) means \"researcher\".",
         "id": "shukudai:professions:0012"
       },
       {
         "lesson": 1,
-        "jp": "いしゃ",
-        "romaji": "isha",
-        "en": "doctor",
+        "prompt": "doctor",
         "answer": "いしゃ",
+        "romaji": "isha",
         "explanation": "いしゃ (isha) means \"doctor\".",
         "id": "shukudai:professions:0013"
       },
       {
         "lesson": 1,
-        "jp": "かんごし",
-        "romaji": "kangoshi",
-        "en": "nurse",
+        "prompt": "nurse",
         "answer": "かんごし",
+        "romaji": "kangoshi",
         "explanation": "かんごし (kangoshi) means \"nurse\".",
         "id": "shukudai:professions:0014"
       },
       {
         "lesson": 1,
-        "jp": "うんてんしゅ",
-        "romaji": "untenshu",
-        "en": "driver",
+        "prompt": "driver",
         "answer": "うんてんしゅ",
+        "romaji": "untenshu",
         "explanation": "うんてんしゅ (untenshu) means \"driver\".",
         "id": "shukudai:professions:0015"
       },
       {
         "lesson": 1,
-        "jp": "けいさつかん",
-        "romaji": "keisatsukan",
-        "en": "police officer",
+        "prompt": "police officer",
         "answer": "けいさつかん",
+        "romaji": "keisatsukan",
         "explanation": "けいさつかん (keisatsukan) means \"police officer\".",
         "id": "shukudai:professions:0016"
       },
       {
         "lesson": 1,
-        "jp": "がいこうかん",
-        "romaji": "gaikōkan",
-        "en": "diplomat",
+        "prompt": "diplomat",
         "answer": "がいこうかん",
+        "romaji": "gaikōkan",
         "explanation": "がいこうかん (gaikōkan) means \"diplomat\".",
         "id": "shukudai:professions:0017"
       },
       {
         "lesson": 1,
-        "jp": "せいじか",
-        "romaji": "seijika",
-        "en": "politician",
+        "prompt": "politician",
         "answer": "せいじか",
+        "romaji": "seijika",
         "explanation": "せいじか (seijika) means \"politician\".",
         "id": "shukudai:professions:0018"
       },
       {
         "lesson": 1,
-        "jp": "がか",
-        "romaji": "gaka",
-        "en": "painter (artist)",
+        "prompt": "painter (artist)",
         "answer": "がか",
+        "romaji": "gaka",
         "explanation": "がか (gaka) means \"painter (artist)\".",
         "id": "shukudai:professions:0019"
       },
       {
         "lesson": 1,
-        "jp": "かんごし",
-        "romaji": "kangoshi",
-        "en": "nurse",
-        "answer": "かんごし",
-        "explanation": "かんごし (kangoshi) means \"nurse\".",
+        "prompt": "author / writer",
+        "answer": "さっか",
+        "romaji": "sakka",
+        "explanation": "さっか (sakka) means \"author / writer\".",
         "id": "shukudai:professions:0020"
       },
       {
         "lesson": 1,
-        "jp": "さっか",
-        "romaji": "sakka",
-        "en": "author / writer",
-        "answer": "さっか",
-        "explanation": "さっか (sakka) means \"author / writer\".",
+        "prompt": "musician",
+        "answer": "おんがくか",
+        "romaji": "ongakuka",
+        "explanation": "おんがくか (ongakuka) means \"musician\".",
         "id": "shukudai:professions:0021"
       },
       {
         "lesson": 1,
-        "jp": "おんがくか",
-        "romaji": "ongakuka",
-        "en": "musician",
-        "answer": "おんがくか",
-        "explanation": "おんがくか (ongakuka) means \"musician\".",
+        "prompt": "architect",
+        "answer": "けんちくか",
+        "romaji": "kenchikuka",
+        "explanation": "けんちくか (kenchikuka) means \"architect\".",
         "id": "shukudai:professions:0022"
       },
       {
         "lesson": 1,
-        "jp": "けんちくか",
-        "romaji": "kenchikuka",
-        "en": "architect",
-        "answer": "けんちくか",
-        "explanation": "けんちくか (kenchikuka) means \"architect\".",
+        "prompt": "engineer",
+        "answer": "エンジニア",
+        "romaji": "enjinia",
+        "explanation": "エンジニア (enjinia) means \"engineer\".",
         "id": "shukudai:professions:0023"
       },
       {
         "lesson": 1,
-        "jp": "エンジニア",
-        "romaji": "enjinia",
-        "en": "engineer",
-        "answer": "エンジニア",
-        "explanation": "エンジニア (enjinia) means \"engineer\".",
+        "prompt": "designer",
+        "answer": "デザイナー",
+        "romaji": "dezainā",
+        "explanation": "デザイナー (dezainā) means \"designer\".",
         "id": "shukudai:professions:0024"
       },
       {
         "lesson": 1,
-        "jp": "デザイナー",
-        "romaji": "dezainā",
-        "en": "designer",
-        "answer": "デザイナー",
-        "explanation": "デザイナー (dezainā) means \"designer\".",
+        "prompt": "journalist",
+        "answer": "ジャーナリスト",
+        "romaji": "jānarisuto",
+        "explanation": "ジャーナリスト (jānarisuto) means \"journalist\".",
         "id": "shukudai:professions:0025"
       },
       {
         "lesson": 1,
-        "jp": "ジャーナリスト",
-        "romaji": "jānarisuto",
-        "en": "journalist",
-        "answer": "ジャーナリスト",
-        "explanation": "ジャーナリスト (jānarisuto) means \"journalist\".",
+        "prompt": "singer",
+        "answer": "かしゅ",
+        "romaji": "kashu",
+        "explanation": "かしゅ (kashu) means \"singer\".",
         "id": "shukudai:professions:0026"
       },
       {
         "lesson": 1,
-        "jp": "かしゅ",
-        "romaji": "kashu",
-        "en": "singer",
-        "answer": "かしゅ",
-        "explanation": "かしゅ (kashu) means \"singer\".",
+        "prompt": "actor / actress",
+        "answer": "はいゆう",
+        "romaji": "haiyū",
+        "explanation": "はいゆう (haiyū) means \"actor / actress\".",
         "id": "shukudai:professions:0027"
       },
       {
         "lesson": 1,
-        "jp": "はいゆう",
-        "romaji": "haiyū",
-        "en": "actor / actress",
-        "answer": "はいゆう",
-        "explanation": "はいゆう (haiyū) means \"actor / actress\".",
-        "id": "shukudai:professions:0028"
-      },
-      {
-        "lesson": 1,
-        "jp": "スポーツせんしゅ",
-        "romaji": "supōtsu senshu",
-        "en": "athlete",
+        "prompt": "athlete",
         "answer": "スポーツせんしゅ",
+        "romaji": "supōtsu senshu",
         "explanation": "スポーツせんしゅ (supōtsu senshu) means \"athlete\".",
-        "id": "shukudai:professions:0029"
+        "id": "shukudai:professions:0028"
       }
     ],
     "places": [
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "アメリカ",
-        "romaji": "Amerika",
-        "en": "America (USA)",
+        "prompt": "America (USA)",
         "answer": "アメリカ",
+        "romaji": "Amerika",
         "explanation": "Country: America (USA).",
         "id": "shukudai:places:0000"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "イギリス",
-        "romaji": "Igirisu",
-        "en": "United Kingdom",
+        "prompt": "United Kingdom",
         "answer": "イギリス",
+        "romaji": "Igirisu",
         "explanation": "Country: United Kingdom.",
         "id": "shukudai:places:0001"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "インド",
-        "romaji": "Indo",
-        "en": "India",
+        "prompt": "India",
         "answer": "インド",
+        "romaji": "Indo",
         "explanation": "Country: India.",
         "id": "shukudai:places:0002"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "インドネシア",
-        "romaji": "Indoneshia",
-        "en": "Indonesia",
+        "prompt": "Indonesia",
         "answer": "インドネシア",
+        "romaji": "Indoneshia",
         "explanation": "Country: Indonesia.",
         "id": "shukudai:places:0003"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "かんこく",
-        "romaji": "Kankoku",
-        "en": "South Korea",
+        "prompt": "South Korea",
         "answer": "かんこく",
+        "romaji": "Kankoku",
         "explanation": "Country: South Korea.",
         "id": "shukudai:places:0004"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "タイ",
-        "romaji": "Tai",
-        "en": "Thailand",
+        "prompt": "Thailand",
         "answer": "タイ",
+        "romaji": "Tai",
         "explanation": "Country: Thailand.",
         "id": "shukudai:places:0005"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "ちゅうごく",
-        "romaji": "Chūgoku",
-        "en": "China",
+        "prompt": "China",
         "answer": "ちゅうごく",
+        "romaji": "Chūgoku",
         "explanation": "Country: China.",
         "id": "shukudai:places:0006"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "ドイツ",
-        "romaji": "Doitsu",
-        "en": "Germany",
+        "prompt": "Germany",
         "answer": "ドイツ",
+        "romaji": "Doitsu",
         "explanation": "Country: Germany.",
         "id": "shukudai:places:0007"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "にほん",
-        "romaji": "Nihon",
-        "en": "Japan",
+        "prompt": "Japan",
         "answer": "にほん",
+        "romaji": "Nihon",
         "explanation": "Country: Japan.",
         "id": "shukudai:places:0008"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "ブラジル",
-        "romaji": "Burajiru",
-        "en": "Brazil",
+        "prompt": "Brazil",
         "answer": "ブラジル",
+        "romaji": "Burajiru",
         "explanation": "Country: Brazil.",
         "id": "shukudai:places:0009"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "イタリア",
-        "romaji": "Itaria",
-        "en": "Italy",
+        "prompt": "Italy",
         "answer": "イタリア",
+        "romaji": "Itaria",
         "explanation": "Country: Italy.",
         "id": "shukudai:places:0010"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "スイス",
-        "romaji": "Suisu",
-        "en": "Switzerland",
+        "prompt": "Switzerland",
         "answer": "スイス",
+        "romaji": "Suisu",
         "explanation": "Country: Switzerland.",
         "id": "shukudai:places:0011"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "フランス",
-        "romaji": "Furansu",
-        "en": "France",
+        "prompt": "France",
         "answer": "フランス",
+        "romaji": "Furansu",
         "explanation": "Country: France.",
         "id": "shukudai:places:0012"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "スペイン",
-        "romaji": "Supein",
-        "en": "Spain",
+        "prompt": "Spain",
         "answer": "スペイン",
+        "romaji": "Supein",
         "explanation": "Country: Spain.",
         "id": "shukudai:places:0013"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "オーストラリア",
-        "romaji": "Ōsutoraria",
-        "en": "Australia",
+        "prompt": "Australia",
         "answer": "オーストラリア",
+        "romaji": "Ōsutoraria",
         "explanation": "Country: Australia.",
         "id": "shukudai:places:0014"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "カナダ",
-        "romaji": "Kanada",
-        "en": "Canada",
+        "prompt": "Canada",
         "answer": "カナダ",
+        "romaji": "Kanada",
         "explanation": "Country: Canada.",
         "id": "shukudai:places:0015"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "メキシコ",
-        "romaji": "Mekishiko",
-        "en": "Mexico",
+        "prompt": "Mexico",
         "answer": "メキシコ",
+        "romaji": "Mekishiko",
         "explanation": "Country: Mexico.",
         "id": "shukudai:places:0016"
       },
       {
         "lesson": 1,
-        "kind": "country",
-        "jp": "ロシア",
-        "romaji": "Roshia",
-        "en": "Russia",
+        "prompt": "Russia",
         "answer": "ロシア",
+        "romaji": "Roshia",
         "explanation": "Country: Russia.",
         "id": "shukudai:places:0017"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "ぎんこう",
-        "romaji": "ginkō",
-        "en": "bank",
+        "prompt": "bank",
         "answer": "ぎんこう",
+        "romaji": "ginkō",
         "explanation": "Place: bank.",
         "id": "shukudai:places:0018"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "ゆうびんきょく",
-        "romaji": "yūbinkyoku",
-        "en": "post office",
+        "prompt": "post office",
         "answer": "ゆうびんきょく",
+        "romaji": "yūbinkyoku",
         "explanation": "Place: post office.",
         "id": "shukudai:places:0019"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "としょかん",
-        "romaji": "toshokan",
-        "en": "library",
+        "prompt": "library",
         "answer": "としょかん",
+        "romaji": "toshokan",
         "explanation": "Place: library.",
         "id": "shukudai:places:0020"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "びじゅつかん",
-        "romaji": "bijutsukan",
-        "en": "art museum",
+        "prompt": "art museum",
         "answer": "びじゅつかん",
+        "romaji": "bijutsukan",
         "explanation": "Place: art museum.",
         "id": "shukudai:places:0021"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "デパート",
-        "romaji": "depāto",
-        "en": "department store",
+        "prompt": "department store",
         "answer": "デパート",
+        "romaji": "depāto",
         "explanation": "Place: department store.",
         "id": "shukudai:places:0022"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "スーパー",
-        "romaji": "sūpā",
-        "en": "supermarket",
+        "prompt": "supermarket",
         "answer": "スーパー",
+        "romaji": "sūpā",
         "explanation": "Place: supermarket.",
         "id": "shukudai:places:0023"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "えき",
-        "romaji": "eki",
-        "en": "station",
+        "prompt": "station",
         "answer": "えき",
+        "romaji": "eki",
         "explanation": "Place: station.",
         "id": "shukudai:places:0024"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "がっこう",
-        "romaji": "gakkō",
-        "en": "school",
+        "prompt": "school",
         "answer": "がっこう",
+        "romaji": "gakkō",
         "explanation": "Place: school.",
         "id": "shukudai:places:0025"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "だいがく",
-        "romaji": "daigaku",
-        "en": "university",
+        "prompt": "university",
         "answer": "だいがく",
+        "romaji": "daigaku",
         "explanation": "Place: university.",
         "id": "shukudai:places:0026"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "びょういん",
-        "romaji": "byōin",
-        "en": "hospital",
+        "prompt": "hospital",
         "answer": "びょういん",
+        "romaji": "byōin",
         "explanation": "Place: hospital.",
         "id": "shukudai:places:0027"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "レストラン",
-        "romaji": "resutoran",
-        "en": "restaurant",
+        "prompt": "restaurant",
         "answer": "レストラン",
+        "romaji": "resutoran",
         "explanation": "Place: restaurant.",
         "id": "shukudai:places:0028"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "ホテル",
-        "romaji": "hoteru",
-        "en": "hotel",
+        "prompt": "hotel",
         "answer": "ホテル",
+        "romaji": "hoteru",
         "explanation": "Place: hotel.",
         "id": "shukudai:places:0029"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "こうえん",
-        "romaji": "kōen",
-        "en": "park",
+        "prompt": "park",
         "answer": "こうえん",
+        "romaji": "kōen",
         "explanation": "Place: park.",
         "id": "shukudai:places:0030"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "コンビニ",
-        "romaji": "konbini",
-        "en": "convenience store",
+        "prompt": "convenience store",
         "answer": "コンビニ",
+        "romaji": "konbini",
         "explanation": "Place: convenience store.",
         "id": "shukudai:places:0031"
       },
       {
         "lesson": 3,
-        "kind": "place",
-        "jp": "きっさてん",
-        "romaji": "kissaten",
-        "en": "coffee shop",
+        "prompt": "coffee shop",
         "answer": "きっさてん",
+        "romaji": "kissaten",
         "explanation": "Place: coffee shop.",
         "id": "shukudai:places:0032"
       }
@@ -4176,7 +3047,7 @@ document.addEventListener('keydown', (e) => {
 const SHU_BANK_KEYS = ['particles','verbs','adjectives','family','professions','places'];
 const SHU_GEN_KEYS  = ['numbers','money','time','dates','counters'];
 
-state.shuCat   = state.shuCat   || 'particles';
+state.shuCat   = state.shuCat   || 'family';
 state.shuInput = state.shuInput || 'type';
 state.shuItem  = null;
 
@@ -4184,7 +3055,7 @@ state.shuItem  = null;
 (function() {
   try {
     const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
-    if (s && s.shuCat) state.shuCat = s.shuCat;
+    if (s && s.shuCat && ['family','professions','places','numbers','money','time','dates','counters'].includes(s.shuCat)) state.shuCat = s.shuCat;
     if (s && s.shuInput) state.shuInput = s.shuInput;
   } catch(e){}
 })();
@@ -4348,14 +3219,20 @@ function genDate() {
 }
 function genCounter() {
   const kinds = [
-    { name:'general', label:'general (~つ)', tbl: COUNTER_GENERAL, max: 10 },
-    { name:'people',  label:'people (~人)',  tbl: COUNTER_PEOPLE,  max: 10 },
-    { name:'age',     label:'age (~歳)',     tbl: COUNTER_AGE,     max: 10 },
-    { name:'floors',  label:'floors (~階)',  tbl: COUNTER_FLOORS,  max: 10 },
+    { name:'general', label:'general things (~つ)', tbl: COUNTER_GENERAL, max: 10 },
+    { name:'people',  label:'people (~人)',         tbl: COUNTER_PEOPLE,  max: 10 },
+    { name:'age',     label:'age (~歳)',            tbl: COUNTER_AGE,     max: 10 },
+    { name:'floors',  label:'floors (~階)',         tbl: COUNTER_FLOORS,  max: 10 },
   ];
   const k = kinds[Math.floor(Math.random()*kinds.length)];
   const n = 1 + Math.floor(Math.random()*k.max);
-  return { prompt: n + '  (' + k.label + ')', answer: k.tbl[n], romaji: '', label: 'How do you say this counter?' };
+  return {
+    prompt: String(n),
+    sublabel: k.label,
+    answer: k.tbl[n],
+    romaji: '',
+    label: 'How do you say this counter?'
+  };
 }
 
 const SHU_GENERATORS = {
@@ -4386,44 +3263,53 @@ function renderShuGenerator() {
   }
   const it = state.shuItem;
   const catLabel = state.shuCat[0].toUpperCase() + state.shuCat.slice(1);
+  const sub = it.sublabel ? `<div class="shu-sublabel">${escapeHtml(it.sublabel)}</div>` : '';
 
   if (!it._revealed) {
     cardEl.innerHTML = `
       <span class="lesson-tag">Shukudai · ${catLabel}</span>
-      <div class="prompt-label">${escapeHtml(it.label)}</div>
+      <div class="prompt-label">${escapeHtml(it.label || '')}</div>
       <div class="shu-gen-prompt">${escapeHtml(it.prompt)}</div>
-      <div class="btn-row"><button class="btn primary" id="shu-reveal">Show answer</button></div>`;
-    document.getElementById('shu-reveal').onclick = () => { it._revealed = true; render(); if (state.autoSpeak) speak(it.answer); };
+      ${sub}
+      <div class="btn-row">
+        <button class="btn primary" id="shu-reveal">Show answer</button>
+      </div>`;
+    const rev = document.getElementById('shu-reveal');
+    if (rev) rev.onclick = () => {
+      it._revealed = true;
+      render();
+      if (state.autoSpeak) speak(it.answer);
+    };
   } else {
     cardEl.innerHTML = `
       <span class="lesson-tag">Shukudai · ${catLabel}</span>
       <div class="prompt-label">${escapeHtml(it.prompt)}</div>
+      ${sub}
       <div class="answer-jp" style="font-size:48px;">${escapeHtml(it.answer)}</div>
       ${it.romaji ? `<div class="answer-romaji">${escapeHtml(it.romaji)}</div>` : ''}
       <div class="btn-row">
-        <button class="btn icon" id="shu-speak">🔊</button>
-        <button class="btn bad" id="shu-miss">Try again</button>
-        <button class="btn good" id="shu-hit">Got it!</button>
+        <button class="btn icon" id="shu-speak">🔊 Hear</button>
+        <button class="btn primary" id="shu-next-gen">Next →</button>
       </div>`;
-    document.getElementById('shu-speak').onclick = () => speak(it.answer);
-    document.getElementById('shu-hit').onclick = () => { state.shuItem = null; render(); };
-    document.getElementById('shu-miss').onclick = () => { state.shuItem = null; render(); };
+    const sp = document.getElementById('shu-speak');
+    if (sp) sp.onclick = () => speak(it.answer);
+    const nx = document.getElementById('shu-next-gen');
+    if (nx) nx.onclick = () => { state.shuItem = null; render(); };
   }
 }
 
 function shuBankPool() {
   const items = (SHUKUDAI.banks[state.shuCat] || []).slice();
-  // For category bound to specific lessons, lesson filter applies (only on items with .lesson)
   if (items.length && items[0].lesson != null && state.lessons.size) {
-    return items.filter(x => state.lessons.has(x.lesson));
+    const filt = items.filter(x => state.lessons.has(x.lesson));
+    return filt.length ? filt : items;  // fall back to all if filter empties
   }
   return items;
 }
 
 function buildShuChoices(item, pool) {
-  // If item has predefined choices, use them. Otherwise generate from pool.
-  if (item.choices && item.choices.length) return shuffle(item.choices.slice());
-  const distractors = shuffle(pool.filter(x => x.answer !== item.answer)).slice(0, 3).map(x => x.answer);
+  const others = pool.filter(x => x.answer !== item.answer);
+  const distractors = shuffle(others).slice(0, 3).map(x => x.answer);
   return shuffle([item.answer, ...distractors]);
 }
 
@@ -4437,57 +3323,42 @@ function renderShuBank() {
     state.shuItem = { ...pool[Math.floor(Math.random()*pool.length)] };
     state.shuItem._cat = state.shuCat;
     state.shuItem._answered = false;
+    state.shuItem._wasCorrect = null;
     state.shuItem._choices = buildShuChoices(state.shuItem, pool);
   }
   const it = state.shuItem;
   const lesson = it.lesson != null ? `Lesson ${it.lesson}` : 'Shukudai';
   const catLabel = state.shuCat[0].toUpperCase() + state.shuCat.slice(1);
-
-  // Render the prompt — replace ___ with a styled blank
-  const promptHTML = it.jp ? escapeHtml(it.jp).replace(/___|＿＿＿/g, '<span class="blank-line">&nbsp;</span>') : '';
-  const enHTML = it.en ? `<div class="shu-en">${escapeHtml(it.en)}</div>` : '';
-
-  let inputArea = '';
-  if (state.shuInput === 'type') {
-    inputArea = `
-      <input type="text" class="shu-input" id="shu-typed" placeholder="${state.shuCat==='particles' ? 'は が を の に へ で と …' : 'type answer'}" autocomplete="off" autocapitalize="off" autocorrect="off" />
-      <div class="btn-row">
-        <button class="btn" id="shu-show">Show answer</button>
-        <button class="btn primary" id="shu-check">Check</button>
-      </div>`;
-  } else {
-    inputArea = `
-      <div class="shu-mcq" id="shu-mcq"></div>`;
-  }
-
-  const explainArea = it._answered ? `
-    <div class="shu-explain">
-      <div><strong>${escapeHtml(it.answer)}</strong> ${it.romaji ? '· ' + escapeHtml(it.romaji) : ''}</div>
-      <div style="margin-top:6px;">${escapeHtml(it.explanation || '')}</div>
-    </div>
-    <div class="btn-row">
-      <button class="btn primary" id="shu-next">Next →</button>
-    </div>` : '';
-
-  cardEl.innerHTML = `
-    <div>
-      <span class="lesson-tag">${lesson} · ${catLabel}</span>
-    </div>
-    <div class="shu-prompt">${promptHTML || '<em>(no prompt)</em>'}</div>
-    ${enHTML}
-    ${!it._answered ? inputArea : `<div class="answer-jp" style="font-size:36px; margin-top:8px;">${escapeHtml(it.answer)}</div>` + explainArea}`;
+  const promptText = it.prompt || it.en || '(no prompt)';
 
   if (!it._answered) {
+    let inputArea = '';
+    if (state.shuInput === 'type') {
+      inputArea = `
+        <input type="text" class="shu-input" id="shu-typed" placeholder="type the Japanese" autocomplete="off" autocapitalize="off" autocorrect="off" />
+        <div class="btn-row">
+          <button class="btn" id="shu-show">Show answer</button>
+          <button class="btn primary" id="shu-check">Check</button>
+        </div>`;
+    } else {
+      inputArea = `<div class="shu-mcq" id="shu-mcq"></div>`;
+    }
+    cardEl.innerHTML = `
+      <div><span class="lesson-tag">${lesson} · ${catLabel}</span></div>
+      <div class="prompt-label">Translate to Japanese</div>
+      <div class="shu-prompt-en">${escapeHtml(promptText)}</div>
+      ${inputArea}`;
+
     if (state.shuInput === 'type') {
       const input = document.getElementById('shu-typed');
-      setTimeout(() => input && input.focus(), 50);
-      const check = () => {
-        const guess = (input.value || '').trim();
-        if (!guess) return;
-        const ok = (guess === it.answer);
+      const checkBtn = document.getElementById('shu-check');
+      const showBtn = document.getElementById('shu-show');
+      setTimeout(() => { if (input) input.focus(); }, 60);
+
+      const submit = (correct) => {
         it._answered = true;
-        it._wasCorrect = ok;
-        if (ok) state.correct++;
+        it._wasCorrect = correct;
+        if (correct) state.correct++;
         state.totalSeen++;
         state.seen++;
         bumpStreak();
@@ -4495,17 +3366,14 @@ function renderShuBank() {
         saveStore();
         render();
       };
-      document.getElementById('shu-check').onclick = check;
-      input.onkeydown = e => { if (e.key === 'Enter') check(); };
-      document.getElementById('shu-show').onclick = () => {
-        it._answered = true;
-        it._wasCorrect = false;
-        state.totalSeen++; state.seen++;
-        bumpStreak();
-        updateStats();
-        saveStore();
-        render();
+      const onCheck = () => {
+        const guess = ((input && input.value) || '').trim();
+        if (!guess) { input && input.focus(); return; }
+        submit(guess === it.answer);
       };
+      if (checkBtn) checkBtn.onclick = onCheck;
+      if (showBtn) showBtn.onclick = () => submit(false);
+      if (input) input.onkeydown = (e) => { if (e.key === 'Enter') onCheck(); };
     } else {
       const grid = document.getElementById('shu-mcq');
       it._choices.forEach(c => {
@@ -4528,10 +3396,26 @@ function renderShuBank() {
       });
     }
   } else {
-    document.getElementById('shu-next').onclick = () => {
-      state.shuItem = null;
-      render();
-    };
+    // Answered — show result + answer + explanation + Next button
+    const banner = it._wasCorrect
+      ? '<div class="feedback-correct" style="font-size:18px; font-weight:600;">✓ Correct</div>'
+      : '<div class="feedback-wrong" style="font-size:18px; font-weight:600;">✗ Not quite</div>';
+    cardEl.innerHTML = `
+      <div><span class="lesson-tag">${lesson} · ${catLabel}</span></div>
+      <div class="prompt-label">${escapeHtml(promptText)}</div>
+      ${banner}
+      <div class="answer-jp" style="font-size:42px;">${escapeHtml(it.answer)}</div>
+      ${it.romaji ? `<div class="answer-romaji">${escapeHtml(it.romaji)}</div>` : ''}
+      ${it.explanation ? `<div class="shu-explain">${escapeHtml(it.explanation)}</div>` : ''}
+      <div class="btn-row">
+        <button class="btn icon" id="shu-speak">🔊 Hear</button>
+        <button class="btn primary" id="shu-next">Next →</button>
+      </div>`;
+    const sp = document.getElementById('shu-speak');
+    if (sp) sp.onclick = () => speak(it.answer);
+    const nx = document.getElementById('shu-next');
+    if (nx) nx.onclick = () => { state.shuItem = null; render(); };
+    if (state.autoSpeak) speak(it.answer);
   }
 }
 
@@ -4579,6 +3463,6 @@ document.querySelectorAll('#shu-input button').forEach(b => {
 updateStats();
 render();
 </script>
-<!-- built 2026-05-02T15:42:04.034897Z · vocab=471 sentences=100 kana=142 -->
+<!-- built 2026-05-03T09:28:37.778945Z · vocab=471 sentences=100 kana=142 -->
 </body>
 </html>
