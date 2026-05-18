@@ -558,6 +558,67 @@
   .modal .modal-close {
     margin-top: 14px; width: 100%;
   }
+
+  .version-badge {
+    display: inline-block;
+    background: var(--panel-2);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    cursor: help;
+  }
+
+  /* ============ Shukudai Learn views ============ */
+  .learn-wrap { width: 100%; text-align: left; }
+  .learn-wrap h3 {
+    margin: 0 0 6px 0; font-size: 13px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--muted); font-weight: 600;
+  }
+  .learn-wrap .learn-hint {
+    color: var(--muted); font-size: 13px; margin-bottom: 14px; line-height: 1.5;
+  }
+  .learn-grid {
+    display: grid; grid-template-columns: 1fr; gap: 14px;
+  }
+  @media (min-width: 700px)  { .learn-grid.cols-2 { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1100px) { .learn-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; } }
+  .learn-card {
+    background: var(--panel-2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 14px;
+  }
+  .learn-card h4 {
+    margin: 0 0 10px 0; font-size: 15px; font-weight: 700;
+    color: var(--accent);
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  }
+  .learn-card h4 .sub { color: var(--muted); font-weight: 500; font-size: 12px; }
+  .ltable {
+    display: grid; grid-template-columns: auto 1fr; gap: 5px 12px;
+    font-size: 14px;
+  }
+  .ltable.three { grid-template-columns: auto 1fr 1fr; }
+  .ltable .k { color: var(--muted); font-family: ui-monospace, "SF Mono", Consolas, monospace; text-align: right; font-size: 12px; }
+  .ltable .v {
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif; color: var(--text);
+  }
+  .ltable .v.irr { color: var(--warn); font-weight: 600; }
+  .ltable .e { font-size: 12px; color: var(--muted); }
+  .learn-card .practice-btn {
+    margin-top: 12px; width: 100%; font-size: 13px; padding: 8px 12px;
+  }
+  .rule-list { list-style: none; padding: 0; margin: 0; }
+  .rule-list li {
+    padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; line-height: 1.5;
+  }
+  .rule-list li:last-child { border-bottom: 0; }
+  .rule-list .key {
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    color: var(--accent); font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -631,6 +692,14 @@
         <button data-input="mcq">Multiple choice</button>
       </div>
     </div>
+
+    <div class="controls-row" id="shu-lp-row" style="display:none;">
+      <label>Drill</label>
+      <div class="seg" id="shu-lp">
+        <button data-lp="learn" class="active">📖 Learn</button>
+        <button data-lp="practice">🎯 Practice</button>
+      </div>
+    </div>
     <div class="controls-row" id="kana-row" style="display:none;">
       <label>Set</label>
       <div class="seg" id="kana-set">
@@ -676,6 +745,9 @@
 
 <footer>
   <div style="max-width: 720px; margin: 0 auto;">
+    <div style="margin-bottom: 12px;">
+      <span class="version-badge" title="Built 2026-05-18 03:30 UTC">v1.1.0</span>
+    </div>
     Personal study aid for Japanese learners. Vocabulary, sentences, and shukudai exercises are derived from materials provided by
     <a href="https://ikomalanguage.com" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent);">Ikoma Language School Singapore</a>
     as part of their Japanese course curriculum. All curriculum content remains the property of Ikoma Language School. This app is not affiliated with or endorsed by Ikoma Language School.
@@ -3768,10 +3840,317 @@ document.querySelectorAll('#shu-input button').forEach(b => {
   });
 })();
 
+
+
+/* ============================================================
+   Shukudai Learn / Practice toggle (universal)
+   Per-category state: default 'learn' on first visit to that cat.
+   ============================================================ */
+state.shuLP = state.shuLP || {}; // { 'numbers': 'learn'|'practice', ... }
+state.countersFilter = state.countersFilter || null;
+state.numbersScope   = state.numbersScope   || null; // optional scope filter
+function shuLPGet() {
+  return state.shuLP[state.shuCat] || 'learn';
+}
+function shuLPSet(v) {
+  state.shuLP[state.shuCat] = v;
+  state.shuItem = null;
+  saveStore();
+}
+
+// Persist shuLP
+(function() {
+  try {
+    const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if (s && s.shuLP) state.shuLP = s.shuLP;
+  } catch(e){}
+})();
+const _origSave3 = saveStore;
+saveStore = function() {
+  _origSave3.apply(null, arguments);
+  try {
+    const cur = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {};
+    cur.shuLP = state.shuLP;
+    localStorage.setItem(STORE_KEY, JSON.stringify(cur));
+  } catch(e){}
+};
+
+// Wire Learn/Practice toggle
+document.querySelectorAll('#shu-lp button').forEach(b => {
+  b.onclick = () => {
+    shuLPSet(b.dataset.lp);
+    document.querySelectorAll('#shu-lp button').forEach(x => x.classList.toggle('active', x.dataset.lp === b.dataset.lp));
+    render();
+  };
+});
+
+// Counter definitions for Learn cards (reuse existing COUNTER_* tables)
+const COUNTER_DEFS = [
+  { key:'general',  jp:'~つ',   name:'General things',   tbl: COUNTER_GENERAL,  irregular: [] },
+  { key:'small',    jp:'~こ',   name:'Small objects',    tbl: COUNTER_SMALL,    irregular: [1,6,8,10,11,16,18,20] },
+  { key:'people',   jp:'~人',   name:'People',           tbl: COUNTER_PEOPLE,   irregular: [1,2,4] },
+  { key:'age',      jp:'~歳',   name:'Age',              tbl: COUNTER_AGE,      irregular: [1,8,10,20] },
+  { key:'floors',   jp:'~階',   name:'Floors',           tbl: COUNTER_FLOORS,   irregular: [1,3,6,8,10,13,16,18,20] },
+  { key:'hours',    jp:'~時間', name:'Hours',            tbl: COUNTER_HOURS,    irregular: [4,7,9,14,17,19] },
+  { key:'minutes',  jp:'~分',   name:'Minutes',          tbl: COUNTER_MINUTES,  irregular: [1,3,4,6,8,10,11,13,14,16,18,20] },
+  { key:'days',     jp:'~日',   name:'Days (duration)',  tbl: COUNTER_DAYS,     irregular: [1,2,3,4,5,6,7,8,9,10,14,20] },
+  { key:'weeks',    jp:'~週間', name:'Weeks',            tbl: COUNTER_WEEKS,    irregular: [1,8,10,11,18,20] },
+  { key:'months',   jp:'~か月', name:'Months',           tbl: COUNTER_MONTHS,   irregular: [1,6,8,10,11,16,18,20] },
+  { key:'years',    jp:'~年',   name:'Years',            tbl: COUNTER_YEARS,    irregular: [4,7,17] },
+  { key:'sheets',   jp:'~枚',   name:'Paper / stamps',   tbl: COUNTER_SHEETS,   irregular: [] },
+  { key:'mach',     jp:'~台',   name:'Machines / cars',  tbl: COUNTER_MACHINES, irregular: [] },
+];
+
+function renderLearnCounters() {
+  const cards = COUNTER_DEFS.map(def => {
+    const max = Math.max(...Object.keys(def.tbl).map(Number));
+    let rows = '';
+    for (let n = 1; n <= max; n++) {
+      const irr = def.irregular.includes(n) ? ' irr' : '';
+      rows += `<div class="k">${n}</div><div class="v${irr}">${escapeHtml(def.tbl[n])}</div>`;
+    }
+    return `<div class="learn-card">
+      <h4>${escapeHtml(def.jp)} <span class="sub">${escapeHtml(def.name)}</span></h4>
+      <div class="ltable">${rows}</div>
+      <button class="btn primary practice-btn" data-counter="${def.key}">Practice ${escapeHtml(def.jp)}</button>
+    </div>`;
+  }).join('');
+  cardEl.innerHTML = `<div class="learn-wrap">
+    <h3>Counters · Reference</h3>
+    <div class="learn-hint">Yellow highlights mark irregular / rendaku readings to memorise. Tap "Practice" on any card to drill only that counter, or switch to the <b>🎯 Practice</b> tab to mix all 13.</div>
+    <div class="learn-grid cols-3">${cards}</div>
+  </div>`;
+  cardEl.querySelectorAll('[data-counter]').forEach(b => {
+    b.onclick = () => {
+      state.countersFilter = b.dataset.counter;
+      shuLPSet('practice');
+      render();
+    };
+  });
+}
+
+function renderLearnNumbers() {
+  const rules = [
+    { en:'100', jp:'ひゃく', note:'1 = ひゃく (regular)' },
+    { en:'200', jp:'にひゃく', note:'regular' },
+    { en:'300', jp:'さんびゃく', note:'rendaku → bya', irr:true },
+    { en:'600', jp:'ろっぴゃく', note:'rendaku → ppya', irr:true },
+    { en:'800', jp:'はっぴゃく', note:'rendaku → ppya', irr:true },
+    { en:'1,000', jp:'せん', note:'regular' },
+    { en:'3,000', jp:'さんぜん', note:'rendaku → zen', irr:true },
+    { en:'8,000', jp:'はっせん', note:'rendaku → ssen', irr:true },
+    { en:'10,000', jp:'いちまん', note:'"man" base unit' },
+    { en:'100,000', jp:'じゅうまん', note:'10 × 10,000' },
+    { en:'1,000,000', jp:'ひゃくまん', note:'100 × 10,000' },
+  ];
+  const rows = rules.map(r => `
+    <div class="k">${escapeHtml(r.en)}</div>
+    <div class="v${r.irr?' irr':''}">${escapeHtml(r.jp)}</div>
+    <div class="e">${escapeHtml(r.note)}</div>
+  `).join('');
+  cardEl.innerHTML = `<div class="learn-wrap">
+    <h3>Numbers · Reference</h3>
+    <div class="learn-hint">The base readings 1-10 are regular. From 100 onwards, certain combinations <b>rendaku</b> (sound shift). Yellow rows are the ones to memorise.</div>
+    <div class="learn-card">
+      <div class="ltable three">
+        <div class="k" style="font-weight:600;">Number</div><div class="v" style="font-weight:600;">Reading</div><div class="e" style="font-weight:600;">Note</div>
+        ${rows}
+      </div>
+      <button class="btn primary practice-btn" data-practice>🎯 Practice random numbers</button>
+    </div>
+  </div>`;
+  cardEl.querySelector('[data-practice]').onclick = () => { shuLPSet('practice'); render(); };
+}
+
+function renderLearnMoney() {
+  const cards = [
+    { title:'Yen (¥)', sub:'~えん', rows:[
+      ['1','いちえん',''], ['10','じゅうえん',''], ['100','ひゃくえん',''],
+      ['1,000','せんえん',''], ['10,000','いちまんえん','base'],
+    ]},
+    { title:'Dollar ($)', sub:'~ドル', rows:[
+      ['1','いちドル',''], ['5','ごドル',''], ['10','じゅうドル',''],
+      ['100','ひゃくドル',''], ['$.50','ごじゅっセント','combine'],
+    ]},
+    { title:'Cent (¢)', sub:'~セント', rows:[
+      ['1','いっセント','irr',true], ['8','はっセント','irr',true],
+      ['10','じゅっセント','irr',true], ['20','にじゅっセント','irr',true],
+      ['100','ひゃくセント',''],
+    ]},
+  ];
+  const html = cards.map(c => {
+    const rows = c.rows.map(r => `<div class="k">${escapeHtml(r[0])}</div><div class="v${r[3]?' irr':''}">${escapeHtml(r[1])}</div><div class="e">${escapeHtml(r[2]||'')}</div>`).join('');
+    return `<div class="learn-card">
+      <h4>${escapeHtml(c.title)} <span class="sub">${escapeHtml(c.sub)}</span></h4>
+      <div class="ltable three">${rows}</div>
+    </div>`;
+  }).join('');
+  cardEl.innerHTML = `<div class="learn-wrap">
+    <h3>Money · Reference</h3>
+    <div class="learn-hint">For yen and dollar amounts the reading is just <i>number + えん / ドル</i>. Cents have several rendaku readings to memorise.</div>
+    <div class="learn-grid cols-3">${html}</div>
+    <button class="btn primary" style="margin-top:14px;" data-practice>🎯 Practice random amounts</button>
+  </div>`;
+  cardEl.querySelector('[data-practice]').onclick = () => { shuLPSet('practice'); render(); };
+}
+
+function renderLearnTime() {
+  // Hours
+  const hours = [['1','いちじ'],['2','にじ'],['3','さんじ'],['4','よじ'],['5','ごじ'],['6','ろくじ'],
+                 ['7','しちじ'],['8','はちじ'],['9','くじ'],['10','じゅうじ'],['11','じゅういちじ'],['12','じゅうにじ']];
+  const irrHours = ['4','7','9'];
+  const hRows = hours.map(([n,r]) => `<div class="k">${n}</div><div class="v${irrHours.includes(n)?' irr':''}">${escapeHtml(r)}</div>`).join('');
+
+  // Minutes - special readings
+  const mins = [['1','いっぷん'],['2','にふん'],['3','さんぷん'],['4','よんぷん'],['5','ごふん'],
+                ['6','ろっぷん'],['7','ななふん'],['8','はっぷん'],['9','きゅうふん'],['10','じゅっぷん'],
+                ['15','じゅうごふん'],['20','にじゅっぷん'],['30','さんじゅっぷん / はん']];
+  const irrMins = ['1','3','4','6','8','10','20','30'];
+  const mRows = mins.map(([n,r]) => `<div class="k">${n}</div><div class="v${irrMins.includes(n)?' irr':''}">${escapeHtml(r)}</div>`).join('');
+
+  cardEl.innerHTML = `<div class="learn-wrap">
+    <h3>Time · Reference</h3>
+    <div class="learn-hint">Special readings for 4じ (よじ), 7じ (しちじ), 9じ (くじ). Minutes have many rendaku: 1, 3, 4, 6, 8, 10. <i>30分</i> can be said as <i>さんじゅっぷん</i> or simply <i>はん</i> (half).</div>
+    <div class="learn-grid cols-2">
+      <div class="learn-card">
+        <h4>~じ <span class="sub">Hours 1-12</span></h4>
+        <div class="ltable">${hRows}</div>
+      </div>
+      <div class="learn-card">
+        <h4>~ふん / ~ぷん <span class="sub">Minutes</span></h4>
+        <div class="ltable">${mRows}</div>
+      </div>
+    </div>
+    <div class="learn-card" style="margin-top:14px;">
+      <h4>AM / PM <span class="sub">prefix before the hour</span></h4>
+      <div class="ltable three">
+        <div class="k">AM</div><div class="v">ごぜん ~じ</div><div class="e">e.g. ごぜん 7じ = 7 AM</div>
+        <div class="k">PM</div><div class="v">ごご ~じ</div><div class="e">e.g. ごご 8じ = 8 PM</div>
+      </div>
+    </div>
+    <button class="btn primary" style="margin-top:14px;" data-practice>🎯 Practice random times</button>
+  </div>`;
+  cardEl.querySelector('[data-practice]').onclick = () => { shuLPSet('practice'); render(); };
+}
+
+function renderLearnDates() {
+  // Months (always regular: 月 = がつ)
+  const months = [['1月','いちがつ'],['2月','にがつ'],['3月','さんがつ'],['4月','しがつ'],['5月','ごがつ'],
+                  ['6月','ろくがつ'],['7月','しちがつ'],['8月','はちがつ'],['9月','くがつ'],
+                  ['10月','じゅうがつ'],['11月','じゅういちがつ'],['12月','じゅうにがつ']];
+  const irrMonths = ['4月','7月','9月'];
+  const mRows = months.map(([n,r]) => `<div class="k">${n}</div><div class="v${irrMonths.includes(n)?' irr':''}">${escapeHtml(r)}</div>`).join('');
+
+  // Days (1-31)
+  const dayMap = {1:'ついたち',2:'ふつか',3:'みっか',4:'よっか',5:'いつか',6:'むいか',7:'なのか',8:'ようか',9:'ここのか',10:'とおか',
+    11:'じゅういちにち',12:'じゅうににち',13:'じゅうさんにち',14:'じゅうよっか',15:'じゅうごにち',16:'じゅうろくにち',
+    17:'じゅうしちにち',18:'じゅうはちにち',19:'じゅうくにち',20:'はつか',21:'にじゅういちにち',22:'にじゅうににち',
+    23:'にじゅうさんにち',24:'にじゅうよっか',25:'にじゅうごにち',26:'にじゅうろくにち',27:'にじゅうしちにち',
+    28:'にじゅうはちにち',29:'にじゅうくにち',30:'さんじゅうにち',31:'さんじゅういちにち'};
+  const irrDays = [1,2,3,4,5,6,7,8,9,10,14,20,24];
+  let dRows = '';
+  for (let n = 1; n <= 31; n++) {
+    dRows += `<div class="k">${n}日</div><div class="v${irrDays.includes(n)?' irr':''}">${escapeHtml(dayMap[n])}</div>`;
+  }
+  cardEl.innerHTML = `<div class="learn-wrap">
+    <h3>Dates · Reference</h3>
+    <div class="learn-hint">Months are mostly regular (4月=しがつ, 7月=しちがつ, 9月=くがつ are the special ones). Days of the month have many <b>irregular</b> readings, especially 1-10, 14, 20 and 24.</div>
+    <div class="learn-grid cols-2">
+      <div class="learn-card">
+        <h4>~月 <span class="sub">Months 1-12</span></h4>
+        <div class="ltable">${mRows}</div>
+      </div>
+      <div class="learn-card">
+        <h4>~日 <span class="sub">Days of month 1-31</span></h4>
+        <div class="ltable">${dRows}</div>
+      </div>
+    </div>
+    <button class="btn primary" style="margin-top:14px;" data-practice>🎯 Practice random dates</button>
+  </div>`;
+  cardEl.querySelector('[data-practice]').onclick = () => { shuLPSet('practice'); render(); };
+}
+
+function renderLearnBank(cat, sectionLabel) {
+  const pool = (SHUKUDAI.banks[cat] || []).slice();
+  if (!pool.length) {
+    cardEl.innerHTML = '<div class="empty">No items in this bank.</div>';
+    return;
+  }
+  // For 'family' show side-by-side own/other if we can detect (heuristic via prompt)
+  // Otherwise just list all items
+  const items = pool.map(it => {
+    return `<div class="k">${escapeHtml(it.prompt || it.en || '')}</div>
+            <div class="v">${escapeHtml(it.answer)}${it.romaji ? ` <span class="e">· ${escapeHtml(it.romaji)}</span>` : ''}</div>`;
+  }).join('');
+  cardEl.innerHTML = `<div class="learn-wrap">
+    <h3>${escapeHtml(sectionLabel)} · Reference</h3>
+    <div class="learn-hint">Scan through the list to study. When ready, tap <b>🎯 Practice</b> for random recall drills.</div>
+    <div class="learn-card">
+      <div class="ltable">${items}</div>
+    </div>
+    <button class="btn primary" style="margin-top:14px;" data-practice>🎯 Practice</button>
+  </div>`;
+  cardEl.querySelector('[data-practice]').onclick = () => { shuLPSet('practice'); render(); };
+}
+
+// Map sub-category -> learn renderer
+const LEARN_RENDERERS = {
+  counters:    renderLearnCounters,
+  numbers:     renderLearnNumbers,
+  money:       renderLearnMoney,
+  time:        renderLearnTime,
+  dates:       renderLearnDates,
+  family:      () => renderLearnBank('family', 'Family terms (own vs others)'),
+  professions: () => renderLearnBank('professions', 'Professions'),
+  places:      () => renderLearnBank('places', 'Places (countries + buildings)'),
+};
+
+// Patch genCounter so it can be restricted to one type via state.countersFilter
+const _origGenCounter = genCounter;
+genCounter = function() {
+  if (!state.countersFilter) return _origGenCounter();
+  const def = COUNTER_DEFS.find(d => d.key === state.countersFilter);
+  if (!def) return _origGenCounter();
+  const max = Math.max(...Object.keys(def.tbl).map(Number));
+  const n = 1 + Math.floor(Math.random() * max);
+  return {
+    prompt: String(n),
+    sublabel: def.jp + ' ' + def.name,
+    answer: def.tbl[n],
+    romaji: '',
+    label: 'How do you say this counter?'
+  };
+};
+SHU_GENERATORS.counters = genCounter;
+
+// Hook renderShukudai: show Learn/Practice toggle for all sub-cats, route to learn renderer when in learn mode
+const _origRenderShukudai_v2 = renderShukudai;
+renderShukudai = function() {
+  // Show Learn/Practice toggle for every sub-cat
+  document.getElementById('shu-lp-row').style.display = 'flex';
+  // Reflect active LP state
+  const lp = shuLPGet();
+  document.querySelectorAll('#shu-lp button').forEach(b => b.classList.toggle('active', b.dataset.lp === lp));
+
+  // Reset filters when switching category
+  if (state._lastShuCat !== state.shuCat) {
+    state.countersFilter = null;
+    state._lastShuCat = state.shuCat;
+  }
+
+  // Run original (sets visibility of other rows). It WILL also render a Practice card.
+  // We override after if we're in Learn mode.
+  _origRenderShukudai_v2();
+  if (lp === 'learn') {
+    const fn = LEARN_RENDERERS[state.shuCat];
+    if (fn) fn();
+  }
+};
+
 // Init
 updateStats();
 render();
 </script>
-<!-- built 2026-05-18T03:18:35.168522Z · vocab=548 sentences=110 kana=142 -->
+<!-- v1.1.0 · built 2026-05-18T03:30:49.773490Z · vocab=548 sentences=110 kana=142 -->
 </body>
 </html>
