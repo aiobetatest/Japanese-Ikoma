@@ -75,16 +75,26 @@
     border-bottom: 1px solid var(--border);
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; gap: 12px;
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    background: var(--panel);
+    background: var(--panel-solid, var(--panel));  /* fallback */
     position: sticky; top: 0; z-index: 5;
+  }
+  @supports ((-webkit-backdrop-filter: blur(2px)) or (backdrop-filter: blur(2px))) {
+    header {
+      background: var(--panel);
+      -webkit-backdrop-filter: blur(16px);
+              backdrop-filter: blur(16px);
+    }
   }
   h1 { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
   h1 .ja {
+    color: var(--accent);                        /* fallback */
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+            background-clip: text;
     margin-right: 10px; font-weight: 800;
+  }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    h1 .ja { -webkit-text-fill-color: transparent; color: transparent; }
   }
   .stats { font-size: 13px; color: var(--muted); display: inline-flex; align-items: center; gap: 4px; flex-wrap: wrap; }
   .stats span { color: var(--text); font-weight: 600; }
@@ -132,7 +142,9 @@
     box-shadow: 0 6px 18px var(--accent-glow);
   }
 
-  .lesson-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .lesson-pills { display: flex; gap: 6px; flex-wrap: wrap; flex: 1; }
+  .lesson-toggles { display: inline-flex; gap: 4px; }
+  #lessons-row { flex-wrap: wrap; gap: 10px; }
   .lesson-pill {
     background: var(--panel-2); color: var(--muted); border: 1px solid var(--border);
     padding: 4px 10px; border-radius: 999px; font-size: 13px;
@@ -210,17 +222,27 @@
   .prompt-en { font-size: 32px; font-weight: 700; line-height: 1.3; max-width: 600px; letter-spacing: -0.01em; }
   .prompt-jp {
     font-size: 52px; font-weight: 700;
+    color: var(--accent);   /* fallback if gradient text unsupported */
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+            background-clip: text;
     font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
     line-height: 1.2; max-width: 720px;
   }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .prompt-jp { -webkit-text-fill-color: transparent; color: transparent; }
+  }
   .answer-jp {
     font-size: 60px; font-weight: 700;
+    color: var(--accent);
     background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+            background-clip: text;
     font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
     line-height: 1.2;
+  }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .answer-jp { -webkit-text-fill-color: transparent; color: transparent; }
   }
   .answer-jp.sentence { font-size: 32px; line-height: 1.5; max-width: 720px; }
   .prompt-en.sentence { font-size: 22px; max-width: 700px; line-height: 1.4; }
@@ -468,6 +490,74 @@
     .canvas-wrap { aspect-ratio: 1.6 / 1; }
     .theme-toggle { width: 32px; height: 32px; font-size: 14px; }
   }
+
+  /* ============ Desktop polish (all scoped, no mobile impact) ============ */
+  @media (min-width: 1100px) {
+    .container { max-width: 1200px; }
+    .review-vocab-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .shu-prompt-en, .prompt-en { max-width: 800px; }
+  }
+  @media (min-width: 1400px) {
+    .container { max-width: 1320px; }
+    .review-vocab-grid { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  }
+
+  /* Custom focus ring for keyboard users — does NOT show on mouse/touch clicks */
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  button:focus-visible, .choice:focus-visible, .lesson-pill:focus-visible {
+    outline-offset: 3px;
+  }
+
+  /* Stronger hover affordances only on devices that can hover (desktop mouse) */
+  @media (hover: hover) and (pointer: fine) {
+    .card:hover { box-shadow: 0 14px 50px rgba(0,0,0,0.5); }
+    .review-row:hover { background: var(--panel); border-color: var(--accent); }
+    .lesson-pill:hover { transform: translateY(-1px); }
+    button.btn:hover { box-shadow: 0 4px 12px var(--accent-glow); }
+  }
+
+  /* ? help button in header — visible on desktop only */
+  .help-btn {
+    background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border);
+    width: 36px; height: 36px; border-radius: 10px;
+    cursor: pointer; font-size: 14px; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all 0.2s; margin-left: 8px;
+  }
+  .help-btn:hover { border-color: var(--accent); transform: scale(1.05); }
+  @media (max-width: 700px) { .help-btn { display: none; } }
+
+  /* Shortcuts modal */
+  .modal-bg {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+    display: none; align-items: center; justify-content: center;
+    z-index: 1000; padding: 20px;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: var(--panel-solid); border: 1px solid var(--border);
+    border-radius: 14px; padding: 22px 24px; max-width: 460px; width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .modal h3 { margin: 0 0 12px 0; font-size: 16px; }
+  .modal .shortcut-row {
+    display: flex; justify-content: space-between; gap: 16px;
+    padding: 8px 0; font-size: 14px; border-bottom: 1px solid var(--border);
+  }
+  .modal .shortcut-row:last-of-type { border-bottom: 0; }
+  .modal .shortcut-row kbd {
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    background: var(--panel-2); padding: 2px 8px; border-radius: 4px;
+    font-size: 12px; border: 1px solid var(--border);
+  }
+  .modal .modal-close {
+    margin-top: 14px; width: 100%;
+  }
 </style>
 </head>
 <body>
@@ -477,15 +567,37 @@
   <div class="stats">
     <span id="stat-seen">0</span> seen · <span id="stat-correct">0</span> correct · streak
     <span class="streak-pill">🔥 <span id="stat-streak-day">0</span>d</span>
+    <button class="help-btn" id="help-btn" title="Keyboard shortcuts">?</button>
     <button class="theme-toggle" id="theme-toggle" title="Toggle light / dark">🌙</button>
   </div>
 </header>
 
+<div class="modal-bg" id="shortcuts-modal" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
+  <div class="modal">
+    <h3 id="shortcuts-title">Keyboard shortcuts</h3>
+    <div class="shortcut-row"><span>Flip / continue</span><kbd>Space</kbd></div>
+    <div class="shortcut-row"><span>Pick choice 1–4 (MCQ)</span><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd></div>
+    <div class="shortcut-row"><span>Hear the word again</span><kbd>S</kbd></div>
+    <div class="shortcut-row"><span>Check dictation answer</span><kbd>Enter</kbd></div>
+    <div class="shortcut-row"><span>Close this dialog</span><kbd>Esc</kbd></div>
+    <button class="btn primary modal-close" id="shortcuts-close">Close</button>
+  </div>
+</div>
+
 <div class="container">
 
   <div class="controls">
+    <div class="controls-row" id="lessons-row">
+      <label>Lessons</label>
+      <div class="lesson-toggles">
+        <button class="btn icon" id="lessons-all" style="padding: 4px 10px; font-size: 12px;">All</button>
+        <button class="btn icon" id="lessons-none" style="padding: 4px 10px; font-size: 12px;">None</button>
+      </div>
+      <div class="lesson-pills" id="lesson-pills"></div>
+    </div>
+
     <div class="controls-row">
-      <label>Mode</label>
+      <label>Category</label>
       <div class="mode-tabs">
         <button data-mode="review" class="active">📖 Review</button>
         <button data-mode="flash">Flashcards</button>
@@ -496,13 +608,6 @@
         <button data-mode="kata">Katakana</button>
         <button data-mode="shukudai">📚 Shukudai</button>
       </div>
-    </div>
-
-    <div class="controls-row" id="lessons-row">
-      <label>Lessons</label>
-      <div class="lesson-pills" id="lesson-pills"></div>
-      <button class="btn icon" id="lessons-all" style="padding: 4px 10px; font-size: 12px;">All</button>
-      <button class="btn icon" id="lessons-none" style="padding: 4px 10px; font-size: 12px;">None</button>
     </div>
 
     
@@ -543,12 +648,11 @@
       <button class="btn primary" id="quiz-btn">🎯 Quiz of the day (10)</button>
     </div>
 
-    <div class="controls-row">
-      <label>Voice</label>
-      <select id="voice-select"><option>Loading voices…</option></select>
+    <div class="controls-row" id="audio-row">
+      <label>Audio</label>
       <label class="toggle">
         <input type="checkbox" id="auto-speak" checked>
-        Auto-speak
+        Auto-speak Japanese on reveal
       </label>
     </div>
 
@@ -571,7 +675,13 @@
 </div>
 
 <footer>
-  Vocab + sentences cover Lessons 1-10 (Dai_Ka.pdf). Hiragana + Katakana writing modes use the standard 46-char chart, with optional dakuten/handakuten. Progress saved in your browser.
+  <div style="max-width: 720px; margin: 0 auto;">
+    Personal study aid for Japanese learners. Vocabulary, sentences, and shukudai exercises are derived from materials provided by
+    <a href="https://ikomalanguage.com" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent);">Ikoma Language School Singapore</a>
+    as part of their Japanese course curriculum. All curriculum content remains the property of Ikoma Language School. This app is not affiliated with or endorsed by Ikoma Language School.
+    <br><br>
+    Progress is saved locally in your browser only — nothing is uploaded anywhere.
+  </div>
 </footer>
 
 <script>
@@ -1047,6 +1157,83 @@ const VOCAB = [
   { lesson: 10, jp: "ナンプラー", romaji: "nanpurā", en: "fish sauce (nam pla)", id: "vocab:10:ナンプラー" },
   { lesson: 10, jp: "コーナー", romaji: "kōnā", en: "corner, section", id: "vocab:10:コーナー" },
   { lesson: 10, jp: "いちばん した", romaji: "ichiban shita", en: "the bottom", id: "vocab:10:いちばん した" },
+  { lesson: 11, jp: "います", romaji: "imasu", en: "have (a child)", id: "vocab:11:います" },
+  { lesson: 11, jp: "います", romaji: "imasu", en: "stay, be (in Japan)", id: "vocab:11:います" },
+  { lesson: 11, jp: "かかります", romaji: "kakarimasu", en: "take, cost (time or money)", id: "vocab:11:かかります" },
+  { lesson: 11, jp: "やすみます", romaji: "yasumimasu", en: "take a day off (work)", id: "vocab:11:やすみます" },
+  { lesson: 11, jp: "ひとつ", romaji: "hitotsu", en: "one (general counter)", id: "vocab:11:ひとつ" },
+  { lesson: 11, jp: "ふたつ", romaji: "futatsu", en: "two (general counter)", id: "vocab:11:ふたつ" },
+  { lesson: 11, jp: "みっつ", romaji: "mittsu", en: "three (general counter)", id: "vocab:11:みっつ" },
+  { lesson: 11, jp: "よっつ", romaji: "yottsu", en: "four (general counter)", id: "vocab:11:よっつ" },
+  { lesson: 11, jp: "いつつ", romaji: "itsutsu", en: "five (general counter)", id: "vocab:11:いつつ" },
+  { lesson: 11, jp: "むっつ", romaji: "muttsu", en: "six (general counter)", id: "vocab:11:むっつ" },
+  { lesson: 11, jp: "ななつ", romaji: "nanatsu", en: "seven (general counter)", id: "vocab:11:ななつ" },
+  { lesson: 11, jp: "やっつ", romaji: "yattsu", en: "eight (general counter)", id: "vocab:11:やっつ" },
+  { lesson: 11, jp: "ここのつ", romaji: "kokonotsu", en: "nine (general counter)", id: "vocab:11:ここのつ" },
+  { lesson: 11, jp: "とお", romaji: "tō", en: "ten (general counter)", id: "vocab:11:とお" },
+  { lesson: 11, jp: "いくつ", romaji: "ikutsu", en: "how many", id: "vocab:11:いくつ" },
+  { lesson: 11, jp: "ひとり", romaji: "hitori", en: "one person", id: "vocab:11:ひとり" },
+  { lesson: 11, jp: "ふたり", romaji: "futari", en: "two people", id: "vocab:11:ふたり" },
+  { lesson: 11, jp: "～にん", romaji: "~nin", en: "~ people (counter)", id: "vocab:11:～にん" },
+  { lesson: 11, jp: "～だい", romaji: "~dai", en: "counter for machines, cars, etc.", id: "vocab:11:～だい" },
+  { lesson: 11, jp: "～まい", romaji: "~mai", en: "counter for paper, stamps, etc.", id: "vocab:11:～まい" },
+  { lesson: 11, jp: "～かい", romaji: "~kai", en: "times", id: "vocab:11:～かい" },
+  { lesson: 11, jp: "りんご", romaji: "ringo", en: "apple", id: "vocab:11:りんご" },
+  { lesson: 11, jp: "みかん", romaji: "mikan", en: "mandarin orange", id: "vocab:11:みかん" },
+  { lesson: 11, jp: "サンドイッチ", romaji: "sandoicchi", en: "sandwich", id: "vocab:11:サンドイッチ" },
+  { lesson: 11, jp: "カレー[ライス]", romaji: "karē [raisu]", en: "curry (with rice)", id: "vocab:11:カレー[ライス]" },
+  { lesson: 11, jp: "アイスクリーム", romaji: "aisukurīmu", en: "ice cream", id: "vocab:11:アイスクリーム" },
+  { lesson: 11, jp: "きって", romaji: "kitte", en: "postage stamp", id: "vocab:11:きって" },
+  { lesson: 11, jp: "はがき", romaji: "hagaki", en: "postcard", id: "vocab:11:はがき" },
+  { lesson: 11, jp: "ふうとう", romaji: "fūtō", en: "envelope", id: "vocab:11:ふうとう" },
+  { lesson: 11, jp: "りょうしん", romaji: "ryōshin", en: "parents", id: "vocab:11:りょうしん" },
+  { lesson: 11, jp: "きょうだい", romaji: "kyōdai", en: "brothers and sisters / siblings", id: "vocab:11:きょうだい" },
+  { lesson: 11, jp: "あに", romaji: "ani", en: "my elder brother", id: "vocab:11:あに" },
+  { lesson: 11, jp: "おにいさん", romaji: "oniisan", en: "someone else's elder brother", id: "vocab:11:おにいさん" },
+  { lesson: 11, jp: "あね", romaji: "ane", en: "my elder sister", id: "vocab:11:あね" },
+  { lesson: 11, jp: "おねえさん", romaji: "onēsan", en: "someone else's elder sister", id: "vocab:11:おねえさん" },
+  { lesson: 11, jp: "おとうと", romaji: "otōto", en: "my younger brother", id: "vocab:11:おとうと" },
+  { lesson: 11, jp: "おとうとさん", romaji: "otōtosan", en: "someone else's younger brother", id: "vocab:11:おとうとさん" },
+  { lesson: 11, jp: "いもうと", romaji: "imōto", en: "my younger sister", id: "vocab:11:いもうと" },
+  { lesson: 11, jp: "いもうとさん", romaji: "imōtosan", en: "someone else's younger sister", id: "vocab:11:いもうとさん" },
+  { lesson: 11, jp: "がいこく", romaji: "gaikoku", en: "foreign country", id: "vocab:11:がいこく" },
+  { lesson: 11, jp: "りゅうがくせい", romaji: "ryūgakusei", en: "foreign student", id: "vocab:11:りゅうがくせい" },
+  { lesson: 11, jp: "クラス", romaji: "kurasu", en: "class", id: "vocab:11:クラス" },
+  { lesson: 11, jp: "～じかん", romaji: "~jikan", en: "~ hour(s)", id: "vocab:11:～じかん" },
+  { lesson: 11, jp: "～しゅうかん", romaji: "~shūkan", en: "~ week(s)", id: "vocab:11:～しゅうかん" },
+  { lesson: 11, jp: "～かげつ", romaji: "~kagetsu", en: "~ month(s)", id: "vocab:11:～かげつ" },
+  { lesson: 11, jp: "～ねん", romaji: "~nen", en: "~ year(s)", id: "vocab:11:～ねん" },
+  { lesson: 11, jp: "～ぐらい", romaji: "~gurai", en: "about ~ (quantity / duration)", id: "vocab:11:～ぐらい" },
+  { lesson: 11, jp: "どのくらい", romaji: "donokurai", en: "how long / how much", id: "vocab:11:どのくらい" },
+  { lesson: 11, jp: "ぜんぶで", romaji: "zenbu de", en: "in total", id: "vocab:11:ぜんぶで" },
+  { lesson: 11, jp: "みんな", romaji: "minna", en: "all, everyone, everything", id: "vocab:11:みんな" },
+  { lesson: 11, jp: "～だけ", romaji: "~dake", en: "only ~", id: "vocab:11:～だけ" },
+  { lesson: 11, jp: "いい[お]てんきですね", romaji: "ii [o]tenki desu ne", en: "Nice weather, isn't it?", id: "vocab:11:いい[お]てんきですね" },
+  { lesson: 11, jp: "おでかけですか", romaji: "odekake desu ka", en: "Are you going out?", id: "vocab:11:おでかけですか" },
+  { lesson: 11, jp: "ちょっと～まで", romaji: "chotto ~ made", en: "I am just going to ~", id: "vocab:11:ちょっと～まで" },
+  { lesson: 11, jp: "いってらっしゃい", romaji: "itterasshai", en: "See you later. / So long. (to person leaving)", id: "vocab:11:いってらっしゃい" },
+  { lesson: 11, jp: "いってきます", romaji: "ittekimasu", en: "See you later. / So long. (said when leaving)", id: "vocab:11:いってきます" },
+  { lesson: 11, jp: "こうくうびん", romaji: "kōkūbin", en: "airmail", id: "vocab:11:こうくうびん" },
+  { lesson: 11, jp: "ふなびん", romaji: "funabin", en: "sea mail", id: "vocab:11:ふなびん" },
+  { lesson: 11, jp: "エアメール", romaji: "eamēru", en: "air mail", id: "vocab:11:エアメール" },
+  { lesson: 11, jp: "おねがいします", romaji: "onegai shimasu", en: "Please. (asking for a favour)", id: "vocab:11:おねがいします" },
+  { lesson: 11, jp: "かしこまりました", romaji: "kashikomarimashita", en: "Certainly, Sir / Madam.", id: "vocab:11:かしこまりました" },
+  { lesson: 11, jp: "オーストラリア", romaji: "Ōsutoraria", en: "Australia", id: "vocab:11:オーストラリア" },
+  { lesson: 2, jp: "おせわに なります", romaji: "osewa ni narimasu", en: "Thank you in advance (for your help / I look forward to working with you)", id: "vocab:2:おせわに なります" },
+  { lesson: 2, jp: "こちらこそ どうぞ よろしく", romaji: "kochira koso dōzo yoroshiku", en: "The pleasure is mine. (response to \"nice to meet you\")", id: "vocab:2:こちらこそ どうぞ よろしく" },
+  { lesson: 2, jp: "ほんのきもちです", romaji: "hon no kimochi desu", en: "It's a small token (when giving a gift)", id: "vocab:2:ほんのきもちです" },
+  { lesson: 3, jp: "どうも", romaji: "dōmo", en: "Thanks", id: "vocab:3:どうも" },
+  { lesson: 4, jp: "たいへんですね", romaji: "taihen desu ne", en: "That's tough, isn't it!", id: "vocab:4:たいへんですね" },
+  { lesson: 4, jp: "だいじょうぶです", romaji: "daijōbu desu", en: "It's all right / It's OK", id: "vocab:4:だいじょうぶです" },
+  { lesson: 5, jp: "そうですね", romaji: "sō desu ne", en: "Yes, it is / Let me see", id: "vocab:5:そうですね" },
+  { lesson: 6, jp: "なんですか", romaji: "nan desu ka", en: "Yes? What is it?", id: "vocab:6:なんですか" },
+  { lesson: 6, jp: "じゃ、また あした", romaji: "jā, mata ashita", en: "See you tomorrow.", id: "vocab:6:じゃ、また あした" },
+  { lesson: 7, jp: "どうぞ おあがり ください", romaji: "dōzo o-agari kudasai", en: "Please come in.", id: "vocab:7:どうぞ おあがり ください" },
+  { lesson: 7, jp: "[～は] いかがですか", romaji: "[~ wa] ikaga desu ka", en: "How about ~? / Would you like ~?", id: "vocab:7:[～は] いかがですか" },
+  { lesson: 8, jp: "[いっしょに] いきましょう", romaji: "[issho ni] ikimashō", en: "Let's go (together).", id: "vocab:8:[いっしょに] いきましょう" },
+  { lesson: 8, jp: "おげんきですか", romaji: "o-genki desu ka", en: "How are you?", id: "vocab:8:おげんきですか" },
+  { lesson: 9, jp: "かして ください", romaji: "kashite kudasai", en: "Please lend (it) to me.", id: "vocab:9:かして ください" },
+  { lesson: 9, jp: "また こんど おねがいします", romaji: "mata kondo onegai shimasu", en: "Maybe next time, please.", id: "vocab:9:また こんど おねがいします" },
 ];
 
 const SENTENCES = [
@@ -1150,6 +1337,16 @@ const SENTENCES = [
   { lesson: 10, jp: "へやに テレビや ラジオなどが あります。", romaji: "Heya ni terebi ya rajio nado ga arimasu.", en: "In the room there is a TV, a radio, and so on.", id: "sent:10:97" },
   { lesson: 10, jp: "ポストは ビルの となりに あります。", romaji: "Posuto wa biru no tonari ni arimasu.", en: "The mailbox is next to the building.", id: "sent:10:98" },
   { lesson: 10, jp: "なかに なにが ありますか。", romaji: "Naka ni nani ga arimasu ka.", en: "What is inside?", id: "sent:10:99" },
+  { lesson: 11, jp: "わたしは こどもが ふたり います。", romaji: "Watashi wa kodomo ga futari imasu.", en: "I have two children.", id: "sent:11:0" },
+  { lesson: 11, jp: "わたしは にほんに いちねん います。", romaji: "Watashi wa Nihon ni ichinen imasu.", en: "I'll be in Japan for one year.", id: "sent:11:1" },
+  { lesson: 11, jp: "ここから えきまで さんじゅっぷん かかります。", romaji: "Koko kara eki made sanjuppun kakarimasu.", en: "It takes 30 minutes from here to the station.", id: "sent:11:2" },
+  { lesson: 11, jp: "げつようび、かいしゃを やすみます。", romaji: "Getsuyōbi, kaisha o yasumimasu.", en: "I'll take Monday off from work.", id: "sent:11:3" },
+  { lesson: 11, jp: "りんごを みっつ ください。", romaji: "Ringo o mittsu kudasai.", en: "Please give me three apples.", id: "sent:11:4" },
+  { lesson: 11, jp: "かぞくは なんにんですか。", romaji: "Kazoku wa nannin desu ka.", en: "How many people are in your family?", id: "sent:11:5" },
+  { lesson: 11, jp: "あにが ひとり、あねが ふたり います。", romaji: "Ani ga hitori, ane ga futari imasu.", en: "I have one elder brother and two elder sisters.", id: "sent:11:6" },
+  { lesson: 11, jp: "とうきょうまで どのくらい かかりますか。", romaji: "Tōkyō made donokurai kakarimasu ka.", en: "How long does it take to Tokyo?", id: "sent:11:7" },
+  { lesson: 11, jp: "さんじかんぐらい かかります。", romaji: "Sanjikan gurai kakarimasu.", en: "It takes about three hours.", id: "sent:11:8" },
+  { lesson: 11, jp: "ぜんぶで いくらですか。", romaji: "Zenbu de ikura desu ka.", en: "How much is it altogether?", id: "sent:11:9" },
 ];
 
 /* ============================================================
@@ -2106,27 +2303,26 @@ function normalize(s) {
     .replace(/[āâ]/g, 'a').replace(/[īî]/g, 'i').replace(/[ūû]/g, 'u')
     .replace(/[ēê]/g, 'e').replace(/[ōô]/g, 'o');
 }
+function _utter(text, rate) {
+  if (!('speechSynthesis' in window)) return null;
+  try { window.speechSynthesis.cancel(); } catch(e) {}
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ja-JP';
+  if (state.voice) u.voice = state.voice;
+  u.rate = rate;
+  u.pitch = 1;
+  u.volume = 1;
+  return u;
+}
 function speak(text) {
-  if (!('speechSynthesis' in window)) return;
-  try {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'ja-JP';
-    if (state.voice) u.voice = state.voice;
-    u.rate = 0.9;
-    window.speechSynthesis.speak(u);
-  } catch (e) {}
+  const u = _utter(text, 0.9);
+  if (!u) return;
+  try { window.speechSynthesis.speak(u); } catch (e) {}
 }
 function speakSlow(text) {
-  if (!('speechSynthesis' in window)) return;
-  try {
-    window.speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'ja-JP';
-    if (state.voice) u.voice = state.voice;
-    u.rate = 0.55;
-    window.speechSynthesis.speak(u);
-  } catch (e) {}
+  const u = _utter(text, 0.55);
+  if (!u) return;
+  try { window.speechSynthesis.speak(u); } catch (e) {}
 }
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -2545,8 +2741,8 @@ function setupCanvas() {
   const canvas = document.getElementById('draw-canvas');
   const dpr = window.devicePixelRatio || 1;
   const rect = wrap.getBoundingClientRect();
-  canvas.width = rect.width * dpr;
-  canvas.height = rect.height * dpr;
+  canvas.width = Math.max(1, rect.width * dpr);
+  canvas.height = Math.max(1, rect.height * dpr);
   canvasCtx = canvas.getContext('2d');
   canvasCtx.scale(dpr, dpr);
   canvasCtx.lineWidth = 6;
@@ -2558,32 +2754,44 @@ function setupCanvas() {
   redrawCanvas();
 
   const start = (e) => {
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     canvasDrawing = true;
     canvasCurrent = [getPos(canvas, e)];
+    try { canvas.setPointerCapture && e.pointerId != null && canvas.setPointerCapture(e.pointerId); } catch(_) {}
   };
   const move = (e) => {
     if (!canvasDrawing) return;
-    e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     canvasCurrent.push(getPos(canvas, e));
     redrawCanvas();
   };
   const end = (e) => {
     if (!canvasDrawing) return;
-    e && e.preventDefault();
+    if (e && e.preventDefault) e.preventDefault();
     canvasDrawing = false;
     if (canvasCurrent && canvasCurrent.length > 1) canvasStrokes.push(canvasCurrent);
     canvasCurrent = null;
     redrawCanvas();
   };
 
-  canvas.addEventListener('touchstart', start, { passive: false });
-  canvas.addEventListener('touchmove', move, { passive: false });
-  canvas.addEventListener('touchend', end);
-  canvas.addEventListener('mousedown', start);
-  canvas.addEventListener('mousemove', move);
-  canvas.addEventListener('mouseup', end);
-  canvas.addEventListener('mouseleave', end);
+  // Prefer Pointer Events (universal across iOS/Android/desktop, handles stylus too)
+  if (window.PointerEvent) {
+    canvas.style.touchAction = 'none';
+    canvas.addEventListener('pointerdown', start);
+    canvas.addEventListener('pointermove', move);
+    canvas.addEventListener('pointerup', end);
+    canvas.addEventListener('pointercancel', end);
+    canvas.addEventListener('pointerleave', end);
+  } else {
+    canvas.addEventListener('touchstart', start, { passive: false });
+    canvas.addEventListener('touchmove', move, { passive: false });
+    canvas.addEventListener('touchend', end);
+    canvas.addEventListener('touchcancel', end);
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('mousemove', move);
+    canvas.addEventListener('mouseup', end);
+    canvas.addEventListener('mouseleave', end);
+  }
 }
 function getPos(canvas, e) {
   const rect = canvas.getBoundingClientRect();
@@ -2996,7 +3204,13 @@ function applyTheme(t) {
   if (meta) meta.setAttribute('content', t === 'light' ? '#f5f7fb' : '#0b1020');
 }
 const savedTheme = (() => {
-  try { return localStorage.getItem('jp_theme') || 'dark'; } catch (e) { return 'dark'; }
+  try {
+    const saved = localStorage.getItem('jp_theme');
+    if (saved) return saved;
+    // First-visit: respect OS preference. Default to dark.
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) return 'light';
+    return 'dark';
+  } catch (e) { return 'dark'; }
 })();
 applyTheme(savedTheme);
 document.getElementById('theme-toggle').onclick = () => {
@@ -3006,28 +3220,66 @@ document.getElementById('theme-toggle').onclick = () => {
   try { localStorage.setItem('jp_theme', next); } catch (e) {}
 };
 
-const voiceSelect = document.getElementById('voice-select');
+let _voiceList = [];
+let _voiceLoadTries = 0;
 function loadVoices() {
   if (!('speechSynthesis' in window)) {
-    voiceSelect.innerHTML = '<option>Browser has no TTS</option>';
+    showVoiceHintIfNeeded(true, 'Your browser doesn\'t support speech synthesis.');
     return;
   }
-  const voices = window.speechSynthesis.getVoices();
-  const ja = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith('ja'));
-  const list = ja.length ? ja : voices;
-  if (!list.length) { voiceSelect.innerHTML = '<option>Loading…</option>'; return; }
-  voiceSelect.innerHTML = '';
-  list.forEach((v, i) => {
-    const o = document.createElement('option');
-    o.value = i;
-    o.textContent = `${v.name} (${v.lang})`;
-    voiceSelect.appendChild(o);
-  });
-  state.voice = list[0];
-  voiceSelect.onchange = () => { state.voice = list[+voiceSelect.value]; };
+  const voices = window.speechSynthesis.getVoices() || [];
+  const ja = voices.filter(v => v.lang && /^ja[-_]?/i.test(v.lang));
+  _voiceList = ja.length ? ja : voices;
+  if (!_voiceList.length) {
+    if (_voiceLoadTries++ < 10) setTimeout(loadVoices, 250);
+    return;
+  }
+  // Pick best Japanese voice silently
+  const prefer = ['Kyoko','Otoya','Google 日本語','Google 日本','Microsoft Haruka','Microsoft Sayaka','Microsoft Ayumi','Microsoft Ichiro'];
+  let pick = _voiceList[0];
+  for (const name of prefer) {
+    const found = _voiceList.find(v => v.name && v.name.includes(name));
+    if (found) { pick = found; break; }
+  }
+  state.voice = pick;
+  showVoiceHintIfNeeded(ja.length === 0);
+}
+function showVoiceHintIfNeeded(noJa, customMsg) {
+  let hint = document.getElementById('voice-hint');
+  if (!noJa) { if (hint) hint.remove(); return; }
+  if (hint) return;
+  hint = document.createElement('div');
+  hint.id = 'voice-hint';
+  hint.style.cssText = 'margin-top:6px; font-size:12px; color:var(--warn); max-width:600px;';
+  hint.innerHTML = customMsg || (
+    'No Japanese voice detected. ' +
+    'On <b>Android</b>: install <i>Google TTS engine</i> and add Japanese in Settings → System → Languages & input → Text-to-speech. ' +
+    'On <b>Samsung</b>: Settings → General management → Text-to-speech → install Japanese language.'
+  );
+  const row = document.getElementById('audio-row');
+  if (row) row.appendChild(hint);
 }
 loadVoices();
-if ('speechSynthesis' in window) window.speechSynthesis.onvoiceschanged = loadVoices;
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+  // Some Chromium variants need a kick after a tiny delay
+  setTimeout(loadVoices, 800);
+}
+
+// Audio unlock on first user gesture (helps iOS + some Android browsers)
+let _audioUnlocked = false;
+function unlockAudio() {
+  if (_audioUnlocked || !('speechSynthesis' in window)) return;
+  try {
+    const u = new SpeechSynthesisUtterance('');
+    u.volume = 0;
+    window.speechSynthesis.speak(u);
+    _audioUnlocked = true;
+  } catch(e){}
+}
+document.addEventListener('pointerdown', unlockAudio, { once: true });
+document.addEventListener('touchstart', unlockAudio, { once: true });
+document.addEventListener('click', unlockAudio, { once: true });
 
 document.addEventListener('keydown', (e) => {
   if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) return;
@@ -3184,15 +3436,85 @@ const DAYS_JP = ['','ついたち','ふつか','みっか','よっか','いつ�
 function dateToJP(month, day) { return MONTHS_JP[month] + ' ' + DAYS_JP[day]; }
 
 /* ---- Counters ---- */
-const COUNTER_FLOORS = {1:'いっかい',2:'にかい',3:'さんがい',4:'よんかい',5:'ごかい',
-                        6:'ろっかい',7:'ななかい',8:'はっかい',9:'きゅうかい',10:'じゅっかい'};
-const COUNTER_AGE = {1:'いっさい',2:'にさい',3:'さんさい',4:'よんさい',5:'ごさい',
-                     6:'ろくさい',7:'ななさい',8:'はっさい',9:'きゅうさい',10:'じゅっさい',
-                     20:'はたち',30:'さんじゅっさい',40:'よんじゅっさい'};
-const COUNTER_PEOPLE = {1:'ひとり',2:'ふたり',3:'さんにん',4:'よにん',5:'ごにん',
-                        6:'ろくにん',7:'ななにん',8:'はちにん',9:'きゅうにん',10:'じゅうにん'};
-const COUNTER_GENERAL = {1:'ひとつ',2:'ふたつ',3:'みっつ',4:'よっつ',5:'いつつ',
-                         6:'むっつ',7:'ななつ',8:'やっつ',9:'ここのつ',10:'とお'};
+/* Counter tables (1-20). ~つ is special: it only exists 1-10. */
+const COUNTER_GENERAL = {
+  1:'ひとつ',2:'ふたつ',3:'みっつ',4:'よっつ',5:'いつつ',
+  6:'むっつ',7:'ななつ',8:'やっつ',9:'ここのつ',10:'とお'
+};
+const COUNTER_SMALL = {
+  1:'いっこ',2:'にこ',3:'さんこ',4:'よんこ',5:'ごこ',
+  6:'ろっこ',7:'ななこ',8:'はっこ',9:'きゅうこ',10:'じゅっこ',
+  11:'じゅういっこ',12:'じゅうにこ',13:'じゅうさんこ',14:'じゅうよんこ',15:'じゅうごこ',
+  16:'じゅうろっこ',17:'じゅうななこ',18:'じゅうはっこ',19:'じゅうきゅうこ',20:'にじゅっこ'
+};
+const COUNTER_PEOPLE = {
+  1:'ひとり',2:'ふたり',3:'さんにん',4:'よにん',5:'ごにん',
+  6:'ろくにん',7:'ななにん',8:'はちにん',9:'きゅうにん',10:'じゅうにん',
+  11:'じゅういちにん',12:'じゅうににん',13:'じゅうさんにん',14:'じゅうよにん',15:'じゅうごにん',
+  16:'じゅうろくにん',17:'じゅうななにん',18:'じゅうはちにん',19:'じゅうきゅうにん',20:'にじゅうにん'
+};
+const COUNTER_MACHINES = {
+  1:'いちだい',2:'にだい',3:'さんだい',4:'よんだい',5:'ごだい',
+  6:'ろくだい',7:'ななだい',8:'はちだい',9:'きゅうだい',10:'じゅうだい',
+  11:'じゅういちだい',12:'じゅうにだい',13:'じゅうさんだい',14:'じゅうよんだい',15:'じゅうごだい',
+  16:'じゅうろくだい',17:'じゅうななだい',18:'じゅうはちだい',19:'じゅうきゅうだい',20:'にじゅうだい'
+};
+const COUNTER_SHEETS = {
+  1:'いちまい',2:'にまい',3:'さんまい',4:'よんまい',5:'ごまい',
+  6:'ろくまい',7:'ななまい',8:'はちまい',9:'きゅうまい',10:'じゅうまい',
+  11:'じゅういちまい',12:'じゅうにまい',13:'じゅうさんまい',14:'じゅうよんまい',15:'じゅうごまい',
+  16:'じゅうろくまい',17:'じゅうななまい',18:'じゅうはちまい',19:'じゅうきゅうまい',20:'にじゅうまい'
+};
+const COUNTER_FLOORS = {
+  1:'いっかい',2:'にかい',3:'さんがい',4:'よんかい',5:'ごかい',
+  6:'ろっかい',7:'ななかい',8:'はっかい',9:'きゅうかい',10:'じゅっかい',
+  11:'じゅういっかい',12:'じゅうにかい',13:'じゅうさんがい',14:'じゅうよんかい',15:'じゅうごかい',
+  16:'じゅうろっかい',17:'じゅうななかい',18:'じゅうはっかい',19:'じゅうきゅうかい',20:'にじゅっかい'
+};
+const COUNTER_AGE = {
+  1:'いっさい',2:'にさい',3:'さんさい',4:'よんさい',5:'ごさい',
+  6:'ろくさい',7:'ななさい',8:'はっさい',9:'きゅうさい',10:'じゅっさい',
+  11:'じゅういっさい',12:'じゅうにさい',13:'じゅうさんさい',14:'じゅうよんさい',15:'じゅうごさい',
+  16:'じゅうろくさい',17:'じゅうななさい',18:'じゅうはっさい',19:'じゅうきゅうさい',20:'はたち'  // irregular: 20歳 = はたち
+};
+const COUNTER_HOURS = {
+  1:'いちじかん',2:'にじかん',3:'さんじかん',4:'よじかん',5:'ごじかん',
+  6:'ろくじかん',7:'しちじかん',8:'はちじかん',9:'くじかん',10:'じゅうじかん',
+  11:'じゅういちじかん',12:'じゅうにじかん',13:'じゅうさんじかん',14:'じゅうよじかん',15:'じゅうごじかん',
+  16:'じゅうろくじかん',17:'じゅうしちじかん',18:'じゅうはちじかん',19:'じゅうくじかん',20:'にじゅうじかん'
+};
+const COUNTER_MINUTES = {
+  1:'いっぷん',2:'にふん',3:'さんぷん',4:'よんぷん',5:'ごふん',
+  6:'ろっぷん',7:'ななふん',8:'はっぷん',9:'きゅうふん',10:'じゅっぷん',
+  11:'じゅういっぷん',12:'じゅうにふん',13:'じゅうさんぷん',14:'じゅうよんぷん',15:'じゅうごふん',
+  16:'じゅうろっぷん',17:'じゅうななふん',18:'じゅうはっぷん',19:'じゅうきゅうふん',20:'にじゅっぷん'
+};
+const COUNTER_DAYS = {
+  1:'いちにち',2:'ふつか',3:'みっか',4:'よっか',5:'いつか',
+  6:'むいか',7:'なのか',8:'ようか',9:'ここのか',10:'とおか',
+  11:'じゅういちにち',12:'じゅうににち',13:'じゅうさんにち',14:'じゅうよっか',15:'じゅうごにち',
+  16:'じゅうろくにち',17:'じゅうしちにち',18:'じゅうはちにち',19:'じゅうくにち',20:'はつか'  // irregular: 20日 = はつか
+};
+const COUNTER_WEEKS = {
+  1:'いっしゅうかん',2:'にしゅうかん',3:'さんしゅうかん',4:'よんしゅうかん',5:'ごしゅうかん',
+  6:'ろくしゅうかん',7:'ななしゅうかん',8:'はっしゅうかん',9:'きゅうしゅうかん',10:'じゅっしゅうかん',
+  11:'じゅういっしゅうかん',12:'じゅうにしゅうかん',13:'じゅうさんしゅうかん',14:'じゅうよんしゅうかん',15:'じゅうごしゅうかん',
+  16:'じゅうろくしゅうかん',17:'じゅうななしゅうかん',18:'じゅうはっしゅうかん',19:'じゅうきゅうしゅうかん',20:'にじゅっしゅうかん'
+};
+const COUNTER_MONTHS = {
+  1:'いっかげつ',2:'にかげつ',3:'さんかげつ',4:'よんかげつ',5:'ごかげつ',
+  6:'ろっかげつ',7:'ななかげつ',8:'はっかげつ',9:'きゅうかげつ',10:'じゅっかげつ',
+  11:'じゅういっかげつ',12:'じゅうにかげつ',13:'じゅうさんかげつ',14:'じゅうよんかげつ',15:'じゅうごかげつ',
+  16:'じゅうろっかげつ',17:'じゅうななかげつ',18:'じゅうはっかげつ',19:'じゅうきゅうかげつ',20:'にじゅっかげつ'
+};
+const COUNTER_YEARS = {
+  1:'いちねん',2:'にねん',3:'さんねん',4:'よねん',5:'ごねん',
+  6:'ろくねん',7:'しちねん',8:'はちねん',9:'きゅうねん',10:'じゅうねん',
+  11:'じゅういちねん',12:'じゅうにねん',13:'じゅうさんねん',14:'じゅうよねん',15:'じゅうごねん',
+  16:'じゅうろくねん',17:'じゅうしちねん',18:'じゅうはちねん',19:'じゅうきゅうねん',20:'にじゅうねん'
+};
+
+
 
 /* ---- Generators ---- */
 function genNumber() {
@@ -3226,11 +3548,21 @@ function genDate() {
   return { prompt: month+'/'+day, answer: dateToJP(month, day), romaji: '', label: 'Read this date in Japanese:' };
 }
 function genCounter() {
+  // ~つ caps at 10 (no 11+ form). Everything else 1-20.
   const kinds = [
-    { name:'general', label:'general things (~つ)', tbl: COUNTER_GENERAL, max: 10 },
-    { name:'people',  label:'people (~人)',         tbl: COUNTER_PEOPLE,  max: 10 },
-    { name:'age',     label:'age (~歳)',            tbl: COUNTER_AGE,     max: 10 },
-    { name:'floors',  label:'floors (~階)',         tbl: COUNTER_FLOORS,  max: 10 },
+    { name:'general', label:'general things (~つ)', tbl: COUNTER_GENERAL,  max: 10 },
+    { name:'small',   label:'small objects (~こ)',  tbl: COUNTER_SMALL,    max: 20 },
+    { name:'people',  label:'people (~人)',         tbl: COUNTER_PEOPLE,   max: 20 },
+    { name:'age',     label:'age (~歳)',            tbl: COUNTER_AGE,      max: 20 },
+    { name:'floors',  label:'floors (~階)',         tbl: COUNTER_FLOORS,   max: 20 },
+    { name:'hours',   label:'hours (~時間)',        tbl: COUNTER_HOURS,    max: 20 },
+    { name:'minutes', label:'minutes (~分)',        tbl: COUNTER_MINUTES,  max: 20 },
+    { name:'days',    label:'days (~日)',           tbl: COUNTER_DAYS,     max: 20 },
+    { name:'weeks',   label:'weeks (~週間)',        tbl: COUNTER_WEEKS,    max: 20 },
+    { name:'months',  label:'months (~か月)',       tbl: COUNTER_MONTHS,   max: 20 },
+    { name:'years',   label:'years (~年)',          tbl: COUNTER_YEARS,    max: 20 },
+    { name:'sheets',  label:'paper/stamps (~枚)',   tbl: COUNTER_SHEETS,   max: 20 },
+    { name:'mach',    label:'machines/cars (~台)',  tbl: COUNTER_MACHINES, max: 20 },
   ];
   const k = kinds[Math.floor(Math.random()*kinds.length)];
   const n = 1 + Math.floor(Math.random()*k.max);
@@ -3415,10 +3747,31 @@ document.querySelectorAll('#shu-input button').forEach(b => {
   };
 });
 
+
+
+/* Desktop shortcuts modal */
+(function() {
+  const btn = document.getElementById('help-btn');
+  const bg  = document.getElementById('shortcuts-modal');
+  const closeBtn = document.getElementById('shortcuts-close');
+  if (!btn || !bg) return;
+  const open = () => bg.classList.add('open');
+  const close = () => bg.classList.remove('open');
+  btn.onclick = open;
+  closeBtn.onclick = close;
+  bg.addEventListener('click', (e) => { if (e.target === bg) close(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+    if (e.key === '?' && !(e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA'))) {
+      e.preventDefault(); open();
+    }
+  });
+})();
+
 // Init
 updateStats();
 render();
 </script>
-<!-- built 2026-05-03T15:41:06.882214Z · vocab=471 sentences=100 kana=142 -->
+<!-- built 2026-05-18T03:18:35.168522Z · vocab=548 sentences=110 kana=142 -->
 </body>
 </html>
