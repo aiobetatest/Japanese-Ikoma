@@ -596,17 +596,54 @@
     display: flex; justify-content: space-between; align-items: center; gap: 8px;
   }
   .learn-card h4 .sub { color: var(--muted); font-weight: 500; font-size: 12px; }
+  /* Learn table — matches Review row typography */
   .ltable {
-    display: grid; grid-template-columns: auto 1fr; gap: 5px 12px;
-    font-size: 14px;
+    display: grid; grid-template-columns: 60px 1fr; gap: 0;
+    font-size: 16px;
   }
-  .ltable.three { grid-template-columns: auto 1fr 1fr; }
-  .ltable .k { color: var(--muted); font-family: ui-monospace, "SF Mono", Consolas, monospace; text-align: right; font-size: 12px; }
+  .ltable.three { grid-template-columns: 60px 1fr 1.2fr; }
+  .ltable > * {
+    padding: 9px 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center;
+  }
+  .ltable > *:nth-last-child(-n+3) { border-bottom: 0; }   /* last row */
+  .ltable.three > *:nth-last-child(-n+3) { border-bottom: 0; }
+  .ltable:not(.three) > *:nth-last-child(-n+2) { border-bottom: 0; }
+  .ltable .k {
+    color: var(--muted);
+    font-family: ui-monospace, "SF Mono", Consolas, monospace;
+    font-size: 13px;
+    font-weight: 500;
+    justify-content: flex-end;
+    padding-right: 12px;
+  }
   .ltable .v {
-    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif; color: var(--text);
+    font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--accent);                                /* fallback */
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    word-break: break-word;
+    line-height: 1.25;
   }
-  .ltable .v.irr { color: var(--warn); font-weight: 600; }
-  .ltable .e { font-size: 12px; color: var(--muted); }
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .ltable .v { -webkit-text-fill-color: transparent; color: transparent; }
+  }
+  .ltable .v.irr {
+    /* Irregular readings: solid yellow, no gradient */
+    background: none;
+    -webkit-text-fill-color: var(--warn);
+    color: var(--warn);
+    font-weight: 700;
+  }
+  .ltable .e {
+    font-size: 13px; color: var(--muted); font-style: italic;
+  }
+  .counter-card h4, .learn-card h4 { font-size: 16px; }
+  .learn-card { padding: 16px; }
   .learn-card .practice-btn {
     margin-top: 12px; width: 100%; font-size: 13px; padding: 8px 12px;
   }
@@ -694,7 +731,7 @@
     </div>
 
     <div class="controls-row" id="shu-lp-row" style="display:none;">
-      <label>Drill</label>
+      <label>Mode</label>
       <div class="seg" id="shu-lp">
         <button data-lp="learn" class="active">📖 Learn</button>
         <button data-lp="practice">🎯 Practice</button>
@@ -746,7 +783,7 @@
 <footer>
   <div style="max-width: 720px; margin: 0 auto;">
     <div style="margin-bottom: 12px;">
-      <span class="version-badge" title="Built 2026-05-18 03:30 UTC">v1.1.0</span>
+      <span class="version-badge" title="Built 2026-05-18 03:39 UTC">v1.1.1</span>
     </div>
     Personal study aid for Japanese learners. Vocabulary, sentences, and shukudai exercises are derived from materials provided by
     <a href="https://ikomalanguage.com" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent);">Ikoma Language School Singapore</a>
@@ -4151,6 +4188,6 @@ renderShukudai = function() {
 updateStats();
 render();
 </script>
-<!-- v1.1.0 · built 2026-05-18T03:30:49.773490Z · vocab=548 sentences=110 kana=142 -->
+<!-- v1.1.1 · built 2026-05-18T03:39:01.455827Z · vocab=548 sentences=110 kana=142 -->
 </body>
 </html>
