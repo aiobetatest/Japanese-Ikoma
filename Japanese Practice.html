@@ -760,7 +760,7 @@
 <footer>
   <div style="max-width: 720px; margin: 0 auto;">
     <div style="margin-bottom: 12px;">
-      <span class="version-badge" title="Built 2026-05-18 04:30 UTC">v1.1.4</span>
+      <span class="version-badge" title="Built 2026-05-19 14:57 UTC">v1.2.0</span>
     </div>
     Personal study aid for Japanese learners. Vocabulary, sentences, and shukudai exercises are derived from materials provided by
     <strong>Ikoma Language School Singapore</strong>
@@ -1320,6 +1320,59 @@ const VOCAB = [
   { lesson: 8, jp: "おげんきですか", romaji: "o-genki desu ka", en: "How are you?", id: "vocab:8:おげんきですか" },
   { lesson: 9, jp: "かして ください", romaji: "kashite kudasai", en: "Please lend (it) to me.", id: "vocab:9:かして ください" },
   { lesson: 9, jp: "また こんど おねがいします", romaji: "mata kondo onegai shimasu", en: "Maybe next time, please.", id: "vocab:9:また こんど おねがいします" },
+  { lesson: 12, jp: "かんたん[な]", romaji: "kantan", en: "easy, simple", id: "vocab:12:かんたん[な]" },
+  { lesson: 12, jp: "ちかい", romaji: "chikai", en: "near", id: "vocab:12:ちかい" },
+  { lesson: 12, jp: "とおい", romaji: "tōi", en: "far", id: "vocab:12:とおい" },
+  { lesson: 12, jp: "はやい", romaji: "hayai", en: "fast, early", id: "vocab:12:はやい" },
+  { lesson: 12, jp: "おそい", romaji: "osoi", en: "slow, late", id: "vocab:12:おそい" },
+  { lesson: 12, jp: "おおい", romaji: "ōi", en: "many (people), much", id: "vocab:12:おおい" },
+  { lesson: 12, jp: "すくない", romaji: "sukunai", en: "few (people), a little", id: "vocab:12:すくない" },
+  { lesson: 12, jp: "あたたかい", romaji: "atatakai", en: "warm", id: "vocab:12:あたたかい" },
+  { lesson: 12, jp: "すずしい", romaji: "suzushii", en: "cool", id: "vocab:12:すずしい" },
+  { lesson: 12, jp: "あまい", romaji: "amai", en: "sweet", id: "vocab:12:あまい" },
+  { lesson: 12, jp: "からい", romaji: "karai", en: "hot (taste), spicy", id: "vocab:12:からい" },
+  { lesson: 12, jp: "おもい", romaji: "omoi", en: "heavy", id: "vocab:12:おもい" },
+  { lesson: 12, jp: "かるい", romaji: "karui", en: "light (weight)", id: "vocab:12:かるい" },
+  { lesson: 12, jp: "いい [コーヒーが~]", romaji: "ii", en: "prefer (coffee, etc.) — used with が", id: "vocab:12:いい [コーヒーが~]" },
+  { lesson: 12, jp: "きせつ", romaji: "kisetsu", en: "season", id: "vocab:12:きせつ" },
+  { lesson: 12, jp: "はる", romaji: "haru", en: "spring", id: "vocab:12:はる" },
+  { lesson: 12, jp: "なつ", romaji: "natsu", en: "summer", id: "vocab:12:なつ" },
+  { lesson: 12, jp: "あき", romaji: "aki", en: "autumn, fall", id: "vocab:12:あき" },
+  { lesson: 12, jp: "ふゆ", romaji: "fuyu", en: "winter", id: "vocab:12:ふゆ" },
+  { lesson: 12, jp: "てんき", romaji: "tenki", en: "weather", id: "vocab:12:てんき" },
+  { lesson: 12, jp: "あめ", romaji: "ame", en: "rain, rainy", id: "vocab:12:あめ" },
+  { lesson: 12, jp: "ゆき", romaji: "yuki", en: "snow, snowy", id: "vocab:12:ゆき" },
+  { lesson: 12, jp: "くもり", romaji: "kumori", en: "cloudy", id: "vocab:12:くもり" },
+  { lesson: 12, jp: "ホテル", romaji: "hoteru", en: "hotel", id: "vocab:12:ホテル" },
+  { lesson: 12, jp: "くうこう", romaji: "kūkō", en: "airport", id: "vocab:12:くうこう" },
+  { lesson: 12, jp: "うみ", romaji: "umi", en: "sea, ocean", id: "vocab:12:うみ" },
+  { lesson: 12, jp: "せかい", romaji: "sekai", en: "world", id: "vocab:12:せかい" },
+  { lesson: 12, jp: "パーティー", romaji: "pātī", en: "party (~を します = to give a party)", id: "vocab:12:パーティー" },
+  { lesson: 12, jp: "[お]まつり", romaji: "o-matsuri", en: "festival", id: "vocab:12:[お]まつり" },
+  { lesson: 12, jp: "すきやき", romaji: "sukiyaki", en: "sukiyaki (beef and vegetable hot pot)", id: "vocab:12:すきやき" },
+  { lesson: 12, jp: "さしみ", romaji: "sashimi", en: "sashimi (sliced raw fish)", id: "vocab:12:さしみ" },
+  { lesson: 12, jp: "[お]すし", romaji: "o-sushi", en: "sushi (vinegared rice topped with raw fish)", id: "vocab:12:[お]すし" },
+  { lesson: 12, jp: "てんぷら", romaji: "tenpura", en: "tempura (seafood and vegetables deep-fried in batter)", id: "vocab:12:てんぷら" },
+  { lesson: 12, jp: "ぶたにく", romaji: "butaniku", en: "pork", id: "vocab:12:ぶたにく" },
+  { lesson: 12, jp: "とりにく", romaji: "toriniku", en: "chicken", id: "vocab:12:とりにく" },
+  { lesson: 12, jp: "ぎゅうにく", romaji: "gyūniku", en: "beef", id: "vocab:12:ぎゅうにく" },
+  { lesson: 12, jp: "レモン", romaji: "remon", en: "lemon", id: "vocab:12:レモン" },
+  { lesson: 12, jp: "いけばな", romaji: "ikebana", en: "flower arrangement (~を します = to practise it)", id: "vocab:12:いけばな" },
+  { lesson: 12, jp: "もみじ", romaji: "momiji", en: "maple / red autumn leaves", id: "vocab:12:もみじ" },
+  { lesson: 12, jp: "どちら", romaji: "dochira", en: "which one (of two things)", id: "vocab:12:どちら" },
+  { lesson: 12, jp: "どちらも", romaji: "dochiramo", en: "both", id: "vocab:12:どちらも" },
+  { lesson: 12, jp: "いちばん", romaji: "ichiban", en: "the most", id: "vocab:12:いちばん" },
+  { lesson: 12, jp: "ずっと", romaji: "zutto", en: "by far", id: "vocab:12:ずっと" },
+  { lesson: 12, jp: "はじめて", romaji: "hajimete", en: "for the first time", id: "vocab:12:はじめて" },
+  { lesson: 12, jp: "ただいま", romaji: "tadaima", en: "I'm home.", id: "vocab:12:ただいま" },
+  { lesson: 12, jp: "お帰りなさい", romaji: "okaerinasai", en: "Welcome home.", id: "vocab:12:お帰りなさい" },
+  { lesson: 12, jp: "わあ、すごい人ですね", romaji: "wā, sugoi hito desu ne", en: "Wow! Look at all those people!", id: "vocab:12:わあ、すごい人ですね" },
+  { lesson: 12, jp: "疲れました", romaji: "tsukaremashita", en: "I'm tired.", id: "vocab:12:疲れました" },
+  { lesson: 12, jp: "祇園祭", romaji: "Gion-matsuri", en: "the Gion Festival (the most famous festival in Kyoto)", id: "vocab:12:祇園祭" },
+  { lesson: 12, jp: "ホンコン", romaji: "Honkon", en: "Hong Kong", id: "vocab:12:ホンコン" },
+  { lesson: 12, jp: "シンガポール", romaji: "Shingapōru", en: "Singapore", id: "vocab:12:シンガポール" },
+  { lesson: 12, jp: "エービーシーストア", romaji: "ABC sutoa", en: "a fictitious supermarket (ABC Store)", id: "vocab:12:エービーシーストア" },
+  { lesson: 12, jp: "ジャパン", romaji: "Japan", en: "a fictitious supermarket", id: "vocab:12:ジャパン" },
 ];
 
 const SENTENCES = [
@@ -1433,6 +1486,16 @@ const SENTENCES = [
   { lesson: 11, jp: "とうきょうまで どのくらい かかりますか。", romaji: "Tōkyō made donokurai kakarimasu ka.", en: "How long does it take to Tokyo?", id: "sent:11:7" },
   { lesson: 11, jp: "さんじかんぐらい かかります。", romaji: "Sanjikan gurai kakarimasu.", en: "It takes about three hours.", id: "sent:11:8" },
   { lesson: 11, jp: "ぜんぶで いくらですか。", romaji: "Zenbu de ikura desu ka.", en: "How much is it altogether?", id: "sent:11:9" },
+  { lesson: 12, jp: "なつと ふゆと どちらが すきですか。", romaji: "Natsu to fuyu to dochira ga suki desu ka.", en: "Which do you prefer, summer or winter?", id: "sent:12:0" },
+  { lesson: 12, jp: "どちらも すきです。", romaji: "Dochiramo suki desu.", en: "I like both.", id: "sent:12:1" },
+  { lesson: 12, jp: "きせつの なかで なつが いちばん すきです。", romaji: "Kisetsu no naka de natsu ga ichiban suki desu.", en: "Of the seasons, summer is my favourite.", id: "sent:12:2" },
+  { lesson: 12, jp: "シンガポールは とても あついです。", romaji: "Shingapōru wa totemo atsui desu.", en: "Singapore is very hot.", id: "sent:12:3" },
+  { lesson: 12, jp: "きょうの てんきは あめです。", romaji: "Kyō no tenki wa ame desu.", en: "Today's weather is rainy.", id: "sent:12:4" },
+  { lesson: 12, jp: "すしと さしみと どちらが すきですか。", romaji: "Sushi to sashimi to dochira ga suki desu ka.", en: "Which do you prefer, sushi or sashimi?", id: "sent:12:5" },
+  { lesson: 12, jp: "すきやきは はじめてです。", romaji: "Sukiyaki wa hajimete desu.", en: "It's my first time having sukiyaki.", id: "sent:12:6" },
+  { lesson: 12, jp: "この コーヒーは あまいです。", romaji: "Kono kōhī wa amai desu.", en: "This coffee is sweet.", id: "sent:12:7" },
+  { lesson: 12, jp: "ふゆは ゆきが おおいです。", romaji: "Fuyu wa yuki ga ōi desu.", en: "There is a lot of snow in winter.", id: "sent:12:8" },
+  { lesson: 12, jp: "しんかんせんは ひこうきより おそいですが、べんりです。", romaji: "Shinkansen wa hikōki yori osoi desu ga, benri desu.", en: "The Shinkansen is slower than a plane, but it is convenient.", id: "sent:12:9" },
 ];
 
 /* ============================================================
@@ -4280,6 +4343,6 @@ renderShukudai = function() {
 updateStats();
 render();
 </script>
-<!-- v1.1.4 · built 2026-05-18T04:30:33.629168Z · vocab=548 sentences=110 kana=142 -->
+<!-- v1.2.0 · built 2026-05-19T14:57:01.920630Z · vocab=601 sentences=120 kana=142 -->
 </body>
 </html>
