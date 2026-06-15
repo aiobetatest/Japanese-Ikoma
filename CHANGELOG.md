@@ -1,0 +1,156 @@
+# Japanese Practice — Changelog
+
+All notable changes are listed here. Versions follow **semver**: `MAJOR.MINOR.PATCH`.
+
+- **MAJOR**: breaking changes (new data shape, removed mode, etc.)
+- **MINOR**: new features (new mode, new sub-category, new lesson)
+- **PATCH**: bug fixes, polish, content additions inside existing structure
+
+The version number is shown in the app footer and stamped into `data/manifest.json`.
+
+---
+
+## v1.3.0 - 2026-06-15
+
+### Added — Lesson 13 (Dai_Ka 13.pdf)
+- **22 main vocab items**: leisure verbs (あそびます, およぎます, むかえます, つかれます, けっこんします, かいものします, しょくじします, さんぽします), adjectives (たいへん, ほしい, ひろい, せまい), nouns (プール, かわ, びじゅつ, つり, スキー, しゅうまつ, [お]しょうがつ), and time/place indefinites (~ごろ, なにか, どこか).
+- **6 会話 phrases for ordering food**: ご注文は？ / 定食 / 牛丼 / ~を おねがいします / ~で ございます / 別に.
+- **3 練習C idioms**: のどが かわきます (get thirsty), おなかが すきます (get hungry), そう しましょう (Let's do that).
+- **2 関連単語**: チェニックス (fictitious company), おはようテレビ (fictitious TV programme).
+- **10 example sentences** using L13 grammar (~たいです, ~がほしいです, verb-stem + に + 行きます, ~ましょう), e.g., "I want to go fishing at the river this weekend", "I'll have the gyūdon please", "I'm hungry. Let's eat something."
+- Lesson 13 pill now appears in the lesson filter.
+
+---
+
+## v1.2.0 - 2026-05-19
+
+### Added — Lesson 12 (Dai_Ka 12.pdf)
+- **44 vocab items**: i-adjectives + na-adjective (かんたん, ちかい, とおい, はやい, おそい, おおい, すくない, あたたかい, すずしい, あまい, からい, おもい, かるい), seasons (はる/なつ/あき/ふゆ + きせつ), weather (てんき, あめ, ゆき, くもり), places (ホテル, くうこう, うみ, せかい, パーティー, [お]まつり), food (すきやき, さしみ, [お]すし, てんぷら, ぶたにく, とりにく, ぎゅうにく, レモン), culture (いけばな, もみじ), and comparison words (どちら, どちらも, いちばん, ずっと, はじめて).
+- **4 会話 phrases**: ただいま (I'm home), お帰りなさい (Welcome home), わあ、すごい人ですね (Wow, look at all those people!), 疲れました (I'm tired).
+- **5 関連単語**: 祇園祭 (Gion Festival), ホンコン (Hong Kong), シンガポール (Singapore), and two fictitious supermarket names.
+- **10 example sentences** using L12 grammar (AとBとどちらが~ですか, ~のなかで~がいちばん~, weather/seasons, food preferences, comparing transport).
+- Lesson 12 pill now appears in the lesson filter.
+
+
+## v1.1.4 - 2026-05-18
+
+### Fixed
+- **All Shukudai Learn views now use the exact same row layout as the Review tab** — Counters, Numbers, Money, Time, Dates included. Prompt (number/symbol/label) on the left in sans-serif left-aligned. Japanese with romaji italic underneath in the centre. Speaker button on the right. Tap any row to hear it spoken.
+- **Romaji shown for every reading** (auto-generated from kana for tables that didn't have it).
+- **Voice over on every Learn row** (matches Review behaviour).
+- **Fixed "いちまんえん" wrapping over 2 lines** — Japanese reading is now ellipsis-truncated within its cell when needed; cells are sized for typical readings.
+- **Fixed "1,000,000" breaking out of the Numbers table** — prompt column uses tabular numerals and allows word-break.
+- Irregular / rendaku readings still highlighted yellow but now via row-level class override (cleaner CSS, no inline gradient conflicts).
+- Removed orphan `.ltable` CSS (replaced by review-row rules).
+
+---
+
+## v1.1.3 - 2026-05-18
+
+### Fixed
+- **Quiz of the day** button is now visible in every mode (was hidden in Review / Dictation / Hiragana / Katakana / Shukudai because it lived inside the direction-row). Moved to its own slot on the right of the Lessons row, smaller and labelled "🎯 Quiz (10)".
+- Manifest `shukudai_banks_total` now auto-synced from the actual data on every build (was stale at 180 vs actual 75).
+- Removed dead Type/MCQ toggle row from DOM + handlers + `state.shuInput`. Was permanently hidden but still in code.
+- Trimmed `SHU_BANK_KEYS` constant to actual categories (`family`, `professions`, `places`).
+- Removed duplicate `display: none` lines for the deleted row.
+- Ikoma footer credit is now plain bold text (link removed — URL was unverified, removing avoids broken links). Restore the link later when the right URL is known.
+- Stats line in header stays compact on very narrow viewports (≤360px) — slightly smaller font + tighter gap.
+
+---
+
+## v1.1.2 - 2026-05-18
+
+### Fixed
+- **Bank Learn views (Family / Professions / Places)** now use the exact same row markup as the Review tab: sans-serif English on left, large purple gradient Japanese with romaji italic underneath, optional speaker button on right. Looks identical to Review.
+- **iOS status bar overlap fixed** — header now respects `env(safe-area-inset-top)` so the iPhone clock and signal icons no longer collide with the page header in PWA / Safari modes. Left/right safe-area insets respected too (landscape).
+- Tapping a row in any Bank Learn view now speaks the Japanese word aloud (matches Review behaviour).
+
+---
+
+## v1.1.1 - 2026-05-18
+
+### Changed
+- Shukudai Learn tables now use Review-style typography: large purple gradient Japanese readings (19 px / weight 700), muted number labels, subtle row separators, more breathing room.
+- "Drill" toggle label renamed to **Mode** (clearer).
+- Irregular readings still highlighted yellow but rendered solid (no gradient) so they stand out against the gradient readings.
+
+---
+
+## v1.1.0 - 2026-05-18
+
+### Added
+- **Learn / Practice toggle inside every Shukudai sub-category**. Default is Learn so users study patterns BEFORE being drilled.
+  - **Counters**: 13 reference tables (1-20). Irregular readings highlighted yellow. Each card has a "Practice ~X only" button to drill that single counter.
+  - **Numbers**: rendaku rules table (300=さんびゃく, 600=ろっぴゃく, 800=はっぴゃく, 3000=さんぜん, 8000=はっせん).
+  - **Money**: ¥/$/¢ tables with cent rendaku readings (1=いっセント, 8=はっセント, 10/20=じゅっ/にじゅっセント).
+  - **Time**: hours 1-12 (irregular: 4, 7, 9) + minutes special readings + AM/PM rules.
+  - **Dates**: months 1-12 + days of month 1-31 (1-10 + 14, 20, 24 all irregular).
+  - **Family / Professions / Places**: scrollable reference list grouped by category.
+- Per-category Learn/Practice preference persists per browser.
+- Switching category always resets to Learn (so each new category invites study first).
+
+### Changed
+- Counters generator can be filtered to a single counter type via the "Practice ~X only" button in the Learn cards.
+
+---
+
+## v1.0.0 — 2026-05-18
+
+First versioned release. Baseline for everything below.
+
+**Content**
+- 548 vocab items across Lessons 1–11 (Dai_Ka.pdf + Dai_Ka 11.pdf, including 会話 and 練習C phrases)
+- 110 example sentences across Lessons 1–11
+- 142 kana (hiragana + katakana, basic + dakuten/handakuten)
+- 75 curated drill items in Shukudai (Family, Professions, Places)
+
+**Modes / Categories**
+- 📖 Review — scan vocab + sentences for selected lessons
+- Flashcards — EN → JP recall with reveal + self-grade
+- Multiple Choice — pick the right JP from 4 options
+- Sentences — translate full sentences
+- Dictation — listen (TTS) + type romaji/kana, or draw on canvas
+- Hiragana — write the kana with finger on canvas
+- Katakana — same for katakana
+- 📚 Shukudai — drill generators (Numbers, Money, Time, Dates, Counters with 13 counter types incl. duration counters from L11) + curated banks (Family, Professions, Places)
+
+**Smart features**
+- Leitner spaced repetition with no-repeat deck cycling
+- Per-lesson mastery % shown on lesson pills
+- 🔥 Daily streak counter
+- Quiz of the day (10 mixed-mode cards from selected lessons)
+- Search across all vocab + sentences
+- EN↔JP direction toggle for Flashcards/Sentences
+
+**UI**
+- Dark + light theme, auto-detects OS preference on first visit, manual toggle persists
+- Sticky header, glass-blur panels, gradient text (with solid-colour fallback for non-WebKit browsers)
+- Mobile: 2-column mode tabs, compact rows, safe-area insets, 44pt touch targets
+- Desktop: wider container (1200/1320px on ≥1100/1400px), 3–4 column review grid, keyboard shortcuts modal (?), custom focus ring, stronger hover affordances
+
+**Cross-browser**
+- iOS Safari (primary): tested
+- Android Chrome / Samsung Internet: voice loading with retries, hint banner if no Japanese voice installed, Pointer Events for canvas, gradient-text + backdrop-filter fallbacks
+
+**Infrastructure**
+- Single-file HTML deploys to GitHub Pages
+- Data lives in `/data/*.json` (vocab, sentences, kana, shukudai, manifest)
+- Build script (`build.py`) composes HTML from data + template
+- Refresh playbook: drop a PDF → say "refresh" → I scan, extract, append, rebuild
+- Stable per-card IDs so Leitner box history survives content updates
+
+**Attribution**
+- Content derived from Ikoma Language School Singapore curriculum
+- Personal study aid, not affiliated with or endorsed by Ikoma
+
+---
+
+## Versioning conventions going forward
+
+When you ask for new work, I'll bump the version per these rules:
+
+- **PATCH** (e.g., 1.0.0 → 1.0.1): a tweak, fix, or copy-edit. Examples: "fix the Check button bug", "bump font size", "remove a category", "fix a typo in 3 sentences".
+- **MINOR** (e.g., 1.0.0 → 1.1.0): new content or new feature. Examples: "add Lesson 12", "add a new drill type", "add a new mode".
+- **MAJOR** (e.g., 1.0.0 → 2.0.0): something that changes how the app works. Examples: "switch to a different data shape", "rebuild the UI from scratch", "merge with another tool".
+
+The app footer always shows the current version. Hover (or tap on mobile) to see the build date.
