@@ -779,7 +779,7 @@
 <footer>
   <div style="max-width: 720px; margin: 0 auto;">
     <div style="margin-bottom: 12px;">
-      <span class="version-badge" title="Built 2026-06-16 03:03 UTC">v1.6.4</span>
+      <span class="version-badge" title="Built 2026-06-16 06:08 UTC">v1.6.5</span>
     </div>
     Personal study aid for Japanese learners. Vocabulary, sentences, and shukudai exercises are derived from materials provided by
     <strong>Ikoma Language School Singapore</strong>
@@ -2734,6 +2734,59 @@ function switchToMode(m) {
 }
 
 /* ============================================================
+   Wake Lock + MediaSession (keeps audio alive when screen locks
+   on supported browsers — iOS Safari 16.4+, Chrome 84+, Samsung Internet 14+)
+   ============================================================ */
+let _wakeLock = null;
+
+async function _requestWakeLock() {
+  if (!('wakeLock' in navigator)) return;
+  try {
+    _wakeLock = await navigator.wakeLock.request('screen');
+    _wakeLock.addEventListener('release', () => { _wakeLock = null; });
+  } catch (e) { /* permission denied or unsupported */ }
+}
+
+function _releaseWakeLock() {
+  if (_wakeLock) {
+    try { _wakeLock.release(); } catch (e) {}
+    _wakeLock = null;
+  }
+}
+
+// Re-acquire wake lock if the page becomes visible again while still playing
+document.addEventListener('visibilitychange', () => {
+  if (_playback && _playback.active && document.visibilityState === 'visible' && !_wakeLock) {
+    _requestWakeLock();
+  }
+});
+
+function _setMediaSession(title, artist) {
+  if (!('mediaSession' in navigator)) return;
+  try {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: title || 'Japanese Practice',
+      artist: artist || 'Dai Ka',
+      album: 'Lesson playback',
+    });
+    const stop = () => _stopPlayback();
+    navigator.mediaSession.setActionHandler('pause', stop);
+    navigator.mediaSession.setActionHandler('stop',  stop);
+    try { navigator.mediaSession.playbackState = 'playing'; } catch (e) {}
+  } catch (e) {}
+}
+
+function _clearMediaSession() {
+  if (!('mediaSession' in navigator)) return;
+  try {
+    navigator.mediaSession.metadata = null;
+    navigator.mediaSession.playbackState = 'none';
+    navigator.mediaSession.setActionHandler('pause', null);
+    navigator.mediaSession.setActionHandler('stop',  null);
+  } catch (e) {}
+}
+
+/* ============================================================
    Sequential EN→JP playback (per-lesson + read-all)
    Uses onend chaining when available, with safety timeout for iOS/Android quirks.
    ============================================================ */
@@ -2744,6 +2797,8 @@ function _ttsAvailable() { return 'speechSynthesis' in window; }
 function _stopPlayback() {
   if (_playback.safetyTimer) { clearTimeout(_playback.safetyTimer); _playback.safetyTimer = null; }
   try { if (_ttsAvailable()) window.speechSynthesis.cancel(); } catch (e) {}
+  _releaseWakeLock();
+  _clearMediaSession();
   // Reset visual state on any active buttons
   document.querySelectorAll('.read-lesson-btn.reading, #review-speak-all.reading').forEach(b => {
     b.classList.remove('reading');
@@ -2823,7 +2878,9 @@ function readLessonPlaylist(lesson) {
     queue: _buildEnJpQueue(items), idx: 0, advanced: false, safetyTimer: null,
   };
   _markReading(_playback.target);
-  unlockAudio();  // best-effort iOS audio unlock from the click gesture
+  unlockAudio();
+  _requestWakeLock();
+  _setMediaSession(`Lesson ${lesson}`, 'Reading vocab + sentences');
   _playNextStep();
 }
 
@@ -2846,6 +2903,8 @@ function readAllSelected() {
   };
   _markReading(_playback.target);
   unlockAudio();
+  _requestWakeLock();
+  _setMediaSession(`Lessons ${lessons.join(', ')}`, 'Reading vocab + sentences');
   _playNextStep();
 }
 
@@ -4728,6 +4787,6 @@ LEARN_RENDERERS.teform = renderLearnTeForm;
 updateStats();
 render();
 </script>
-<!-- v1.6.4 · built 2026-06-16T03:03:15.749322Z · vocab=680 sentences=140 kana=142 -->
+<!-- v1.6.5 · built 2026-06-16T06:08:56.862394Z · vocab=680 sentences=140 kana=142 -->
 </body>
 </html>

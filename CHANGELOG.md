@@ -10,6 +10,16 @@ The version number is shown in the app footer and stamped into `data/manifest.js
 
 ---
 
+## v1.6.5 - 2026-06-16
+
+### Fixed — Audio no longer stops when screen locks
+- Master audio now **requests a screen wake lock** (`navigator.wakeLock`) while a lesson is playing. The screen stays on for the duration → iOS no longer suspends JS → playback continues uninterrupted. Wake lock is released automatically when you tap stop or switch modes.
+- Added **MediaSession** metadata so iOS lock-screen / Android notification panel now shows "Lesson N · Reading vocab + sentences" with a working stop button. You can stop the queue from the lock screen without unlocking your phone.
+- Both APIs are feature-gated — older browsers that don't support them (e.g. Firefox Android < 121) gracefully fall back to the previous behaviour (audio still stops on lock).
+- Trade-off: screen stays on while playing. Brightness can still be dimmed. Stops as soon as you tap the Stop button, switch mode, or close the app.
+
+---
+
 ## v1.6.4 - 2026-06-16
 
 ### Changed
