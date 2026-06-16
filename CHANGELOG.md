@@ -10,6 +10,23 @@ The version number is shown in the app footer and stamped into `data/manifest.js
 
 ---
 
+## v1.6.2 - 2026-06-16
+
+### Changed
+- Master audio gaps simplified to a uniform **250 ms** after every utterance (English and Japanese alike). Was 200 ms after English / 500 ms after Japanese.
+
+---
+
+## v1.6.1 - 2026-06-16
+
+### Changed
+- Per-lesson master audio (and "Read all") now reads at a slower, more deliberate pace:
+  - **English** rate **0.85** (was 0.95)
+  - **Japanese** rate **0.75** (was 0.85)
+- Gaps unchanged: 200 ms after English, 500 ms after Japanese.
+
+---
+
 ## v1.6.0 - 2026-06-16
 
 ### Added — Per-lesson master audio button (Review tab)

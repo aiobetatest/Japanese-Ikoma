@@ -779,7 +779,7 @@
 <footer>
   <div style="max-width: 720px; margin: 0 auto;">
     <div style="margin-bottom: 12px;">
-      <span class="version-badge" title="Built 2026-06-16 02:45 UTC">v1.6.0</span>
+      <span class="version-badge" title="Built 2026-06-16 02:52 UTC">v1.6.2</span>
     </div>
     Personal study aid for Japanese learners. Vocabulary, sentences, and shukudai exercises are derived from materials provided by
     <strong>Ikoma Language School Singapore</strong>
@@ -2800,8 +2800,8 @@ function _buildEnJpQueue(items) {
   // For each item: English at 0.95, short gap, Japanese at 0.85, longer gap before next.
   const queue = [];
   for (const v of items) {
-    if (v.en) queue.push({ text: v.en, lang: 'en-US', rate: 0.95, gapAfter: 200 });
-    if (v.jp) queue.push({ text: v.jp, lang: 'ja-JP', rate: 0.85, gapAfter: 500 });
+    if (v.en) queue.push({ text: v.en, lang: 'en-US', rate: 0.85, gapAfter: 250 });
+    if (v.jp) queue.push({ text: v.jp, lang: 'ja-JP', rate: 0.75, gapAfter: 250 });
   }
   return queue;
 }
@@ -4728,6 +4728,6 @@ LEARN_RENDERERS.teform = renderLearnTeForm;
 updateStats();
 render();
 </script>
-<!-- v1.6.0 · built 2026-06-16T02:45:39.066668Z · vocab=680 sentences=140 kana=142 -->
+<!-- v1.6.2 · built 2026-06-16T02:52:36.040546Z · vocab=680 sentences=140 kana=142 -->
 </body>
 </html>
