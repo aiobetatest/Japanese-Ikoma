@@ -10,6 +10,44 @@ The version number is shown in the app footer and stamped into `data/manifest.js
 
 ---
 
+## v1.6.0 - 2026-06-16
+
+### Added — Per-lesson master audio button (Review tab)
+- **🔊 Read lesson** pill button at the top of every lesson section in Review. Tap once → the app reads, at a measured pace, the **English** then the **Japanese** for every vocab item + sentence in that lesson, hands-free. Designed for commute / passive listening.
+- Pace is deliberate: English at rate 0.95, Japanese at rate 0.85 with a 500 ms gap between pairs (not rushed).
+- Button visually pulses orange while reading. Tap again → stop. Tap a different lesson → stops the first and starts the new one. Switching mode (e.g. into Flashcards) auto-stops playback.
+- Per-row 🔊 buttons (single word) are **unchanged** — still work.
+- The existing bottom "Read all (selected lessons)" button has been upgraded to the same EN→JP pacing for consistency.
+- Cross-device safe: uses `onend` chaining when available, with a safety timeout fallback so iOS PWA / Samsung Internet quirks don't stall the queue. Calls `unlockAudio()` from the click gesture so iOS allows the first utterance.
+
+---
+
+## v1.5.0 - 2026-06-16
+
+### Added — Te Form sub-category in Shukudai
+- **New "Te Form" Shukudai sub-category** sourced from `Te Form Exercise.pdf`.
+- **Learn view** (3 cards: Group I / II / III):
+  - Group I (五段) shows all 9 ending-rules side-by-side (き→いて, ぎ→いで, し→して, ち→って, り→って, い→って, び→んで, み→んで, plus the irregular いきます → いって highlighted yellow).
+  - Group II (一段) — drop ます, add て.
+  - Group III — します → して, きます → きて, plus all ~します compound verbs.
+- Each card shows the conjugation **rules first**, then a list of **verbs** (drawn from your existing L1-L14 vocab so they are familiar). 41 verbs total. Tap any row to hear the te-form.
+- **Practice view** — random masu-form verb → tap reveal → see the te-form, romaji, and the rule used ("Group I · ち → って"). Use the existing 🔊 / Next flow.
+- Uses the same `.review-row` markup as the Review tab and every other Learn view — visually consistent across iOS / Android / desktop.
+
+---
+
+## v1.4.0 - 2026-06-16
+
+### Added — Lesson 14 (Dai_Ka 14.pdf)
+- **40 main vocab items**: 21 verbs commonly used with the ~てください request form (つけます/けします/あけます/しめます/いそぎます/まちます/もちます/とります/てつだいます/よびます/はなします/つかいます/とめます/みせます/おしえます/すわります/たちます/はいります/でます/ふります/コピーします), 10 nouns (でんき/エアコン/パスポート/なまえ/じゅうしょ/ちず/しお/さとう/もんだい/こたえ + reading-related よみかた / ~かた), and 7 adverbs (まっすぐ/ゆっくり/すぐ/また/あとで/もうすこし/もう~).
+- **3 会話 phrases**: 信号を 右へ 曲がってください (turn right at the traffic lights), これで おねがいします (I'll pay with this), お釣り (change).
+- **2 練習C interjections**: さあ (right, let's go), あれ？ (Oh! Eh?).
+- **1 関連単語**: みどり町 (fictitious town).
+- **10 example sentences** practising the L14 ~てください pattern: "Please turn on the air conditioner", "Please wait a moment", "Please show me your passport", etc.
+- Lesson 14 pill now appears in the lesson filter.
+
+---
+
 ## v1.3.0 - 2026-06-15
 
 ### Added — Lesson 13 (Dai_Ka 13.pdf)

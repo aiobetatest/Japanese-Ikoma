@@ -339,6 +339,24 @@
     padding: 6px 0; margin-bottom: 6px;
     border-bottom: 1px solid var(--border);
     text-align: left;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+  .read-lesson-btn {
+    background: var(--panel-2); color: var(--text);
+    border: 1px solid var(--border); border-radius: 999px;
+    padding: 4px 12px; font-size: 12px; cursor: pointer;
+    font-weight: 600; text-transform: none; letter-spacing: 0;
+    transition: all 0.18s; white-space: nowrap;
+  }
+  .read-lesson-btn:hover { border-color: var(--accent); }
+  .read-lesson-btn.reading {
+    background: linear-gradient(135deg, var(--warn) 0%, #f97316 100%);
+    color: white; border-color: transparent;
+    animation: pulse-read 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse-read {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(251, 191, 36, 0); }
   }
   .review-row {
     display: grid;
@@ -706,6 +724,7 @@
         <button data-cat="time">Time</button>
         <button data-cat="dates">Dates</button>
         <button data-cat="counters">Counters</button>
+        <button data-cat="teform">Te Form</button>
       </div>
     </div>
     <div class="controls-row" id="shu-lp-row" style="display:none;">
@@ -760,7 +779,7 @@
 <footer>
   <div style="max-width: 720px; margin: 0 auto;">
     <div style="margin-bottom: 12px;">
-      <span class="version-badge" title="Built 2026-06-15 07:30 UTC">v1.3.0</span>
+      <span class="version-badge" title="Built 2026-06-16 02:45 UTC">v1.6.0</span>
     </div>
     Personal study aid for Japanese learners. Vocabulary, sentences, and shukudai exercises are derived from materials provided by
     <strong>Ikoma Language School Singapore</strong>
@@ -1406,6 +1425,52 @@ const VOCAB = [
   { lesson: 13, jp: "そう しましょう", romaji: "sō shimashō", en: "Let's do that (agreeing with a suggestion)", id: "vocab:13:そう しましょう" },
   { lesson: 13, jp: "チェニックス", romaji: "Chenikkusu", en: "a fictitious company name", id: "vocab:13:チェニックス" },
   { lesson: 13, jp: "おはようテレビ", romaji: "Ohayō Terebi", en: "a fictitious TV programme", id: "vocab:13:おはようテレビ" },
+  { lesson: 14, jp: "つけます", romaji: "tsukemasu", en: "turn on", id: "vocab:14:つけます" },
+  { lesson: 14, jp: "けします", romaji: "keshimasu", en: "turn off", id: "vocab:14:けします" },
+  { lesson: 14, jp: "あけます", romaji: "akemasu", en: "open", id: "vocab:14:あけます" },
+  { lesson: 14, jp: "しめます", romaji: "shimemasu", en: "close, shut", id: "vocab:14:しめます" },
+  { lesson: 14, jp: "いそぎます", romaji: "isogimasu", en: "hurry", id: "vocab:14:いそぎます" },
+  { lesson: 14, jp: "まちます", romaji: "machimasu", en: "wait", id: "vocab:14:まちます" },
+  { lesson: 14, jp: "もちます", romaji: "mochimasu", en: "hold", id: "vocab:14:もちます" },
+  { lesson: 14, jp: "とります", romaji: "torimasu", en: "take, pass (e.g. salt)", id: "vocab:14:とります" },
+  { lesson: 14, jp: "てつだいます", romaji: "tetsudaimasu", en: "help (with a task)", id: "vocab:14:てつだいます" },
+  { lesson: 14, jp: "よびます", romaji: "yobimasu", en: "call", id: "vocab:14:よびます" },
+  { lesson: 14, jp: "はなします", romaji: "hanashimasu", en: "speak, talk", id: "vocab:14:はなします" },
+  { lesson: 14, jp: "つかいます", romaji: "tsukaimasu", en: "use", id: "vocab:14:つかいます" },
+  { lesson: 14, jp: "とめます", romaji: "tomemasu", en: "stop, park", id: "vocab:14:とめます" },
+  { lesson: 14, jp: "みせます", romaji: "misemasu", en: "show", id: "vocab:14:みせます" },
+  { lesson: 14, jp: "おしえます [じゅうしょを~]", romaji: "oshiemasu", en: "tell (an address)", id: "vocab:14:おしえます [じゅうしょを~]" },
+  { lesson: 14, jp: "すわります", romaji: "suwarimasu", en: "sit down", id: "vocab:14:すわります" },
+  { lesson: 14, jp: "たちます", romaji: "tachimasu", en: "stand up", id: "vocab:14:たちます" },
+  { lesson: 14, jp: "はいります [きっさてんに~]", romaji: "hairimasu", en: "enter (a café, etc.)", id: "vocab:14:はいります [きっさてんに~]" },
+  { lesson: 14, jp: "でます [きっさてんを~]", romaji: "demasu", en: "go out (of a café, etc.)", id: "vocab:14:でます [きっさてんを~]" },
+  { lesson: 14, jp: "ふります [あめが~]", romaji: "furimasu", en: "rain — used as 雨が降ります", id: "vocab:14:ふります [あめが~]" },
+  { lesson: 14, jp: "コピーします", romaji: "kopī shimasu", en: "copy", id: "vocab:14:コピーします" },
+  { lesson: 14, jp: "でんき", romaji: "denki", en: "electricity, light", id: "vocab:14:でんき" },
+  { lesson: 14, jp: "エアコン", romaji: "eakon", en: "air conditioner", id: "vocab:14:エアコン" },
+  { lesson: 14, jp: "パスポート", romaji: "pasupōto", en: "passport", id: "vocab:14:パスポート" },
+  { lesson: 14, jp: "なまえ", romaji: "namae", en: "name", id: "vocab:14:なまえ" },
+  { lesson: 14, jp: "じゅうしょ", romaji: "jūsho", en: "address", id: "vocab:14:じゅうしょ" },
+  { lesson: 14, jp: "ちず", romaji: "chizu", en: "map", id: "vocab:14:ちず" },
+  { lesson: 14, jp: "しお", romaji: "shio", en: "salt", id: "vocab:14:しお" },
+  { lesson: 14, jp: "さとう", romaji: "satō", en: "sugar", id: "vocab:14:さとう" },
+  { lesson: 14, jp: "もんだい", romaji: "mondai", en: "question, problem, trouble", id: "vocab:14:もんだい" },
+  { lesson: 14, jp: "こたえ", romaji: "kotae", en: "answer", id: "vocab:14:こたえ" },
+  { lesson: 14, jp: "よみかた", romaji: "yomikata", en: "how to read, way of reading", id: "vocab:14:よみかた" },
+  { lesson: 14, jp: "~かた", romaji: "~kata", en: "how to ~, way of ~ing", id: "vocab:14:~かた" },
+  { lesson: 14, jp: "まっすぐ", romaji: "massugu", en: "straight", id: "vocab:14:まっすぐ" },
+  { lesson: 14, jp: "ゆっくり", romaji: "yukkuri", en: "slowly, leisurely", id: "vocab:14:ゆっくり" },
+  { lesson: 14, jp: "すぐ", romaji: "sugu", en: "immediately", id: "vocab:14:すぐ" },
+  { lesson: 14, jp: "また", romaji: "mata", en: "again", id: "vocab:14:また" },
+  { lesson: 14, jp: "あとで", romaji: "ato de", en: "later", id: "vocab:14:あとで" },
+  { lesson: 14, jp: "もうすこし", romaji: "mō sukoshi", en: "a little more", id: "vocab:14:もうすこし" },
+  { lesson: 14, jp: "もう~", romaji: "mō ~", en: "more, another ~", id: "vocab:14:もう~" },
+  { lesson: 14, jp: "信号を 右へ 曲がってください", romaji: "shingō o migi e magatte kudasai", en: "Turn right at the traffic lights.", id: "vocab:14:信号を 右へ 曲がってください" },
+  { lesson: 14, jp: "これで おねがいします", romaji: "kore de onegai shimasu", en: "I'd like to pay with this.", id: "vocab:14:これで おねがいします" },
+  { lesson: 14, jp: "お釣り", romaji: "otsuri", en: "change (money returned)", id: "vocab:14:お釣り" },
+  { lesson: 14, jp: "さあ", romaji: "sā", en: "right (used to encourage some course of action)", id: "vocab:14:さあ" },
+  { lesson: 14, jp: "あれ？", romaji: "are?", en: "Oh! Eh? (in surprise or wonder)", id: "vocab:14:あれ？" },
+  { lesson: 14, jp: "みどり町", romaji: "Midori-machi", en: "a fictitious town", id: "vocab:14:みどり町" },
 ];
 
 const SENTENCES = [
@@ -1539,6 +1604,16 @@ const SENTENCES = [
   { lesson: 13, jp: "牛丼を おねがいします。", romaji: "Gyūdon o onegai shimasu.", en: "I'll have the gyūdon, please.", id: "sent:13:7" },
   { lesson: 13, jp: "おなかが すきました。なにか たべましょう。", romaji: "Onaka ga sukimashita. Nanika tabemashō.", en: "I'm hungry. Let's eat something.", id: "sent:13:8" },
   { lesson: 13, jp: "けっこんしたいですが、おかねが ありません。", romaji: "Kekkonshitai desu ga, okane ga arimasen.", en: "I want to get married, but I don't have any money.", id: "sent:13:9" },
+  { lesson: 14, jp: "エアコンを つけてください。", romaji: "Eakon o tsukete kudasai.", en: "Please turn on the air conditioner.", id: "sent:14:0" },
+  { lesson: 14, jp: "ドアを しめてください。", romaji: "Doa o shimete kudasai.", en: "Please close the door.", id: "sent:14:1" },
+  { lesson: 14, jp: "すこし まってください。", romaji: "Sukoshi matte kudasai.", en: "Please wait a moment.", id: "sent:14:2" },
+  { lesson: 14, jp: "すみません、ちずを みせてください。", romaji: "Sumimasen, chizu o misete kudasai.", en: "Excuse me, please show me a map.", id: "sent:14:3" },
+  { lesson: 14, jp: "ゆっくり はなしてください。", romaji: "Yukkuri hanashite kudasai.", en: "Please speak slowly.", id: "sent:14:4" },
+  { lesson: 14, jp: "まっすぐ いってください。", romaji: "Massugu itte kudasai.", en: "Please go straight ahead.", id: "sent:14:5" },
+  { lesson: 14, jp: "しおと さとうを とってください。", romaji: "Shio to satō o totte kudasai.", en: "Please pass the salt and sugar.", id: "sent:14:6" },
+  { lesson: 14, jp: "もう すこし まってください。", romaji: "Mō sukoshi matte kudasai.", en: "Please wait a little more.", id: "sent:14:7" },
+  { lesson: 14, jp: "パスポートを みせてください。", romaji: "Pasupōto o misete kudasai.", en: "Please show me your passport.", id: "sent:14:8" },
+  { lesson: 14, jp: "じゅうしょを おしえてください。", romaji: "Jūsho o oshiete kudasai.", en: "Please tell me your address.", id: "sent:14:9" },
 ];
 
 /* ============================================================
@@ -2606,8 +2681,11 @@ function renderReview() {
           <button class="rspeak" type="button" aria-label="Hear">🔊</button>
         </div>`).join('')}` : '';
     return `
-      <div class="review-section">
-        <div class="review-header">Lesson ${n} · Vocab (${vocab.length}) · ${pct}% mastered</div>
+      <div class="review-section" data-lesson-section="${n}">
+        <div class="review-header">
+          <span>Lesson ${n} · Vocab (${vocab.length}) · ${pct}% mastered</span>
+          <button class="read-lesson-btn" data-read-lesson="${n}" type="button" aria-label="Read this lesson aloud">🔊 Read lesson</button>
+        </div>
         ${rowsV}
         ${rowsS}
       </div>`;
@@ -2633,6 +2711,15 @@ function renderReview() {
     });
   });
 
+  // Per-lesson master audio buttons
+  cardEl.querySelectorAll('[data-read-lesson]').forEach(btn => {
+    btn.onclick = (ev) => {
+      ev.stopPropagation();
+      const n = +btn.dataset.readLesson;
+      readLessonPlaylist(n);
+    };
+  });
+
   // Bottom bar actions
   document.getElementById('review-speak-all').onclick = () => readAllSelected();
   document.getElementById('review-start-flash').onclick = () => switchToMode('flash');
@@ -2646,9 +2733,106 @@ function switchToMode(m) {
   render();
 }
 
-let _readAllTimer = null;
+/* ============================================================
+   Sequential EN→JP playback (per-lesson + read-all)
+   Uses onend chaining when available, with safety timeout for iOS/Android quirks.
+   ============================================================ */
+let _playback = { active: false, target: null, queue: null, idx: 0, advanced: false, safetyTimer: null };
+
+function _ttsAvailable() { return 'speechSynthesis' in window; }
+
+function _stopPlayback() {
+  if (_playback.safetyTimer) { clearTimeout(_playback.safetyTimer); _playback.safetyTimer = null; }
+  try { if (_ttsAvailable()) window.speechSynthesis.cancel(); } catch (e) {}
+  // Reset visual state on any active buttons
+  document.querySelectorAll('.read-lesson-btn.reading, #review-speak-all.reading').forEach(b => {
+    b.classList.remove('reading');
+    if (b.id === 'review-speak-all') b.textContent = '🔊 Read all (selected lessons)';
+    else b.innerHTML = '🔊 Read lesson';
+  });
+  _playback = { active: false, target: null, queue: null, idx: 0, advanced: false, safetyTimer: null };
+}
+
+function _markReading(target) {
+  if (target.kind === 'lesson') {
+    const btn = document.querySelector(`[data-read-lesson="${target.n}"]`);
+    if (btn) { btn.classList.add('reading'); btn.innerHTML = '⏸ Stop'; }
+  } else if (target.kind === 'all') {
+    const btn = document.getElementById('review-speak-all');
+    if (btn) { btn.classList.add('reading'); btn.textContent = '⏸ Stop reading'; }
+  }
+}
+
+function _playNextStep() {
+  if (!_playback.active) return;
+  if (_playback.idx >= _playback.queue.length) { _stopPlayback(); return; }
+  const it = _playback.queue[_playback.idx++];
+  _playback.advanced = false;
+  if (!_ttsAvailable()) { setTimeout(_playNextStep, 100); return; }
+
+  const u = new SpeechSynthesisUtterance(it.text);
+  u.lang = it.lang;
+  u.rate = it.rate;
+  u.pitch = 1;
+  u.volume = 1;
+  if (it.lang === 'ja-JP' && state.voice) u.voice = state.voice;
+
+  const advance = () => {
+    if (_playback.advanced) return;
+    _playback.advanced = true;
+    if (_playback.safetyTimer) { clearTimeout(_playback.safetyTimer); _playback.safetyTimer = null; }
+    setTimeout(_playNextStep, it.gapAfter || 250);
+  };
+  u.onend = advance;
+  u.onerror = advance;
+
+  // Safety timeout — estimates 200ms/char + 2s buffer at the configured rate; falls forward if
+  // onend doesn't fire (some iOS / Samsung Internet builds).
+  const estMs = (it.text.length * 200) / it.rate + 2000;
+  const safety = Math.min(20000, Math.max(2500, estMs));
+  _playback.safetyTimer = setTimeout(advance, safety);
+
+  try { window.speechSynthesis.speak(u); }
+  catch (e) { advance(); }
+}
+
+function _buildEnJpQueue(items) {
+  // For each item: English at 0.95, short gap, Japanese at 0.85, longer gap before next.
+  const queue = [];
+  for (const v of items) {
+    if (v.en) queue.push({ text: v.en, lang: 'en-US', rate: 0.95, gapAfter: 200 });
+    if (v.jp) queue.push({ text: v.jp, lang: 'ja-JP', rate: 0.85, gapAfter: 500 });
+  }
+  return queue;
+}
+
+function readLessonPlaylist(lesson) {
+  // Toggle: clicking the same lesson while it's playing → stop
+  if (_playback.active && _playback.target && _playback.target.kind === 'lesson' && _playback.target.n === lesson) {
+    _stopPlayback();
+    return;
+  }
+  _stopPlayback();
+  const items = [
+    ...VOCAB.filter(v => v.lesson === lesson),
+    ...SENTENCES.filter(v => v.lesson === lesson),
+  ];
+  if (!items.length) return;
+  _playback = {
+    active: true, target: { kind:'lesson', n: lesson },
+    queue: _buildEnJpQueue(items), idx: 0, advanced: false, safetyTimer: null,
+  };
+  _markReading(_playback.target);
+  unlockAudio();  // best-effort iOS audio unlock from the click gesture
+  _playNextStep();
+}
+
 function readAllSelected() {
-  if (_readAllTimer) { clearTimeout(_readAllTimer); _readAllTimer = null; if ('speechSynthesis' in window) window.speechSynthesis.cancel(); return; }
+  if (_playback.active && _playback.target && _playback.target.kind === 'all') {
+    _stopPlayback();
+    return;
+  }
+  _stopPlayback();
   const lessons = [...state.lessons].sort((a,b)=>a-b);
   const items = [];
   lessons.forEach(n => {
@@ -2656,17 +2840,20 @@ function readAllSelected() {
     SENTENCES.filter(v => v.lesson === n).forEach(v => items.push(v));
   });
   if (!items.length) return;
-  let i = 0;
-  const playNext = () => {
-    if (i >= items.length) { _readAllTimer = null; return; }
-    const v = items[i++];
-    speak(v.jp);
-    // Estimate reading time by length; minimum 1.6s, maximum 4s.
-    const dur = Math.min(4000, Math.max(1600, v.jp.length * 220));
-    _readAllTimer = setTimeout(playNext, dur);
+  _playback = {
+    active: true, target: { kind:'all' },
+    queue: _buildEnJpQueue(items), idx: 0, advanced: false, safetyTimer: null,
   };
-  playNext();
+  _markReading(_playback.target);
+  unlockAudio();
+  _playNextStep();
 }
+
+// Stop playback whenever the user navigates to a different mode
+const _stopOnModeChange = () => { if (_playback.active && state.mode !== 'review') _stopPlayback(); };
+document.querySelectorAll('.mode-tabs button').forEach(b => {
+  b.addEventListener('click', _stopOnModeChange);
+});
 function renderFlash(pool) {
   if (!state.current) { state.current = pickFromDeck(pool, 'vocab'); state.revealed = false; }
   flashLike(pool, state.current, 'vocab', false);
@@ -3813,6 +4000,7 @@ function renderShuGenerator() {
       ${sub}
       <div class="answer-jp" style="font-size:48px;">${escapeHtml(it.answer)}</div>
       ${it.romaji ? `<div class="answer-romaji">${escapeHtml(it.romaji)}</div>` : ''}
+      ${it.extra ? `<div class="shu-explain">${escapeHtml(it.extra)}</div>` : ''}
       <div class="btn-row">
         <button class="btn icon" id="shu-speak">🔊 Hear</button>
         <button class="btn primary" id="shu-next-gen">Next →</button>
@@ -4382,10 +4570,164 @@ renderShukudai = function() {
   }
 };
 
+
+
+/* ============================================================
+   Te Form drill (v1.5.0)
+   ============================================================ */
+const VERBS_TE = [
+  // ===== Group I (五段) - subgrouped by ending of masu-stem =====
+  // き → いて
+  { masu:'かきます',   te:'かいて',   romaji_masu:'kakimasu',   romaji_te:'kaite',   group:'I', sub:'き → いて', en:'write',         lesson:6 },
+  { masu:'ききます',   te:'きいて',   romaji_masu:'kikimasu',   romaji_te:'kiite',   group:'I', sub:'き → いて', en:'listen, hear',  lesson:6 },
+  { masu:'はたらきます', te:'はたらいて', romaji_masu:'hatarakimasu', romaji_te:'hataraite', group:'I', sub:'き → いて', en:'work',     lesson:4 },
+  // ぎ → いで
+  { masu:'いそぎます', te:'いそいで', romaji_masu:'isogimasu',  romaji_te:'isoide',  group:'I', sub:'ぎ → いで', en:'hurry',         lesson:14 },
+  { masu:'およぎます', te:'およいで', romaji_masu:'oyogimasu',  romaji_te:'oyoide',  group:'I', sub:'ぎ → いで', en:'swim',          lesson:13 },
+  // し → して
+  { masu:'はなします', te:'はなして', romaji_masu:'hanashimasu', romaji_te:'hanashite', group:'I', sub:'し → して', en:'speak, talk', lesson:14 },
+  { masu:'けします',   te:'けして',   romaji_masu:'keshimasu',  romaji_te:'keshite',  group:'I', sub:'し → して', en:'turn off',     lesson:14 },
+  // ち → って
+  { masu:'まちます',   te:'まって',   romaji_masu:'machimasu',  romaji_te:'matte',   group:'I', sub:'ち → って', en:'wait',          lesson:14 },
+  { masu:'もちます',   te:'もって',   romaji_masu:'mochimasu',  romaji_te:'motte',   group:'I', sub:'ち → って', en:'hold',          lesson:14 },
+  { masu:'たちます',   te:'たって',   romaji_masu:'tachimasu',  romaji_te:'tatte',   group:'I', sub:'ち → って', en:'stand up',      lesson:14 },
+  // り → って
+  { masu:'とります',   te:'とって',   romaji_masu:'torimasu',   romaji_te:'totte',   group:'I', sub:'り → って', en:'take, pass',    lesson:14 },
+  { masu:'かえります', te:'かえって', romaji_masu:'kaerimasu',  romaji_te:'kaette',  group:'I', sub:'り → って', en:'go home, return', lesson:5 },
+  { masu:'すわります', te:'すわって', romaji_masu:'suwarimasu', romaji_te:'suwatte', group:'I', sub:'り → って', en:'sit down',      lesson:14 },
+  { masu:'のります',   te:'のって',   romaji_masu:'norimasu',   romaji_te:'notte',   group:'I', sub:'り → って', en:'ride / get on', lesson:14 },
+  // い → って
+  { masu:'かいます',   te:'かって',   romaji_masu:'kaimasu',    romaji_te:'katte',   group:'I', sub:'い → って', en:'buy',           lesson:6 },
+  { masu:'あいます',   te:'あって',   romaji_masu:'aimasu',     romaji_te:'atte',    group:'I', sub:'い → って', en:'meet',          lesson:6 },
+  { masu:'すいます',   te:'すって',   romaji_masu:'suimasu',    romaji_te:'sutte',   group:'I', sub:'い → って', en:'smoke',         lesson:6 },
+  { masu:'てつだいます', te:'てつだって', romaji_masu:'tetsudaimasu', romaji_te:'tetsudatte', group:'I', sub:'い → って', en:'help', lesson:14 },
+  { masu:'つかいます', te:'つかって', romaji_masu:'tsukaimasu', romaji_te:'tsukatte', group:'I', sub:'い → って', en:'use',          lesson:14 },
+  // び → んで
+  { masu:'よびます',   te:'よんで',   romaji_masu:'yobimasu',   romaji_te:'yonde',   group:'I', sub:'び → んで', en:'call',          lesson:14 },
+  { masu:'あそびます', te:'あそんで', romaji_masu:'asobimasu',  romaji_te:'asonde',  group:'I', sub:'び → んで', en:'play, enjoy oneself', lesson:13 },
+  // み → んで
+  { masu:'のみます',   te:'のんで',   romaji_masu:'nomimasu',   romaji_te:'nonde',   group:'I', sub:'み → んで', en:'drink',         lesson:6 },
+  { masu:'よみます',   te:'よんで',   romaji_masu:'yomimasu',   romaji_te:'yonde',   group:'I', sub:'み → んで', en:'read',          lesson:6 },
+  { masu:'やすみます', te:'やすんで', romaji_masu:'yasumimasu', romaji_te:'yasunde', group:'I', sub:'み → んで', en:'rest, take time off', lesson:4 },
+  // Group I irregular
+  { masu:'いきます',   te:'いって',   romaji_masu:'ikimasu',    romaji_te:'itte',    group:'I', sub:'irregular', en:'go', lesson:5, irregular:true },
+
+  // ===== Group II (一段) - just stem + て =====
+  { masu:'たべます',   te:'たべて',   romaji_masu:'tabemasu',  romaji_te:'tabete',  group:'II', sub:'stem + て', en:'eat',           lesson:6 },
+  { masu:'ねます',     te:'ねて',     romaji_masu:'nemasu',    romaji_te:'nete',    group:'II', sub:'stem + て', en:'sleep, go to bed', lesson:4 },
+  { masu:'みます',     te:'みて',     romaji_masu:'mimasu',    romaji_te:'mite',    group:'II', sub:'stem + て', en:'see, watch',    lesson:6 },
+  { masu:'おきます',   te:'おきて',   romaji_masu:'okimasu',   romaji_te:'okite',   group:'II', sub:'stem + て', en:'wake up, get up', lesson:4 },
+  { masu:'でます',     te:'でて',     romaji_masu:'demasu',    romaji_te:'dete',    group:'II', sub:'stem + て', en:'go out, exit',  lesson:14 },
+  { masu:'つけます',   te:'つけて',   romaji_masu:'tsukemasu', romaji_te:'tsukete', group:'II', sub:'stem + て', en:'turn on',       lesson:14 },
+  { masu:'あけます',   te:'あけて',   romaji_masu:'akemasu',   romaji_te:'akete',   group:'II', sub:'stem + て', en:'open',          lesson:14 },
+  { masu:'しめます',   te:'しめて',   romaji_masu:'shimemasu', romaji_te:'shimete', group:'II', sub:'stem + て', en:'close, shut',   lesson:14 },
+  { masu:'とめます',   te:'とめて',   romaji_masu:'tomemasu',  romaji_te:'tomete',  group:'II', sub:'stem + て', en:'stop, park',    lesson:14 },
+  { masu:'みせます',   te:'みせて',   romaji_masu:'misemasu',  romaji_te:'misete',  group:'II', sub:'stem + て', en:'show',          lesson:14 },
+  { masu:'おしえます', te:'おしえて', romaji_masu:'oshiemasu', romaji_te:'oshiete', group:'II', sub:'stem + て', en:'teach, tell',   lesson:7 },
+  { masu:'かけます',   te:'かけて',   romaji_masu:'kakemasu',  romaji_te:'kakete',  group:'II', sub:'stem + て', en:'make a phone call', lesson:7 },
+  { masu:'あげます',   te:'あげて',   romaji_masu:'agemasu',   romaji_te:'agete',   group:'II', sub:'stem + て', en:'give',          lesson:7 },
+  { masu:'います',     te:'いて',     romaji_masu:'imasu',     romaji_te:'ite',     group:'II', sub:'stem + て', en:'be (animate) / have', lesson:10 },
+
+  // ===== Group III - irregular + ~します =====
+  { masu:'します',          te:'して',         romaji_masu:'shimasu',          romaji_te:'shite',         group:'III', sub:'irregular', en:'do',              lesson:6 },
+  { masu:'きます',          te:'きて',         romaji_masu:'kimasu',           romaji_te:'kite',          group:'III', sub:'irregular', en:'come',            lesson:5 },
+  { masu:'べんきょうします', te:'べんきょうして', romaji_masu:'benkyō shimasu', romaji_te:'benkyō shite', group:'III', sub:'~します',   en:'study',          lesson:4 },
+  { masu:'けっこんします',   te:'けっこんして',  romaji_masu:'kekkon shimasu',  romaji_te:'kekkon shite',  group:'III', sub:'~します',   en:'get married',    lesson:13 },
+  { masu:'かいものします',   te:'かいものして',  romaji_masu:'kaimono shimasu', romaji_te:'kaimono shite', group:'III', sub:'~します',   en:'do shopping',    lesson:13 },
+  { masu:'コピーします',     te:'コピーして',    romaji_masu:'kopī shimasu',    romaji_te:'kopī shite',    group:'III', sub:'~します',   en:'copy',           lesson:14 },
+];
+
+// Group endings reference (for Learn view header)
+const TE_RULES = {
+  I: [
+    { ending:'き', te:'いて', example:'かきます → かいて' },
+    { ending:'ぎ', te:'いで', example:'およぎます → およいで' },
+    { ending:'し', te:'して', example:'はなします → はなして' },
+    { ending:'ち', te:'って', example:'まちます → まって' },
+    { ending:'り', te:'って', example:'とります → とって' },
+    { ending:'い', te:'って', example:'かいます → かって' },
+    { ending:'び', te:'んで', example:'よびます → よんで' },
+    { ending:'み', te:'んで', example:'のみます → のんで' },
+    { ending:'irregular', te:'いって', example:'いきます → いって  ★' },
+  ],
+  II: [
+    { ending:'stem + て', te:'~て', example:'たべます → たべて' },
+  ],
+  III: [
+    { ending:'irregular', te:'~て', example:'します → して · きます → きて' },
+    { ending:'~します',    te:'~して', example:'べんきょうします → べんきょうして' },
+  ],
+};
+
+function renderLearnTeForm() {
+  const cards = ['I', 'II', 'III'].map(grp => {
+    const verbs = VERBS_TE.filter(v => v.group === grp);
+    const rules = TE_RULES[grp];
+    const rulesHtml = rules.map(r => `
+      <div class="review-row learn-row${r.ending === 'irregular' ? ' irregular' : ''}">
+        <div class="ren"><b>${escapeHtml(r.ending)}</b></div>
+        <div class="rjpwrap">
+          <div class="rjp">${escapeHtml(r.te)}</div>
+          <div class="rromaji">${escapeHtml(r.example)}</div>
+        </div>
+      </div>`).join('');
+    const verbsHtml = verbs.map(v => `
+      <div class="review-row learn-row${v.irregular ? ' irregular' : ''}" data-jp="${escapeHtml(v.te)}">
+        <div class="ren">${escapeHtml(v.masu)}<div style="font-size:11px; color:var(--muted); margin-top:2px;">${escapeHtml(v.en)}</div></div>
+        <div class="rjpwrap">
+          <div class="rjp">${escapeHtml(v.te)}</div>
+          <div class="rromaji">${escapeHtml(v.romaji_te)}${v.sub ? ' · ' + escapeHtml(v.sub) : ''}</div>
+        </div>
+        <button class="rspeak" type="button" aria-label="Hear">🔊</button>
+      </div>`).join('');
+    const title = grp === 'I' ? 'Group I (五段)' : grp === 'II' ? 'Group II (一段)' : 'Group III (irregular)';
+    const sub   = grp === 'I' ? 'consonant-stem verbs — ending changes' : grp === 'II' ? 'vowel-stem verbs — just drop ます, add て' : 'する / くる + ~します verbs';
+    return `<div class="learn-card">
+      <h4>${escapeHtml(title)} <span class="sub">${escapeHtml(sub)}</span></h4>
+      <div style="font-size:12px; color:var(--muted); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.06em;">Rules</div>
+      <div class="review-vocab-grid">${rulesHtml}</div>
+      <div style="font-size:12px; color:var(--muted); margin:14px 0 8px 0; text-transform:uppercase; letter-spacing:0.06em;">Verbs (${verbs.length})</div>
+      <div class="review-vocab-grid">${verbsHtml}</div>
+    </div>`;
+  }).join('');
+  cardEl.innerHTML = `<div class="learn-wrap">
+    <h3>Te Form · Reference</h3>
+    <div class="learn-hint">The <b>te-form</b> is the single most important verb form — used for requests (~てください), continuous action (~ています), and connecting clauses. Yellow rows are irregulars to memorise. Tap any row to hear the te-form.</div>
+    <div class="learn-grid">${cards}</div>
+    <button class="btn primary" style="margin-top:14px;" data-practice>🎯 Practice random verbs</button>
+  </div>`;
+  cardEl.querySelectorAll('.review-row[data-jp]').forEach(row => {
+    row.addEventListener('click', () => {
+      const jp = row.dataset.jp;
+      if (jp) speak(jp);
+    });
+  });
+  const pb = cardEl.querySelector('[data-practice]');
+  if (pb) pb.onclick = () => { shuLPSet('practice'); render(); };
+}
+
+// Te Form generator
+function genTeForm() {
+  const v = VERBS_TE[Math.floor(Math.random() * VERBS_TE.length)];
+  return {
+    prompt: v.masu,
+    sublabel: v.en,
+    answer: v.te,
+    romaji: v.romaji_te,
+    extra: `Group ${v.group} · ${v.sub}`,
+    label: 'Give the te-form',
+  };
+}
+
+// Register
+SHU_GEN_KEYS.push('teform');
+SHU_GENERATORS.teform = genTeForm;
+LEARN_RENDERERS.teform = renderLearnTeForm;
+
 // Init
 updateStats();
 render();
 </script>
-<!-- v1.3.0 · built 2026-06-15T07:30:52.489091Z · vocab=634 sentences=130 kana=142 -->
+<!-- v1.6.0 · built 2026-06-16T02:45:39.066668Z · vocab=680 sentences=140 kana=142 -->
 </body>
 </html>
