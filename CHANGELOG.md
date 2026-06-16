@@ -10,6 +10,16 @@ The version number is shown in the app footer and stamped into `data/manifest.js
 
 ---
 
+## v1.6.4 - 2026-06-16
+
+### Changed
+- Master audio further slowed for commute use:
+  - **English** rate **0.70** (was 0.75)
+  - **Japanese** rate **0.60** (was 0.65)
+  - **Gaps** **400 ms** after every utterance (was 350 ms)
+
+---
+
 ## v1.6.3 - 2026-06-16
 
 ### Changed
