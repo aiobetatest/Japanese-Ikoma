@@ -779,7 +779,7 @@
 <footer>
   <div style="max-width: 720px; margin: 0 auto;">
     <div style="margin-bottom: 12px;">
-      <span class="version-badge" title="Built 2026-06-16 06:08 UTC">v1.6.5</span>
+      <span class="version-badge" title="Built 2026-07-04 06:52 UTC">v1.7.0</span>
     </div>
     Personal study aid for Japanese learners. Vocabulary, sentences, and shukudai exercises are derived from materials provided by
     <strong>Ikoma Language School Singapore</strong>
@@ -1471,6 +1471,30 @@ const VOCAB = [
   { lesson: 14, jp: "さあ", romaji: "sā", en: "right (used to encourage some course of action)", id: "vocab:14:さあ" },
   { lesson: 14, jp: "あれ？", romaji: "are?", en: "Oh! Eh? (in surprise or wonder)", id: "vocab:14:あれ？" },
   { lesson: 14, jp: "みどり町", romaji: "Midori-machi", en: "a fictitious town", id: "vocab:14:みどり町" },
+  { lesson: 15, jp: "おきます", romaji: "okimasu", en: "to put, to place", id: "vocab:15:おきます" },
+  { lesson: 15, jp: "つくります", romaji: "tsukurimasu", en: "to make, to produce", id: "vocab:15:つくります" },
+  { lesson: 15, jp: "うります", romaji: "urimasu", en: "to sell", id: "vocab:15:うります" },
+  { lesson: 15, jp: "しります", romaji: "shirimasu", en: "to get to know, to learn", id: "vocab:15:しります" },
+  { lesson: 15, jp: "すみます", romaji: "sumimasu", en: "to be going to live, to reside", id: "vocab:15:すみます" },
+  { lesson: 15, jp: "けんきゅうします", romaji: "kenkyū shimasu", en: "to do research", id: "vocab:15:けんきゅうします" },
+  { lesson: 15, jp: "しりょう", romaji: "shiryō", en: "materials, data", id: "vocab:15:しりょう" },
+  { lesson: 15, jp: "カタログ", romaji: "katarogu", en: "catalogue", id: "vocab:15:カタログ" },
+  { lesson: 15, jp: "じこくひょう", romaji: "jikokuhyō", en: "timetable", id: "vocab:15:じこくひょう" },
+  { lesson: 15, jp: "ふく", romaji: "fuku", en: "clothes", id: "vocab:15:ふく" },
+  { lesson: 15, jp: "せいひん", romaji: "seihin", en: "products", id: "vocab:15:せいひん" },
+  { lesson: 15, jp: "ソフト", romaji: "sofuto", en: "software", id: "vocab:15:ソフト" },
+  { lesson: 15, jp: "でんしじしょ", romaji: "denshi jisho", en: "electronic dictionary", id: "vocab:15:でんしじしょ" },
+  { lesson: 15, jp: "けいざい", romaji: "keizai", en: "economy", id: "vocab:15:けいざい" },
+  { lesson: 15, jp: "しやくしょ", romaji: "shiyakusho", en: "municipal office, city hall", id: "vocab:15:しやくしょ" },
+  { lesson: 15, jp: "こうこう", romaji: "kōkō", en: "senior high school", id: "vocab:15:こうこう" },
+  { lesson: 15, jp: "はいしゃ", romaji: "haisha", en: "dentist, dentist's", id: "vocab:15:はいしゃ" },
+  { lesson: 15, jp: "どくしん", romaji: "dokushin", en: "single, unmarried", id: "vocab:15:どくしん" },
+  { lesson: 15, jp: "すみません", romaji: "sumimasen", en: "I'm sorry.", id: "vocab:15:すみません" },
+  { lesson: 15, jp: "おもいだします", romaji: "omoidashimasu", en: "to remember, to recollect", id: "vocab:15:おもいだします" },
+  { lesson: 15, jp: "いらっしゃいます", romaji: "irasshaimasu", en: "to be (honorific equivalent of います)", id: "vocab:15:いらっしゃいます" },
+  { lesson: 15, jp: "みなさん", romaji: "minasan", en: "ladies and gentlemen, everybody", id: "vocab:15:みなさん" },
+  { lesson: 15, jp: "にっぽんばし", romaji: "Nipponbashi", en: "a shopping district in Osaka", id: "vocab:15:にっぽんばし" },
+  { lesson: 15, jp: "みんなの インタビュー", romaji: "Minna no Intabyū", en: "a fictitious TV programme", id: "vocab:15:みんなの インタビュー" },
 ];
 
 const SENTENCES = [
@@ -1614,6 +1638,16 @@ const SENTENCES = [
   { lesson: 14, jp: "もう すこし まってください。", romaji: "Mō sukoshi matte kudasai.", en: "Please wait a little more.", id: "sent:14:7" },
   { lesson: 14, jp: "パスポートを みせてください。", romaji: "Pasupōto o misete kudasai.", en: "Please show me your passport.", id: "sent:14:8" },
   { lesson: 14, jp: "じゅうしょを おしえてください。", romaji: "Jūsho o oshiete kudasai.", en: "Please tell me your address.", id: "sent:14:9" },
+  { lesson: 15, jp: "わたしは とうきょうに すみます。", romaji: "watashi wa Tōkyō ni sumimasu.", en: "I am going to live in Tokyo.", id: "sent:15:0" },
+  { lesson: 15, jp: "わたしは かいぎの しりょうを つくります。", romaji: "watashi wa kaigi no shiryō o tsukurimasu.", en: "I will make materials for the meeting.", id: "sent:15:1" },
+  { lesson: 15, jp: "あの みせで にほんの せいひんを うっています。", romaji: "ano mise de Nihon no seihin o utteimasu.", en: "They sell Japanese products at that shop.", id: "sent:15:2" },
+  { lesson: 15, jp: "いすの うえに カタログを おきます。", romaji: "isu no ue ni katarogu o okimasu.", en: "I will put the catalogue on the chair.", id: "sent:15:3" },
+  { lesson: 15, jp: "わたしの あにの でんわばんごうを しっていますか。", romaji: "watashi no ani no denwa bangō o shitteimasu ka.", en: "Do you know my elder brother’s phone number?", id: "sent:15:4" },
+  { lesson: 15, jp: "いいえ、しりません。", romaji: "iie, shirimasen.", en: "No, I don’t know.", id: "sent:15:5" },
+  { lesson: 15, jp: "だいがくで けいざいを けんきゅうしています。", romaji: "daigaku de keizai o kenkyū shite imasu.", en: "I am doing research on economics at university.", id: "sent:15:6" },
+  { lesson: 15, jp: "でんしじしょを かいたいです。", romaji: "denshi jisho o kaitai desu.", en: "I want to buy an electronic dictionary.", id: "sent:15:7" },
+  { lesson: 15, jp: "しやくしょは どこですか。", romaji: "shiyakusho wa doko desu ka.", en: "Where is the city hall?", id: "sent:15:8" },
+  { lesson: 15, jp: "やまださんは どくしんですか。", romaji: "Yamada-san wa dokushin desu ka.", en: "Is Mr. Yamada single?", id: "sent:15:9" },
 ];
 
 /* ============================================================
@@ -4787,6 +4821,6 @@ LEARN_RENDERERS.teform = renderLearnTeForm;
 updateStats();
 render();
 </script>
-<!-- v1.6.5 · built 2026-06-16T06:08:56.862394Z · vocab=680 sentences=140 kana=142 -->
+<!-- v1.7.0 · built 2026-07-04T06:52:13.476169Z · vocab=704 sentences=150 kana=142 -->
 </body>
 </html>

@@ -10,6 +10,19 @@ The version number is shown in the app footer and stamped into `data/manifest.js
 
 ---
 
+## v1.7.0 - 2026-07-04
+
+### Added — Lesson 15
+- Imported **Dai_Ka 15.pdf** (Ikoma Language School). **+24 vocabulary items** and **+10 example sentences**. Totals: 704 vocab / 150 sentences / L1–L15 covered.
+- Vocabulary focus: **Group I verbs** (置きます / 作ります / 売ります / 知ります / 住みます) + Group III (研究します) → sets up the transition to plain-form conjugation in later lessons.
+- Nouns: 資料, カタログ, 時刻表, 服, 製品, ソフト, 電子辞書, 経済, 市役所, 高校, 歯医者, 独身, plus すみません as apology.
+- 会話: 思い出します (remember, recollect), いらっしゃいます (honorific of います).
+- 練習C: 皆さん (everybody).
+- 関連単語: 日本橋 (Osaka shopping district), みんなのインタビュー (fictitious TV programme).
+- Included 10 example sentences drilling the new verbs against L1–L14 grammar (は…に住みます / を作ります / に置きます / を知っています / いいえ、しりません / を研究しています / がほしい / どくしんですか).
+
+---
+
 ## v1.6.5 - 2026-06-16
 
 ### Fixed — Audio no longer stops when screen locks
