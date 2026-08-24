@@ -10,6 +10,37 @@ The version number is shown in the app footer and stamped into `data/manifest.js
 
 ---
 
+## v1.9.0 - 2026-08-24
+
+### Added — Lesson 17
+- Imported **Dai_Ka 17.pdf** (Ikoma Language School). **+35 items** (29 vocab + 6 kaiwa) and **+10 example sentences**.
+- Grammar setup for **~ないでください / ~なければなりません / ~までに** (obligation and deadlines).
+- Verbs: 覚えます (memorise), 忘れます (forget), なくします (lose), 払います (pay), 返します (return), 出かけます (go out), 脱ぎます (take off), 持って行きます / 持って来ます (take/bring), 心配します (worry), 残業します (work overtime), 出張します (business trip), 飲みます [薬を~] (take medicine), 入ります [お風呂に~] (take a bath).
+- na-adj: 大切／大丈夫. i-adj: 危ない (dangerous). 禁煙 (no smoking).
+- Health vocab: 熱, 病気, 薬, 風邪, [健康]保険証, のど, 上着, 下着, [お]風呂.
+- Time: ～までに (by ~), 2、3日, 2、3～, ですから.
+- Doctor 会話: どうしましたか / [~が]痛いです / それから / お大事に.
+
+---
+
+## v1.8.0 - 2026-08-24
+
+### Added — Lesson 16
+- Imported **Dai_Ka 16.pdf** (Ikoma Language School). **+58 items** (41 vocab + 8 kaiwa + 2 renshuu C + 7 related) and **+10 example sentences**.
+- Movement verbs: 乗ります [電車に~], 降ります [電車を~], 乗り換えます — introduces the に / を particle distinction for boarding/alighting.
+- Transitive/intransitive setup: 入れます (put in), 出します (take out), 押します (push), 下ろします [お金を~] (withdraw).
+- University lifecycle: 入ります [大学に~] (enter university), 出ます [大学を~] (graduate from). IDs disambiguated from earlier lesson homographs.
+- Daily-life verbs: 浴びます [シャワーを~] (take a shower), 飲みます (drink alcohol — disambiguated from L6 のみます), 始めます (begin), 見学します (tour/visit), 電話します (phone).
+- **i-adjectives**: 若い, 長い, 短い, 明るい, 暗い — sets up ~くない negative form.
+- **Body parts (12)**: 体, 頭, 髪, 顔, 目, 耳, 鼻, 口, 歯, おなか, 足, 背 — feeds L17 illness kaiwa (~が痛いです).
+- ATM kaiwa: お引き出しですか / まず / 次に / キャッシュカード / 暗証番号 / 金額 / 確認 / ボタン.
+- 練習C: すごいですね / [いいえ、]まだまだです.
+- 関連単語: JR, 雪祭り, バンドン, フランケン, ベラクルス, 梅田, 大学前.
+- Direction pattern: どうやって + どの ～ / どれ (choosing from three or more).
+- Cumulative: **797 vocab / 170 sentences / L1–L17 covered**.
+
+---
+
 ## v1.7.0 - 2026-07-04
 
 ### Added — Lesson 15
