@@ -779,7 +779,7 @@
 <footer>
   <div style="max-width: 720px; margin: 0 auto;">
     <div style="margin-bottom: 12px;">
-      <span class="version-badge" title="Built 2026-08-24 02:51 UTC">v1.9.0</span>
+      <span class="version-badge" title="Built 2026-08-25 03:07 UTC">v1.10.0</span>
     </div>
     Personal study aid for Japanese learners. Vocabulary, sentences, and shukudai exercises are derived from materials provided by
     <strong>Ikoma Language School Singapore</strong>
@@ -1588,6 +1588,36 @@ const VOCAB = [
   { lesson: 17, jp: "かぜ", romaji: "kaze", en: "cold, flu", id: "vocab:17:かぜ" },
   { lesson: 17, jp: "それから", romaji: "sore kara", en: "and, furthermore", id: "vocab:17:それから" },
   { lesson: 17, jp: "お大事に。", romaji: "o-daiji ni.", en: "Take care of yourself. (said to people who are ill)", id: "vocab:17:お大事に。" },
+  { lesson: 18, jp: "できます", romaji: "dekimasu", en: "to be able to, can", id: "vocab:18:できます" },
+  { lesson: 18, jp: "あらいます", romaji: "araimasu", en: "to wash", id: "vocab:18:あらいます" },
+  { lesson: 18, jp: "ひきます", romaji: "hikimasu", en: "to play (stringed instrument, piano, etc.)", id: "vocab:18:ひきます" },
+  { lesson: 18, jp: "うたいます", romaji: "utaimasu", en: "to sing", id: "vocab:18:うたいます" },
+  { lesson: 18, jp: "あつめます", romaji: "atsumemasu", en: "to collect, to gather", id: "vocab:18:あつめます" },
+  { lesson: 18, jp: "すてます", romaji: "sutemasu", en: "to throw away", id: "vocab:18:すてます" },
+  { lesson: 18, jp: "かえます", romaji: "kaemasu", en: "to exchange, to change", id: "vocab:18:かえます" },
+  { lesson: 18, jp: "うんてんします", romaji: "unten shimasu", en: "to drive", id: "vocab:18:うんてんします" },
+  { lesson: 18, jp: "よやくします", romaji: "yoyaku shimasu", en: "to reserve, to book", id: "vocab:18:よやくします" },
+  { lesson: 18, jp: "ピアノ", romaji: "piano", en: "piano", id: "vocab:18:ピアノ" },
+  { lesson: 18, jp: "…メートル", romaji: "…mētoru", en: "~ meter", id: "vocab:18:…メートル" },
+  { lesson: 18, jp: "げんきん", romaji: "genkin", en: "cash", id: "vocab:18:げんきん" },
+  { lesson: 18, jp: "しゅみ", romaji: "shumi", en: "hobby", id: "vocab:18:しゅみ" },
+  { lesson: 18, jp: "にっき", romaji: "nikki", en: "diary", id: "vocab:18:にっき" },
+  { lesson: 18, jp: "おいのり", romaji: "o-inori", en: "prayer (~を します: to pray)", id: "vocab:18:おいのり" },
+  { lesson: 18, jp: "かちょう", romaji: "kachō", en: "section head", id: "vocab:18:かちょう" },
+  { lesson: 18, jp: "ぶちょう", romaji: "buchō", en: "department head", id: "vocab:18:ぶちょう" },
+  { lesson: 18, jp: "しゃちょう", romaji: "shachō", en: "company president", id: "vocab:18:しゃちょう" },
+  { lesson: 18, jp: "どうぶつ", romaji: "dōbutsu", en: "animal", id: "vocab:18:どうぶつ" },
+  { lesson: 18, jp: "うま", romaji: "uma", en: "horse", id: "vocab:18:うま" },
+  { lesson: 18, jp: "インターネット", romaji: "intānetto", en: "the Internet", id: "vocab:18:インターネット" },
+  { lesson: 18, jp: "とくに", romaji: "toku ni", en: "especially", id: "vocab:18:とくに" },
+  { lesson: 18, jp: "へえ", romaji: "hē", en: "What! Really! (used when expressing surprise)", id: "vocab:18:へえ" },
+  { lesson: 18, jp: "それは おもしろいですね。", romaji: "sore wa omoshiroi desu ne.", en: "That's interesting, isn't it?", id: "vocab:18:それは おもしろいですね。" },
+  { lesson: 18, jp: "なかなか", romaji: "nakanaka", en: "not easily (used with negatives)", id: "vocab:18:なかなか" },
+  { lesson: 18, jp: "ほんとうですか。", romaji: "hontō desu ka.", en: "Really?", id: "vocab:18:ほんとうですか。" },
+  { lesson: 18, jp: "ぜひ", romaji: "zehi", en: "by all means, really", id: "vocab:18:ぜひ" },
+  { lesson: 18, jp: "ふるさと", romaji: "furusato", en: "Furusato (a song title meaning 'Home Town')", id: "vocab:18:ふるさと" },
+  { lesson: 18, jp: "ビートルズ", romaji: "Bītoruzu", en: "the Beatles (a famous British pop group)", id: "vocab:18:ビートルズ" },
+  { lesson: 18, jp: "あきはばら", romaji: "Akihabara", en: "a district in Tokyo", id: "vocab:18:あきはばら" },
 ];
 
 const SENTENCES = [
@@ -1761,6 +1791,16 @@ const SENTENCES = [
   { lesson: 17, jp: "かぜですから、くすりを のんで ください。", romaji: "kaze desu kara, kusuri o nonde kudasai.", en: "It's a cold, so please take medicine.", id: "sent:17:7" },
   { lesson: 17, jp: "この みちは あぶないですから、あるかないで ください。", romaji: "kono michi wa abunai desu kara, arukanaide kudasai.", en: "This road is dangerous, so please don't walk here.", id: "sent:17:8" },
   { lesson: 17, jp: "だいじょうぶですか。 お大事に。", romaji: "daijōbu desu ka. o-daiji ni.", en: "Are you all right? Take care of yourself.", id: "sent:17:9" },
+  { lesson: 18, jp: "わたしは にほんごが すこし できます。", romaji: "watashi wa nihongo ga sukoshi dekimasu.", en: "I can speak a little Japanese.", id: "sent:18:0" },
+  { lesson: 18, jp: "ミラーさんは ピアノを ひくことが できます。", romaji: "Mirā-san wa piano o hiku koto ga dekimasu.", en: "Mr. Miller can play the piano.", id: "sent:18:1" },
+  { lesson: 18, jp: "わたしの しゅみは にほんの うたを うたうことです。", romaji: "watashi no shumi wa nihon no uta o utau koto desu.", en: "My hobby is singing Japanese songs.", id: "sent:18:2" },
+  { lesson: 18, jp: "こどもの とき、きってを あつめました。", romaji: "kodomo no toki, kitte o atsumemashita.", en: "When I was a child, I collected stamps.", id: "sent:18:3" },
+  { lesson: 18, jp: "この ゴミは ここに すてて ください。", romaji: "kono gomi wa koko ni sutete kudasai.", en: "Please throw this rubbish away here.", id: "sent:18:4" },
+  { lesson: 18, jp: "ぎんこうで えんを ドルに かえます。", romaji: "ginkō de en o doru ni kaemasu.", en: "I will exchange yen for dollars at the bank.", id: "sent:18:5" },
+  { lesson: 18, jp: "くるまを うんてんすることが できますか。", romaji: "kuruma o unten suru koto ga dekimasu ka.", en: "Can you drive a car?", id: "sent:18:6" },
+  { lesson: 18, jp: "レストランを よやくしました。", romaji: "resutoran o yoyaku shimashita.", en: "I made a restaurant reservation.", id: "sent:18:7" },
+  { lesson: 18, jp: "しゃちょうは あした とうきょうへ いきます。", romaji: "shachō wa ashita Tōkyō e ikimasu.", en: "The company president will go to Tokyo tomorrow.", id: "sent:18:8" },
+  { lesson: 18, jp: "へえ、それは おもしろいですね。ぜひ みたいです。", romaji: "hē, sore wa omoshiroi desu ne. zehi mitai desu.", en: "Really, that sounds interesting. I really want to see it.", id: "sent:18:9" },
 ];
 
 /* ============================================================
@@ -4934,6 +4974,6 @@ LEARN_RENDERERS.teform = renderLearnTeForm;
 updateStats();
 render();
 </script>
-<!-- v1.9.0 · built 2026-08-24T02:51:41.251320Z · vocab=797 sentences=170 kana=142 -->
+<!-- v1.10.0 · built 2026-08-25T03:07:32.303025Z · vocab=827 sentences=180 kana=142 -->
 </body>
 </html>

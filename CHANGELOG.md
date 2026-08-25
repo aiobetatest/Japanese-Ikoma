@@ -10,6 +10,20 @@ The version number is shown in the app footer and stamped into `data/manifest.js
 
 ---
 
+## v1.10.0 - 2026-08-25
+
+### Added — Lesson 18
+- Imported **Dai_Ka 18.pdf** (Ikoma Language School). **+30 items** (21 vocab + 6 kaiwa + 3 related) and **+10 example sentences**.
+- Grammar milestone: introduces **できます (potential/ability)** and the **辞書形 + ことができます** structure — the first way of expressing "can do X" without a dedicated potential form.
+- Hobby verbs: 弾きます (play instrument), 歌います (sing), 集めます (collect), 捨てます (throw away), 換えます (exchange), 運転します (drive), 予約します (reserve/book), 洗います (wash).
+- Nouns: ピアノ, ～メートル, 現金, 趣味, 日記, お祈り, 動物, 馬, インターネット.
+- Workplace titles: 課長 (section head), 部長 (department head), 社長 (company president) — builds on L1–3 job/title vocab.
+- Reaction 会話: 特に / へえ / それはおもしろいですね / なかなか (with negatives) / ほんとうですか / ぜひ.
+- 関連単語: 故郷 (Furusato — song title), ビートルズ, 秋葉原.
+- Cumulative: **827 vocab / 180 sentences / L1–L18 covered**.
+
+---
+
 ## v1.9.0 - 2026-08-24
 
 ### Added — Lesson 17
